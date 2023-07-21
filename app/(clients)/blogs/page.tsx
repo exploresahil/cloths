@@ -13,9 +13,9 @@ import {
   CategoriesWatermarkCenter,
   CategoriesWatermarkOuter,
 } from "@/components/icons/Icons";
-import { blogsSchema } from "@/sanity/types/Blogs";
-import { featuredSchema } from "@/sanity/types/Featured";
-import { topicsSchema } from "@/sanity/types/Topics";
+import { blogsSchema } from "@/types/Blogs";
+import { featuredSchema } from "@/types/Featured";
+import { topicsSchema } from "@/types/Topics";
 
 export default function Blogs() {
   const [filter, setFilter] = useState("ALL");

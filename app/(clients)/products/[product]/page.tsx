@@ -8,7 +8,7 @@ import { BsArrowRight } from "react-icons/bs";
 import { PiRulerLight } from "react-icons/pi";
 import { HiArrowLongRight } from "react-icons/hi2";
 import { useEffect, useState } from "react";
-import { products } from "@/sanity/types/Products";
+import { products } from "@/types/Products";
 import { getProduct } from "@/sanity/sanity-utils";
 import { PortableText } from "@portabletext/react";
 import { ScrollArrow } from "@/components/icons/Icons";

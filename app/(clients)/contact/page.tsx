@@ -14,7 +14,7 @@ import {
 } from "@/components/icons/Icons";
 
 import { useEffect, useState } from "react";
-import { contactSchema } from "@/sanity/types/Contact";
+import { contactSchema } from "@/types/Contact";
 import { getContact } from "@/sanity/sanity-utils";
 
 const Contact = () => {

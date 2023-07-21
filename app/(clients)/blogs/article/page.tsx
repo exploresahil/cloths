@@ -4,9 +4,12 @@ import Image from "next/image";
 
 import FAQs from "@/components/client/FAQs";
 
-import { CategoriesWatermarkCenter, CategoriesWatermarkOuter } from "@/components/icons/Icons";
+import {
+  CategoriesWatermarkCenter,
+  CategoriesWatermarkOuter,
+} from "@/components/icons/Icons";
 
-import ArticleImg from "@/public/assets/images/blogs/article/ArticleImg.png"
+import ArticleImg from "@/public/assets/images/blogs/article/ArticleImg.png";
 import Newsletter from "@/components/client/NewsLetter";
 
 const Article = () => {
@@ -18,10 +21,7 @@ const Article = () => {
       </div>
       <div className="article-section">
         <div className="article-img-container">
-          <Image 
-            src={ArticleImg}
-            alt="article-img"
-          />
+          <Image src={ArticleImg} alt="article-img" />
         </div>
         <div className="article-content">
           <div className="article-heading">
@@ -46,13 +46,14 @@ const Article = () => {
               sustainable and stylish future.
             </p>
             <p>
-              The Kapda Project is not just a fashion brand; it&apos;s a movement. We
-              believe that fashion has the power to empower and create positive
-              change. Through our commitment to sustainable practices, we are
-              redefining the industry and challenging the norms. From the
-              selection of eco-friendly fabrics to the fair treatment of our
-              skilled artisans, every decision we make is rooted in our mission
-              to uplift communities and protect the environment.
+              The Kapda Project is not just a fashion brand; it&apos;s a
+              movement. We believe that fashion has the power to empower and
+              create positive change. Through our commitment to sustainable
+              practices, we are redefining the industry and challenging the
+              norms. From the selection of eco-friendly fabrics to the fair
+              treatment of our skilled artisans, every decision we make is
+              rooted in our mission to uplift communities and protect the
+              environment.
             </p>
             <p>
               By choosing The Kapda Project, you become a part of this movement.
@@ -64,8 +65,8 @@ const Article = () => {
             <p>
               Together, we can transform the fashion landscape. Join us on this
               journey of empowerment, where style meets purpose and every
-              garment tells a story of positive impact. Together, let&apos;s create a
-              better future, one sustainable fashion choice at a time.
+              garment tells a story of positive impact. Together, let&apos;s
+              create a better future, one sustainable fashion choice at a time.
             </p>
           </div>
         </div>

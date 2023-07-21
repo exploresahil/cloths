@@ -7,8 +7,8 @@ import ContactArrow from "@/components/icons/ContactArrow";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { getCategories, getProducts } from "@/sanity/sanity-utils";
-import { products } from "@/sanity/types/Products";
-import { category } from "@/sanity/types/Category";
+import { products } from "@/types/Products";
+import { category } from "@/types/Category";
 import { AiOutlinePlus } from "react-icons/ai";
 import { useSearchParams } from "next/navigation";
 function arraysHaveCommonElement(array1: any[], array2: any[]) {
