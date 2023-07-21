@@ -7,7 +7,7 @@ import {
   CategoriesWatermarkOuter,
 } from "@/components/icons/Icons";
 import { getBlog } from "@/sanity/sanity-utils";
-import { blogsSchema } from "@/sanity/types/Blogs";
+import { blogsSchema } from "@/types/Blogs";
 import { PortableText } from "@portabletext/react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
