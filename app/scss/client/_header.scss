@@ -1,0 +1,667 @@
+@use "./variables" as v;
+
+header {
+  position: fixed;
+
+  width: 100vw;
+  height: 180px;
+  padding: 0 6vw;
+  top: 0;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  z-index: 999;
+
+  animation: headerRef 200ms ease-in forwards;
+
+  @keyframes headerRef {
+    0% {
+      transform: translateY(-180px);
+      opacity: 0;
+    }
+
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  .logo-container {
+    position: relative;
+    height: 120px;
+    width: 200px;
+    cursor: pointer;
+
+    svg {
+      width: 100%;
+      height: 100%;
+      fill: black;
+    }
+  }
+
+  .search-container {
+    width: 200px;
+    position: relative;
+    right: 260px;
+
+    form {
+      position: relative;
+      border-bottom: 2px solid v.$dark;
+
+      input {
+        width: 100%;
+        background: none;
+        border: none;
+
+        font-family: v.$fontRR;
+        text-transform: uppercase;
+        font-size: 1rem;
+        line-height: 25px;
+        text-align: right;
+        padding-left: 30px;
+        letter-spacing: 0.5px;
+
+        &:focus {
+          border: none;
+          outline: none;
+        }
+      }
+
+      button {
+        position: absolute;
+        left: 0;
+        top: 0;
+
+        &:hover {
+          svg {
+            color: v.$textTeal;
+          }
+        }
+      }
+    }
+  }
+
+  .user-menu {
+    display: flex;
+    gap: 2em;
+    right: 6vw;
+    position: fixed;
+
+    .user-menu-ecommercs {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: v.$dark;
+      border-radius: 100px;
+      overflow: hidden;
+
+      button {
+        padding: 15px 25px !important;
+        height: 100%;
+
+        svg {
+          fill: v.$bg;
+        }
+
+        &:hover {
+          background-color: v.$textTeal;
+        }
+      }
+
+      .line {
+        width: 1px;
+        height: 60%;
+        background-color: v.$bg;
+      }
+    }
+
+    .menu-button {
+      position: relative;
+      padding: 12px 12px;
+      background-color: v.$dark;
+      border-radius: 100px;
+      cursor: pointer;
+      z-index: 1001;
+
+      svg {
+        stroke: v.$bg;
+        stroke-miterlimit: 10;
+        stroke-width: 2px;
+        width: 30px;
+        height: 30px;
+      }
+
+      .menuClose {
+        width: 20px;
+        height: 20px;
+        margin: 5px;
+      }
+
+      &:hover {
+        background-color: v.$textTeal;
+      }
+    }
+
+    .bgDarkMenu {
+      width: 100vw;
+      height: 100vh;
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+
+      display: none;
+    }
+
+    .fadeIn {
+      display: block;
+
+      animation: fadeIn 400ms ease;
+
+      @keyframes fadeIn {
+        0% {
+          opacity: 0;
+        }
+
+        100% {
+          opacity: 1;
+        }
+      }
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+
+      z-index: 1000;
+      pointer-events: none;
+
+      transition: background-color 400ms ease;
+
+      .menu {
+        position: relative;
+        border-radius: 40px 0 0 40px;
+        margin-top: 150px;
+        width: 60vw;
+        height: 65vh;
+        right: 0;
+        margin-left: auto;
+        z-index: 1000;
+        display: flex;
+        justify-content: space-around;
+        opacity: 0;
+
+        background-color: v.$bg;
+
+        transform: translateX(100vw);
+
+        transition: transform 2s ease;
+        pointer-events: all;
+
+        .section {
+          height: 100%;
+          width: calc(100% / 3);
+
+          display: flex;
+          flex-direction: column;
+          //align-items: center;
+          padding: 12% 0;
+          margin-left: 50px;
+
+          ul {
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
+
+            a {
+              font-size: 1.1rem;
+              font-weight: 500;
+              letter-spacing: 0.2px;
+            }
+          }
+        }
+
+        .left {
+          border-right: 1px solid v.$dark;
+        }
+
+        .center {
+          border-right: 1px solid v.$dark;
+
+          ul {
+            justify-self: flex-start;
+          }
+        }
+
+        .right {
+          height: 100%;
+          width: calc(100% / 3);
+          padding: 0 3%;
+          justify-content: center;
+          align-items: center;
+          gap: 1em;
+          margin-right: 20px;
+
+          .text {
+            margin-top: 50px;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6em;
+
+            .dot {
+              width: 15px;
+              height: 15px;
+
+              background-color: v.$red;
+              border-radius: 15px;
+
+              position: relative;
+              top: 6px;
+            }
+            .title {
+              display: flex;
+              flex-direction: column;
+              width: fit-content;
+
+              gap: 0.8em;
+
+              h2 {
+                font-size: 1.3rem;
+                text-transform: uppercase;
+                font-weight: 500;
+                letter-spacing: 0.5px;
+              }
+
+              p {
+                font-family: v.$fontREL;
+                font-style: italic;
+                font-size: 0.6rem;
+                font-weight: 600;
+                letter-spacing: 0.5px;
+              }
+            }
+          }
+
+          form {
+            margin-top: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.8em;
+
+            h2 {
+              font-family: v.$fontRM;
+              text-transform: uppercase;
+              font-size: 0.8em;
+              font-weight: 500;
+            }
+
+            input {
+              width: 110px;
+              height: 35px;
+              border: 1px solid v.$dark;
+              background: none;
+              padding: 0 12px;
+              color: v.$dark;
+
+              &::placeholder {
+                color: v.$dark;
+              }
+
+              &::placeholder {
+                opacity: 0.14;
+              }
+            }
+
+            input[type="email"] {
+              width: 232px;
+            }
+
+            .name {
+              display: flex;
+              gap: 0.8em;
+            }
+          }
+
+          button[type="submit"] {
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            border: 1px solid v.$bordercolor;
+            border-radius: 12px;
+            color: v.$dark;
+
+            h3 {
+              font-family: v.$fontRL;
+              font-size: 0.7rem;
+              font-weight: 400;
+              margin: 0 16px;
+              letter-spacing: 0.5px;
+            }
+
+            svg {
+              margin: 2px 2px;
+              width: 25px;
+              height: 25px;
+            }
+          }
+        }
+
+        .socials {
+          margin-top: 80px;
+          display: flex;
+          gap: 1.8em;
+
+          a {
+            svg {
+              fill: v.$textTeal;
+              width: 25px;
+              height: 25px;
+            }
+          }
+        }
+      }
+
+      .fadeInMenu {
+        opacity: 1;
+        transform: translateX(0);
+        transition: transform 500ms ease-out;
+      }
+    }
+
+    .navOpen {
+      background-color: rgba(0, 0, 0, 0.6);
+      transition: background-color 200ms ease;
+    }
+  }
+
+  .open {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  .menu-open {
+    transform: translateX(0);
+    transition: transform 200ms ease;
+  }
+}
+
+.scrollDown {
+  display: none;
+}
+
+.title {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.nav-mobile {
+  display: none !important;
+}
+
+@media screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
+  header {
+    .search-container {
+      position: relative;
+      right: 260px;
+    }
+
+    .logo-container {
+      z-index: 1001;
+
+      width: 100px;
+    }
+    .user-menu {
+      .user-menu-ecommercs {
+        z-index: 1001;
+      }
+
+      nav {
+        display: none;
+      }
+
+      .nav-mobile {
+        display: block !important;
+
+        .menu {
+          width: 100vw;
+          height: calc(100vh - 180px);
+          border-radius: 0px;
+          border-top: 1px solid v.$dark;
+          flex-direction: column;
+          position: relative;
+
+          .section {
+            padding: 50px;
+            align-items: baseline;
+            margin: 0;
+
+            ul a {
+              font-size: 1.5rem;
+            }
+          }
+
+          .left {
+            width: 100vw;
+            border: none;
+
+            height: 50vh;
+            border-bottom: 1px solid v.$dark;
+          }
+
+          .menu-second {
+            display: flex;
+
+            .center {
+              width: 50vw;
+              border: none;
+            }
+
+            .right {
+              width: 50vw;
+            }
+          }
+
+          .socials {
+            width: 100vw;
+            display: flex;
+            justify-content: center;
+            padding: 40px;
+            margin-top: 0;
+          }
+        }
+      }
+
+      .navOpen {
+        background-color: v.$bg;
+      }
+    }
+  }
+}
+
+@media screen and (min-device-width: 1024px) and (max-device-width: 1370px) {
+  header {
+    .nav-d {
+      .menu {
+        width: 80vw !important;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  header {
+    height: 100px;
+    margin-bottom: 100px;
+
+    .search-container {
+      display: block;
+      width: 86vw;
+      position: absolute;
+      bottom: -30px;
+      right: 0;
+      left: 50%;
+      transform: translateX(-50%);
+
+      input {
+        line-height: 30px !important;
+      }
+    }
+
+    .logo-container {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1001;
+      height: fit-content;
+
+      svg {
+        width: 80px;
+        margin-left: 10px;
+      }
+    }
+
+    .user-menu {
+      position: relative !important;
+
+      .user-menu-ecommercs {
+        z-index: 1001;
+        right: 0;
+      }
+
+      .menu-button {
+        left: 0;
+      }
+    }
+
+    nav {
+      display: none !important;
+    }
+
+    .navOpen {
+      background-color: v.$bg !important;
+    }
+
+    .nav-mobile {
+      display: block !important;
+
+      position: fixed !important;
+      inset: 0 !important;
+
+      .menu {
+        width: 100vw !important;
+        height: calc(100vh - 100px) !important;
+        border-radius: 0px !important;
+        border-top: 1px solid v.$dark;
+        flex-direction: column;
+        position: fixed !important;
+        margin-top: 100px !important;
+        overflow-y: scroll !important;
+        justify-content: flex-start !important;
+
+        .section {
+          padding: 50px 50px 20px 50px !important;
+          align-items: baseline;
+          margin: 0 !important;
+          width: auto !important;
+
+          ul {
+            gap: 1em !important;
+            li {
+              a {
+                font-size: 1rem !important;
+              }
+            }
+          }
+        }
+
+        .left {
+          width: 100vw;
+          border: none !important ;
+
+          height: 50vh;
+          border-bottom: 1px solid v.$dark;
+        }
+
+        .menu-second {
+          display: flex;
+          flex-direction: column;
+
+          .center {
+            width: 50vw;
+            border: none;
+          }
+
+          .right {
+            width: 50vw;
+
+            form {
+              .name {
+                flex-direction: column;
+
+                input {
+                  width: auto;
+                }
+              }
+              input {
+                width: auto !important;
+              }
+            }
+          }
+        }
+
+        .socials {
+          width: 100vw;
+          display: flex;
+          justify-content: center;
+          padding: 40px;
+          margin-top: 0 !important;
+        }
+      }
+    }
+
+    .user-menu {
+      position: fixed;
+      width: 100vw;
+      left: 0;
+
+      .user-menu-ecommercs {
+        button {
+          padding: 10px 20px !important;
+        }
+      }
+
+      .menu-button {
+        width: 40px;
+        height: 40px;
+        padding: 10px;
+
+        .menuClose {
+          width: 10px;
+          height: 10px;
+        }
+
+        svg {
+          width: 20px;
+          height: 20px;
+        }
+      }
+    }
+
+    .user-menu-ecommercs {
+      position: absolute;
+      right: 4vw;
+    }
+
+    .menu-button {
+      position: absolute;
+      left: 4vw;
+    }
+  }
+}

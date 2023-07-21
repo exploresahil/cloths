@@ -1,0 +1,21 @@
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap");
+
+$font: "Instrument Sans", sans-serif;
+
+$dark: #202124;
+$light: #e0e0e0;
+$blue: #8ab4f8;
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: $font;
+  background-color: $dark;
+  color: $light;
+}

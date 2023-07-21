@@ -1,0 +1,549 @@
+@use "./variables" as v;
+
+.newsletter-form-container {
+  width: 100vw;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 0 20vh 0;
+  margin-top: 20vh;
+
+  h1 {
+    font-family: v.$fontASB;
+    font-size: 6em;
+    color: v.$textTeal;
+    font-weight: 100;
+  }
+
+  .newsletter-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 40vw;
+    gap: 2rem;
+    font-family: v.$fontRM;
+
+    h2 {
+      font-size: 1.2rem;
+      font-weight: 400;
+    }
+
+    .name {
+      margin-top: 1.5em;
+      display: flex;
+      align-items: center;
+      width: 40vw;
+      justify-content: space-between;
+      gap: 2em;
+
+      input {
+        width: 50%;
+        font-size: 1.5rem;
+        color: #1a1a1a;
+        padding: 1em 1em;
+        border-width: 2px;
+        border-style: solid;
+        border-color: v.$bordercolor;
+      }
+    }
+
+    input {
+      width: 100%;
+      font-size: 1.5em;
+      color: #1a1a1a;
+      padding: 1em 1em;
+      border-width: 2px;
+      border-style: solid;
+      border-color: v.$bordercolor;
+      background-color: v.$bg;
+    }
+
+    button {
+      align-items: center;
+      display: flex;
+      gap: 1.8rem;
+      padding: 0.3rem 0.3rem 0.3rem 2.7rem;
+      border-radius: 2rem;
+      border-style: solid;
+      border-width: 2px;
+      border-color: v.$bordercolor;
+
+      &:hover {
+        color: v.$bg;
+        background-color: v.$textTeal;
+        border-color: v.$textTeal;
+
+        svg {
+          fill: v.$textTeal;
+
+          &:nth-of-type(1) {
+            display: block;
+            fill: v.$textTeal;
+          }
+
+          &:nth-of-type(2) {
+            display: none;
+          }
+        }
+      }
+
+      &:active {
+        color: v.$bg;
+        background-color: v.$textTeal;
+        border-color: v.$textTeal;
+        gap: 1.9rem;
+
+        svg {
+          &:nth-of-type(1) {
+            display: none;
+          }
+
+          &:nth-of-type(2) {
+            display: block;
+            width: 1.4rem;
+            height: 1.52rem;
+            margin: 0.7rem;
+          }
+        }
+      }
+
+      h3 {
+        font-family: v.$fontRL;
+        font-weight: 500;
+        font-size: 1.8em;
+      }
+
+      svg {
+        width: 3.5em;
+        height: auto;
+        fill: v.$bordercolor;
+
+        &:nth-of-type(1) {
+          display: block;
+        }
+
+        &:nth-of-type(2) {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+//*----------> Tablets
+@media screen and (max-width: 1024px) {
+  .newsletter-form-container {
+    position: relative;
+    margin-top: 15vh;
+    width: 100vw;
+    height: auto;
+    padding: 0 0 10vh 0;
+    margin-left: 0;
+
+    h1 {
+      font-family: v.$fontASB;
+      font-size: 6rem;
+      color: v.$textTeal;
+      font-weight: 100;
+    }
+
+    .newsletter-form {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 70vw;
+      gap: 1rem;
+      font-family: v.$fontRM;
+
+      h2 {
+        font-size: 1.2rem;
+        font-weight: 100;
+      }
+
+      .name {
+        display: flex;
+        width: 70vw;
+        justify-content: space-between;
+        // gap: 1.5rem;
+
+        input {
+          width: 50%;
+          font-size: 0.8rem;
+          color: #1a1a1a;
+          padding: 1rem 1rem;
+          border-width: 2px;
+          border-style: solid;
+          border-color: v.$bordercolor;
+        }
+      }
+
+      input {
+        width: 100%;
+        font-size: 1rem;
+        color: #1a1a1a;
+        padding: 1rem 1rem;
+        border-width: 2px;
+        border-style: solid;
+        border-color: v.$bordercolor;
+        background-color: v.$bg;
+      }
+
+      button {
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+        gap: 0rem;
+        width: 40vw;
+        height: 2.8rem;
+        padding: 0.3rem 0.3rem 0.3rem 3rem;
+        border-radius: 1.5rem;
+        border-style: solid;
+        border-width: 2px;
+        border-color: v.$bordercolor;
+        position: relative;
+        top: 1rem;
+
+        &:hover {
+          color: v.$bg;
+          background-color: v.$textTeal;
+
+          svg {
+            fill: v.$textTeal;
+
+            &:nth-of-type(1) {
+              display: block;
+              fill: v.$textTeal;
+            }
+
+            &:nth-of-type(2) {
+              display: none;
+            }
+          }
+        }
+
+        &:active {
+          color: v.$bg;
+          background-color: v.$textTeal;
+
+          svg {
+            &:nth-of-type(1) {
+              display: none;
+            }
+
+            &:nth-of-type(2) {
+              display: block;
+              width: 1.1rem;
+              height: 1.5rem;
+              margin: 0.7rem;
+            }
+          }
+        }
+
+        h3 {
+          font-family: v.$fontRL;
+          font-weight: 500;
+          font-size: 1rem;
+        }
+
+        svg {
+          width: 2.1rem;
+          height: auto;
+
+          &:nth-of-type(1) {
+            display: block;
+          }
+
+          &:nth-of-type(2) {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}
+
+//*----------> largeMobile
+@media screen and (max-width: 768px) {
+  .newsletter-form-container {
+    position: relative;
+    margin-top: 15vh;
+    width: 100vw;
+    height: auto;
+    padding: 0 0 10vh 0;
+    margin-left: 0;
+
+    h1 {
+      font-family: v.$fontASB;
+      font-size: 4rem;
+      color: v.$textTeal;
+      font-weight: 100;
+    }
+
+    .newsletter-form {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 90vw;
+      gap: 1rem;
+      font-family: v.$fontRM;
+
+      h2 {
+        font-size: 0.8rem;
+        font-weight: 100;
+      }
+
+      .name {
+        display: flex;
+        width: 90vw;
+        justify-content: space-between;
+        gap: 1.5rem;
+
+        input {
+          width: 50%;
+          font-size: 0.8rem;
+          color: #1a1a1a;
+          padding: 1rem 1rem;
+          border-width: 2px;
+          border-style: solid;
+          border-color: v.$bordercolor;
+        }
+      }
+
+      input {
+        width: 100%;
+        font-size: 0.8rem;
+        color: #1a1a1a;
+        padding: 1rem 1rem;
+        border-width: 2px;
+        border-style: solid;
+        border-color: v.$bordercolor;
+        background-color: v.$bg;
+      }
+
+      button {
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+        gap: 0.7rem;
+        width: auto;
+        height: 2.8rem;
+        padding: 0.3rem 0.2rem 0.3rem 1.5rem;
+        border-radius: 1.5rem;
+        border-style: solid;
+        border-width: 2px;
+        border-color: v.$bordercolor;
+        position: relative;
+        top: 1rem;
+
+        &:hover {
+          color: v.$bg;
+          background-color: v.$textTeal;
+
+          svg {
+            fill: v.$textTeal;
+
+            &:nth-of-type(1) {
+              display: block;
+              fill: v.$textTeal;
+            }
+
+            &:nth-of-type(2) {
+              display: none;
+            }
+          }
+        }
+
+        &:active {
+          color: v.$bg;
+          background-color: v.$textTeal;
+          gap: 0.7rem;
+
+          svg {
+            h3 {
+              font-family: v.$fontRL;
+              font-weight: 500;
+              font-size: 0.8rem;
+            }
+
+            &:nth-of-type(1) {
+              display: none;
+            }
+
+            &:nth-of-type(2) {
+              display: block;
+              width: 1rem;
+              height: 1.5rem;
+              margin: 0.6rem;
+            }
+          }
+        }
+
+        h3 {
+          font-family: v.$fontRL;
+          font-weight: 500;
+          font-size: 0.8rem;
+        }
+
+        svg {
+          width: 3.5em;
+          height: auto;
+
+          &:nth-of-type(1) {
+            display: block;
+            width: 2.2rem;
+          }
+
+          &:nth-of-type(2) {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}
+
+//*---------> smallMobile
+@media screen and (max-width: 320px) {
+  .newsletter-form-container {
+    position: relative;
+    margin-top: 15vh;
+    width: 100vw;
+    height: auto;
+    padding: 0 0 10vh 0;
+    margin-left: 0;
+
+    h1 {
+      font-family: v.$fontASB;
+      font-size: 3.5rem;
+      color: v.$textTeal;
+      font-weight: 100;
+    }
+
+    .newsletter-form {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 90vw;
+      gap: 1rem;
+      font-family: v.$fontRM;
+
+      h2 {
+        font-size: 0.8rem;
+        font-weight: 100;
+      }
+
+      .name {
+        display: flex;
+        width: 90vw;
+        justify-content: space-between;
+        gap: 1.5rem;
+
+        input {
+          width: 50%;
+          font-size: 0.8rem;
+          color: #1a1a1a;
+          padding: 1rem 1rem;
+          border-width: 2px;
+          border-style: solid;
+          border-color: v.$bordercolor;
+        }
+      }
+
+      input {
+        width: 100%;
+        font-size: 0.8rem;
+        color: #1a1a1a;
+        padding: 1rem 1rem;
+        border-width: 2px;
+        border-style: solid;
+        border-color: v.$bordercolor;
+        background-color: v.$bg;
+      }
+
+      button {
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+        gap: 0.7rem;
+        width: auto;
+        height: 2.8rem;
+        padding: 0.3rem 0.2rem 0.3rem 1.5rem;
+        border-radius: 1.5rem;
+        border-style: solid;
+        border-width: 2px;
+        border-color: v.$bordercolor;
+        position: relative;
+        top: 1rem;
+
+        &:hover {
+          color: v.$bg;
+          background-color: v.$textTeal;
+
+          svg {
+            fill: v.$textTeal;
+
+            &:nth-of-type(1) {
+              display: block;
+              fill: v.$textTeal;
+            }
+
+            &:nth-of-type(2) {
+              display: none;
+            }
+          }
+        }
+
+        &:active {
+          color: v.$bg;
+          background-color: v.$textTeal;
+          gap: 0.7rem;
+
+          svg {
+            h3 {
+              font-family: v.$fontRL;
+              font-weight: 500;
+              font-size: 0.8rem;
+            }
+
+            &:nth-of-type(1) {
+              display: none;
+            }
+
+            &:nth-of-type(2) {
+              display: block;
+              width: 1rem;
+              height: 1.5rem;
+              margin: 0.6rem;
+            }
+          }
+        }
+
+        h3 {
+          font-family: v.$fontRL;
+          font-weight: 500;
+          font-size: 0.8rem;
+        }
+
+        svg {
+          width: 3.5em;
+          height: auto;
+
+          &:nth-of-type(1) {
+            display: block;
+            width: 2.2rem;
+          }
+
+          &:nth-of-type(2) {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}

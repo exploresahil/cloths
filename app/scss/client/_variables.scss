@@ -1,0 +1,242 @@
+@font-face {
+  font-family: "AYERPOSTER-BLACK";
+  src: url("../fonts/AYERPOSTER-BLACK.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "AYERPOSTER-BLACKITALIC";
+  src: url("../fonts/AYERPOSTER-BLACKITALIC.woff") format("woff");
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "AYERPOSTER-BOLD";
+  src: url("../fonts/AYERPOSTER-BOLD.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "AYERPOSTER-BOLDITALIC";
+  src: url("../fonts/AYERPOSTER-BOLDITALIC.woff") format("woff");
+  font-weight: bold;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "AYERPOSTER-MEDIUM";
+  src: url("../fonts/AYERPOSTER-MEDIUM.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "AYERPOSTER-MEDIUMITALIC";
+  src: url("../fonts/AYERPOSTER-MEDIUMITALIC.woff") format("woff");
+  font-weight: 500;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "AYERPOSTER-REGULAR";
+  src: url("../fonts/AYERPOSTER-REGULAR.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "AYERPOSTER-REGULARITALIC";
+  src: url("../fonts/AYERPOSTER-REGULARITALIC.woff") format("woff");
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "AYERPOSTER-SEMIBOLD";
+  src: url("../fonts/AYERPOSTER-SEMIBOLD.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "AYERPOSTER-SEMIBOLDITALIC";
+  src: url("../fonts/AYERPOSTER-SEMIBOLDITALIC.woff") format("woff");
+  font-weight: 600;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "RALEWAY-BLACK";
+  src: url("../fonts/RALEWAY-BLACK.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "RALEWAY-BLACKITALIC";
+  src: url("../fonts/RALEWAY-BLACKITALIC.woff") format("woff");
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "RALEWAY-BOLD";
+  src: url("../fonts/RALEWAY-BOLD.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "RALEWAY-BOLDITALIC";
+  src: url("../fonts/RALEWAY-BOLDITALIC.woff") format("woff");
+  font-weight: bold;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "RALEWAY-EXTRABOLD";
+  src: url("../fonts/RALEWAY-EXTRABOLD.woff") format("woff");
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "RALEWAY-EXTRABOLDITALIC";
+  src: url("../fonts/RALEWAY-EXTRABOLDITALIC.woff") format("woff");
+  font-weight: 800;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "RALEWAY-EXTRALIGHT";
+  src: url("../fonts/RALEWAY-EXTRALIGHT.woff") format("woff");
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "RALEWAY-EXTRALIGHTITALIC";
+  src: url("../fonts/RALEWAY-EXTRALIGHTITALIC.woff") format("woff");
+  font-weight: 200;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "RALEWAY-ITALIC";
+  src: url("../fonts/RALEWAY-ITALIC.woff") format("woff");
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "RALEWAY-LIGHT";
+  src: url("../fonts/RALEWAY-LIGHT.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "RALEWAY-LIGHTITALIC";
+  src: url("../fonts/RALEWAY-LIGHTITALIC.woff") format("woff");
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "RALEWAY-MEDIUM";
+  src: url("../fonts/RALEWAY-MEDIUM.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "RALEWAY-MEDIUMITALIC";
+  src: url("../fonts/RALEWAY-MEDIUMITALIC.woff") format("woff");
+  font-weight: 500;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "RALEWAY-REGULAR";
+  src: url("../fonts/RALEWAY-REGULAR.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "RALEWAY-SEMIBOLD";
+  src: url("../fonts/RALEWAY-SEMIBOLD.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "RALEWAY-SEMIBOLDITALIC";
+  src: url("../fonts/RALEWAY-SEMIBOLDITALIC.woff") format("woff");
+  font-weight: 600;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "RALEWAY-THIN";
+  src: url("../fonts/RALEWAY-THIN.woff") format("woff");
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "RALEWAY-THINITALIC";
+  src: url("../fonts/RALEWAY-THINITALIC.woff") format("woff");
+  font-weight: 100;
+  font-style: italic;
+}
+
+$fontAB: "AYERPOSTER-BOLD", sans-serif;
+$fontABI: "AYERPOSTER-BOLDITALIC", sans-serif;
+$fontAM: "AYERPOSTER-MEDIUM",sans-serif;
+$fontAMI: "AYERPOSTER-MEDIUMITALIC", sans-serif;
+$fontAR: "AYERPOSTER-REGULAR", sans-serif;
+$fontARI: "AYERPOSTER-REGULARITALIC",sans-serif;
+$fontASB: "AYERPOSTER-SEMIBOLD",sans-serif;
+$fontASBI: "AYERPOSTER-SEMIBOLDITALIC",sans-serif;
+
+$fontRB: "RALEWAY-BOLD",sans-serif;
+$fontRBI: "RALEWAY-BOLDITALIC",sans-serif;
+$fontREB: "RALEWAY-EXTRABOLD",sans-serif;
+$fontREBI: "RALEWAY-EXTRABOLDITALIC",sans-serif;
+$fontREL: "RALEWAY-EXTRALIGHT",sans-serif;
+$fontRELI: "RALEWAY-EXTRALIGHTITALIC", sans-serif;
+$fontRI: "RALEWAY-ITALIC",sans-serif;
+$fontRL: "RALEWAY-LIGHT", sans-serif;
+$fontRLI: "RALEWAY-LIGHTITALIC",sans-serif;
+$fontRM: "RALEWAY-MEDIUM", sans-serif;
+$fontRMI: "RALEWAY-MEDIUMITALIC",sans-serif;
+$fontRR: "RALEWAY-REGULAR",sans-serif;
+$fontRSB: "RALEWAY-SEMIBOLD",sans-serif;
+$fontRSBI: "RALEWAY-SEMIBOLDITALIC",sans-serif;
+$fontRT: "RALEWAY-THIN",sans-serif;
+$fontRTI: "RALEWAY-THINITALIC",sans-serif;
+
+
+$bg: #e3dcdc;
+$textTeal: #194841;
+$textBrown: #ad6e4d;
+$dark: #333333;
+$red: #c0272d;
+$light: white;
+
+$bordercolor: #606060;
+
+$offDark: rgba(0, 0, 0, 0.5);
+
+$orange: #ff9840;
+$green: #00c39a;
+
+$blue: #4b9fff;
+
+$purple: rgba(116, 32, 124, 1);
+$darkBlue: rgba(25, 26, 30, 1);
+$lightBlue: rgba(38, 188, 221, 1);

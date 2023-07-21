@@ -1,0 +1,460 @@
+@use "./variables" as v;
+
+.faq-section {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: auto;
+  background-color: v.$dark;
+  justify-content: center;
+  align-items: center;
+  padding: 7em 0;
+  gap: 3rem;
+
+  -webkit-tap-highlight-color: transparent;
+
+  .faq-heading {
+    h1 {
+      font-family: v.$fontAR;
+      font-style: italic;
+      font-size: 5rem;
+      color: v.$bg;
+      font-weight: 100;
+    }
+
+    h2 {
+      font-family: v.$fontRM;
+      font-size: 1.2em;
+      color: v.$bg;
+      font-weight: 100;
+    }
+  }
+
+  .faq-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 80vw;
+    height: auto;
+    gap: 1.5rem;
+
+    .faq-content {
+      .accordion-down {
+        position: absolute;
+        margin-left: 50vw;
+        transition: transform 0.25s cubic-bezier(0, 0, 0, 1);
+
+        svg {
+          color: v.$bg;
+        }
+      }
+
+      .szh-accordion {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 70vw;
+        border-bottom: 1px solid v.$bg;
+
+        &__item {
+          // border-top: 1px solid #ccc;
+
+          &-heading {
+            padding: 0 17vw;
+          }
+
+          &-btn {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            margin: 0;
+            padding: 1rem;
+            font-family: v.$fontRB;
+            font-size: 1rem;
+            font-weight: 100;
+            text-align: center;
+            color: v.$bg;
+            margin-bottom: 0.8em;
+          }
+
+          &-content {
+            transition: height 0.25s cubic-bezier(0, 0, 0, 1);
+            text-align: center;
+          }
+
+          &-panel {
+            padding: 1rem 15vw;
+            color: v.$bg;
+            font-family: v.$fontRL;
+          }
+
+          &--expanded {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            .szh-accordion__item-btn {
+              text-align: center;
+            }
+
+            .accordion-down {
+              transform: rotate(180deg);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+//*----------> Tablets
+@media screen and (max-width: 1024px) {
+  .faq-section {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: auto;
+    background-color: v.$dark;
+    justify-content: center;
+    align-items: center;
+    padding: 7vh 0;
+    gap: 3rem;
+
+    .faq-heading {
+      padding: 0 10vw;
+      h1 {
+        font-family: v.$fontAR;
+        font-style: italic;
+        font-size: 5rem;
+        color: v.$bg;
+        font-weight: 100;
+      }
+
+      h2 {
+        font-family: v.$fontRM;
+        font-size: 1.2rem;
+        color: v.$bg;
+        font-weight: 100;
+      }
+    }
+
+    .faq-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 80vw;
+      height: auto;
+      gap: 1.5rem;
+
+      .faq-content {
+        .accordion-down {
+          position: absolute;
+          margin-left: 75vw;
+          transition: transform 0.25s cubic-bezier(0, 0, 0, 1);
+
+          svg {
+            color: v.$bg;
+          }
+        }
+
+        .szh-accordion {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          width: 90vw;
+          border-bottom: 1px solid v.$bg;
+
+          &__item {
+            // border-top: 1px solid #ccc;
+
+            &-heading {
+              padding: 0 5vw;
+            }
+
+            &-btn {
+              cursor: pointer;
+              display: flex;
+              align-items: flex-start;
+              justify-content: space-between;
+              width: 100vw;
+              margin: 0;
+              padding: 1vh 15vw 1vh 10vw;
+              font-family: v.$fontRB;
+              font-size: 1rem;
+              font-weight: 100;
+              text-align: left;
+              color: v.$bg;
+              margin-bottom: 0.8em;
+            }
+
+            &-content {
+              transition: height 0.25s cubic-bezier(0, 0, 0, 1);
+              text-align: left;
+              font-size: 1rem;
+              width: 100%;
+            }
+
+            &-panel {
+              padding: 1rem 15vw;
+              color: v.$bg;
+              font-family: v.$fontRL;
+            }
+
+            &--expanded {
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+
+              .szh-accordion__item-btn {
+                text-align: left;
+              }
+
+              .accordion-down {
+                transform: rotate(180deg);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+//*----------> largeMobile
+@media screen and (max-width: 768px) {
+  .faq-section {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: auto;
+    background-color: v.$dark;
+    justify-content: center;
+    align-items: center;
+    padding: 7vh 0;
+    gap: 2rem;
+
+    .faq-heading {
+      padding: 0 10vw;
+      h1 {
+        font-family: v.$fontAR;
+        font-style: italic;
+        font-size: 4rem;
+        color: v.$bg;
+        font-weight: 100;
+      }
+
+      h2 {
+        font-family: v.$fontRM;
+        font-size: 1rem;
+        color: v.$bg;
+        font-weight: 100;
+      }
+    }
+
+    .faq-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 80vw;
+      height: auto;
+      gap: 1.5rem;
+
+      .faq-content {
+        .accordion-down {
+          position: absolute;
+          margin-left: 75vw;
+          transition: transform 0.25s cubic-bezier(0, 0, 0, 1);
+
+          svg {
+            color: v.$bg;
+          }
+        }
+
+        .szh-accordion {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          width: 90vw;
+          border-bottom: 1px solid v.$bg;
+
+          &__item {
+            // border-top: 1px solid #ccc;
+
+            &-heading {
+              padding: 0 5vw;
+            }
+
+            &-btn {
+              cursor: pointer;
+              display: flex;
+              align-items: flex-start;
+              justify-content: space-between;
+              width: 100vw;
+              margin: 0;
+              padding: 1vh 15vw 1vh 10vw;
+              font-family: v.$fontRB;
+              font-size: 0.7rem;
+              font-weight: 100;
+              text-align: left;
+              color: v.$bg;
+              margin-bottom: 0.8em;
+            }
+
+            &-content {
+              transition: height 0.25s cubic-bezier(0, 0, 0, 1);
+              text-align: left;
+              font-size: 0.7rem;
+              width: 100%;
+            }
+
+            &-panel {
+              padding: 1rem 15vw;
+              color: v.$bg;
+              font-family: v.$fontRL;
+            }
+
+            &--expanded {
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+
+              .szh-accordion__item-btn {
+                text-align: left;
+              }
+
+              .accordion-down {
+                transform: rotate(180deg);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .faq-section {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: auto;
+    background-color: v.$dark;
+    justify-content: center;
+    align-items: center;
+    padding: 7vh 0;
+    gap: 2rem;
+
+    .faq-heading {
+      padding: 0 10vw;
+      h1 {
+        font-family: v.$fontAR;
+        font-style: italic;
+        font-size: 3.5rem;
+        color: v.$bg;
+        font-weight: 100;
+      }
+
+      h2 {
+        font-family: v.$fontRM;
+        font-size: 1rem;
+        color: v.$bg;
+        font-weight: 100;
+      }
+    }
+
+    .faq-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 80vw;
+      height: auto;
+      gap: 1.5rem;
+
+      .faq-content {
+        .accordion-down {
+          position: absolute;
+          margin-left: 75vw;
+          transition: transform 0.25s cubic-bezier(0, 0, 0, 1);
+
+          svg {
+            color: v.$bg;
+          }
+        }
+
+        .szh-accordion {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          width: 90vw;
+          border-bottom: 1px solid v.$bg;
+
+          &__item {
+            // border-top: 1px solid #ccc;
+
+            &-heading {
+              padding: 0 5vw;
+            }
+
+            &-btn {
+              cursor: pointer;
+              display: flex;
+              align-items: flex-start;
+              justify-content: space-between;
+              width: 100vw;
+              margin: 0;
+              padding: 1vh 15vw 1vh 10vw;
+              font-family: v.$fontRB;
+              font-size: 0.7rem;
+              font-weight: 100;
+              text-align: left;
+              color: v.$bg;
+              margin-bottom: 0.8em;
+            }
+
+            &-content {
+              transition: height 0.25s cubic-bezier(0, 0, 0, 1);
+              text-align: left;
+              font-size: 0.7rem;
+              width: 100%;
+            }
+
+            &-panel {
+              padding: 1rem 15vw;
+              color: v.$bg;
+              font-family: v.$fontRL;
+            }
+
+            &--expanded {
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+
+              .szh-accordion__item-btn {
+                text-align: left;
+              }
+
+              .accordion-down {
+                transform: rotate(180deg);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

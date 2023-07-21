@@ -1,0 +1,29 @@
+@use "./defaults";
+@use "./header";
+@use "./hero";
+@use "./footer";
+@use "./process";
+@use "./newsletter";
+@use "./contact";
+@use "./products";
+@use "./product";
+@use "./about";
+@use "./refund";
+@use "./shipping";
+@use "./blogs";
+@use "./blog";
+@use "./faqs";
+@use "./privacy";
+@use "./cart";
+@use "./login";
+@use "./user";
+
+main {
+  margin-top: 180px;
+}
+
+@media screen and (max-width: 767px) {
+  main {
+    margin-top: 250px;
+  }
+}

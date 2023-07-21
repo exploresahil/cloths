@@ -1,0 +1,255 @@
+@use "./variables" as v;
+
+.shipping-main {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: auto;
+  padding: 0 27vw 7vh 27vw;
+  gap: 2em;
+
+  p {
+    font-family: v.$fontRM;
+    font-size: 1em;
+  }
+
+  .shipping-content {
+    h3 {
+      font-family: v.$fontRM;
+    }
+  }
+
+  .shipping-watermark-container {
+    position: fixed;
+    z-index: 1;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    left: 5vw;
+    bottom: 7vh;
+    fill: v.$textBrown;
+
+    svg {
+      width: 100px;
+      height: 100px;
+
+      &:nth-of-type(1) {
+        width: 40px;
+        height: 40px;
+      }
+
+      &:nth-of-type(2) {
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        animation: rotate 40s linear infinite forwards;
+
+        @keyframes rotate {
+          0% {
+            transform: rotate(0);
+          }
+          100% {
+            transform: rotate(360deg);
+          }
+        }
+      }
+    }
+  }
+
+  .shipping-body {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    .shipping-heading {
+      display: flex;
+      flex-direction: column;
+      gap: 1em;
+
+      h1 {
+        font-family: v.$fontASB;
+        color: v.$textTeal;
+        font-size: 6em;
+      }
+    }
+
+    .shipping-content-section {
+      display: flex;
+      flex-direction: column;
+      gap: 1em;
+
+      .shipping-content {
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+      }
+    }
+  }
+}
+
+//*----------> Tablets
+@media screen and (max-width: 1024px) {
+  .shipping-main {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: auto;
+    padding: 0 10vw 5vh 10vw;
+    gap: 2em;
+
+    .shipping-watermark-container {
+      display: none;
+
+      svg {
+        display: none;
+      }
+    }
+
+    .shipping-body {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+
+      .shipping-heading {
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+
+        h1 {
+          font-family: v.$fontASB;
+          color: v.$textTeal;
+          font-size: 6rem;
+        }
+
+        .shipping-description {
+          font-weight: 100;
+        }
+      }
+
+      .shipping-content-section {
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+
+        .shipping-content {
+          display: flex;
+          flex-direction: column;
+          gap: 1em;
+        }
+      }
+    }
+  }
+}
+
+//*----------> largeMobile
+@media screen and (max-width: 768px) {
+  .shipping-main {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: auto;
+    padding: 0 10vw 5vh 10vw;
+    gap: 2em;
+    margin-top: -80px;
+
+    .shipping-watermark-container {
+      display: none;
+
+      svg {
+        display: none;
+      }
+    }
+
+    .shipping-body {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+
+      .shipping-heading {
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+
+        h1 {
+          font-family: v.$fontASB;
+          color: v.$textTeal;
+          font-size: 4rem;
+        }
+
+        .shipping-description {
+          font-weight: 100;
+        }
+      }
+
+      .shipping-content-section {
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+
+        .shipping-content {
+          display: flex;
+          flex-direction: column;
+          gap: 1em;
+        }
+      }
+    }
+  }
+}
+
+//*-----------> smallMobile
+@media screen and (max-width: 320px) {
+  .shipping-main {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: auto;
+    padding: 0 10vw 5vh 10vw;
+    gap: 2em;
+    margin-top: -80px;
+
+    .shipping-watermark-container {
+      display: none;
+
+      svg {
+        display: none;
+      }
+    }
+
+    .shipping-body {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+
+      .shipping-heading {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+
+        h1 {
+          font-family: v.$fontASB;
+          color: v.$textTeal;
+          font-size: 3.5rem;
+        }
+
+        .shipping-description {
+          font-weight: 100;
+        }
+      }
+
+      .shipping-content-section {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+
+        .shipping-content {
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+        }
+      }
+    }
+  }
+}

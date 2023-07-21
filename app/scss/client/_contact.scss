@@ -1,0 +1,1114 @@
+@use "./variables" as v;
+
+.contact-section {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: -180px;
+  width: 100vw;
+  z-index: 2;
+
+  .contact-bg-container {
+    position: relative;
+    width: 50vw;
+    height: 100vh;
+    z-index: 1;
+
+    img {
+      width: 10vw;
+      height: auto;
+      z-index: 1;
+    }
+  }
+
+  .contact-details {
+    padding: 0 5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3em;
+    width: 50vw;
+    height: 100vh;
+    justify-content: center;
+
+    h1 {
+      font-size: 8rem;
+      font-family: v.$fontASB;
+      font-weight: 900;
+      color: v.$textTeal;
+    }
+
+    .contact-options {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 2.5em;
+      padding: 7em 1em 0em 1em;
+      height: 37vh;
+      overflow-y: scroll;
+
+      svg {
+        width: 1em;
+        height: auto;
+      }
+
+      .contact-options-wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 3.2em;
+        padding: 1em 0em 1em 0em;
+        height: 45vh;
+        margin-top: 170px;
+
+        a {
+          font-family: v.$fontRM;
+          text-transform: lowercase;
+          font-weight: 100;
+
+          .contact-phone,
+          .contact-mail,
+          .contact-insta {
+            display: flex;
+            align-items: center;
+            width: 20em;
+            font-size: 0.8em;
+          }
+
+          .contact-phone {
+            display: flex;
+            justify-content: space-between;
+            width: 30vw;
+
+            .contact-phone-left {
+              display: flex;
+              gap: 2em;
+
+              svg {
+                width: 1.8em;
+                height: auto;
+              }
+            }
+
+            .contact-right {
+              svg {
+                height: auto;
+                width: 1em;
+              }
+            }
+          }
+
+          .contact-mail {
+            display: flex;
+            justify-content: space-between;
+            width: 30vw;
+
+            .contact-mail-left {
+              display: flex;
+              gap: 2em;
+
+              svg {
+                width: 2.4em;
+                height: auto;
+                margin-left: -2px;
+              }
+            }
+
+            .contact-right {
+              svg {
+                height: auto;
+                width: 1em;
+              }
+            }
+          }
+
+          .contact-insta {
+            display: flex;
+            justify-content: space-between;
+            width: 30vw;
+            .contact-insta-left {
+              display: flex;
+              gap: 2em;
+
+              svg {
+                width: 2.3em;
+                height: auto;
+                margin-left: 0px;
+              }
+            }
+
+            .contact-right {
+              svg {
+                height: auto;
+                width: 1em;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .contact-newsletter {
+    padding: 1em 0em 2em 0.5em;
+    margin-left: -1em;
+
+    .contact-newsletter-form {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 1em;
+      font-family: v.$fontRM;
+
+      .name {
+        display: flex;
+        gap: 2em;
+
+        input {
+          width: 12.18em;
+          font-size: 1em;
+          color: #1a1a1a;
+          padding: 1em 1em;
+          border-width: 2px;
+          border-style: solid;
+          border-color: v.$bordercolor;
+        }
+      }
+
+      input {
+        width: 26.35em;
+        font-size: 1em;
+        color: #1a1a1a;
+        padding: 1em 1em;
+        border-width: 2px;
+        border-style: solid;
+        border-color: v.$bordercolor;
+        background-color: v.$bg;
+      }
+
+      button {
+        align-items: center;
+        position: relative;
+        display: flex;
+        gap: 1.4em;
+        padding: 0.3em 0.3em 0.3em 2.6em;
+        border-radius: 2.5rem;
+        border-style: solid;
+        border-width: 2px;
+        border-color: v.$bordercolor;
+        top: 0.5rem;
+
+        &:hover {
+          color: v.$bg;
+          background-color: v.$textTeal;
+
+          svg {
+            fill: v.$textTeal;
+
+            &:nth-of-type(1) {
+              display: block;
+              fill: v.$textTeal;
+            }
+
+            &:nth-of-type(2) {
+              display: none;
+            }
+          }
+        }
+
+        &:active {
+          color: v.$bg;
+          background-color: v.$textTeal;
+          gap: 1.2rem;
+
+          svg {
+            &:nth-of-type(1) {
+              display: none;
+            }
+
+            &:nth-of-type(2) {
+              display: block;
+              width: 1rem;
+              height: 1rem;
+              margin: 0.75rem;
+            }
+          }
+        }
+
+        h3 {
+          font-family: v.$fontRL;
+          font-weight: 500;
+          font-size: 1.2rem;
+        }
+
+        svg {
+          width: 2.5rem;
+          height: auto;
+          fill: v.$bordercolor;
+
+          &:nth-of-type(1) {
+            display: block;
+          }
+
+          &:nth-of-type(2) {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}
+
+//*----------> Tablets
+@media screen and (max-width: 1024px) {
+  .contact-section {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 0;
+    width: 100vw;
+    height: auto;
+    gap: 2rem;
+    z-index: 2;
+
+    .contact-bg-container {
+      position: relative;
+      width: 100vw;
+      height: 45vh;
+      z-index: 2;
+      overflow: hidden;
+
+      img {
+        position: relative;
+        height: auto;
+        width: 100vw;
+        top: -10vh;
+        z-index: 1;
+      }
+    }
+
+    .contact-details {
+      padding: 0 3rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.7rem;
+      width: 100vw;
+      height: auto;
+      justify-content: start;
+
+      h1 {
+        font-size: 7rem;
+        font-family: v.$fontASB;
+        font-weight: 900;
+        color: v.$textTeal;
+      }
+
+      .contact-options {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 0;
+        padding: 0 0 0 0;
+        width: 100vw;
+        height: auto;
+        overflow-y: visible;
+
+        svg {
+          width: 1em;
+          height: auto;
+        }
+
+        .contact-options-wrapper {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: flex-start;
+          gap: 2.5rem;
+          padding: 0 0;
+          width: 100vw;
+          height: auto;
+          margin-top: 0px;
+
+          a {
+            font-family: v.$fontRM;
+            text-transform: lowercase;
+            font-weight: 100;
+
+            .contact-phone,
+            .contact-mail,
+            .contact-insta {
+              display: flex;
+              align-items: center;
+              width: 100vw;
+              font-size: 0.9rem;
+            }
+
+            .contact-phone {
+              display: flex;
+              justify-content: space-between;
+              width: 80vw;
+
+              .contact-phone-left {
+                display: flex;
+                gap: 2em;
+
+                svg {
+                  width: 2em;
+                  height: auto;
+                }
+              }
+
+              .contact-right {
+                svg {
+                  height: auto;
+                  width: 1em;
+                }
+              }
+            }
+
+            .contact-mail {
+              display: flex;
+              justify-content: space-between;
+              width: 80vw;
+
+              .contact-mail-left {
+                display: flex;
+                gap: 2em;
+
+                svg {
+                  width: 2.7rem;
+                  height: auto;
+                  margin-left: -2px;
+                }
+              }
+
+              .contact-right {
+                svg {
+                  height: auto;
+                  width: 1em;
+                }
+              }
+            }
+
+            .contact-insta {
+              display: flex;
+              justify-content: space-between;
+              width: 80vw;
+              .contact-insta-left {
+                display: flex;
+                gap: 2em;
+
+                svg {
+                  width: 2.6em;
+                  height: auto;
+                  margin-left: 0px;
+                }
+              }
+
+              .contact-right {
+                svg {
+                  height: auto;
+                  width: 1em;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .contact-newsletter {
+      position: relative;
+      margin-top: 15vh;
+      width: auto;
+      height: 50vh;
+      padding: 0 0 10vh 0;
+      margin-left: 0;
+
+      .contact-newsletter-form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        font-family: v.$fontRM;
+
+        h2 {
+          font-size: 2.7rem;
+          font-weight: 100;
+        }
+
+        .name {
+          display: flex;
+          gap: 1.5em;
+
+          input {
+            width: 42.3vw;
+            font-size: 2rem;
+            color: #1a1a1a;
+            padding: 1.2rem 1rem;
+            border-width: 2px;
+            border-style: solid;
+            border-color: v.$bordercolor;
+          }
+        }
+
+        input {
+          width: 87.5vw;
+          font-size: 2rem;
+          color: #1a1a1a;
+          padding: 1.2rem 1rem;
+          border-width: 2px;
+          border-style: solid;
+          border-color: v.$bordercolor;
+          background-color: v.$bg;
+        }
+
+        button {
+          align-items: center;
+          display: flex;
+          justify-content: space-between;
+          gap: 1.5rem;
+          width: auto;
+          height: 5rem;
+          padding: 0.3rem 0.25rem 0.3rem 2.7rem;
+          border-radius: 2.5rem;
+          border-style: solid;
+          border-width: 2px;
+          border-color: v.$bordercolor;
+          position: relative;
+          top: 1rem;
+
+          &:hover {
+            color: v.$bg;
+            background-color: v.$textTeal;
+
+            svg {
+              fill: v.$textTeal;
+
+              &:nth-of-type(1) {
+                display: block;
+                fill: v.$textTeal;
+              }
+
+              &:nth-of-type(2) {
+                display: none;
+              }
+            }
+          }
+
+          &:active {
+            color: v.$bg;
+            background-color: v.$textTeal;
+            gap: 2.2rem;
+
+            svg {
+              &:nth-of-type(1) {
+                display: none;
+              }
+
+              &:nth-of-type(2) {
+                display: block;
+                width: 2rem;
+                height: 2rem;
+                margin: 0.75rem;
+              }
+            }
+          }
+
+          h3 {
+            font-family: v.$fontRL;
+            font-weight: 500;
+            font-size: 2rem;
+          }
+
+          svg {
+            width: 4.2rem;
+            height: auto;
+            fill: v.$bordercolor;
+
+            &:nth-of-type(1) {
+              display: block;
+            }
+
+            &:nth-of-type(2) {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+//*----------> largeMobile
+@media screen and (max-width: 768px) {
+  .contact-section {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: -80px;
+    width: 100vw;
+    gap: 1em;
+    z-index: 2;
+
+    .contact-bg-container {
+      position: relative;
+      width: 100vw;
+      height: 35vh;
+      z-index: 1;
+
+      img {
+        z-index: 1;
+      }
+    }
+
+    .contact-details {
+      padding: 0 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.7rem;
+      width: 100vw;
+      height: auto;
+      justify-content: start;
+
+      h1 {
+        font-size: 4.1rem;
+        font-family: v.$fontASB;
+        font-weight: 900;
+        color: v.$textTeal;
+      }
+
+      .contact-options {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 0;
+        padding: 0 0 0 0;
+        width: 87vw;
+        height: auto;
+        overflow-y: visible;
+
+        svg {
+          width: 1em;
+          height: auto;
+        }
+
+        .contact-options-wrapper {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: flex-start;
+          gap: 2.5rem;
+          padding: 0 0;
+          width: 87vw;
+          height: auto;
+          margin-top: 0px;
+
+          a {
+            font-family: v.$fontRM;
+            text-transform: lowercase;
+            font-weight: 100;
+
+            h2 {
+              font-size: .8rem
+            }
+
+            .contact-phone,
+            .contact-mail,
+            .contact-insta {
+              display: flex;
+              align-items: center;
+              width: 100vw;
+              font-size: 0.5rem;
+            }
+
+            .contact-phone {
+              display: flex;
+              justify-content: space-between;
+              width: 80vw;
+
+              .contact-phone-left {
+                display: flex;
+                gap: 2em;
+
+                svg {
+                  width: 2em;
+                  height: auto;
+                }
+              }
+
+              .contact-right {
+                svg {
+                  height: auto;
+                  width: 1em;
+                }
+              }
+            }
+
+            .contact-mail {
+              display: flex;
+              justify-content: space-between;
+              width: 80vw;
+
+              .contact-mail-left {
+                display: flex;
+                gap: 2em;
+
+                svg {
+                  width: 1.5rem;
+                  height: auto;
+                  margin-left: -2px;
+                }
+              }
+
+              .contact-right {
+                svg {
+                  height: auto;
+                  width: 1em;
+                }
+              }
+            }
+
+            .contact-insta {
+              display: flex;
+              justify-content: space-between;
+              width: 80vw;
+              .contact-insta-left {
+                display: flex;
+                gap: 2em;
+
+                svg {
+                  width: 2.6em;
+                  height: auto;
+                  margin-left: 0px;
+                }
+              }
+
+              .contact-right {
+                svg {
+                  height: auto;
+                  width: 1em;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .contact-newsletter {
+      position: relative;
+      margin-top: 15vh;
+      width: 87vw;
+      height: auto;
+      padding: 0 0 20vh 0;
+      margin-left: 0;
+
+      .contact-newsletter-form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        font-family: v.$fontRM;
+
+        h2 {
+          font-size: 1rem;
+          font-weight: 100;
+        }
+
+        .name {
+          display: flex;
+          gap: 1.5rem;
+
+          input {
+            width: 40vw;
+            font-size: 0.8rem;
+            color: #1a1a1a;
+            padding: 1rem 1rem;
+            border-width: 2px;
+            border-style: solid;
+            border-color: v.$bordercolor;
+          }
+        }
+
+        input {
+          width: 86vw;
+          font-size: 0.8rem;
+          color: #1a1a1a;
+          padding: 1rem 1rem;
+          border-width: 2px;
+          border-style: solid;
+          border-color: v.$bordercolor;
+          background-color: v.$bg;
+        }
+
+        button {
+          align-items: center;
+          display: flex;
+          justify-content: space-between;
+          gap: 1.2rem;
+          width: auto;
+          height: 2.8rem;
+          padding: 0.3rem 0.25rem 0.3rem 2.5rem;
+          border-radius: 1.5rem;
+          border-style: solid;
+          border-width: 2px;
+          border-color: v.$bordercolor;
+          position: relative;
+          top: 1rem;
+
+          &:hover {
+            color: v.$bg;
+            background-color: v.$textTeal;
+
+            svg {
+              fill: v.$textTeal;
+
+              &:nth-of-type(1) {
+                display: block;
+                fill: v.$textTeal;
+              }
+
+              &:nth-of-type(2) {
+                display: none;
+              }
+            }
+          }
+
+          &:active {
+            color: v.$bg;
+            background-color: v.$textTeal;
+            gap: 0.9rem;
+
+            svg {
+              &:nth-of-type(1) {
+                display: none;
+              }
+
+              &:nth-of-type(2) {
+                display: block;
+                width: 1rem;
+                height: 1rem;
+                margin: 0.75rem;
+              }
+            }
+          }
+
+          h3 {
+            font-family: v.$fontRL;
+            font-weight: 500;
+            font-size: 0.8rem;
+          }
+
+          svg {
+            width: 2.2rem;
+            height: auto;
+            fill: v.$bordercolor;
+
+            &:nth-of-type(1) {
+              display: block;
+            }
+
+            &:nth-of-type(2) {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+//*-----------> smallMobile
+@media screen and (max-width: 320px) {
+  .contact-section {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: -80px;
+    width: 100vw;
+    gap: 1em;
+    z-index: 2;
+
+    .contact-bg-container {
+      position: relative;
+      width: 100vw;
+      height: 40vh;
+      z-index: 1;
+
+      img {
+        z-index: 1;
+      }
+    }
+
+    .contact-details {
+      padding: 0 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.7rem;
+      width: 100vw;
+      height: auto;
+      justify-content: start;
+
+      h1 {
+        font-size: 3.5rem;
+        font-family: v.$fontASB;
+        font-weight: 900;
+        color: v.$textTeal;
+      }
+
+      .contact-options {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 0;
+        padding: 0 0 0 0;
+        width: 87vw;
+        height: auto;
+        overflow-y: visible;
+
+        svg {
+          width: 1em;
+          height: auto;
+        }
+
+        .contact-options-wrapper {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: flex-start;
+          gap: 2.5rem;
+          padding: 0 0;
+          width: 87vw;
+          height: auto;
+          margin-top: 0px;
+
+          a {
+            font-family: v.$fontRM;
+            text-transform: lowercase;
+            font-weight: 100;
+
+            .contact-phone,
+            .contact-mail,
+            .contact-insta {
+              display: flex;
+              align-items: center;
+              width: 100vw;
+              font-size: 0.5rem;
+
+              h2 {
+                font-size: .7rem
+              }
+            }
+
+            .contact-phone {
+              display: flex;
+              justify-content: space-between;
+              width: 80vw;
+
+              .contact-phone-left {
+                display: flex;
+                gap: 2em;
+
+                svg {
+                  width: 2em;
+                  height: auto;
+                }
+              }
+
+              .contact-right {
+                svg {
+                  height: auto;
+                  width: 1em;
+                }
+              }
+            }
+
+            .contact-mail {
+              display: flex;
+              justify-content: space-between;
+              width: 80vw;
+
+              .contact-mail-left {
+                display: flex;
+                gap: 2em;
+
+                svg {
+                  width: 1.5rem;
+                  height: auto;
+                  margin-left: -2px;
+                }
+              }
+
+              .contact-right {
+                svg {
+                  height: auto;
+                  width: 1em;
+                }
+              }
+            }
+
+            .contact-insta {
+              display: flex;
+              justify-content: space-between;
+              width: 80vw;
+              .contact-insta-left {
+                display: flex;
+                gap: 2em;
+
+                svg {
+                  width: 2.6em;
+                  height: auto;
+                  margin-left: 0px;
+                }
+              }
+
+              .contact-right {
+                svg {
+                  height: auto;
+                  width: 1em;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .contact-newsletter {
+      position: relative;
+      margin-top: 15vh;
+      width: 87vw;
+      height: auto;
+      padding: 0 0 20vh 0;
+      margin-left: 0;
+
+      .contact-newsletter-form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        font-family: v.$fontRM;
+
+        h2 {
+          font-size: 1rem;
+          font-weight: 100;
+        }
+
+        .name {
+          display: flex;
+          gap: 1.5rem;
+
+          input {
+            width: 40vw;
+            font-size: 0.8rem;
+            color: v.$dark;
+            padding: 1rem 1rem;
+            border-width: 2px;
+            border-style: solid;
+            border-color: v.$bordercolor;
+          }
+        }
+
+        input {
+          width: 86vw;
+          font-size: 0.8rem;
+          color: v.$dark;
+          padding: 1rem 1rem;
+          border-width: 2px;
+          border-style: solid;
+          border-color: v.$bordercolor;
+          background-color: v.$bg;
+        }
+
+        button {
+          align-items: center;
+          display: flex;
+          justify-content: space-between;
+          gap: 1.2rem;
+          width: auto;
+          height: 2.8rem;
+          padding: 0.3rem 0.25rem 0.3rem 2rem;
+          border-radius: 1.5rem;
+          border-style: solid;
+          border-width: 2px;
+          border-color: v.$bordercolor;
+          position: relative;
+          top: 1rem;
+
+          &:hover {
+            color: v.$bg;
+            background-color: v.$textTeal;
+
+            svg {
+              fill: v.$textTeal;
+
+              &:nth-of-type(1) {
+                display: block;
+                fill: v.$textTeal;
+              }
+
+              &:nth-of-type(2) {
+                display: none;
+              }
+            }
+          }
+
+          &:active {
+            color: v.$bg;
+            background-color: v.$textTeal;
+            gap: 0.9rem;
+
+            svg {
+              &:nth-of-type(1) {
+                display: none;
+              }
+
+              &:nth-of-type(2) {
+                display: block;
+                width: 1rem;
+                height: 1rem;
+                margin: 0.75rem;
+              }
+            }
+          }
+
+          h3 {
+            font-family: v.$fontRL;
+            font-weight: 500;
+            font-size: 0.8rem;
+          }
+
+          svg {
+            width: 2.2rem;
+            height: auto;
+            fill: v.$bordercolor;
+
+            &:nth-of-type(1) {
+              display: block;
+            }
+
+            &:nth-of-type(2) {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+  }
+}

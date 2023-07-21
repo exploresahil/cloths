@@ -1,0 +1,195 @@
+@use "./variables" as v;
+
+.login-main-container {
+  width: 100vw;
+  height: calc(100vh - 180px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 100px;
+
+  .login-container {
+    width: 25vw;
+    height: 520px;
+    border: 1px solid v.$dark;
+    position: relative;
+
+    .login-svg {
+      border: 1px solid v.$dark;
+      width: max-content;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 100px;
+      background-color: v.$bg;
+      position: absolute;
+      top: -25px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .login-input-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 70%;
+      gap: 20px;
+
+      h3 {
+        font-family: v.$fontAM;
+        font-size: 3rem;
+        color: v.$textTeal;
+      }
+
+      form {
+        width: 70%;
+        display: flex;
+        flex-direction: column;
+
+        .inputs {
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+
+          label {
+            font-size: 0.65rem;
+            font-family: v.$fontRM;
+            margin-bottom: 6px;
+          }
+
+          input {
+            background: none;
+            border: none;
+            border-bottom: 1px solid v.$dark;
+            margin-bottom: 12px;
+            line-height: 2;
+
+            &:focus {
+              outline: none;
+            }
+          }
+
+          .otp-container {
+            position: relative;
+            input {
+              width: 100%;
+            }
+
+            .eye-container {
+              position: absolute;
+              top: 8px;
+              right: 0;
+
+              svg {
+                width: 15px;
+                height: 15px;
+              }
+            }
+          }
+        }
+
+        button[type="submit"] {
+          align-self: center;
+          background-color: v.$textTeal;
+          padding: 8px 15px;
+          margin: 10px 0 0 0;
+
+          text-transform: uppercase;
+          color: v.$bg;
+          border-radius: 100px;
+
+          &:hover {
+            background: none;
+            color: v.$dark;
+            border: 1px solid v.$dark;
+          }
+        }
+      }
+    }
+
+    .register-buttons-container {
+      width: 100%;
+      height: 30%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border-top: 1px solid v.$dark;
+      position: relative;
+
+      .or-container {
+        position: absolute;
+        top: -22px;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 0 10px;
+        background-color: v.$bg;
+
+        font-size: 0.8rem;
+      }
+
+      button {
+        border: 1px solid v.$dark;
+        width: fit-content;
+        display: flex;
+        align-items: center;
+
+        gap: 1em;
+        width: 220px;
+        height: 30px;
+        padding: 0 15px;
+        border-radius: 100px;
+
+        svg {
+          width: 15px;
+          height: 15px;
+        }
+
+        &:hover {
+          background-color: v.$dark;
+          color: v.$bg;
+        }
+
+        &:nth-of-type(2) {
+          background-color: v.$textTeal;
+          border: 1px solid v.$textTeal;
+          color: v.$bg;
+
+          justify-content: center;
+
+          &:hover {
+            background: none;
+            border: 1px solid v.$dark;
+            color: v.$dark;
+          }
+        }
+      }
+
+      p {
+        margin: 15px 0 5px 0;
+        font-family: v.$fontRM;
+        font-size: 0.6rem;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  .login-main-container {
+    .login-container {
+      width: 40vw;
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .login-main-container {
+    margin: -80px 0 100px 0;
+    .login-container {
+      width: 90vw;
+    }
+  }
+}

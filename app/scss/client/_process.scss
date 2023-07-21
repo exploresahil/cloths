@@ -1,0 +1,423 @@
+@use "./variables" as v;
+
+.main-process-section {
+  margin-top: 600px;
+  width: 100vw;
+  height: auto;
+  text-align: center;
+  color: v.$textTeal;
+  position: relative;
+
+  .main-process-heading {
+    display: flex;
+    flex-direction: column;
+    font-family: v.$fontAR;
+
+    h1 {
+      font-size: 6em;
+
+      span {
+        color: v.$textBrown;
+      }
+    }
+
+    h2 {
+      font-size: 4em;
+      margin-top: -1%;
+
+      span {
+        color: v.$textBrown;
+        font-style: italic;
+      }
+    }
+  }
+
+  .circular-text-container {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    z-index: 0;
+
+    svg {
+      width: 118vw;
+      height: auto;
+      padding: 0;
+      margin-left: -9.6%;
+      z-index: 0;
+      animation: rotate 40s linear infinite forwards;
+    }
+
+    @keyframes rotate {
+      0% {
+        transform: rotate(0);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  }
+
+  .cut-container {
+    width: 100vw;
+    height: 100vh;
+    background-color: v.$bg;
+    position: absolute;
+    bottom: 0;
+  }
+
+  .mission-section {
+    position: relative;
+    display: flex;
+    margin: 36% 20%;
+    gap: 5em;
+
+    .mission-text {
+      font-family: v.$fontRM;
+      color: v.$dark;
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+      gap: 4em;
+
+      p {
+        font-size: 1.2em;
+      }
+
+      span {
+        font-weight: 900;
+      }
+
+      button {
+        display: flex;
+        text-align: left;
+        background-color: v.$textTeal;
+        width: fit-content;
+        padding: 10px 10px 10px 30px;
+        gap: 1em;
+        border-radius: 2em;
+
+        &:hover {
+          background-color: v.$dark;
+
+          h3 {
+            color: v.$bg;
+          }
+
+          svg {
+            fill: v.$dark;
+          }
+        }
+
+        h3 {
+          font-family: v.$fontRL;
+          font-size: 1.2em;
+          font-weight: 600;
+          color: v.$bg;
+        }
+
+        svg {
+          width: 1.8em;
+          padding-right: 5px;
+        }
+      }
+    }
+
+    .mission-container {
+      width: 100vw;
+      overflow: hidden;
+
+      svg {
+        width: 12.5vw;
+        height: auto;
+        margin-top: 12%;
+      }
+    }
+  }
+
+  .process-section-mobile {
+    display: none;
+  }
+
+  .process-section {
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    margin-top: -20%;
+    padding: 1px;
+    gap: 3px;
+    background-color: v.$bg;
+
+    .process-container {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      padding: 2em 0 4em 0;
+      align-items: center;
+      justify-content: space-between;
+      width: 33.33vw;
+      height: 90vh;
+      z-index: 2;
+
+      .line {
+        display: none;
+      }
+
+      img {
+        z-index: 1;
+      }
+
+      h1 {
+        position: relative;
+        z-index: 2;
+        text-transform: uppercase;
+        font-family: v.$fontAR;
+        color: v.$light;
+        font-size: 5.2em;
+
+        span {
+          font-family: v.$fontRL;
+          font-size: 0.2em;
+          margin-right: 1em;
+        }
+      }
+
+      p {
+        max-width: 70%;
+        position: relative;
+        z-index: 2;
+
+        font-family: v.$fontRL;
+        text-align: left;
+        color: v.$light;
+        font-size: 0.85em;
+      }
+    }
+  }
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
+  .main-process-section {
+    margin-top: -100px;
+    position: relative;
+
+    .circular-text-container {
+      position: absolute;
+      top: 300px;
+
+      svg {
+        width: 150vw;
+        position: absolute;
+        left: -15%;
+      }
+    }
+
+    .cut-container {
+      width: 100vw;
+      height: 100vh;
+      background-color: v.$bg;
+      position: absolute;
+      top: 25%;
+    }
+
+    .mission-section {
+      margin: 400px 6vw;
+      align-items: center;
+      flex-direction: column-reverse;
+
+      .mission-text {
+        align-items: center;
+
+        p {
+          width: 80%;
+          text-align: center;
+        }
+      }
+
+      .mission-container {
+        width: fit-content;
+      }
+    }
+
+    .process-section {
+      display: none;
+    }
+
+    .process-section-mobile {
+      position: relative;
+      display: block;
+      border-top: 1px solid v.$dark;
+      z-index: 2;
+
+      .process-main-mobile {
+        display: flex;
+        flex-direction: column;
+
+        width: 100vw;
+        padding: 0 10vw;
+
+        h1 {
+          width: fit-content;
+          position: relative;
+          text-transform: uppercase;
+          font-family: v.$fontAR;
+          color: v.$textTeal;
+          font-size: 6em;
+          margin: 50px 0;
+
+          span {
+            font-family: v.$fontRL;
+            font-size: 0.2em;
+            margin-right: 1em;
+          }
+        }
+
+        .process-container-mobile {
+          align-self: center;
+          position: relative;
+          width: 100%;
+          height: 50vh;
+        }
+
+        p {
+          margin: 50px 0;
+          font-family: v.$fontRL;
+          text-align: left;
+          color: v.$dark;
+          font-size: 2rem;
+        }
+
+        .line {
+          width: 100vw;
+          height: 1px;
+          margin-left: -10vw;
+          background-color: v.$dark;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-device-width: 768px) {
+  .main-process-section {
+    margin-top: 500px;
+    position: relative;
+
+    .main-process-heading {
+      line-height: 1;
+
+      h1 {
+        font-size: 4rem;
+      }
+
+      h2 {
+        font-size: 2.6rem;
+      }
+    }
+
+    .circular-text-container {
+      position: absolute;
+      top: 200px;
+
+      svg {
+        width: 150vw;
+        position: absolute;
+        left: -15%;
+      }
+    }
+
+    .cut-container {
+      width: 100vw;
+      height: 100vh;
+      background-color: v.$bg;
+      position: absolute;
+      top: 15%;
+    }
+
+    .mission-section {
+      margin: 250px 6vw;
+      align-items: center;
+      flex-direction: column-reverse;
+
+      .mission-text {
+        align-items: center;
+
+        p {
+          width: 80%;
+          text-align: center;
+        }
+      }
+
+      .mission-container {
+        width: fit-content;
+
+        svg {
+          width: 40vw;
+        }
+      }
+    }
+
+    .process-section {
+      display: none;
+    }
+
+    .process-section-mobile {
+      position: relative;
+      display: block;
+      border-top: 1px solid v.$dark;
+      z-index: 2;
+
+      .process-main-mobile {
+        display: flex;
+        flex-direction: column;
+
+        width: 100vw;
+        padding: 0 10vw;
+
+        h1 {
+          width: fit-content;
+          position: relative;
+          text-transform: uppercase;
+          font-family: v.$fontAR;
+          color: v.$textTeal;
+          font-size: 4em;
+          margin: 20px 0;
+
+          span {
+            font-family: v.$fontRL;
+            font-size: 0.2em;
+            margin-right: 1em;
+          }
+        }
+
+        .process-container-mobile {
+          align-self: center;
+          position: relative;
+          width: 100%;
+          height: 50vh;
+        }
+
+        p {
+          margin: 40px 0;
+          font-family: v.$fontRM;
+          text-align: left;
+          color: v.$dark;
+          font-size: 1rem;
+        }
+
+        .line {
+          width: 100vw;
+          height: 1px;
+          margin-left: -10vw;
+          background-color: v.$dark;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-device-height: 800px) {
+  .main-process-section {
+    margin-top: 500px;
+  }
+}
