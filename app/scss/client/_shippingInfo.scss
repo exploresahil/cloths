@@ -1,0 +1,266 @@
+@use "./variables" as v;
+
+.shipping-info-container {
+  width: 100vw;
+  height: 100vh;
+  margin-top: -180px;
+  padding: 200px 10vh;
+  
+  .shipping-info-main {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    .shipping-info {
+      h1 {
+        font-size: 1.3rem;
+        font-family: v.$fontRSB;
+      }
+
+      h2 {
+        font-size: 1rem;
+        font-family: v.$fontRL;
+
+        a {
+          text-decoration: underline;
+        }
+      }
+    }
+    .shipping-info-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+
+      .main {
+        display: flex;
+        justify-content: start;
+        gap: 2.5rem;
+
+        input {
+          width: 35vw;
+          background-color: v.$bg;
+          border-top: none;
+          border-left: none;
+          border-right: none;
+          border-color: v.$bordercolor;
+          outline: none;
+          font-family: v.$fontRSB;
+          font-size: 1rem;
+        }
+
+        p {
+          font-family: v.$fontRR;
+          font-weight: 500;
+          font-size: 1rem;
+        }
+
+        .left {
+          display: flex;
+          flex-direction: column;
+          gap: 1.5rem;
+          width: 35vw;
+
+          .state {
+            .state-select-container {
+              outline: none !important;
+
+              .state-select__control {
+                background-color: v.$bg;
+                border-radius: 0;
+                border-top: none;
+                border-left: none;
+                border-right: none;
+                border-bottom: 2px solid v.$bordercolor;
+                outline: none !important;
+              }
+
+              .state-select__value-container {
+                font-family: v.$fontRSB;
+              }
+
+              .state-select__indicators {
+                .state-select__indicator-separator {
+                  display: none;
+                }
+
+                svg {
+                  color: v.$bordercolor;
+                }
+              }
+
+              .state-select__menu {
+                background-color: v.$bg;
+                max-height: 20vh;
+
+                .state-select__menu-list {
+                  max-height: 20vh;
+                }
+              }
+            }
+          }
+        }
+
+        .right {
+          display: flex;
+          flex-direction: column;
+          gap: 1.5rem;
+          width: 35vw;
+        }
+      }
+
+      .phone {
+        display: flex;
+        gap: 2rem;
+
+        .code {
+          display: flex;
+          flex-direction: column;
+
+          input {
+            width: 5vw;
+            border: none;
+            background-color: v.$bg;
+            font-family: v.$fontRR;
+            font-size: 1rem;
+            outline: none;
+          }
+        }
+
+        .telephone {
+          display: flex;
+          flex-direction: column;
+
+          input {
+            width: 35vw;
+            font-size: 1rem;
+            font-family: v.$fontRSB;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            border-bottom: 2px solid v.$bordercolor;
+            background-color: v.$bg;
+            outline: none;
+          }
+
+          .otp {
+            display: flex;
+            align-items: center;
+            border: 2px solid v.$bordercolor;
+            margin-top: 1rem;
+            width: 10vw;
+
+            input {
+              padding: 0.7rem 1rem;
+              width: 7.5vw;
+              font-size: 1rem;
+              border: none;
+            }
+
+            svg {
+              display: none; //set to "display: block" when OTP approved
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .proceed-to-checkout-container {
+    width: 550px;
+    height: 160px;
+    background-color: v.$dark;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0 40px;
+
+    .price-container {
+      width: 160px;
+      display: flex;
+      .text {
+        color: v.$bg;
+
+        h3 {
+          font-size: 1.5rem;
+          font-family: v.$fontRR;
+        }
+
+        p {
+          font-size: 0.8rem;
+          font-weight: 600;
+        }
+      }
+
+      svg {
+        color: v.$bg;
+        width: 30px;
+        transform: rotate(180deg);
+      }
+    }
+
+    .line {
+      width: 1px;
+      height: 70%;
+      background-color: v.$bg;
+    }
+
+    .checkout-button-container {
+      width: 350px;
+
+      button {
+        align-items: center;
+        display: flex;
+        gap: 0.5rem;
+        padding: 0.4rem 0.4rem 0.4rem 0.8rem;
+        border-radius: 2rem;
+        border-style: solid;
+        border-width: 2px;
+        border-color: v.$bg;
+        font-size: 0.6rem;
+
+        &:hover {
+          background-color: v.$bg;
+          border-color: v.$bg;
+          
+          h3 {
+            color: v.$dark;
+          }
+
+          svg {
+            fill: v.$bg;
+          }
+        }
+
+        &:active {
+          background-color: v.$bg;
+          border-color: v.$bg;
+          
+          h3 {
+            color: v.$dark;
+          }
+
+          svg {
+            fill: v.$bg;
+          }
+        }
+
+        h3 {
+          font-family: v.$fontRM;
+          font-weight: 500;
+          font-size: 1.8em;
+          color: v.$bg;
+        }
+
+        svg {
+          width: 3.4em;
+          height: auto;
+          fill: v.$bg;
+        }
+      }
+    }
+  }
+}

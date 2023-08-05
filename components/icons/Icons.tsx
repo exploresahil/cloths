@@ -33,3 +33,5 @@ export { default as TkpLogo } from "@/components/icons/TkpLogo";
 export { default as BlogsArrow } from "@/components/icons/BlogsArrow";
 export { default as NewsletterTick } from "@/components/icons/NewsletterTick";
 export { default as NewsletterArrowNormal } from "@/components/icons/NewsletterArrowNormal";
+export { default as OTPTick } from "@/components/icons/OTPTick";
+export { default as CheckoutArrowNormal } from "@/components/icons/CheckoutArrowNormal";

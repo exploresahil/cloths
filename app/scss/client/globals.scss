@@ -17,6 +17,8 @@
 @use "./cart";
 @use "./login";
 @use "./user";
+@use "./shippingInfo";
+@use "./payment";
 
 main {
   margin-top: 180px;
