@@ -5,7 +5,7 @@
   height: 100vh;
   margin-top: -180px;
   padding: 200px 10vh;
-  
+
   .shipping-info-main {
     display: flex;
     flex-direction: column;
@@ -61,6 +61,7 @@
           width: 35vw;
 
           .state {
+            outline: none !important;
             .state-select-container {
               outline: none !important;
 
@@ -94,6 +95,20 @@
 
                 .state-select__menu-list {
                   max-height: 20vh;
+
+                  .state-select__option {
+                    font-family: v.$fontRSB;
+                  }
+
+                  .state-select__option--is-focused {
+                    background-color: v.$bordercolor;
+                    color: v.$bg;
+                  }
+
+                  .state-select__option--is-selected {
+                    background-color: v.$dark;
+                    color: v.$bg;
+                  }
                 }
               }
             }
@@ -166,8 +181,8 @@
   }
 
   .proceed-to-checkout-container {
-    width: 550px;
-    height: 160px;
+    width: 37vw;
+    height: 20vh;
     background-color: v.$dark;
     position: absolute;
     bottom: 0;
@@ -175,11 +190,11 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 1rem;
+    gap: 1.5rem;
     padding: 0 40px;
 
     .price-container {
-      width: 160px;
+      width: 10vw;
       display: flex;
       .text {
         color: v.$bg;
@@ -210,6 +225,9 @@
 
     .checkout-button-container {
       width: 350px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
       button {
         align-items: center;
@@ -225,7 +243,7 @@
         &:hover {
           background-color: v.$bg;
           border-color: v.$bg;
-          
+
           h3 {
             color: v.$dark;
           }
@@ -238,7 +256,7 @@
         &:active {
           background-color: v.$bg;
           border-color: v.$bg;
-          
+
           h3 {
             color: v.$dark;
           }

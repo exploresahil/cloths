@@ -138,7 +138,7 @@ export default function ShippingInfo() {
           </div>
           <AccordionDown />
         </div>
-        <div className="line"></div>
+        <div className="line" />
         <div className="checkout-button-container">
           <button type="button">
             <h3>PROCEED TO CHECKOUT</h3>

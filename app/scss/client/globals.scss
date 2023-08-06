@@ -18,7 +18,7 @@
 @use "./login";
 @use "./user";
 @use "./shippingInfo";
-@use "./payment";
+@use "./authorize";
 
 main {
   margin-top: 180px;

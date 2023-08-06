@@ -1,0 +1,380 @@
+@use "./variables" as v;
+
+.authorize-container {
+  width: 100vw;
+  height: 100vh;
+  margin-top: -180px;
+  padding: 220px 30vh;
+
+  .authorize-main {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+
+    .delivery-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      width: 30vw;
+
+      .delivery-type {
+        h1 {
+          font-family: v.$fontRB;
+          font-size: 1rem;
+          font-weight: 100;
+        }
+
+        h2 {
+          font-family: v.$fontRL;
+          font-size: 1rem;
+          font-weight: 100;
+        }
+      }
+
+      .delivery-offer {
+        font-family: v.$fontRL;
+      }
+
+      .delivery-type-edit {
+        font-family: v.$fontRSB;
+        font-size: 1rem;
+        text-transform: lowercase;
+        text-decoration: underline;
+      }
+    }
+
+    .delivery-address-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      width: 30vw;
+
+      .delivery-address-main {
+        width: 25vw;
+
+        .name {
+          text-transform: uppercase;
+
+          h1 {
+            font-family: v.$fontRL;
+            font-size: 1rem;
+            font-weight: 100;
+            text-transform: uppercase;
+          }
+        }
+
+        .address {
+          text-transform: uppercase;
+
+          .address-line {
+            font-family: v.$fontRL;
+            font-size: 1rem;
+            font-weight: 100;
+          }
+
+          .city {
+            font-family: v.$fontRL;
+            font-size: 1rem;
+            font-weight: 100;
+            display: inline-block;
+          }
+
+          .pincode {
+            font-family: v.$fontRL;
+            font-size: 1rem;
+            font-weight: 100;
+            display: inline-block;
+          }
+
+          .state {
+            font-family: v.$fontRL;
+            font-size: 1rem;
+            font-weight: 100;
+          }
+
+          .country {
+            font-family: v.$fontRL;
+            font-size: 1rem;
+            font-weight: 100;
+          }
+
+          .phone {
+            font-family: v.$fontRL;
+            font-size: 1rem;
+            font-weight: 100;
+          }
+        }
+      }
+
+      .delivery-address-edit {
+        font-family: v.$fontRSB;
+        font-size: 1rem;
+        text-transform: lowercase;
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .authorize-payment-container {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 37vw;
+    height: 75vh;
+    border: 1px solid black;
+    border-bottom: none !important;
+    border-right: none !important;
+    border-radius: 60px 0 0 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+    .authorize-payment-cart {
+      height: 70%;
+      padding: 60px 0 0 60px;
+
+      .cart-products {
+        overflow-y: scroll;
+        height: 80%;
+
+        .cart-items {
+          position: relative;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding-bottom: 20px;
+          margin-bottom: 20px;
+          margin-right: 20px;
+
+          .cart-product-info {
+            display: flex;
+            gap: 2em;
+
+            .cart-item-info {
+              text-transform: uppercase;
+              display: flex;
+              flex-direction: column;
+              justify-content: space-between;
+
+              .info {
+                h3 {
+                  letter-spacing: 0.5px;
+                }
+
+                p {
+                  color: v.$textTeal;
+                }
+              }
+
+              .item-filter {
+                display: flex;
+                gap: 1em;
+
+                p {
+                  color: v.$dark;
+
+                  &:nth-of-type(1) {
+                    font-family: v.$fontRM;
+                  }
+
+                  &:nth-of-type(2) {
+                    display: flex;
+                    justify-content: center;
+                    width: 40px;
+                    border: 1px solid v.$dark;
+                  }
+                }
+              }
+            }
+
+            .image-container {
+              position: relative;
+              width: 80px;
+              height: 80px;
+              overflow: hidden;
+            }
+          }
+
+          button {
+            border: 1px solid v.$dark;
+            width: fit-content;
+            height: fit-content;
+            padding: 10px;
+            border-radius: 100px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            svg {
+              width: 15px;
+              height: 15px;
+            }
+
+            &:hover {
+              background-color: v.$dark;
+            }
+          }
+
+          .line {
+            width: 100%;
+            height: 1px;
+            background-color: v.$dark;
+            position: absolute;
+            bottom: 0;
+          }
+        }
+      }
+
+      button {
+        width: 250px;
+        margin-top: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: v.$textTeal;
+        font-size: 0.9rem;
+        border: 1px solid v.$textTeal;
+        padding: 8px 10px 8px 15px;
+        border-radius: 100px;
+        align-self: center;
+
+        .arrow {
+          width: 25px;
+          height: 25px;
+          border-radius: 100px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color: v.$bg;
+          background-color: v.$textTeal;
+
+          svg {
+            width: 15px;
+            height: 15px;
+          }
+        }
+
+        &:hover {
+          background-color: v.$textTeal;
+          color: v.$bg;
+        }
+      }
+
+      .socials {
+        position: absolute;
+        display: flex;
+        gap: 1.8em;
+        bottom: 20px;
+        right: 60px;
+        a {
+          svg {
+            fill: v.$textTeal;
+            width: 25px;
+            height: 25px;
+          }
+        }
+      }
+    }
+
+    .authorize-payment-bottom-container {
+      width: 37vw;
+      height: 20vh;
+      background-color: v.$dark;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      padding: 0 40px;
+
+      .price-container {
+        width: 10vw;
+        display: flex;
+
+        .text {
+          color: v.$bg;
+
+          h3 {
+            font-size: 1.5rem;
+            font-family: v.$fontRR;
+          }
+
+          p {
+            font-size: 0.8rem;
+            font-weight: 600;
+          }
+        }
+
+        svg {
+          color: v.$bg;
+          width: 30px;
+          transform: rotate(180deg);
+        }
+      }
+
+      .line {
+        width: 1px;
+        height: 70%;
+        background-color: v.$bg;
+      }
+
+      .payment-button-container {
+        width: 350px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        button {
+          align-items: center;
+          display: flex;
+          gap: 0.5rem;
+          padding: 0.4rem 0.4rem 0.4rem 0.8rem;
+          border-radius: 2rem;
+          border-style: solid;
+          border-width: 2px;
+          border-color: v.$bg;
+          font-size: 0.6rem;
+
+          &:hover {
+            background-color: v.$bg;
+            border-color: v.$bg;
+
+            h3 {
+              color: v.$dark;
+            }
+
+            svg {
+              fill: v.$bg;
+            }
+          }
+
+          &:active {
+            background-color: v.$bg;
+            border-color: v.$bg;
+
+            h3 {
+              color: v.$dark;
+            }
+
+            svg {
+              fill: v.$bg;
+            }
+          }
+
+          h3 {
+            font-family: v.$fontRM;
+            font-weight: 500;
+            font-size: 1.8em;
+            color: v.$bg;
+          }
+
+          svg {
+            width: 3.4em;
+            height: auto;
+            fill: v.$bg;
+          }
+        }
+      }
+    }
+  }
+}
