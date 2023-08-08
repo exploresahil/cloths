@@ -3,11 +3,9 @@
 import React from "react";
 import Select from "react-select";
 
-import {
-  CheckoutArrowNormal,
-  OTPTick,
-} from "@/components/icons/Icons";
+import { CheckoutArrowNormal, OTPTick } from "@/components/icons/Icons";
 import AccordionDown from "@/components/icons/AccordionDown";
+import { AiOutlinePlus } from "react-icons/ai";
 
 export default function ShippingInfo() {
   const stateOptions: any = [
@@ -134,7 +132,10 @@ export default function ShippingInfo() {
         <div className="price-container">
           <div className="text">
             <h3>Rs. 2,995</h3>
-            <p>+EXCL.SHIPPING</p>
+            <span>
+              <AiOutlinePlus />
+              <p>EXCL.SHIPPING</p>
+            </span>
           </div>
           <AccordionDown />
         </div>

@@ -4,7 +4,9 @@
   width: 100vw;
   height: 100vh;
   margin-top: -180px;
-  padding: 200px 10vh;
+  padding: 200px 10vw;
+  display: flex;
+  justify-content: start;
 
   .shipping-info-main {
     display: flex;
@@ -190,12 +192,13 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 1.5rem;
-    padding: 0 40px;
+    gap: .5rem;
+    padding: 0 30px;
 
     .price-container {
       width: 10vw;
       display: flex;
+
       .text {
         color: v.$bg;
 
@@ -204,10 +207,20 @@
           font-family: v.$fontRR;
         }
 
-        p {
-          font-size: 0.8rem;
-          font-weight: 600;
-        }
+        span {
+          display: flex;
+          align-items: center;
+
+          p {
+            font-size: 0.7rem;
+            font-weight: 600;
+          }
+
+          svg {
+            width: .9rem;
+          }
+        } 
+
       }
 
       svg {
@@ -224,7 +237,7 @@
     }
 
     .checkout-button-container {
-      width: 350px;
+      width: 25vw;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -232,9 +245,9 @@
       button {
         align-items: center;
         display: flex;
-        gap: 0.5rem;
-        padding: 0.4rem 0.4rem 0.4rem 0.8rem;
-        border-radius: 2rem;
+        gap: 6px;
+        padding: 6px 6px 6px 15px;
+        border-radius: 100px;
         border-style: solid;
         border-width: 2px;
         border-color: v.$bg;
@@ -269,14 +282,952 @@
         h3 {
           font-family: v.$fontRM;
           font-weight: 500;
-          font-size: 1.8em;
+          font-size: 1rem;
           color: v.$bg;
         }
 
         svg {
-          width: 3.4em;
+          width: 3rem;
           height: auto;
           fill: v.$bg;
+        }
+      }
+    }
+  }
+}
+
+//*----------> Tablets
+@media screen and (max-width: 1024px) {
+  .shipping-info-container {
+    width: 100vw;
+    height: 100vh;
+    margin-top: -180px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    padding: 220px 10vw;
+    
+    .shipping-info-main {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+
+      .shipping-info {
+        h1 {
+          font-size: 1.3rem;
+          font-family: v.$fontRSB;
+        }
+
+        h2 {
+          font-size: 1rem;
+          font-family: v.$fontRL;
+
+          a {
+            text-decoration: underline;
+          }
+        }
+      }
+      .shipping-info-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+
+        .main {
+          display: flex;
+          justify-content: start;
+          gap: 2.5rem;
+
+          input {
+            width: 35vw;
+            background-color: v.$bg;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            border-color: v.$bordercolor;
+            outline: none;
+            font-family: v.$fontRSB;
+            font-size: 1rem;
+          }
+
+          p {
+            font-family: v.$fontRR;
+            font-weight: 500;
+            font-size: 1rem;
+          }
+
+          .left {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            width: 35vw;
+
+            .state {
+              outline: none !important;
+              .state-select-container {
+                outline: none !important;
+
+                .state-select__control {
+                  background-color: v.$bg;
+                  border-radius: 0;
+                  border-top: none;
+                  border-left: none;
+                  border-right: none;
+                  border-bottom: 2px solid v.$bordercolor;
+                  outline: none !important;
+                }
+
+                .state-select__value-container {
+                  font-family: v.$fontRSB;
+                }
+
+                .state-select__indicators {
+                  .state-select__indicator-separator {
+                    display: none;
+                  }
+
+                  svg {
+                    color: v.$bordercolor;
+                  }
+                }
+
+                .state-select__menu {
+                  background-color: v.$bg;
+                  max-height: 20vh;
+
+                  .state-select__menu-list {
+                    max-height: 20vh;
+
+                    .state-select__option {
+                      font-family: v.$fontRSB;
+                    }
+
+                    .state-select__option--is-focused {
+                      background-color: v.$bordercolor;
+                      color: v.$bg;
+                    }
+
+                    .state-select__option--is-selected {
+                      background-color: v.$dark;
+                      color: v.$bg;
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+          .right {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            width: 35vw;
+          }
+        }
+
+        .phone {
+          display: flex;
+          gap: 2rem;
+
+          .code {
+            display: flex;
+            flex-direction: column;
+            width: 5vw;
+
+            input {
+              width: 5vw;
+              border: none;
+              background-color: v.$bg;
+              font-family: v.$fontRR;
+              font-size: 1rem;
+              outline: none;
+            }
+          }
+
+          .telephone {
+            display: flex;
+            flex-direction: column;
+
+            input {
+              width: 35vw;
+              font-size: 1rem;
+              font-family: v.$fontRSB;
+              border-top: none;
+              border-left: none;
+              border-right: none;
+              border-bottom: 2px solid v.$bordercolor;
+              background-color: v.$bg;
+              outline: none;
+            }
+
+            .otp {
+              display: flex;
+              align-items: center;
+              border: 2px solid v.$bordercolor;
+              margin-top: 1rem;
+              width: 150px;
+
+              input {
+                padding: 0.7rem 1rem;
+                width: 110px;
+                font-size: 1rem;
+                border: none;
+              }
+
+              svg {
+                display: block; //set to "display: block" when OTP approved
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .proceed-to-checkout-container {
+      width: 100vw;
+      height: 20vh;
+      background-color: v.$dark;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      padding: 0 50px;
+
+      .price-container {
+        width: 49.5vw;
+        display: flex;
+
+        .text {
+          color: v.$bg;
+
+          h3 {
+            font-size: 1.7rem;
+            font-family: v.$fontRR;
+          }
+
+          span {
+            display: flex;
+
+            p {
+              font-size: 0.9rem;
+              font-weight: 600;
+            }
+
+            svg {
+              width: .9rem;
+            }
+          }
+
+        }
+
+        svg {
+          color: v.$bg;
+          width: 30px;
+          transform: rotate(180deg);
+        }
+      }
+
+      .line {
+        width: 3px;
+        height: 60%;
+        background-color: v.$bg;
+      }
+
+      .checkout-button-container {
+        width: 49.5vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        button {
+          align-items: center;
+          display: flex;
+          gap: 8px;
+          padding: 6px 6px 6px 15px;
+          border-radius: 100px;
+          border-style: solid;
+          border-width: 2px;
+          border-color: v.$bg;
+          font-size: 0.6rem;
+
+          &:hover {
+            background-color: v.$bg;
+            border-color: v.$bg;
+
+            h3 {
+              color: v.$dark;
+            }
+
+            svg {
+              fill: v.$bg;
+            }
+          }
+
+          &:active {
+            background-color: v.$bg;
+            border-color: v.$bg;
+
+            h3 {
+              color: v.$dark;
+            }
+
+            svg {
+              fill: v.$bg;
+            }
+          }
+
+          h3 {
+            font-family: v.$fontRM;
+            font-weight: 500;
+            font-size: 1.2rem;
+            color: v.$bg;
+          }
+
+          svg {
+            width: 2.5rem;
+            height: auto;
+            fill: v.$bg;
+          }
+        }
+      }
+    }
+  }
+}
+
+//*----------> largeMobile
+@media screen and (max-width: 768px) {
+  .shipping-info-container {
+    width: 100vw;
+    height: auto;
+    padding: 0px 0vw;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    justify-content: center;
+    margin-top: -80px;
+
+    .shipping-info-main {
+      display: flex;
+      flex-direction: column;
+      padding: 0 7vw;
+      gap: 2.5rem;
+
+      .shipping-info {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+
+        h1 {
+          font-size: 0.9rem;
+          font-family: v.$fontRSB;
+          font-weight: 600;
+        }
+
+        h2 {
+          font-size: 0.75rem;
+          font-family: v.$fontRL;
+          font-weight: 500;
+
+          a {
+            text-decoration: underline;
+          }
+        }
+      }
+      .shipping-info-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        width: 86vw;
+
+        .main {
+          display: flex;
+          flex-direction: column;
+          justify-content: start;
+          gap: 1rem;
+
+          input {
+            width: 86vw;
+            background-color: v.$bg;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            border-color: v.$bordercolor;
+            outline: none;
+            font-family: v.$fontRSB;
+            font-size: 0.75rem;
+          }
+
+          p {
+            font-family: v.$fontRR;
+            font-weight: 500;
+            font-size: 0.75rem;
+          }
+
+          .left {
+            display: flex;
+            flex-direction: column;
+            width: 86vw;
+            gap: 1.5rem;
+
+            .state {
+              outline: none !important;
+              font-size: 0.75rem;
+
+              .state-select-container {
+                outline: none !important;
+
+                .state-select__control {
+                  background-color: v.$bg;
+                  border-radius: 0;
+                  border-top: none;
+                  border-left: none;
+                  border-right: none;
+                  border-bottom: 2px solid v.$bordercolor;
+                  outline: none !important;
+                }
+
+                .state-select__value-container {
+                  font-family: v.$fontRSB;
+                }
+
+                .state-select__indicators {
+                  .state-select__indicator-separator {
+                    display: none;
+                  }
+
+                  svg {
+                    color: v.$bordercolor;
+                  }
+                }
+
+                .state-select__menu {
+                  background-color: v.$bg;
+                  max-height: 20vh;
+
+                  .state-select__menu-list {
+                    max-height: 20vh;
+
+                    .state-select__option {
+                      font-family: v.$fontRSB;
+                    }
+
+                    .state-select__option--is-focused {
+                      background-color: v.$bordercolor;
+                      color: v.$bg;
+                    }
+
+                    .state-select__option--is-selected {
+                      background-color: v.$dark;
+                      color: v.$bg;
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+          .right {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            width: 86vw;
+          }
+        }
+
+        .phone {
+          display: flex;
+          gap: 0;
+
+          .code {
+            display: flex;
+            flex-direction: column;
+            font-size: 0.75rem;
+            width: 16vw;
+
+            input {
+              width: 16vw;
+              border: none;
+              background-color: v.$bg;
+              font-family: v.$fontRR;
+              outline: none;
+              font-size: 0.75rem;
+            }
+          }
+
+          .telephone {
+            display: flex;
+            flex-direction: column;
+            width: 70vw;
+            font-size: 0.75rem;
+
+            input {
+              width: 70vw;
+              font-size: 0.75rem;
+              font-family: v.$fontRSB;
+              border-top: none;
+              border-left: none;
+              border-right: none;
+              border-bottom: 2px solid v.$bordercolor;
+              background-color: v.$bg;
+              outline: none;
+            }
+
+            .otp {
+              display: flex;
+              align-items: center;
+              border: 2px solid v.$bordercolor;
+              margin-top: 1rem;
+              width: 150px;
+              font-size: 0.75rem;
+
+              input {
+                padding: 0.7rem 1rem;
+                width: 110px;
+                font-size: 0.75rem;
+                border: none;
+              }
+
+              svg {
+                display: block; //set to "display: block" when OTP approved
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .proceed-to-checkout-container {
+      width: 100vw;
+      height: 20vh;
+      background-color: v.$dark;
+      position: relative;
+      bottom: 0;
+      right: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0 7vw;
+
+      .price-container {
+        width: 48vw;
+        display: flex;
+
+        .text {
+          display: flex;
+          flex-direction: column;
+          color: v.$bg;
+
+          h3 {
+            font-size: 1rem;
+            font-family: v.$fontRR;
+          }
+
+          span {
+            display: flex;
+            align-items: center;
+            gap: 0.1rem;
+
+            svg {
+              width: 0.5rem;
+            }
+
+            p {
+              font-size: 0.5rem;
+              font-weight: 600;
+            }
+          }
+        }
+
+        svg {
+          color: v.$bg;
+          width: 30px;
+          transform: rotate(180deg);
+        }
+      }
+
+      .line {
+        width: 2px;
+        height: 60%;
+        background-color: v.$bg;
+      }
+
+      .checkout-button-container {
+        width: 48vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        button {
+          align-items: center;
+          display: flex;
+          gap: 5px;
+          padding: 6px 6px 6px 10px;
+          border-radius: 100px;
+          border-style: solid;
+          border-width: 2px;
+          border-color: v.$bg;
+          font-size: 0.5rem;
+
+          &:hover {
+            background-color: v.$bg;
+            border-color: v.$bg;
+
+            h3 {
+              color: v.$dark;
+            }
+
+            svg {
+              fill: v.$bg;
+            }
+          }
+
+          &:active {
+            background-color: v.$bg;
+            border-color: v.$bg;
+
+            h3 {
+              color: v.$dark;
+            }
+
+            svg {
+              fill: v.$bg;
+            }
+          }
+
+          h3 {
+            font-family: v.$fontRM;
+            font-weight: 500;
+            font-size: 0.75rem;
+            color: v.$bg;
+          }
+
+          svg {
+            width: 3rem;
+            height: auto;
+            fill: v.$bg;
+          }
+        }
+      }
+    }
+  }
+}
+
+//*---------> smallMobile
+@media screen and (max-width: 320px) {
+  .shipping-info-container {
+    width: 100vw;
+    height: auto;
+    padding: 0px 0vw;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    justify-content: center;
+    margin-top: -80px;
+
+    .shipping-info-main {
+      display: flex;
+      flex-direction: column;
+      padding: 0 7vw;
+      gap: 2.5rem;
+
+      .shipping-info {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+
+        h1 {
+          font-size: 0.9rem;
+          font-family: v.$fontRSB;
+          font-weight: 600;
+        }
+
+        h2 {
+          font-size: 0.75rem;
+          font-family: v.$fontRL;
+          font-weight: 500;
+
+          a {
+            text-decoration: underline;
+          }
+        }
+      }
+      .shipping-info-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        width: 86vw;
+
+        .main {
+          display: flex;
+          flex-direction: column;
+          justify-content: start;
+          gap: 1rem;
+
+          input {
+            width: 86vw;
+            background-color: v.$bg;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            border-color: v.$bordercolor;
+            outline: none;
+            font-family: v.$fontRSB;
+            font-size: 0.75rem;
+          }
+
+          p {
+            font-family: v.$fontRR;
+            font-weight: 500;
+            font-size: 0.75rem;
+          }
+
+          .left {
+            display: flex;
+            flex-direction: column;
+            width: 86vw;
+            gap: 1.5rem;
+
+            .state {
+              outline: none !important;
+              font-size: 0.75rem;
+
+              .state-select-container {
+                outline: none !important;
+
+                .state-select__control {
+                  background-color: v.$bg;
+                  border-radius: 0;
+                  border-top: none;
+                  border-left: none;
+                  border-right: none;
+                  border-bottom: 2px solid v.$bordercolor;
+                  outline: none !important;
+                }
+
+                .state-select__value-container {
+                  font-family: v.$fontRSB;
+                }
+
+                .state-select__indicators {
+                  .state-select__indicator-separator {
+                    display: none;
+                  }
+
+                  svg {
+                    color: v.$bordercolor;
+                  }
+                }
+
+                .state-select__menu {
+                  background-color: v.$bg;
+                  max-height: 20vh;
+
+                  .state-select__menu-list {
+                    max-height: 20vh;
+
+                    .state-select__option {
+                      font-family: v.$fontRSB;
+                    }
+
+                    .state-select__option--is-focused {
+                      background-color: v.$bordercolor;
+                      color: v.$bg;
+                    }
+
+                    .state-select__option--is-selected {
+                      background-color: v.$dark;
+                      color: v.$bg;
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+          .right {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            width: 86vw;
+          }
+        }
+
+        .phone {
+          display: flex;
+          gap: 0;
+
+          .code {
+            display: flex;
+            flex-direction: column;
+            font-size: 0.75rem;
+            width: 16vw;
+
+            input {
+              width:16vw;
+              border: none;
+              background-color: v.$bg;
+              font-family: v.$fontRR;
+              outline: none;
+              font-size: 0.75rem;
+            }
+          }
+
+          .telephone {
+            display: flex;
+            flex-direction: column;
+            width: 70vw;
+            font-size: 0.75rem;
+
+            input {
+              width: 70vw;
+              font-size: 0.75rem;
+              font-family: v.$fontRSB;
+              border-top: none;
+              border-left: none;
+              border-right: none;
+              border-bottom: 2px solid v.$bordercolor;
+              background-color: v.$bg;
+              outline: none;
+            }
+
+            .otp {
+              display: flex;
+              align-items: center;
+              border: 2px solid v.$bordercolor;
+              margin-top: 1rem;
+              width: 150px;
+              font-size: 0.75rem;
+
+              input {
+                padding: 0.7rem 1rem;
+                width: 110px;
+                font-size: 0.75rem;
+                border: none;
+              }
+
+              svg {
+                display: block; //set to "display: block" when OTP approved
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .proceed-to-checkout-container {
+      width: 100vw;
+      height: 20vh;
+      background-color: v.$dark;
+      position: relative;
+      bottom: 0;
+      right: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: .7rem;
+      padding: 0 7vw;
+
+      .price-container {
+        width: 48vw;
+        display: flex;
+
+        .text {
+          display: flex;
+          flex-direction: column;
+          color: v.$bg;
+
+          h3 {
+            font-size: .9rem;
+            font-family: v.$fontRR;
+          }
+
+          span {
+            display: flex;
+            align-items: center;
+            gap: 0.1rem;
+
+            svg {
+              width: 0.5rem;
+            }
+
+            p {
+              font-size: 0.5rem;
+              font-weight: 600;
+            }
+          }
+        }
+
+        svg {
+          color: v.$bg;
+          width: 25px;
+          transform: rotate(180deg);
+        }
+      }
+
+      .line {
+        width: 2px;
+        height: 60%;
+        background-color: v.$bg;
+      }
+
+      .checkout-button-container {
+        width: 48vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        button {
+          align-items: center;
+          display: flex;
+          gap: 5px;
+          padding: 6px 6px 6px 10px;
+          border-radius: 100px;
+          border-style: solid;
+          border-width: 2px;
+          border-color: v.$bg;
+          font-size: 0.5rem;
+
+          &:hover {
+            background-color: v.$bg;
+            border-color: v.$bg;
+
+            h3 {
+              color: v.$dark;
+            }
+
+            svg {
+              fill: v.$bg;
+            }
+          }
+
+          &:active {
+            background-color: v.$bg;
+            border-color: v.$bg;
+
+            h3 {
+              color: v.$dark;
+            }
+
+            svg {
+              fill: v.$bg;
+            }
+          }
+
+          h3 {
+            font-family: v.$fontRM;
+            font-weight: 500;
+            font-size: 0.65rem;
+            color: v.$bg;
+          }
+
+          svg {
+            width: 2.5rem;
+            height: auto;
+            fill: v.$bg;
+          }
         }
       }
     }
