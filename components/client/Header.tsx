@@ -21,6 +21,8 @@ import {
   TkpLogo,
 } from "@/components/icons/Icons";
 import Cart from "./Cart";
+import { User as user } from "@supabase/supabase-js";
+import { getUser } from "@/backend/User";
 
 const Header = () => {
   const router = useRouter();
@@ -28,6 +30,9 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [userData, setUserData] = useState<
+    { data: user | null; extra_data: any } | undefined
+  >();
 
   const handleCartClickOpen = () => {
     setIsCartOpen(true);
@@ -36,8 +41,16 @@ const Header = () => {
   const handleCartClickClose = () => {
     setIsCartOpen(false);
   };
+  // console.log(userData);
 
   useEffect(() => {
+    (async () => {
+      const dam = await getUser();
+      // console.log(dam);
+
+      if (dam.data !== null) setUserData(dam);
+      else setUserData(undefined);
+    })();
     let prevScrollPos = window.scrollY || document.documentElement.scrollTop;
     const handleScroll = () => {
       const currentScrollPos =
@@ -149,9 +162,10 @@ const Header = () => {
             <Bag />
           </button>
           <div className="line" />
+
           <button
             onClick={() => {
-              router.push("/login");
+              router.push(userData == undefined ? "/login" : "/user");
             }}
           >
             <User />

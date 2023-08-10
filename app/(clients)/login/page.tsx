@@ -1,20 +1,29 @@
 "use client";
-
+import db from "@/backend/Backend.client";
+import { EmailLogin, getUser, googleLogin } from "@/backend/User";
 import GoogleIcon from "@/components/icons/GoogleIcon";
 import HiddenPassword from "@/components/icons/HiddenPassword";
 import ShownPassword from "@/components/icons/ShownPassword";
 import { useState } from "react";
 import { LuUser } from "react-icons/lu";
-
+import { useRouter } from "next/navigation";
 const Login = () => {
+  const router = useRouter();
   const [isPasswordShown, setIsPasswordShown] = useState(false);
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState({
+    email: "",
+    password: "",
+    phone: "",
+  });
 
   const handleToglePasswordShow = () => {
     setIsPasswordShown(!isPasswordShown);
   };
   const handleInputChange = (e: any) => {
-    setInputValue(e.target.value);
+    setInputValue((s) => ({
+      ...s,
+      password: e.target.value,
+    }));
   };
 
   return (
@@ -24,22 +33,65 @@ const Login = () => {
           <LuUser />
         </div>
         <div className="login-input-container">
-          <h3>Login</h3>
-          <form action="#">
+          <h3>Login / Register</h3>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              EmailLogin(
+                inputValue.email,
+                inputValue.password,
+                inputValue.phone
+              )
+                .then(async (data) => {
+                  //TODO
+
+                  if (data.error?.message == "User already registered")
+                    db.auth.signInWithPassword({
+                      email: inputValue.email,
+                      password: inputValue.password,
+                      phone: inputValue.phone,
+                    });
+                  else alert(data.error?.message);
+                  console.log(data);
+                  await getUser().then(() => {
+                    router.push("/user");
+                  });
+                })
+                .catch((e) => {
+                  console.log(e);
+                });
+            }}
+          >
             <div className="inputs">
-              <label>EMAIL / PHONE NO.</label>
-              <input type="text" required />
-              <label>OTP</label>
+              <label>EMAIL </label>
+              <input
+                value={inputValue.email}
+                onChange={(e) =>
+                  setInputValue((v) => ({ ...v, email: e.target.value }))
+                }
+                type="text"
+                required
+              />
+              <label>Phone No </label>
+              <input
+                value={inputValue.phone}
+                onChange={(e) =>
+                  setInputValue((v) => ({ ...v, phone: e.target.value }))
+                }
+                type="text"
+                required
+              />
+              <label>Password</label>
               <div className="otp-container">
                 <input
                   type={isPasswordShown ? "text" : "password"}
                   name=""
                   id=""
-                  value={inputValue}
+                  value={inputValue.password}
                   required
                   onChange={handleInputChange}
                 />
-                {inputValue.length > 0 && (
+                {inputValue.password !== "" && (
                   <button
                     className="eye-container"
                     type="button"
@@ -55,11 +107,9 @@ const Login = () => {
         </div>
         <div className="register-buttons-container">
           <p className="or-container">OR</p>
-          <button type="button">
+          <button type="button" onClick={() => googleLogin()}>
             <GoogleIcon /> Continue With Google
           </button>
-          <p>Don&#39;t have an account yet?</p>
-          <button type="button">Create New Account</button>
         </div>
       </div>
     </div>

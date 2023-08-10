@@ -31,9 +31,7 @@ export default function Authorize() {
               <h1>Sanyukta Adhikary</h1>
             </div>
             <div className="address">
-              <h2 className="address-line">
-                UTTARAYAN, VIDHYA NAGAR,
-              </h2>
+              <h2 className="address-line">UTTARAYAN, VIDHYA NAGAR,</h2>
               <h2 className="city">BILASPUR</h2>
               <h2 className="pincode"> - 495004</h2>
               {/* <h2 className="state">Chhattisgarh</h2> */}
