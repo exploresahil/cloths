@@ -5,7 +5,11 @@ import Select from "react-select";
 
 import { CheckoutArrowNormal, OTPTick } from "@/components/icons/Icons";
 import AccordionDown from "@/components/icons/AccordionDown";
+<<<<<<< HEAD
 import { User } from "@supabase/supabase-js";
+=======
+import { AiOutlinePlus } from "react-icons/ai";
+>>>>>>> 355d70a9960154f3937073b843d67653f15a84bb
 
 export default function ShippingInfo() {
   const stateOptions: any = [
@@ -157,7 +161,23 @@ export default function ShippingInfo() {
                 />
               </div>
             </div>
+<<<<<<< HEAD
           </form>
+=======
+          </div>
+        </form>
+      </div>
+      <div className="proceed-to-checkout-container">
+        <div className="price-container">
+          <div className="text">
+            <h3>Rs. 2,995</h3>
+            <span>
+              <AiOutlinePlus />
+              <p>EXCL.SHIPPING</p>
+            </span>
+          </div>
+          <AccordionDown />
+>>>>>>> 355d70a9960154f3937073b843d67653f15a84bb
         </div>
         <div className="proceed-to-checkout-container">
           <div className="price-container">
