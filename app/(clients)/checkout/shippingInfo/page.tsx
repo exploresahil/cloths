@@ -2,14 +2,10 @@
 
 import React, { useState } from "react";
 import Select from "react-select";
-
+import db from "@/backend/Backend.client";
 import { CheckoutArrowNormal, OTPTick } from "@/components/icons/Icons";
 import AccordionDown from "@/components/icons/AccordionDown";
-<<<<<<< HEAD
 import { User } from "@supabase/supabase-js";
-=======
-import { AiOutlinePlus } from "react-icons/ai";
->>>>>>> 355d70a9960154f3937073b843d67653f15a84bb
 
 export default function ShippingInfo() {
   const stateOptions: any = [
@@ -58,6 +54,17 @@ export default function ShippingInfo() {
   React.useEffect(() => {
     setUserData(JSON.parse(localStorage.getItem("userData") || ""));
   }, []);
+  const [input, setInput] = useState({
+    name: userData?.data.user_metadata.full_name,
+    address: userData?.extra_data.address,
+    locality: userData?.extra_data.locality,
+    state: userData?.extra_data.state,
+    pincode: userData?.extra_data.pincode,
+    more_info: userData?.extra_data.more_info,
+    city: userData?.extra_data.city,
+    region: "India",
+    phone: userData?.data.phone,
+  });
   console.log(userData?.data.user_metadata.full_name);
 
   const number_formatter_current = new Intl.NumberFormat(navigator.language, {
@@ -72,16 +79,24 @@ export default function ShippingInfo() {
             <h1>ENTER YOUR SHIPPING INFORMATION BELOW</h1>
             <h2>
               THIS INFORMATION CAN BE ACCESSED OR UPDATED AT{" "}
-              <a href="/">USER</a> PANEL
+              <a href="/user">USER</a> PANEL
             </h2>
           </div>
-          <form className="shipping-info-form">
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+            }}
+            className="shipping-info-form"
+          >
             <div className="main">
               <div className="left">
                 <div className="name">
                   <p>NAME</p>
                   <input
-                    value={userData.data.user_metadata.full_name}
+                    value={input.name}
+                    onChange={(e) =>
+                      setInput((data) => ({ ...data, name: e.target.value }))
+                    }
                     type="text"
                     required
                   />
@@ -90,7 +105,10 @@ export default function ShippingInfo() {
                   <p>ADDRESS</p>
                   <input
                     type="text"
-                    value={userData.extra_data.address}
+                    value={input.address}
+                    onChange={(e) =>
+                      setInput((data) => ({ ...data, address: e.target.value }))
+                    }
                     required
                   />
                 </div>
@@ -98,7 +116,13 @@ export default function ShippingInfo() {
                   <p>LOCALITY</p>
                   <input
                     type="text"
-                    value={userData.extra_data.locality}
+                    value={input.locality}
+                    onChange={(e) =>
+                      setInput((data) => ({
+                        ...data,
+                        locality: e.target.value,
+                      }))
+                    }
                     required
                   />
                 </div>
@@ -109,7 +133,10 @@ export default function ShippingInfo() {
                     className="state-select-container"
                     classNamePrefix="state-select"
                     options={stateOptions}
-                    value={userData.extra_data.state}
+                    value={input.state}
+                    onChange={(e) =>
+                      setInput((data) => ({ ...data, state: e.value }))
+                    }
                     isSearchable
                   />
                 </div>
@@ -119,8 +146,11 @@ export default function ShippingInfo() {
                   <p>PINCODE</p>
                   <input
                     type="tel"
-                    value={userData.extra_data.pincode}
+                    value={input.pincode}
                     maxLength={6}
+                    onChange={(e) =>
+                      setInput((data) => ({ ...data, pincode: e.target.value }))
+                    }
                     required
                   />
                 </div>
@@ -128,15 +158,24 @@ export default function ShippingInfo() {
                   <p>MORE INFO</p>
                   <input
                     type="text"
-                    value={userData.extra_data.more_info}
+                    value={input.more_info}
                     placeholder="OPTIONAL"
+                    onChange={(e) =>
+                      setInput((data) => ({
+                        ...data,
+                        more_info: e.target.value,
+                      }))
+                    }
                   />
                 </div>
                 <div className="city">
                   <p>CITY</p>
                   <input
                     type="text"
-                    value={userData.extra_data.city}
+                    value={input.city}
+                    onChange={(e) =>
+                      setInput((data) => ({ ...data, city: e.target.value }))
+                    }
                     required
                   />
                 </div>
@@ -156,28 +195,15 @@ export default function ShippingInfo() {
                 <input
                   type="tel"
                   maxLength={10}
-                  value={userData.data.phone}
+                  value={input.phone}
+                  onChange={(e) =>
+                    setInput((data) => ({ ...data, phone: e.target.value }))
+                  }
                   required
                 />
               </div>
             </div>
-<<<<<<< HEAD
           </form>
-=======
-          </div>
-        </form>
-      </div>
-      <div className="proceed-to-checkout-container">
-        <div className="price-container">
-          <div className="text">
-            <h3>Rs. 2,995</h3>
-            <span>
-              <AiOutlinePlus />
-              <p>EXCL.SHIPPING</p>
-            </span>
-          </div>
-          <AccordionDown />
->>>>>>> 355d70a9960154f3937073b843d67653f15a84bb
         </div>
         <div className="proceed-to-checkout-container">
           <div className="price-container">
@@ -190,7 +216,25 @@ export default function ShippingInfo() {
           </div>
           <div className="line" />
           <div className="checkout-button-container">
-            <button type="button">
+            <button
+              onClick={() => {
+                db.auth.updateUser({
+                  data: {
+                    full_name: input.name,
+                  },
+                  phone: "+91" + input.phone,
+                });
+                db.from("USER").update({
+                  address: input.address,
+                  locality: input.locality,
+                  state: input.state,
+                  pincode: input.pincode,
+                  more_info: input.more_info,
+                  city: input.city,
+                  region: input.region,
+                });
+              }}
+            >
               <h3>PROCEED TO CHECKOUT</h3>
               <CheckoutArrowNormal />
             </button>
