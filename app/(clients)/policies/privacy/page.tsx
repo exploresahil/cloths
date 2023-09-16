@@ -1,5 +1,6 @@
 "use client";
 
+import ThankYou from "@/components/client/ThankYou";
 import {
   CategoriesWatermarkCenter,
   CategoriesWatermarkOuter,
