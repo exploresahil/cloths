@@ -110,6 +110,19 @@ header {
         }
       }
 
+      .cart {
+        position: relative;
+        p {
+          position: absolute;
+          top: 5px;
+          right: 10px;
+          background-color: v.$bg;
+          padding: 2px 5px;
+          font-size: 0.6rem;
+          border-radius: 100px;
+        }
+      }
+
       .line {
         width: 1px;
         height: 60%;

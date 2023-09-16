@@ -158,8 +158,9 @@ const Header = () => {
       </div>
       <div className="user-menu">
         <div className="user-menu-ecommercs">
-          <button onClick={handleCartClickOpen}>
+          <button className="cart" onClick={handleCartClickOpen}>
             <Bag />
+            <p>1</p>
           </button>
           <div className="line" />
 
