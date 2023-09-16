@@ -152,35 +152,80 @@ const Products = () => {
                       ) {
                         // console.log(product.size);
                         return (
-                          <a
-                            key={product._id}
-                            href={`/products/${product.slug}`}
-                            className="product"
-                          >
-                            <div className="img-container">
-                              {product.images && (
-                                <Image
-                                  fill
-                                  src={product.images[0].url}
-                                  style={{ objectFit: "cover" }}
-                                  alt={product.slug}
-                                />
-                              )}
-                              <button type="button">
-                                <AiOutlinePlus />
-                              </button>
-                            </div>
-                            <div className="product-info">
-                              <h3>{product.name}</h3>
-                              <p>RS.{product.price}</p>
-                            </div>
-                          </a>
+                          <div className="product-sec">
+                            <Link
+                              key={product._id}
+                              href={`/products/${product.slug}`}
+                              className="product"
+                            >
+                              <div className="img-container">
+                                {product.images && (
+                                  <Image
+                                    fill
+                                    src={product.images[0].url}
+                                    style={{ objectFit: "cover" }}
+                                    alt={product.slug}
+                                  />
+                                )}
+                              </div>
+                              <div className="product-info">
+                                <h3>{product.name}</h3>
+                                <p>RS.{product.price}</p>
+                              </div>
+                            </Link>
+                            <button type="button">
+                              <AiOutlinePlus />
+                            </button>
+                          </div>
                         );
                       } else if (
                         selectedCategory == product.category &&
                         product.category == product.category
                       ) {
                         return (
+                          <div className="product-sec">
+                            <Link
+                              key={product._id}
+                              href={`/products/${product.slug}`}
+                              className="product"
+                            >
+                              <div className="img-container">
+                                {product.images && (
+                                  <Image
+                                    fill
+                                    src={product.images[0].url}
+                                    style={{ objectFit: "cover" }}
+                                    alt={product.slug}
+                                  />
+                                )}
+                              </div>
+                              <div className="product-info">
+                                <h3>{product.name}</h3>
+                                <p>RS.{product.price}</p>
+                              </div>
+                            </Link>
+                            <button type="button">
+                              <AiOutlinePlus />
+                            </button>
+                          </div>
+                        );
+                      }
+                    }
+                  } else {
+                    console.log(
+                      selectedCategory == product.category.name,
+                      selectedCategory,
+                      product.category,
+                      product.category.name == product.category.name
+                    );
+
+                    if (
+                      selectedCategory == "view all" ||
+                      selectedCategory == "_view all"
+                    ) {
+                      // console.log(product.size);
+                      return (
+                        <div className="product-sec">
                           <Link
                             key={product._id}
                             href={`/products/${product.slug}`}
@@ -201,52 +246,51 @@ const Products = () => {
                               <p>RS.{product.price}</p>
                             </div>
                           </Link>
-                        );
-                      }
-                    }
-                  } else {
-                    console.log(
-                      selectedCategory == product.category.name,
-                      selectedCategory,
-                      product.category,
-                      product.category.name == product.category.name
-                    );
-
-                    if (
-                      selectedCategory == "view all" ||
-                      selectedCategory == "_view all"
-                    ) {
-                      // console.log(product.size);
-                      return (
-                        <a
-                          key={product._id}
-                          href={`/products/${product.slug}`}
-                          className="product"
-                        >
-                          <div className="img-container">
-                            {product.images && (
-                              <Image
-                                fill
-                                src={product.images[0].url}
-                                style={{ objectFit: "cover" }}
-                                alt={product.slug}
-                              />
-                            )}
-                            <button type="button">
-                              <AiOutlinePlus />
-                            </button>
-                          </div>
-                          <div className="product-info">
-                            <h3>{product.name}</h3>
-                            <p>RS.{product.price}</p>
-                          </div>
-                        </a>
+                          <button type="button">
+                            <AiOutlinePlus />
+                          </button>
+                        </div>
                       );
                     } else if (
                       selectedCategory == product.category &&
                       product.category == product.category
                     ) {
                       return (
+                        <div className="product-sec">
+                          <Link
+                            key={product._id}
+                            href={`/products/${product.slug}`}
+                            className="product"
+                          >
+                            <div className="img-container">
+                              {product.images && (
+                                <Image
+                                  fill
+                                  src={product.images[0].url}
+                                  style={{ objectFit: "cover" }}
+                                  alt={product.slug}
+                                />
+                              )}
+                            </div>
+                            <div className="product-info">
+                              <h3>{product.name}</h3>
+                              <p>RS.{product.price}</p>
+                            </div>
+                          </Link>
+
+                          <button type="button">
+                            <AiOutlinePlus />
+                          </button>
+                        </div>
+                      );
+                    }
+                  }
+                })
+              : products.map((product) => {
+                  if (selectedCategory == "view all") {
+                    // console.log(product.size);
+                    return (
+                      <div className="product-sec">
                         <Link
                           key={product._id}
                           href={`/products/${product.slug}`}
@@ -267,63 +311,41 @@ const Products = () => {
                             <p>RS.{product.price}</p>
                           </div>
                         </Link>
-                      );
-                    }
-                  }
-                })
-              : products.map((product) => {
-                  if (selectedCategory == "view all") {
-                    // console.log(product.size);
-                    return (
-                      <a
-                        key={product._id}
-                        href={`/products/${product.slug}`}
-                        className="product"
-                      >
-                        <div className="img-container">
-                          {product.images && (
-                            <Image
-                              fill
-                              src={product.images[0].url}
-                              style={{ objectFit: "cover" }}
-                              alt={product.slug}
-                            />
-                          )}
-                          <button type="button">
-                            <AiOutlinePlus />
-                          </button>
-                        </div>
-                        <div className="product-info">
-                          <h3>{product.name}</h3>
-                          <p>RS.{product.price}</p>
-                        </div>
-                      </a>
+                        <button type="button">
+                          <AiOutlinePlus />
+                        </button>
+                      </div>
                     );
                   } else if (
                     selectedCategory == product.category &&
                     product.category == product.category
                   ) {
                     return (
-                      <Link
-                        key={product._id}
-                        href={`/products/${product.slug}`}
-                        className="product"
-                      >
-                        <div className="img-container">
-                          {product.images && (
-                            <Image
-                              fill
-                              src={product.images[0].url}
-                              style={{ objectFit: "cover" }}
-                              alt={product.slug}
-                            />
-                          )}
-                        </div>
-                        <div className="product-info">
-                          <h3>{product.name}</h3>
-                          <p>RS.{product.price}</p>
-                        </div>
-                      </Link>
+                      <div className="product-sec">
+                        <Link
+                          key={product._id}
+                          href={`/products/${product.slug}`}
+                          className="product"
+                        >
+                          <div className="img-container">
+                            {product.images && (
+                              <Image
+                                fill
+                                src={product.images[0].url}
+                                style={{ objectFit: "cover" }}
+                                alt={product.slug}
+                              />
+                            )}
+                          </div>
+                          <div className="product-info">
+                            <h3>{product.name}</h3>
+                            <p>RS.{product.price}</p>
+                          </div>
+                        </Link>
+                        <button type="button">
+                          <AiOutlinePlus />
+                        </button>
+                      </div>
                     );
                   }
                 })}
