@@ -29,6 +29,11 @@ const products = {
       type: "number",
     },
     {
+      name: "sku",
+      title: "SKU",
+      type: "string",
+    },
+    {
       name: "details",
       title: "Details",
       type: "array",
