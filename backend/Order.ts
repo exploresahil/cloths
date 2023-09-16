@@ -23,5 +23,5 @@ export const getOrders = (user_id: string) => {
   return SuperBase.from("Order").select("*").eq("user", user_id);
 };
 export const getOrdersId = (order_id: string) => {
-  return SuperBase.from("Order").select("*").eq("id", order_id);
+  return SuperBase.from("Order").select("id").eq("id", order_id);
 };
