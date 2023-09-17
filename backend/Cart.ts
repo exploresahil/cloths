@@ -1,7 +1,7 @@
 import SuperBase from "@/backend/Backend.client";
 
 export const AddCartOrder = (
-  product: JSON,
+  product: any,
   user_id: string,
   how_many: number
 ) => {
@@ -16,4 +16,8 @@ export const RemoveCartOrder = (id: string) => {
 };
 export const UpdateCartOrder = (id: string, data: any) => {
   return SuperBase.from("Cart").update(data).eq("id", id).select("*");
+};
+
+export const getProCart = (id: string) => {
+  return SuperBase.from("Cart").select("*").eq("user", id);
 };
