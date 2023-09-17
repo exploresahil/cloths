@@ -12,6 +12,7 @@ import Mail from "../icons/Mail";
 import Insta from "../icons/Insta";
 import { useEffect, useState } from "react";
 import { getProCart } from "@/backend/Cart";
+import { products } from "@/types/Products";
 const Cart = ({ onCartCloseClick }: props) => {
   const [product, setProduct] = useState<null | any[]>(null);
   const [userData, setUser] = useState<null | any>(null);
@@ -22,7 +23,7 @@ const Cart = ({ onCartCloseClick }: props) => {
     console.log(userData);
 
     if (userData)
-      getProCart(userData.data.id).then((data) => setProduct(data.data));
+      getProCart(userData.extra_data.id).then((data) => setProduct(data.data));
   }, [userData]);
   console.log(product);
 
@@ -32,25 +33,25 @@ const Cart = ({ onCartCloseClick }: props) => {
       <div className="cart-container">
         <div className="cart-products">
           {product &&
-            product.map((v, i) => (
+            product.map((v: { product: products; how_many: number }, i) => (
               <div className="cart-items">
                 <div className="cart-product-info">
                   <div className="image-container">
                     <Image
                       fill
-                      src={productImage}
+                      src={v.product.images[0].url}
                       style={{ objectFit: "cover" }}
                       alt="footer-logo"
                     />
                   </div>
                   <div className="cart-item-info">
                     <div className="info">
-                      <h3>striped shirt kurta</h3>
-                      <p>rs 850</p>
+                      <h3>{v.product.name}</h3>
+                      <p>rs {v.product.price}</p>
                     </div>
                     <div className="item-filter">
                       <p>M</p>
-                      <p>1</p>
+                      <p>{v.how_many}</p>
                     </div>
                   </div>
                 </div>

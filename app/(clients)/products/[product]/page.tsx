@@ -12,6 +12,7 @@ import { products } from "@/types/Products";
 import { getProduct } from "@/sanity/sanity-utils";
 import { PortableText } from "@portabletext/react";
 import { ScrollArrow } from "@/components/icons/Icons";
+import { AddCartOrder } from "@/backend/Cart";
 
 type Props = {
   params: { product: any };
@@ -20,6 +21,7 @@ type Props = {
 export default function Product({ params }: Props) {
   const [product, setProduct] = useState<products>();
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
+  const [userData, setUser] = useState<null | any>(null);
   const slug = params.product;
 
   useEffect(() => {
@@ -27,7 +29,9 @@ export default function Product({ params }: Props) {
       setProduct(data);
     });
   }, [slug]);
-
+  useEffect(() => {
+    setUser(JSON.parse(localStorage.getItem("userData") || ""));
+  }, []);
   const handleNextImage = () => {
     setCurrentImageIndex(
       (prevIndex) => (prevIndex + 1) % (product?.images?.length ?? 0)
@@ -121,9 +125,20 @@ export default function Product({ params }: Props) {
               </button>
             </div>
             <div className="buy-now-container">
-              <AiFillPlusCircle />
+              <button
+                type="button"
+                onClick={() => {
+                  AddCartOrder(product, userData.extra_data.id, 1).then(
+                    (data) => {
+                      console.log(data.data);
+                    }
+                  );
+                }}
+              >
+                <AiFillPlusCircle />
+              </button>
               <div className="line" />
-              <button>
+              <button className="button">
                 Buy Now <BsArrowRight />
               </button>
             </div>

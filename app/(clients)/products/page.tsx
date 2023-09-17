@@ -12,7 +12,6 @@ import { category } from "@/types/Category";
 import { AiOutlinePlus } from "react-icons/ai";
 import { useSearchParams } from "next/navigation";
 import { AddCartOrder } from "@/backend/Cart";
-import { use } from "react";
 function arraysHaveCommonElement(array1: any[], array2: any[]) {
   return array1.some((item) => array2.includes(item));
 }
@@ -24,30 +23,12 @@ const Products = () => {
   const [_products, set_Products] = useState<products[] | any[]>([]);
   const [categories, setCategories] = useState<category[]>([]);
   const [selectedCategory, setSelectedCategory] = useState("_view all");
-  const [selectedFilters, setSelectedFilters] = useState<any[]>([]);
-  const [selectedSizes, setSelectedSizes] = useState<any[]>([]);
-  const [userData, setUser] = useState<null | any>(null);
-  //set product using search query or selected category
-  useEffect(() => {
-    set_Products((_prvPro) => {
-      if (searchQuery && selectedCategory == "_view all")
-        return products.filter((product) =>
-          product.searchTags.current
-            .toLowerCase()
-            .includes(searchQuery.toLowerCase())
-        );
-
-      return products;
-    });
-    return () => {
-      set_Products([]);
-    };
-  }, [searchQuery, products]);
 
   useEffect(() => {
     async function fetchProducts() {
       const products = await getProducts();
       setProducts(products);
+      set_Products(products);
     }
 
     async function fetchCategories() {
@@ -58,6 +39,7 @@ const Products = () => {
     fetchProducts();
     fetchCategories();
   }, [selectedCategory]);
+
   useEffect(() => {
     set_Products((_products) => {
       // console.log(
@@ -86,19 +68,23 @@ const Products = () => {
       }
     });
   }, [searchQuery, products]);
-
   useEffect(() => {
     if (categoryQuery) setSelectedCategory(categoryQuery);
   }, [categoryQuery]);
-  useEffect(() => {
-    setUser(JSON.parse(localStorage.getItem("userData") || ""));
-  }, []);
 
   const handleCategoryClick = (selectedCategory: any) => {
     setSelectedCategory(selectedCategory);
     setSelectedFilters([]);
     setSelectedSizes([]);
   };
+  //====
+  const [selectedFilters, setSelectedFilters] = useState<any[]>([]);
+  const [selectedSizes, setSelectedSizes] = useState<any[]>([]);
+  //====
+  const [userData, setUser] = useState<null | any>(null);
+  useEffect(() => {
+    setUser(JSON.parse(localStorage.getItem("userData") || ""));
+  }, []);
   return (
     <div className="products-main">
       <Filter
@@ -124,7 +110,8 @@ const Products = () => {
                   handleCategoryClick(category.name);
                 }}
               >
-                {category.name} <ContactArrow />
+                {category.name}
+                <ContactArrow />
               </li>
             ))}
             <li
@@ -134,102 +121,122 @@ const Products = () => {
                   ? "active"
                   : ""
               }`}
+              onClick={() => {
+                handleCategoryClick("view all");
+              }}
             >
-              View all
+              view all
               <ContactArrow />
             </li>
           </ul>
         </div>
-
         <div className="products">
           <div className="products-grid">
-            {_products.length == 0 &&
-              products.map((product) => {
-                if (selectedCategory == "view all") {
-                  // console.log(product.size);
-                  return (
-                    <a
-                      key={product._id}
-                      // href={`/products/${product.slug}`}
-                      className="product"
-                    >
-                      <div className="img-container">
-                        {product.images && (
-                          <Image
-                            fill
-                            src={product.images[0].url}
-                            style={{ objectFit: "cover" }}
-                            alt={product.slug}
-                          />
-                        )}
-                        <button
-                          onClick={() =>
-                            AddCartOrder(product, userData.data.id, 1)
-                          }
-                          type="button"
-                        >
-                          <AiOutlinePlus />
-                        </button>
-                      </div>
-                      <div className="product-info">
-                        <h3>{product.name}</h3>
-                        <p>sssRS.{product.price}</p>
-                      </div>
-                    </a>
-                  );
-                } else if (
-                  selectedCategory == product.category &&
-                  product.category == product.category
-                ) {
-                  return (
-                    <Link
-                      key={product._id}
-                      href={`/products/${product.slug}`}
-                      className="product"
-                    >
-                      <div className="img-container">
-                        {product.images && (
-                          <Image
-                            fill
-                            src={product.images[0].url}
-                            style={{ objectFit: "cover" }}
-                            alt={product.slug}
-                          />
-                        )}
-                      </div>
-                      <div className="product-info">
-                        <h3>{product.name}</h3>
-                        <p>RS.{product.price}</p>
-                      </div>
-                    </Link>
-                  );
-                }
-              })}
-            {_products.length != 0 &&
-              _products.map((product) => {
-                if (
-                  selectedFilters.length !== 0 ||
-                  selectedSizes.length !== 0
-                ) {
+            {_products.length !== 0
+              ? _products.map((product) => {
                   if (
-                    selectedFilters.indexOf(product.type) !== -1 ||
-                    arraysHaveCommonElement(selectedSizes, product.size)
+                    selectedFilters.length !== 0 ||
+                    selectedSizes.length !== 0
                   ) {
+                    console.log(
+                      selectedFilters,
+                      product.type,
+                      selectedSizes,
+                      product.size,
+                      selectedFilters.indexOf(product.type) !== -1 ||
+                        arraysHaveCommonElement(selectedSizes, product.size)
+                    );
+                    if (
+                      selectedFilters.indexOf(product.type) !== -1 ||
+                      arraysHaveCommonElement(selectedSizes, product.size)
+                    ) {
+                      if (
+                        selectedCategory == "view all" ||
+                        selectedCategory == "_view all"
+                      ) {
+                        // console.log(product.size);
+                        return (
+                          // <a
+                          //   key={product._id}
+                          //   href={`/products/${product.slug}`}
+                          //   className="product"
+                          // >
+                          <>
+                            {/* // <a
+                            //   key={product._id}
+                            //   href={`/products/${product.slug}`}
+                            //   className="product"
+                            // > */}
+                            <div className="img-container">
+                              {product.images && (
+                                <Image
+                                  fill
+                                  src={product.images[0].url}
+                                  style={{ objectFit: "cover" }}
+                                  alt={product.slug}
+                                />
+                              )}
+                              <button
+                                type="button"
+                                onClick={() =>
+                                  AddCartOrder(product, userData.data.id, 1)
+                                }
+                              >
+                                <AiOutlinePlus />
+                              </button>
+                            </div>
+                            <div className="product-info">
+                              <h3>{product.name}</h3>
+                              <p>RS.{product.price}</p>
+                            </div>
+                          </>
+                          // </a>
+                        );
+                      } else if (
+                        selectedCategory == product.category &&
+                        product.category == product.category
+                      ) {
+                        return (
+                          <Link
+                            key={product._id}
+                            href={`#`}
+                            className="product"
+                          >
+                            <div className="img-container">
+                              {product.images && (
+                                <Image
+                                  fill
+                                  src={product.images[0].url}
+                                  style={{ objectFit: "cover" }}
+                                  alt={product.slug}
+                                />
+                              )}
+                            </div>
+                            <div className="product-info">
+                              <h3>{product.name}</h3>
+                              <p>RS.{product.price}</p>
+                            </div>
+                          </Link>
+                        );
+                      }
+                    }
+                  } else {
+                    console.log(
+                      selectedCategory == product.category.name,
+                      selectedCategory,
+                      product.category,
+                      product.category.name == product.category.name
+                    );
+
                     if (
                       selectedCategory == "view all" ||
                       selectedCategory == "_view all"
                     ) {
                       // console.log(product.size);
                       return (
-                        // <a
-                        //   key={product._id}
-                        //   href={`/products/${product.slug}`}
-                        //   className="product"
-                        // >
-
                         <a
                           key={product._id}
-                          href={`/products/${product.slug}`}
+                          // href={`/products/${product.slug}`}
                           className="product"
                         >
                           <div className="img-container">
@@ -242,10 +249,10 @@ const Products = () => {
                               />
                             )}
                             <button
-                              type="button"
                               onClick={() =>
                                 AddCartOrder(product, userData.data.id, 1)
                               }
+                              type="button"
                             >
                               <AiOutlinePlus />
                             </button>
@@ -261,11 +268,7 @@ const Products = () => {
                       product.category == product.category
                     ) {
                       return (
-                        <Link
-                          key={product._id}
-                          href={`/products/${product.slug}`}
-                          className="product"
-                        >
+                        <Link key={product._id} href={`#`} className="product">
                           <div className="img-container">
                             {product.images && (
                               <Image
@@ -278,22 +281,20 @@ const Products = () => {
                           </div>
                           <div className="product-info">
                             <h3>{product.name}</h3>
-                            <p>RS.{product.price}</p>
+                            <p>ssRS.{product.price}</p>
                           </div>
                         </Link>
                       );
                     }
                   }
-                } else {
-                  if (
-                    selectedCategory == "view all" ||
-                    selectedCategory == "_view all"
-                  ) {
+                })
+              : products.map((product) => {
+                  if (selectedCategory == "view all") {
                     // console.log(product.size);
                     return (
                       <a
                         key={product._id}
-                        href={`/products/${product.slug}`}
+                        // href={`/products/${product.slug}`}
                         className="product"
                       >
                         <div className="img-container">
@@ -316,7 +317,7 @@ const Products = () => {
                         </div>
                         <div className="product-info">
                           <h3>{product.name}</h3>
-                          <p>RS.{product.price}</p>
+                          <p>sssRS.{product.price}</p>
                         </div>
                       </a>
                     );
@@ -325,7 +326,11 @@ const Products = () => {
                     product.category == product.category
                   ) {
                     return (
-                      <Link key={product._id} href={`#`} className="product">
+                      <Link
+                        key={product._id}
+                        href={`/products/${product.slug}`}
+                        className="product"
+                      >
                         <div className="img-container">
                           {product.images && (
                             <Image
@@ -338,13 +343,12 @@ const Products = () => {
                         </div>
                         <div className="product-info">
                           <h3>{product.name}</h3>
-                          <p>ssRS.{product.price}</p>
+                          <p>RS.{product.price}</p>
                         </div>
                       </Link>
                     );
                   }
-                }
-              })}
+                })}
           </div>
         </div>
         <div className="blank" />
