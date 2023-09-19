@@ -65,9 +65,9 @@ export default function ShippingInfo() {
     region: "India",
     phone: userData?.data.phone,
   });
-  console.log(userData?.data.user_metadata.full_name);
+  //console.log(userData?.data.user_metadata.full_name);
 
-  const number_formatter_current = new Intl.NumberFormat(navigator.language, {
+  const number_formatter_current = new Intl.NumberFormat("en", {
     style: "currency",
     currency: "inr",
   });
@@ -78,8 +78,7 @@ export default function ShippingInfo() {
           <div className="shipping-info">
             <h1>ENTER YOUR SHIPPING INFORMATION BELOW</h1>
             <h2>
-              THIS INFORMATION CAN BE ACCESSED OR UPDATED AT{" "}
-              <a href="/user">USER</a> PANEL
+              THIS INFORMATION CAN BE ACCESSED AT <a href="/user">USER</a> PANEL
             </h2>
           </div>
           <form
