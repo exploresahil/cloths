@@ -133,20 +133,19 @@ export default function Authorize() {
         <div className="authorize-payment-bottom-container">
           <div className="price-container">
             <div className="text">
-              <h3>
-                Rs.{" "}
-                {product
-                  ?.map((v) => parseInt(v.product.price))
-                  .reduce(
-                    (accumulator, currentValue) => accumulator + currentValue,
-                    0
-                  )}{" "}
-                <AiOutlinePlus />
-              </h3>
               <span>
+                <p>
+                  Order Amount: Rs.{" "}
+                  {product
+                    ?.map((v) => parseInt(v.product.price))
+                    .reduce(
+                      (accumulator, currentValue) => accumulator + currentValue,
+                      0
+                    )}
+                </p>
                 <p>Dilivery Charges:{}</p>
-                <p>GST:{}</p>
               </span>
+              <h3>Total: Rs. {}</h3>
             </div>
           </div>
           <div className="line" />

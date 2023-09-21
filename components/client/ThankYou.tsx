@@ -10,10 +10,12 @@ const ThankYou = () => {
       <div className="info-container">
         <h3>Thank you for your purchase!</h3>
         <div className="buttons-container">
-          <button type="button" onClick={() => router.push("/products")}>
+          <button type="button" onClick={() => router.push("/")}>
             Continue Shopping
           </button>
-          <button>Go to your Account</button>
+          <button type="button" onClick={() => router.push("/user")}>
+            Go to your Account
+          </button>
         </div>
       </div>
     </div>

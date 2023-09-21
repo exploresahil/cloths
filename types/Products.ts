@@ -18,4 +18,5 @@ export type products = {
   category: string;
   type: string;
   searchTags: { current: string };
+  sku: string;
 };
