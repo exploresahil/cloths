@@ -245,7 +245,7 @@ export default function ShippingInfo() {
                   data: {
                     full_name: input.name,
                   },
-                  phone: "+91" + input.phone,
+                  phone: "+91" + input.phone?.slice(0, 9),
                 });
                 db.from("USER")
                   .update({

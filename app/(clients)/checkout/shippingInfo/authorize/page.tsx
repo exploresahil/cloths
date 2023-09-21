@@ -67,7 +67,7 @@ export default function Authorize() {
             <div className="delivery-address-main">
               <h1>Dilivery Address</h1>
               <div className="name">
-                <h1>{userData.data.user_metadata.name}</h1>
+                <h1>{userData.data.user_metadata.full_name}</h1>
               </div>
               <div className="address">
                 <h2 className="address-line">{userData.extra_data.address},</h2>
