@@ -295,19 +295,24 @@
       padding: 0 40px;
 
       .price-container {
-        width: 10vw;
         display: flex;
 
         .text {
           color: v.$bg;
+          width: 180px;
 
           h3 {
             font-size: 1.5rem;
             font-family: v.$fontRR;
           }
 
+          svg {
+            width: 10px;
+            height: 10px;
+          }
+
           p {
-            font-size: 0.8rem;
+            font-size: 0.6rem;
             font-weight: 600;
           }
         }

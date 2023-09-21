@@ -140,14 +140,14 @@ export default function Authorize() {
                   .reduce(
                     (accumulator, currentValue) => accumulator + currentValue,
                     0
-                  )}
+                  )}{" "}
+                <AiOutlinePlus />
               </h3>
               <span>
-                <AiOutlinePlus />
-                <p>EXCL.SHIPPING</p>
+                <p>Dilivery Charges:{}</p>
+                <p>GST:{}</p>
               </span>
             </div>
-            <AccordionDown />
           </div>
           <div className="line" />
           <div className="payment-button-container">
