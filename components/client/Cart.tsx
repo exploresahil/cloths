@@ -13,10 +13,12 @@ import Insta from "../icons/Insta";
 import { useEffect, useState } from "react";
 import { getProCart, RemoveCartOrder } from "@/backend/Cart";
 import { products } from "@/types/Products";
+
 const Cart = ({ onCartCloseClick }: props) => {
   const dispatch = useAppDispatch();
   const [product, setProduct] = useState<null | any[]>(null);
   const [userData, setUser] = useState<null | any>(null);
+
   useEffect(() => {
     setUser(JSON.parse(localStorage.getItem("userData") || ""));
   }, []);
@@ -24,7 +26,7 @@ const Cart = ({ onCartCloseClick }: props) => {
     if (userData)
       getProCart(userData.extra_data.id).then((data) => setProduct(data.data));
   }, [userData]);
-  console.log(product);
+  //console.log(product);
 
   return (
     <div className="cart-main-container">

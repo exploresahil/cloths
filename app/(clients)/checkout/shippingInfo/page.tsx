@@ -71,6 +71,7 @@ export default function ShippingInfo() {
     style: "currency",
     currency: "inr",
   });
+
   return (
     userData && (
       <div className="shipping-info-container">

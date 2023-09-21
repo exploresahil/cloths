@@ -7,9 +7,26 @@ import { GrClose } from "react-icons/gr";
 import AccordionDown from "@/components/icons/AccordionDown";
 import { CheckoutArrowNormal } from "@/components/icons/Icons";
 import { AiOutlinePlus } from "react-icons/ai";
-import { getProCart } from "@/backend/Cart";
+import { getProCart, RemoveCartOrder } from "@/backend/Cart";
+import { products } from "@/types/Products";
+import { useAppDispatch } from "@/redux/hook";
+import { decrement } from "@/redux/reducer/cartSlice";
+import { useEffect, useState } from "react";
 
 export default function Authorize() {
+  const dispatch = useAppDispatch();
+  const [product, setProduct] = useState<null | any[]>(null);
+  const [userData, setUser] = useState<null | any>(null);
+
+  useEffect(() => {
+    setUser(JSON.parse(localStorage.getItem("userData") || ""));
+  }, []);
+
+  useEffect(() => {
+    if (userData)
+      getProCart(userData.extra_data.id).then((data) => setProduct(data.data));
+  }, [userData]);
+
   return (
     <div className="authorize-container">
       <div className="authorize-main">
@@ -23,12 +40,10 @@ export default function Authorize() {
           <p className="delivery-offer">
             Free shipping for orders over Rs. 2,990.
           </p>
-          <a className="delivery-type-edit" href="/">
-            Edit
-          </a>
         </div>
         <div className="delivery-address-container">
           <div className="delivery-address-main">
+            <h1>Dilivery Address</h1>
             <div className="name">
               <h1>Sanyukta Adhikary</h1>
             </div>
@@ -49,162 +64,47 @@ export default function Authorize() {
       <div className="authorize-payment-container">
         <div className="authorize-payment-cart">
           <div className="cart-products">
-            <div className="cart-items">
-              <div className="cart-product-info">
-                <div className="image-container">
-                  <Image
-                    fill
-                    src={ProductImage}
-                    style={{ objectFit: "cover" }}
-                    alt="product-image"
-                  />
-                </div>
-                <div className="cart-item-info">
-                  <div className="info">
-                    <h3>striped shirt kurta</h3>
-                    <p>rs 850</p>
+            {product &&
+              product.map(
+                (v: { product: products; how_many: number; id: string }, i) => (
+                  <div className="cart-items">
+                    <div className="cart-product-info">
+                      <div className="image-container">
+                        <Image
+                          fill
+                          src={v.product.images[0].url}
+                          style={{ objectFit: "cover" }}
+                          alt="product-image"
+                        />
+                      </div>
+                      <div className="cart-item-info">
+                        <div className="info">
+                          <h3>{v.product.name}</h3>
+                          <p>rs {v.product.price}</p>
+                        </div>
+                        <div className="item-filter">
+                          <p>M</p>
+                          <p>{v.how_many}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        RemoveCartOrder(v.id).then(() => {
+                          getProCart(userData.extra_data.id).then((data) =>
+                            setProduct(data.data)
+                          );
+                          dispatch(decrement());
+                        });
+                      }}
+                    >
+                      <GrClose />
+                    </button>
+                    <div className="line" />
                   </div>
-                  <div className="item-filter">
-                    <p>M</p>
-                    <p>1</p>
-                  </div>
-                </div>
-              </div>
-              <button>
-                <GrClose />
-              </button>
-              <div className="line" />
-            </div>
-            <div className="cart-items">
-              <div className="cart-product-info">
-                <div className="image-container">
-                  <Image
-                    fill
-                    src={ProductImage}
-                    style={{ objectFit: "cover" }}
-                    alt="product-image"
-                  />
-                </div>
-                <div className="cart-item-info">
-                  <div className="info">
-                    <h3>striped shirt kurta</h3>
-                    <p>rs 850</p>
-                  </div>
-                  <div className="item-filter">
-                    <p>M</p>
-                    <p>1</p>
-                  </div>
-                </div>
-              </div>
-              <button>
-                <GrClose />
-              </button>
-              <div className="line" />
-            </div>
-            <div className="cart-items">
-              <div className="cart-product-info">
-                <div className="image-container">
-                  <Image
-                    fill
-                    src={ProductImage}
-                    style={{ objectFit: "cover" }}
-                    alt="product-image"
-                  />
-                </div>
-                <div className="cart-item-info">
-                  <div className="info">
-                    <h3>striped shirt kurta</h3>
-                    <p>rs 850</p>
-                  </div>
-                  <div className="item-filter">
-                    <p>M</p>
-                    <p>1</p>
-                  </div>
-                </div>
-              </div>
-              <button>
-                <GrClose />
-              </button>
-              <div className="line" />
-            </div>
-            <div className="cart-items">
-              <div className="cart-product-info">
-                <div className="image-container">
-                  <Image
-                    fill
-                    src={ProductImage}
-                    style={{ objectFit: "cover" }}
-                    alt="product-image"
-                  />
-                </div>
-                <div className="cart-item-info">
-                  <div className="info">
-                    <h3>striped shirt kurta</h3>
-                    <p>rs 850</p>
-                  </div>
-                  <div className="item-filter">
-                    <p>M</p>
-                    <p>1</p>
-                  </div>
-                </div>
-              </div>
-              <button>
-                <GrClose />
-              </button>
-              <div className="line" />
-            </div>
-            <div className="cart-items">
-              <div className="cart-product-info">
-                <div className="image-container">
-                  <Image
-                    fill
-                    src={ProductImage}
-                    style={{ objectFit: "cover" }}
-                    alt="product-image"
-                  />
-                </div>
-                <div className="cart-item-info">
-                  <div className="info">
-                    <h3>striped shirt kurta</h3>
-                    <p>rs 850</p>
-                  </div>
-                  <div className="item-filter">
-                    <p>M</p>
-                    <p>1</p>
-                  </div>
-                </div>
-              </div>
-              <button>
-                <GrClose />
-              </button>
-              <div className="line" />
-            </div>
-            <div className="cart-items">
-              <div className="cart-product-info">
-                <div className="image-container">
-                  <Image
-                    fill
-                    src={ProductImage}
-                    style={{ objectFit: "cover" }}
-                    alt="product-image"
-                  />
-                </div>
-                <div className="cart-item-info">
-                  <div className="info">
-                    <h3>striped shirt kurta</h3>
-                    <p>rs 850</p>
-                  </div>
-                  <div className="item-filter">
-                    <p>M</p>
-                    <p>1</p>
-                  </div>
-                </div>
-              </div>
-              <button>
-                <GrClose />
-              </button>
-              <div className="line" />
-            </div>
+                )
+              )}
           </div>
         </div>
         <div className="authorize-payment-bottom-container">
