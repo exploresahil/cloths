@@ -23,7 +23,9 @@ export default function Product({ params }: Props) {
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
   const [userData, setUser] = useState<null | any>(null);
   const slug = params.product;
-
+  useEffect(() => {
+    setUser(JSON.parse(localStorage.getItem("userData") || ""));
+  }, []);
   useEffect(() => {
     getProduct(slug).then((data) => {
       setProduct(data);
