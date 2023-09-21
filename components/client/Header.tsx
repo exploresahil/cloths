@@ -52,7 +52,7 @@ const Header = () => {
 
       if (dam.data !== null) {
         setUserData(dam);
-        getProCart(dam.extra_data.id || "").then((data) => {
+        getProCart(dam.extra_data.id || "").then((data: any) => {
           setCartCount(data.data.length);
         });
       } else setUserData(undefined);
