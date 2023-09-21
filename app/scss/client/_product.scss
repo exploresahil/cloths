@@ -312,12 +312,13 @@
           }
         }
         .product-info {
-          font-size: 1rem;
+          font-size: 0.8rem;
           font-weight: 600;
           margin: 10px 0;
-          text-align: center;
-
           color: $bg;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
         }
       }
     }
