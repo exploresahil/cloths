@@ -6,8 +6,11 @@ import db from "@/backend/Backend.client";
 import { CheckoutArrowNormal, OTPTick } from "@/components/icons/Icons";
 import AccordionDown from "@/components/icons/AccordionDown";
 import { User } from "@supabase/supabase-js";
+import { useRouter } from "next/navigation";
+import { getUser } from "@/backend/User";
 
 export default function ShippingInfo() {
+  const router = useRouter();
   const stateOptions: any = [
     {
       value: "Andaman and Nicobar Islands",
@@ -224,15 +227,23 @@ export default function ShippingInfo() {
                   },
                   phone: "+91" + input.phone,
                 });
-                db.from("USER").update({
-                  address: input.address,
-                  locality: input.locality,
-                  state: input.state,
-                  pincode: input.pincode,
-                  more_info: input.more_info,
-                  city: input.city,
-                  region: input.region,
-                });
+                db.from("USER")
+                  .update({
+                    address: input.address,
+                    locality: input.locality,
+                    state: input.state,
+                    pincode: input.pincode,
+                    more_info: input.more_info,
+                    city: input.city,
+                    region: input.region,
+                  })
+                  .eq("id", userData.extra_data.id)
+                  .then(async (data) => {
+                    await getUser();
+                    // console.log(data);
+
+                    router.push("/checkout/shippingInfo/authorize");
+                  });
               }}
             >
               <h3>PROCEED TO CHECKOUT</h3>
