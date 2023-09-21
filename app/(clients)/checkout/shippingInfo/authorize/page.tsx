@@ -7,6 +7,7 @@ import { GrClose } from "react-icons/gr";
 import AccordionDown from "@/components/icons/AccordionDown";
 import { CheckoutArrowNormal } from "@/components/icons/Icons";
 import { AiOutlinePlus } from "react-icons/ai";
+import { getProCart } from "@/backend/Cart";
 
 export default function Authorize() {
   return (

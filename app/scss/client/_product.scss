@@ -203,6 +203,15 @@
           position: absolute;
           right: 20px;
         }
+
+        &:hover {
+          background-color: $textTeal;
+          color: $bg;
+        }
+
+        svg {
+          fill: $bg;
+        }
       }
     }
   }
