@@ -19,8 +19,6 @@ const Cart = ({ onCartCloseClick }: props) => {
     setUser(JSON.parse(localStorage.getItem("userData") || ""));
   }, []);
   useEffect(() => {
-    console.log(userData);
-
     if (userData)
       getProCart(userData.extra_data.id).then((data) => setProduct(data.data));
   }, [userData]);

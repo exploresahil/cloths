@@ -49,14 +49,7 @@ const Filter = ({
   useEffect(() => {
     const handleClickOutside = (event: any) => {
       const target: any = event.target;
-      console.log(
-        filterButtonRef.current.contains(target) &&
-          filterDropdownRef.current.contains(target) &&
-          filterSelectedRef.current.contains(target) &&
-          target?.classList.contains("close-button") &&
-          target?.classList.contains("size") &&
-          target?.classList.contains("selected")
-      );
+
       if (
         filterButtonRef.current.contains(target) &&
         filterDropdownRef.current.contains(target) &&

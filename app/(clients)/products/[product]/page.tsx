@@ -130,7 +130,8 @@ export default function Product({ params }: Props) {
                 onClick={() => {
                   AddCartOrder(product, userData.extra_data.id, 1).then(
                     (data) => {
-                      console.log(data.data);
+                      {
+                      }
                     }
                   );
                 }}

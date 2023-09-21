@@ -23,6 +23,7 @@ import {
 import Cart from "./Cart";
 import { User as user } from "@supabase/supabase-js";
 import { getUser } from "@/backend/User";
+import { getProCart } from "@/backend/Cart";
 
 const Header = () => {
   const router = useRouter();
@@ -30,6 +31,7 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [cartCount, setCartCount] = useState(0);
   const [userData, setUserData] = useState<
     { data: user | null; extra_data: any } | undefined
   >();
@@ -48,8 +50,12 @@ const Header = () => {
       const dam = await getUser();
       // console.log(dam);
 
-      if (dam.data !== null) setUserData(dam);
-      else setUserData(undefined);
+      if (dam.data !== null) {
+        setUserData(dam);
+        getProCart(dam.extra_data.id || "").then((data) => {
+          setCartCount(data.data.length);
+        });
+      } else setUserData(undefined);
     })();
     let prevScrollPos = window.scrollY || document.documentElement.scrollTop;
     const handleScroll = () => {
@@ -160,10 +166,9 @@ const Header = () => {
         <div className="user-menu-ecommercs">
           <button className="cart" onClick={handleCartClickOpen}>
             <Bag />
-            <p>1</p>
+            <p>{cartCount}</p>
           </button>
           <div className="line" />
-
           <button
             onClick={() => {
               router.push(userData == undefined ? "/login" : "/user");

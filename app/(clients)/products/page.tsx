@@ -52,19 +52,14 @@ const Products = () => {
       // );
 
       if (searchQuery && selectedCategory === "_view all") {
-        console.log("search query not null");
-
         const filteredProducts = products.filter((product) =>
           product.searchTags.current
             .toLowerCase()
             .includes(searchQuery.toLowerCase())
         );
-        console.log(filteredProducts);
 
         return filteredProducts;
       } else {
-        console.log("search query  null");
-
         return products;
       }
     });
@@ -141,14 +136,6 @@ const Products = () => {
                     selectedFilters.length !== 0 ||
                     selectedSizes.length !== 0
                   ) {
-                    console.log(
-                      selectedFilters,
-                      product.type,
-                      selectedSizes,
-                      product.size,
-                      selectedFilters.indexOf(product.type) !== -1 ||
-                        arraysHaveCommonElement(selectedSizes, product.size)
-                    );
                     if (
                       selectedFilters.indexOf(product.type) !== -1 ||
                       arraysHaveCommonElement(selectedSizes, product.size)
@@ -189,7 +176,7 @@ const Products = () => {
                                   product,
                                   userData.extra_data.id,
                                   1
-                                ).then((data) => console.log(data));
+                                ).then((data) => {});
                               }}
                             >
                               <AiOutlinePlus />
@@ -231,7 +218,7 @@ const Products = () => {
                                   product,
                                   userData.extra_data.id,
                                   1
-                                ).then((data) => console.log(data));
+                                ).then((data) => {});
                               }}
                             >
                               <AiOutlinePlus />
@@ -241,13 +228,6 @@ const Products = () => {
                       }
                     }
                   } else {
-                    console.log(
-                      selectedCategory == product.category.name,
-                      selectedCategory,
-                      product.category,
-                      product.category.name == product.category.name
-                    );
-
                     if (
                       selectedCategory == "view all" ||
                       selectedCategory == "_view all"
@@ -278,13 +258,11 @@ const Products = () => {
                           <button
                             type="button"
                             onClick={() => {
-                              console.log("hi", "", product, userData);
-
                               AddCartOrder(
                                 product,
                                 userData.extra_data.id,
                                 1
-                              ).then((data) => console.log(data));
+                              ).then((data) => {});
                             }}
                           >
                             <AiOutlinePlus />
@@ -327,7 +305,7 @@ const Products = () => {
                                 product,
                                 userData.extra_data.id,
                                 1
-                              ).then((data) => console.log(data));
+                              ).then((data) => {});
                             }}
                           >
                             <AiOutlinePlus />
@@ -371,7 +349,7 @@ const Products = () => {
                               product,
                               userData.extra_data.id,
                               1
-                            ).then((data) => console.log(data));
+                            ).then((data) => {});
                           }}
                         >
                           <AiOutlinePlus />
@@ -413,7 +391,7 @@ const Products = () => {
                               product,
                               userData.extra_data.id,
                               1
-                            ).then((data) => console.log(data));
+                            ).then((data) => {});
                           }}
                         >
                           <AiOutlinePlus />

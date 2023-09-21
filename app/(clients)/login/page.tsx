@@ -52,7 +52,6 @@ const Login = () => {
                       phone: inputValue.phone,
                     });
                   else alert(data.error?.message);
-                  console.log(data);
                   await getUser().then(() => {
                     router.push("/user");
                   });
