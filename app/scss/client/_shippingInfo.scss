@@ -25,6 +25,12 @@
           text-decoration: underline;
         }
       }
+
+      p {
+        margin-top: 5px;
+        font-size: 0.8rem;
+        font-family: v.$fontRM;
+      }
     }
     .shipping-info-form {
       display: flex;

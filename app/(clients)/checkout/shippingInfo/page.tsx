@@ -9,6 +9,7 @@ import { User } from "@supabase/supabase-js";
 import { useRouter } from "next/navigation";
 import { getUser } from "@/backend/User";
 import { getProCart } from "@/backend/Cart";
+import Link from "next/link";
 
 export default function ShippingInfo() {
   const router = useRouter();
@@ -104,8 +105,10 @@ export default function ShippingInfo() {
           <div className="shipping-info">
             <h1>ENTER YOUR SHIPPING INFORMATION BELOW</h1>
             <h2>
-              THIS INFORMATION CAN BE ACCESSED AT <a href="/user">USER</a> PANEL
+              THIS INFORMATION CAN BE ACCESSED AT <Link href="/user">USER</Link>{" "}
+              PANEL
             </h2>
+            <p>Delivery charges will be aplicable as per your location</p>
           </div>
           <form
             onSubmit={(e) => {
@@ -261,6 +264,7 @@ export default function ShippingInfo() {
                     ) || 0) + 599 || 0
                 )}{" "}
               </p>
+              <h4>MRP {number_formatter_current.format(2995)}</h4>
             </div>
             <AccordionDown />
           </div>
