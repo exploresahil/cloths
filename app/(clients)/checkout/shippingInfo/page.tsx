@@ -8,6 +8,7 @@ import AccordionDown from "@/components/icons/AccordionDown";
 import { User } from "@supabase/supabase-js";
 import { useRouter } from "next/navigation";
 import { getUser } from "@/backend/User";
+import { getProCart } from "@/backend/Cart";
 
 export default function ShippingInfo() {
   const router = useRouter();
@@ -53,7 +54,13 @@ export default function ShippingInfo() {
     { value: "Uttarakhand", label: "Uttarakhand" },
     { value: "West Bengal", label: "West Bengal" },
   ];
+  const [product, setProduct] = useState<null | any[]>(null);
+
   const [userData, setUserData] = useState<{ data: User; extra_data: any }>();
+  useEffect(() => {
+    if (userData)
+      getProCart(userData.extra_data.id).then((data) => setProduct(data.data));
+  }, [userData]);
   const [input, setInput] = useState({
     name: userData?.data.user_metadata.full_name,
     address: userData?.extra_data.address,
@@ -231,9 +238,29 @@ export default function ShippingInfo() {
         <div className="proceed-to-checkout-container">
           <div className="price-container">
             <div className="text">
-              <h4>MRP {number_formatter_current.format(2995)}</h4>
+              <h4>
+                MRP{" "}
+                {number_formatter_current.format(
+                  product
+                    ?.map((v) => parseInt(v.product.price))
+                    .reduce(
+                      (accumulator, currentValue) => accumulator + currentValue,
+                      0
+                    ) || 0
+                )}
+              </h4>
               <h5>Delivery {number_formatter_current.format(500)}</h5>
-              <p>Total {number_formatter_current.format(2995 + 500)} </p>
+              <p>
+                Total{" "}
+                {number_formatter_current.format(
+                  (product
+                    ?.map((v) => parseInt(v.product.price))
+                    .reduce(
+                      (accumulator, currentValue) => accumulator + currentValue,
+                      0
+                    ) || 0) + 599 || 0
+                )}{" "}
+              </p>
             </div>
             <AccordionDown />
           </div>
