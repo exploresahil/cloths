@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useAppDispatch } from "@/redux/hook";
 import { increment } from "@/redux/reducer/cartSlice";
-import { AiFillPlusCircle } from "react-icons/ai";
+import { AiFillPlusCircle, AiOutlinePlus } from "react-icons/ai";
 import { BsArrowRight } from "react-icons/bs";
 import { PiRulerLight } from "react-icons/pi";
 import { HiArrowLongRight } from "react-icons/hi2";
@@ -189,9 +189,40 @@ export default function Product({ params }: Props) {
 
             <div className="products-grid">
               {randomProducts.map((randomProduct) => (
-                <div key={randomProduct._id} className="product-container">
-                  {randomProduct.name}
-                  <div className="product-sec"></div>
+                <div className="product-sec" key={randomProduct._id}>
+                  <Link
+                    href={`/products/${randomProduct.slug}`}
+                    className="product"
+                  >
+                    <div className="img-container">
+                      {randomProduct.images && (
+                        <Image
+                          fill
+                          src={randomProduct.images[0].url}
+                          style={{ objectFit: "cover" }}
+                          alt={randomProduct.slug}
+                        />
+                      )}
+                    </div>
+                    <div className="product-info">
+                      <h3>{randomProduct.name}</h3>
+                      <p>RS.{randomProduct.price}</p>
+                    </div>
+                  </Link>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      // console.log("hi", "", product, userData);
+
+                      AddCartOrder(product, userData.extra_data.id, 1).then(
+                        (data) => {
+                          dispatch(increment());
+                        }
+                      );
+                    }}
+                  >
+                    <AiOutlinePlus />
+                  </button>
                 </div>
               ))}
             </div>

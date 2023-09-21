@@ -2,7 +2,6 @@
 //2550
 import Image from "next/image";
 
-import ProductImage from "@/public/assets/images/products/product-img.png";
 import { GrClose } from "react-icons/gr";
 import AccordionDown from "@/components/icons/AccordionDown";
 import { CheckoutArrowNormal } from "@/components/icons/Icons";
