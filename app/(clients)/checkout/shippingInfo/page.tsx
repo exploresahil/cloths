@@ -241,32 +241,8 @@ export default function ShippingInfo() {
         <div className="proceed-to-checkout-container">
           <div className="price-container">
             <div className="text">
-              <h4>
-                MRP{" "}
-                {number_formatter_current.format(
-                  product
-                    ?.map((v) => parseInt(v.product.price))
-                    .reduce(
-                      (accumulator, currentValue) => accumulator + currentValue,
-                      0
-                    ) || 0
-                )}
-              </h4>
-              <h5>Delivery {number_formatter_current.format(500)}</h5>
-              <p>
-                Total{" "}
-                {number_formatter_current.format(
-                  (product
-                    ?.map((v) => parseInt(v.product.price))
-                    .reduce(
-                      (accumulator, currentValue) => accumulator + currentValue,
-                      0
-                    ) || 0) + 599 || 0
-                )}{" "}
-              </p>
-              <h4>MRP {number_formatter_current.format(2995)}</h4>
+              <h4>Rs. 222</h4>
             </div>
-            <AccordionDown />
           </div>
           <div className="line" />
           <div className="checkout-button-container">
