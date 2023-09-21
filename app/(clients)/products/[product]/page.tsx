@@ -142,7 +142,7 @@ export default function Product({ params }: Props) {
                 <AiFillPlusCircle />
               </button>
               <div className="line" />
-              <button>
+              <button type="button" className="button">
                 Buy Now <BsArrowRight />
               </button>
             </div>
