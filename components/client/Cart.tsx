@@ -55,7 +55,16 @@ const Cart = ({ onCartCloseClick }: props) => {
                       </div>
                     </div>
                   </div>
-                  <button type="button" onClick={() => RemoveCartOrder(v.id)}>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      RemoveCartOrder(v.id).then(() => {
+                        getProCart(userData.extra_data.id).then((data) =>
+                          setProduct(data.data)
+                        );
+                      });
+                    }}
+                  >
                     <GrClose />
                   </button>
                   <div className="line" />
