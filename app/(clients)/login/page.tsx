@@ -57,7 +57,7 @@ const Login = () => {
                   });
                 })
                 .catch((e) => {
-                  console.log(e);
+                  alert("An error occurred: " + e.message);
                 });
             }}
           >
