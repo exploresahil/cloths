@@ -136,7 +136,9 @@ export default function ShippingInfo() {
                     className="state-select-container"
                     classNamePrefix="state-select"
                     options={stateOptions}
-                    value={input.state}
+                    value={stateOptions.find(
+                      (option: any) => option.value === input.state
+                    )}
                     onChange={(e) =>
                       setInput((data) => ({ ...data, state: e.value }))
                     }
