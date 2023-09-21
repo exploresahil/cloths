@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-
+import { useAppDispatch } from "@/redux/hook";
+import { increment } from "@/redux/reducer/cartSlice";
 import { AiFillPlusCircle } from "react-icons/ai";
 import { BsArrowRight } from "react-icons/bs";
 import { PiRulerLight } from "react-icons/pi";
@@ -19,6 +20,7 @@ type Props = {
 };
 
 export default function Product({ params }: Props) {
+  const dispatch = useAppDispatch();
   const [product, setProduct] = useState<products>();
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
   const [userData, setUser] = useState<null | any>(null);
@@ -131,6 +133,7 @@ export default function Product({ params }: Props) {
                   AddCartOrder(product, userData.extra_data.id, 1).then(
                     (data) => {
                       {
+                        dispatch(increment());
                       }
                     }
                   );

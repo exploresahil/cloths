@@ -8,7 +8,7 @@ import { useRouter, usePathname } from "next/navigation";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FiSearch } from "react-icons/fi";
-
+import { useAppSelector } from "@/redux/hook";
 import {
   Bag,
   User,
@@ -26,12 +26,13 @@ import { getUser } from "@/backend/User";
 import { getProCart } from "@/backend/Cart";
 
 const Header = () => {
+  const count = useAppSelector((state) => state.CardReducer.value);
   const router = useRouter();
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const [cartCount, setCartCount] = useState(0);
+
   const [userData, setUserData] = useState<
     { data: user | null; extra_data: any } | undefined
   >();
@@ -52,9 +53,6 @@ const Header = () => {
 
       if (dam.data !== null) {
         setUserData(dam);
-        getProCart(dam.extra_data.id || "").then((data: any) => {
-          setCartCount(data.data.length);
-        });
       } else setUserData(undefined);
     })();
     let prevScrollPos = window.scrollY || document.documentElement.scrollTop;
@@ -166,7 +164,7 @@ const Header = () => {
         <div className="user-menu-ecommercs">
           <button className="cart" onClick={handleCartClickOpen}>
             <Bag />
-            <p>{cartCount}</p>
+            {count !== 0 && <p>{count}</p>}
           </button>
           <div className="line" />
           <button

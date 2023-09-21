@@ -1,5 +1,6 @@
 import Image from "next/image";
-
+import { useAppDispatch } from "@/redux/hook";
+import { decrement } from "@/redux/reducer/cartSlice";
 interface props {
   onCartCloseClick: any;
 }
@@ -13,6 +14,7 @@ import { useEffect, useState } from "react";
 import { getProCart, RemoveCartOrder } from "@/backend/Cart";
 import { products } from "@/types/Products";
 const Cart = ({ onCartCloseClick }: props) => {
+  const dispatch = useAppDispatch();
   const [product, setProduct] = useState<null | any[]>(null);
   const [userData, setUser] = useState<null | any>(null);
   useEffect(() => {
@@ -60,6 +62,7 @@ const Cart = ({ onCartCloseClick }: props) => {
                         getProCart(userData.extra_data.id).then((data) =>
                           setProduct(data.data)
                         );
+                        dispatch(decrement());
                       });
                     }}
                   >

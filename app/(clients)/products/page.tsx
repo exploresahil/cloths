@@ -2,7 +2,8 @@
 
 import Filter from "@/components/client/Filter";
 import Image from "next/image";
-
+import { useAppDispatch } from "@/redux/hook";
+import { increment } from "@/redux/reducer/cartSlice";
 import ContactArrow from "@/components/icons/ContactArrow";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -17,6 +18,7 @@ function arraysHaveCommonElement(array1: any[], array2: any[]) {
   return array1.some((item) => array2.includes(item));
 }
 const Products = () => {
+  const dispatch = useAppDispatch();
   const searchParams = useSearchParams();
   const searchQuery = searchParams.get("search") || "";
   const categoryQuery = searchParams.get("category") || "";
@@ -176,7 +178,9 @@ const Products = () => {
                                   product,
                                   userData.extra_data.id,
                                   1
-                                ).then((data) => {});
+                                ).then((data) => {
+                                  dispatch(increment());
+                                });
                               }}
                             >
                               <AiOutlinePlus />
@@ -218,7 +222,9 @@ const Products = () => {
                                   product,
                                   userData.extra_data.id,
                                   1
-                                ).then((data) => {});
+                                ).then((data) => {
+                                  dispatch(increment());
+                                });
                               }}
                             >
                               <AiOutlinePlus />
@@ -262,7 +268,9 @@ const Products = () => {
                                 product,
                                 userData.extra_data.id,
                                 1
-                              ).then((data) => {});
+                              ).then((data) => {
+                                dispatch(increment());
+                              });
                             }}
                           >
                             <AiOutlinePlus />
@@ -305,7 +313,9 @@ const Products = () => {
                                 product,
                                 userData.extra_data.id,
                                 1
-                              ).then((data) => {});
+                              ).then((data) => {
+                                dispatch(increment());
+                              });
                             }}
                           >
                             <AiOutlinePlus />
@@ -349,7 +359,9 @@ const Products = () => {
                               product,
                               userData.extra_data.id,
                               1
-                            ).then((data) => {});
+                            ).then((data) => {
+                              dispatch(increment());
+                            });
                           }}
                         >
                           <AiOutlinePlus />
@@ -391,7 +403,9 @@ const Products = () => {
                               product,
                               userData.extra_data.id,
                               1
-                            ).then((data) => {});
+                            ).then((data) => {
+                              dispatch(increment());
+                            });
                           }}
                         >
                           <AiOutlinePlus />

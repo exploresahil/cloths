@@ -1,6 +1,7 @@
 import Header from "@/components/client/Header";
 import "@/app/scss/client/globals.scss";
 import Footer from "@/components/client/Footer";
+import { Providers } from "@/redux/provider";
 
 export const metadata = {
   title: "The Kapda Project",
@@ -20,9 +21,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body id="bodyTop">
-        <Header />
-        <main>{children}</main>
-        <Footer />
+        <Providers>
+          <Header />
+          <main>{children}</main>
+          <Footer />
+        </Providers>
       </body>
     </html>
   );
