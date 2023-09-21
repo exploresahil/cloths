@@ -14,12 +14,13 @@ import { getProduct, getProducts } from "@/sanity/sanity-utils";
 import { PortableText } from "@portabletext/react";
 import { ScrollArrow } from "@/components/icons/Icons";
 import { AddCartOrder } from "@/backend/Cart";
-
+import { useRouter } from "next/navigation";
 type Props = {
   params: { product: any };
 };
 
 export default function Product({ params }: Props) {
+  const router = useRouter();
   const dispatch = useAppDispatch();
   const [product, setProduct] = useState<products>();
   const [relatedProducts, setRelatedProducts] = useState<products[]>([]);
@@ -175,7 +176,18 @@ export default function Product({ params }: Props) {
                 <AiFillPlusCircle />
               </button>
               <div className="line" />
-              <button type="button" className="button">
+              <button
+                type="button"
+                className="button"
+                onClick={() => {
+                  router.push("/checkout/shippingInfo/");
+                  AddCartOrder(product, userData.extra_data.id, 1).then(
+                    (data) => {
+                      dispatch(increment());
+                    }
+                  );
+                }}
+              >
                 Buy Now <BsArrowRight />
               </button>
             </div>
