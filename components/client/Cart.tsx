@@ -14,7 +14,10 @@ import { useEffect, useState } from "react";
 import { getProCart, RemoveCartOrder } from "@/backend/Cart";
 import { products } from "@/types/Products";
 
+import { useRouter } from "next/navigation";
+
 const Cart = ({ onCartCloseClick }: props) => {
+  const router = useRouter();
   const dispatch = useAppDispatch();
   const [product, setProduct] = useState<null | any[]>(null);
   const [userData, setUser] = useState<null | any>(null);
@@ -22,6 +25,7 @@ const Cart = ({ onCartCloseClick }: props) => {
   useEffect(() => {
     setUser(JSON.parse(localStorage.getItem("userData") || ""));
   }, []);
+
   useEffect(() => {
     if (userData)
       getProCart(userData.extra_data.id).then((data) => setProduct(data.data));
@@ -129,7 +133,13 @@ const Cart = ({ onCartCloseClick }: props) => {
           </div> */}
         </div>
 
-        <button>
+        <button
+          type="button"
+          onClick={() => {
+            router.push("/checkout/shippingInfo/");
+            onCartCloseClick();
+          }}
+        >
           PROCEED TO CHECKOUT{" "}
           <div className="arrow">
             <BsArrowRight />

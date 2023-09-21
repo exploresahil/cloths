@@ -1,5 +1,5 @@
 "use client";
-//2550
+
 import Image from "next/image";
 
 import { GrClose } from "react-icons/gr";
@@ -53,12 +53,13 @@ export default function Authorize() {
           </div>
           <p className="delivery-offer">
             Free shipping for orders over Rs.{" "}
-            {product
+            {/* {product
               ?.map((v) => parseInt(v.product.price))
               .reduce(
                 (accumulator, currentValue) => accumulator + currentValue,
                 0
-              )}
+              )} */}
+            2550
           </p>
         </div>
         {userData && (
