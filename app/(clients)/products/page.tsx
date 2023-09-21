@@ -182,9 +182,15 @@ const Products = () => {
                             </Link>
                             <button
                               type="button"
-                              onClick={() =>
-                                AddCartOrder(product, userData.extra_data.id, 1)
-                              }
+                              onClick={() => {
+                                // console.log("hi", "", product, userData);
+
+                                AddCartOrder(
+                                  product,
+                                  userData.extra_data.id,
+                                  1
+                                ).then((data) => console.log(data));
+                              }}
                             >
                               <AiOutlinePlus />
                             </button>
@@ -218,9 +224,15 @@ const Products = () => {
                             </Link>
                             <button
                               type="button"
-                              onClick={() =>
-                                AddCartOrder(product, userData.extra_data.id, 1)
-                              }
+                              onClick={() => {
+                                // console.log("hi", "", product, userData);
+
+                                AddCartOrder(
+                                  product,
+                                  userData.extra_data.id,
+                                  1
+                                ).then((data) => console.log(data));
+                              }}
                             >
                               <AiOutlinePlus />
                             </button>
@@ -265,9 +277,15 @@ const Products = () => {
                           </Link>
                           <button
                             type="button"
-                            onClick={() =>
-                              AddCartOrder(product, userData.extra_data.id, 1)
-                            }
+                            onClick={() => {
+                              console.log("hi", "", product, userData);
+
+                              AddCartOrder(
+                                product,
+                                userData.extra_data.id,
+                                1
+                              ).then((data) => console.log(data));
+                            }}
                           >
                             <AiOutlinePlus />
                           </button>
@@ -302,9 +320,15 @@ const Products = () => {
 
                           <button
                             type="button"
-                            onClick={() =>
-                              AddCartOrder(product, userData.extra_data.id, 1)
-                            }
+                            onClick={() => {
+                              console.log("hi");
+
+                              AddCartOrder(
+                                product,
+                                userData.extra_data.id,
+                                1
+                              ).then((data) => console.log(data));
+                            }}
                           >
                             <AiOutlinePlus />
                           </button>
@@ -340,9 +364,15 @@ const Products = () => {
                         </Link>
                         <button
                           type="button"
-                          onClick={() =>
-                            AddCartOrder(product, userData.extra_data.id, 1)
-                          }
+                          onClick={() => {
+                            console.log("hi");
+
+                            AddCartOrder(
+                              product,
+                              userData.extra_data.id,
+                              1
+                            ).then((data) => console.log(data));
+                          }}
                         >
                           <AiOutlinePlus />
                         </button>
@@ -376,9 +406,15 @@ const Products = () => {
                         </Link>
                         <button
                           type="button"
-                          onClick={() =>
-                            AddCartOrder(product, userData.extra_data.id, 1)
-                          }
+                          onClick={() => {
+                            console.log("hi");
+
+                            AddCartOrder(
+                              product,
+                              userData.extra_data.id,
+                              1
+                            ).then((data) => console.log(data));
+                          }}
                         >
                           <AiOutlinePlus />
                         </button>
