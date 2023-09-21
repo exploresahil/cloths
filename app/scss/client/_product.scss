@@ -61,6 +61,11 @@
           padding: 5px 20px;
           border: 2px solid $textTeal;
           border-radius: 999px;
+
+          &:hover {
+            background-color: $textTeal;
+            color: $bg;
+          }
         }
       }
 
@@ -244,7 +249,6 @@
 
   .related-products-main {
     width: 100vw;
-    height: 100vh;
     background-color: $dark;
     padding: 150px 8vw;
 
@@ -257,56 +261,64 @@
       font-size: 5rem;
       color: $bg;
       font-weight: 100;
+      margin-bottom: 100px;
     }
-  }
-}
 
-@media screen and (max-width: 1370px) {
-  .product-slug-main {
-    .product-container {
-      .product-info {
-        margin-left: 0;
-      }
-      .product-images {
-        .next {
+    .products-grid {
+      display: flex;
+      gap: 40px;
+
+      .product-sec {
+        position: relative;
+        width: 260px;
+
+        button {
+          position: absolute;
+          top: 65%;
+          left: 50%;
+          width: 50px;
+          height: 50px;
+          background-color: rgba(0, 0, 0, 0.5);
+          z-index: 3;
+          border-radius: 100px;
+          margin-bottom: 50px;
+          transform: translateX(-50%);
+
           svg {
-            margin-left: 0;
+            width: 30px;
+            height: 30px;
+            color: $bg;
           }
-        }
-      }
-    }
-  }
-}
 
-@media screen and (max-width: 1194px) {
-  .product-slug-main {
-    .product-container {
-      .product-info {
-        min-width: 300px;
-        margin-right: 50px;
-      }
-
-      .product-images {
-        .img-container:nth-of-type(1) {
-          width: 300px;
-          height: 430px;
-        }
-
-        .img-container:nth-of-type(2) {
-          width: 170px;
-          height: 250px;
-        }
-
-        .next {
-          svg {
-            margin-left: 0;
+          &:hover {
+            background-color: #1948417e;
           }
         }
       }
 
-      .buy-now-container {
-        width: 500px;
-        height: 140px;
+      .product {
+        overflow: hidden;
+
+        .img-container {
+          position: relative;
+          width: 100%;
+          height: 400px;
+          display: flex;
+          justify-content: center;
+          align-items: flex-end;
+
+          img {
+            z-index: 2;
+          }
+        }
+        .product-info {
+          font-size: 1rem;
+          font-weight: 600;
+          margin: 10px 0;
+          text-align: center;
+
+          color: $bg;
+        }
       }
     }
   }
