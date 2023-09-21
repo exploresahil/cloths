@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Select from "react-select";
 import db from "@/backend/Backend.client";
 import { CheckoutArrowNormal, OTPTick } from "@/components/icons/Icons";
@@ -54,9 +54,6 @@ export default function ShippingInfo() {
     { value: "West Bengal", label: "West Bengal" },
   ];
   const [userData, setUserData] = useState<{ data: User; extra_data: any }>();
-  React.useEffect(() => {
-    setUserData(JSON.parse(localStorage.getItem("userData") || ""));
-  }, []);
   const [input, setInput] = useState({
     name: userData?.data.user_metadata.full_name,
     address: userData?.extra_data.address,
@@ -68,6 +65,23 @@ export default function ShippingInfo() {
     region: "India",
     phone: userData?.data.phone,
   });
+  React.useEffect(() => {
+    setUserData(JSON.parse(localStorage.getItem("userData") || ""));
+  }, []);
+  useEffect(() => {
+    setInput({
+      name: userData?.data.user_metadata.full_name,
+      address: userData?.extra_data.address,
+      locality: userData?.extra_data.locality,
+      state: userData?.extra_data.state,
+      pincode: userData?.extra_data.pincode,
+      more_info: userData?.extra_data.more_info,
+      city: userData?.extra_data.city,
+      region: "India",
+      phone: userData?.data.phone,
+    });
+  }, [userData]);
+
   //console.log(userData?.data.user_metadata.full_name);
 
   const number_formatter_current = new Intl.NumberFormat("en", {
@@ -76,7 +90,8 @@ export default function ShippingInfo() {
   });
 
   return (
-    userData && (
+    userData &&
+    input && (
       <div className="shipping-info-container">
         <div className="shipping-info-main">
           <div className="shipping-info">
