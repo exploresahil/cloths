@@ -1,5 +1,5 @@
 "use client";
-
+//2550
 import Image from "next/image";
 
 import ProductImage from "@/public/assets/images/products/product-img.png";

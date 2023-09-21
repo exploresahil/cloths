@@ -10,7 +10,7 @@ import { PiRulerLight } from "react-icons/pi";
 import { HiArrowLongRight } from "react-icons/hi2";
 import { useEffect, useState } from "react";
 import { products } from "@/types/Products";
-import { getProduct } from "@/sanity/sanity-utils";
+import { getProduct, getProducts } from "@/sanity/sanity-utils";
 import { PortableText } from "@portabletext/react";
 import { ScrollArrow } from "@/components/icons/Icons";
 import { AddCartOrder } from "@/backend/Cart";
@@ -22,17 +22,50 @@ type Props = {
 export default function Product({ params }: Props) {
   const dispatch = useAppDispatch();
   const [product, setProduct] = useState<products>();
+  const [relatedProducts, setRelatedProducts] = useState<products[]>([]);
+  const [randomProducts, setRandomProducts] = useState<products[]>([]);
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
   const [userData, setUser] = useState<null | any>(null);
   const slug = params.product;
+
   useEffect(() => {
     setUser(JSON.parse(localStorage.getItem("userData") || ""));
   }, []);
+
   useEffect(() => {
     getProduct(slug).then((data) => {
       setProduct(data);
     });
   }, [slug]);
+
+  useEffect(() => {
+    async function fetchRelatedProducts() {
+      const relatedProducts = await getProducts();
+      setRelatedProducts(relatedProducts);
+    }
+
+    fetchRelatedProducts();
+
+    console.log(relatedProducts);
+  }, []);
+
+  useEffect(() => {
+    // Shuffle the relatedProducts array to randomize the order
+    const shuffledProducts = [...relatedProducts];
+    for (let i = shuffledProducts.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffledProducts[i], shuffledProducts[j]] = [
+        shuffledProducts[j],
+        shuffledProducts[i],
+      ];
+    }
+
+    // Select the first 3 products from the shuffled array
+    const selectedRandomProducts = shuffledProducts.slice(0, 3);
+
+    // Set the random products to state
+    setRandomProducts(selectedRandomProducts);
+  }, [relatedProducts]);
 
   const handleNextImage = () => {
     setCurrentImageIndex(
@@ -82,9 +115,9 @@ export default function Product({ params }: Props) {
               </div>
               <div className="product-info-price-size">
                 <p>Rs {product.price}</p>
-                <button>S</button>
-                <button>M</button>
-                <button>L</button>
+                {product.size.includes("S") && <button>S</button>}
+                {product.size.includes("M") && <button>M</button>}
+                {product.size.includes("L") && <button>L</button>}
               </div>
               <Link href="#">
                 <PiRulerLight /> Size Guide
@@ -151,9 +184,17 @@ export default function Product({ params }: Props) {
             <h2>Description</h2>
             <PortableText value={product.description} />
           </div>
-
           <div className="related-products-main">
             <h2>Related Products</h2>
+
+            <div className="products-grid">
+              {randomProducts.map((randomProduct) => (
+                <div key={randomProduct._id} className="product-container">
+                  {randomProduct.name}
+                  <div className="product-sec"></div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       )}

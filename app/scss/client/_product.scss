@@ -61,6 +61,11 @@
           padding: 5px 20px;
           border: 2px solid $textTeal;
           border-radius: 999px;
+
+          &:hover {
+            background-color: $textTeal;
+            color: $bg;
+          }
         }
       }
 
@@ -258,56 +263,9 @@
       color: $bg;
       font-weight: 100;
     }
-  }
-}
 
-@media screen and (max-width: 1370px) {
-  .product-slug-main {
-    .product-container {
-      .product-info {
-        margin-left: 0;
-      }
-      .product-images {
-        .next {
-          svg {
-            margin-left: 0;
-          }
-        }
-      }
-    }
-  }
-}
-
-@media screen and (max-width: 1194px) {
-  .product-slug-main {
-    .product-container {
-      .product-info {
-        min-width: 300px;
-        margin-right: 50px;
-      }
-
-      .product-images {
-        .img-container:nth-of-type(1) {
-          width: 300px;
-          height: 430px;
-        }
-
-        .img-container:nth-of-type(2) {
-          width: 170px;
-          height: 250px;
-        }
-
-        .next {
-          svg {
-            margin-left: 0;
-          }
-        }
-      }
-
-      .buy-now-container {
-        width: 500px;
-        height: 140px;
-      }
+    .products-grid {
+      display: flex;
     }
   }
 }
