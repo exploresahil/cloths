@@ -167,10 +167,13 @@ export default function ShippingInfo() {
                   <input
                     type="tel"
                     value={input.pincode}
+                    inputMode="numeric"
+                    pattern="[0-9]*"
                     maxLength={6}
-                    onChange={(e) =>
-                      setInput((data) => ({ ...data, pincode: e.target.value }))
-                    }
+                    onChange={(e) => {
+                      const numericValue = e.target.value.replace(/\D/g, ""); // Remove non-numeric characters
+                      setInput((data) => ({ ...data, pincode: numericValue }));
+                    }}
                     required
                   />
                 </div>
