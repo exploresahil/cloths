@@ -3,7 +3,6 @@ import Image from "next/image";
 interface props {
   onCartCloseClick: any;
 }
-import productImage from "@/public/assets/images/products/product-img.png";
 import { GrClose } from "react-icons/gr";
 import { BsArrowRight } from "react-icons/bs";
 import Link from "next/link";
@@ -11,7 +10,7 @@ import Call from "../icons/Call";
 import Mail from "../icons/Mail";
 import Insta from "../icons/Insta";
 import { useEffect, useState } from "react";
-import { getProCart } from "@/backend/Cart";
+import { getProCart, RemoveCartOrder } from "@/backend/Cart";
 import { products } from "@/types/Products";
 const Cart = ({ onCartCloseClick }: props) => {
   const [product, setProduct] = useState<null | any[]>(null);
@@ -33,34 +32,36 @@ const Cart = ({ onCartCloseClick }: props) => {
       <div className="cart-container">
         <div className="cart-products">
           {product &&
-            product.map((v: { product: products; how_many: number }, i) => (
-              <div className="cart-items">
-                <div className="cart-product-info">
-                  <div className="image-container">
-                    <Image
-                      fill
-                      src={v.product.images[0].url}
-                      style={{ objectFit: "cover" }}
-                      alt="footer-logo"
-                    />
-                  </div>
-                  <div className="cart-item-info">
-                    <div className="info">
-                      <h3>{v.product.name}</h3>
-                      <p>rs {v.product.price}</p>
+            product.map(
+              (v: { product: products; how_many: number; id: string }, i) => (
+                <div className="cart-items" key={i}>
+                  <div className="cart-product-info">
+                    <div className="image-container">
+                      <Image
+                        fill
+                        src={v.product.images[0].url}
+                        style={{ objectFit: "cover" }}
+                        alt="footer-logo"
+                      />
                     </div>
-                    <div className="item-filter">
-                      <p>M</p>
-                      <p>{v.how_many}</p>
+                    <div className="cart-item-info">
+                      <div className="info">
+                        <h3>{v.product.name}</h3>
+                        <p>rs {v.product.price}</p>
+                      </div>
+                      <div className="item-filter">
+                        <p>M</p>
+                        <p>{v.how_many}</p>
+                      </div>
                     </div>
                   </div>
+                  <button type="button" onClick={() => RemoveCartOrder(v.id)}>
+                    <GrClose />
+                  </button>
+                  <div className="line" />
                 </div>
-                <button>
-                  <GrClose />
-                </button>
-                <div className="line" />
-              </div>
-            ))}
+              )
+            )}
           {product?.length == 0 && <h3>No Product in cart</h3>}
           {/* <div className="cart-items">
             <div className="cart-product-info">
