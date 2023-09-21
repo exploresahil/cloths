@@ -29,9 +29,7 @@ export default function Product({ params }: Props) {
       setProduct(data);
     });
   }, [slug]);
-  useEffect(() => {
-    setUser(JSON.parse(localStorage.getItem("userData") || ""));
-  }, []);
+
   const handleNextImage = () => {
     setCurrentImageIndex(
       (prevIndex) => (prevIndex + 1) % (product?.images?.length ?? 0)
@@ -138,7 +136,7 @@ export default function Product({ params }: Props) {
                 <AiFillPlusCircle />
               </button>
               <div className="line" />
-              <button className="button">
+              <button>
                 Buy Now <BsArrowRight />
               </button>
             </div>

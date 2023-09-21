@@ -12,6 +12,7 @@ import { category } from "@/types/Category";
 import { AiOutlinePlus } from "react-icons/ai";
 import { useSearchParams } from "next/navigation";
 import { AddCartOrder } from "@/backend/Cart";
+
 function arraysHaveCommonElement(array1: any[], array2: any[]) {
   return array1.some((item) => array2.includes(item));
 }
@@ -81,10 +82,12 @@ const Products = () => {
   const [selectedFilters, setSelectedFilters] = useState<any[]>([]);
   const [selectedSizes, setSelectedSizes] = useState<any[]>([]);
   //====
+
   const [userData, setUser] = useState<null | any>(null);
   useEffect(() => {
     setUser(JSON.parse(localStorage.getItem("userData") || ""));
   }, []);
+
   return (
     <div className="products-main">
       <Filter
@@ -156,67 +159,72 @@ const Products = () => {
                       ) {
                         // console.log(product.size);
                         return (
-                          // <a
-                          //   key={product._id}
-                          //   href={`/products/${product.slug}`}
-                          //   className="product"
-                          // >
-                          <>
-                            {/* // <a
-                            //   key={product._id}
-                            //   href={`/products/${product.slug}`}
-                            //   className="product"
-                            // > */}
-                            <div className="img-container">
-                              {product.images && (
-                                <Image
-                                  fill
-                                  src={product.images[0].url}
-                                  style={{ objectFit: "cover" }}
-                                  alt={product.slug}
-                                />
-                              )}
-                              <button
-                                type="button"
-                                onClick={() =>
-                                  AddCartOrder(product, userData.data.id, 1)
-                                }
-                              >
-                                <AiOutlinePlus />
-                              </button>
-                            </div>
-                            <div className="product-info">
-                              <h3>{product.name}</h3>
-                              <p>RS.{product.price}</p>
-                            </div>
-                          </>
-                          // </a>
+                          <div className="product-sec">
+                            <Link
+                              key={product._id}
+                              href={`/products/${product.slug}`}
+                              className="product"
+                            >
+                              <div className="img-container">
+                                {product.images && (
+                                  <Image
+                                    fill
+                                    src={product.images[0].url}
+                                    style={{ objectFit: "cover" }}
+                                    alt={product.slug}
+                                  />
+                                )}
+                              </div>
+                              <div className="product-info">
+                                <h3>{product.name}</h3>
+                                <p>RS.{product.price}</p>
+                              </div>
+                            </Link>
+                            <button
+                              type="button"
+                              onClick={() =>
+                                AddCartOrder(product, userData.data.id, 1)
+                              }
+                            >
+                              <AiOutlinePlus />
+                            </button>
+                          </div>
                         );
                       } else if (
                         selectedCategory == product.category &&
                         product.category == product.category
                       ) {
                         return (
-                          <Link
-                            key={product._id}
-                            href={`#`}
-                            className="product"
-                          >
-                            <div className="img-container">
-                              {product.images && (
-                                <Image
-                                  fill
-                                  src={product.images[0].url}
-                                  style={{ objectFit: "cover" }}
-                                  alt={product.slug}
-                                />
-                              )}
-                            </div>
-                            <div className="product-info">
-                              <h3>{product.name}</h3>
-                              <p>RS.{product.price}</p>
-                            </div>
-                          </Link>
+                          <div className="product-sec">
+                            <Link
+                              key={product._id}
+                              href={`/products/${product.slug}`}
+                              className="product"
+                            >
+                              <div className="img-container">
+                                {product.images && (
+                                  <Image
+                                    fill
+                                    src={product.images[0].url}
+                                    style={{ objectFit: "cover" }}
+                                    alt={product.slug}
+                                  />
+                                )}
+                              </div>
+                              <div className="product-info">
+                                <h3>{product.name}</h3>
+                                <p>RS.{product.price}</p>
+                              </div>
+                            </Link>
+                            <button
+                              type="button"
+                              onClick={() =>
+                                AddCartOrder(product, userData.data.id, 1)
+                              }
+                            >
+                              <AiOutlinePlus />
+                            </button>
+                          </div>
                         );
                       }
                     }
@@ -234,9 +242,85 @@ const Products = () => {
                     ) {
                       // console.log(product.size);
                       return (
-                        <a
+                        <div className="product-sec">
+                          <Link
+                            key={product._id}
+                            href={`/products/${product.slug}`}
+                            className="product"
+                          >
+                            <div className="img-container">
+                              {product.images && (
+                                <Image
+                                  fill
+                                  src={product.images[0].url}
+                                  style={{ objectFit: "cover" }}
+                                  alt={product.slug}
+                                />
+                              )}
+                            </div>
+                            <div className="product-info">
+                              <h3>{product.name}</h3>
+                              <p>RS.{product.price}</p>
+                            </div>
+                          </Link>
+                          <button
+                            type="button"
+                            onClick={() =>
+                              AddCartOrder(product, userData.data.id, 1)
+                            }
+                          >
+                            <AiOutlinePlus />
+                          </button>
+                        </div>
+                      );
+                    } else if (
+                      selectedCategory == product.category &&
+                      product.category == product.category
+                    ) {
+                      return (
+                        <div className="product-sec">
+                          <Link
+                            key={product._id}
+                            href={`/products/${product.slug}`}
+                            className="product"
+                          >
+                            <div className="img-container">
+                              {product.images && (
+                                <Image
+                                  fill
+                                  src={product.images[0].url}
+                                  style={{ objectFit: "cover" }}
+                                  alt={product.slug}
+                                />
+                              )}
+                            </div>
+                            <div className="product-info">
+                              <h3>{product.name}</h3>
+                              <p>RS.{product.price}</p>
+                            </div>
+                          </Link>
+
+                          <button
+                            type="button"
+                            onClick={() =>
+                              AddCartOrder(product, userData.data.id, 1)
+                            }
+                          >
+                            <AiOutlinePlus />
+                          </button>
+                        </div>
+                      );
+                    }
+                  }
+                })
+              : products.map((product) => {
+                  if (selectedCategory == "view all") {
+                    // console.log(product.size);
+                    return (
+                      <div className="product-sec">
+                        <Link
                           key={product._id}
-                          // href={`/products/${product.slug}`}
+                          href={`/products/${product.slug}`}
                           className="product"
                         >
                           <div className="img-container">
@@ -248,27 +332,33 @@ const Products = () => {
                                 alt={product.slug}
                               />
                             )}
-                            <button
-                              onClick={() =>
-                                AddCartOrder(product, userData.data.id, 1)
-                              }
-                              type="button"
-                            >
-                              <AiOutlinePlus />
-                            </button>
                           </div>
                           <div className="product-info">
                             <h3>{product.name}</h3>
                             <p>RS.{product.price}</p>
                           </div>
-                        </a>
-                      );
-                    } else if (
-                      selectedCategory == product.category &&
-                      product.category == product.category
-                    ) {
-                      return (
-                        <Link key={product._id} href={`#`} className="product">
+                        </Link>
+                        <button
+                          type="button"
+                          onClick={() =>
+                            AddCartOrder(product, userData.data.id, 1)
+                          }
+                        >
+                          <AiOutlinePlus />
+                        </button>
+                      </div>
+                    );
+                  } else if (
+                    selectedCategory == product.category &&
+                    product.category == product.category
+                  ) {
+                    return (
+                      <div className="product-sec">
+                        <Link
+                          key={product._id}
+                          href={`/products/${product.slug}`}
+                          className="product"
+                        >
                           <div className="img-container">
                             {product.images && (
                               <Image
@@ -281,71 +371,18 @@ const Products = () => {
                           </div>
                           <div className="product-info">
                             <h3>{product.name}</h3>
-                            <p>ssRS.{product.price}</p>
+                            <p>RS.{product.price}</p>
                           </div>
                         </Link>
-                      );
-                    }
-                  }
-                })
-              : products.map((product) => {
-                  if (selectedCategory == "view all") {
-                    // console.log(product.size);
-                    return (
-                      <a
-                        key={product._id}
-                        // href={`/products/${product.slug}`}
-                        className="product"
-                      >
-                        <div className="img-container">
-                          {product.images && (
-                            <Image
-                              fill
-                              src={product.images[0].url}
-                              style={{ objectFit: "cover" }}
-                              alt={product.slug}
-                            />
-                          )}
-                          <button
-                            onClick={() =>
-                              AddCartOrder(product, userData.data.id, 1)
-                            }
-                            type="button"
-                          >
-                            <AiOutlinePlus />
-                          </button>
-                        </div>
-                        <div className="product-info">
-                          <h3>{product.name}</h3>
-                          <p>sssRS.{product.price}</p>
-                        </div>
-                      </a>
-                    );
-                  } else if (
-                    selectedCategory == product.category &&
-                    product.category == product.category
-                  ) {
-                    return (
-                      <Link
-                        key={product._id}
-                        href={`/products/${product.slug}`}
-                        className="product"
-                      >
-                        <div className="img-container">
-                          {product.images && (
-                            <Image
-                              fill
-                              src={product.images[0].url}
-                              style={{ objectFit: "cover" }}
-                              alt={product.slug}
-                            />
-                          )}
-                        </div>
-                        <div className="product-info">
-                          <h3>{product.name}</h3>
-                          <p>RS.{product.price}</p>
-                        </div>
-                      </Link>
+                        <button
+                          type="button"
+                          onClick={() =>
+                            AddCartOrder(product, userData.data.id, 1)
+                          }
+                        >
+                          <AiOutlinePlus />
+                        </button>
+                      </div>
                     );
                   }
                 })}
