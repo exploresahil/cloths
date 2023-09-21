@@ -1,3 +1,4 @@
+"use client";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type CartState = {
@@ -5,7 +6,7 @@ type CartState = {
 };
 
 const initialState = {
-  value: 0,
+  value: parseInt(localStorage?.getItem("card") || "") || 0,
 } as CartState;
 
 export const CartCounter = createSlice({
@@ -15,9 +16,11 @@ export const CartCounter = createSlice({
     reset: () => initialState,
     increment: (state) => {
       state.value += 1;
+      localStorage.setItem("card", state.value.toString());
     },
     decrement: (state) => {
       state.value -= 1;
+      localStorage.setItem("card", state.value.toString());
     },
   },
 });
