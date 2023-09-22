@@ -164,7 +164,7 @@ const Header = () => {
         <div className="user-menu-ecommercs">
           <button className="cart" onClick={handleCartClickOpen}>
             <Bag />
-            {count !== 0 && <p>{count}</p>}
+            {count.length !== 0 && <p>{count.length}</p>}
           </button>
           <div className="line" />
           <button

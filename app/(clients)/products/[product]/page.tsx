@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useAppDispatch } from "@/redux/hook";
-import { increment } from "@/redux/reducer/cartSlice";
+import { addToCard } from "@/redux/reducer/cartSlice";
 import { AiFillPlusCircle, AiOutlinePlus } from "react-icons/ai";
 import { BsArrowRight } from "react-icons/bs";
 import { PiRulerLight } from "react-icons/pi";
@@ -13,7 +13,7 @@ import { products } from "@/types/Products";
 import { getProduct, getProducts } from "@/sanity/sanity-utils";
 import { PortableText } from "@portabletext/react";
 import { ScrollArrow } from "@/components/icons/Icons";
-import { AddCartOrder } from "@/backend/Cart";
+import { AddCartOrder, getProCart } from "@/backend/Cart";
 import { useRouter } from "next/navigation";
 type Props = {
   params: { product: any };
@@ -167,7 +167,9 @@ export default function Product({ params }: Props) {
                   AddCartOrder(product, userData.extra_data.id, 1).then(
                     (data) => {
                       {
-                        dispatch(increment());
+                        getProCart(userData.extra_data.id).then((data) => {
+                          dispatch(addToCard(data.data));
+                        });
                       }
                     }
                   );
@@ -183,7 +185,9 @@ export default function Product({ params }: Props) {
                   router.push("/checkout/shippingInfo/");
                   AddCartOrder(product, userData.extra_data.id, 1).then(
                     (data) => {
-                      dispatch(increment());
+                      getProCart(userData.extra_data.id).then((data) => {
+                        dispatch(addToCard(data.data));
+                      });
                     }
                   );
                 }}
@@ -228,7 +232,9 @@ export default function Product({ params }: Props) {
 
                       AddCartOrder(product, userData.extra_data.id, 1).then(
                         (data) => {
-                          dispatch(increment());
+                          getProCart(userData.extra_data.id).then((data) => {
+                            dispatch(addToCard(data.data));
+                          });
                         }
                       );
                     }}

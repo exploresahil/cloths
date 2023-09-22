@@ -8,11 +8,11 @@ import { CheckoutArrowNormal } from "@/components/icons/Icons";
 import { AiOutlinePlus } from "react-icons/ai";
 import { getProCart, RemoveCartOrder } from "@/backend/Cart";
 import { products } from "@/types/Products";
-import { useAppDispatch } from "@/redux/hook";
-import { decrement } from "@/redux/reducer/cartSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/hook";
+import { removeToCard } from "@/redux/reducer/cartSlice";
 import { useEffect, useState } from "react";
-
 export default function Authorize() {
+  const count = useAppSelector((state) => state.CardReducer.value);
   const dispatch = useAppDispatch();
   const [product, setProduct] = useState<null | any[]>(null);
   const [userData, setUser] = useState<null | any>(null);
@@ -87,9 +87,12 @@ export default function Authorize() {
       <div className="authorize-payment-container">
         <div className="authorize-payment-cart">
           <div className="cart-products">
-            {product &&
-              product.map(
-                (v: { product: products; how_many: number; id: string }, i) => (
+            {count &&
+              count.map(
+                (
+                  v: { product: products; how_many: number; id: string },
+                  i: any
+                ) => (
                   <div className="cart-items">
                     <div className="cart-product-info">
                       <div className="image-container">
@@ -115,10 +118,9 @@ export default function Authorize() {
                       type="button"
                       onClick={() => {
                         RemoveCartOrder(v.id).then(() => {
-                          getProCart(userData.extra_data.id).then((data) =>
-                            setProduct(data.data)
-                          );
-                          dispatch(decrement());
+                          getProCart(userData.extra_data.id).then((data) => {
+                            dispatch(removeToCard(data.data));
+                          });
                         });
                       }}
                     >

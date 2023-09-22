@@ -3,7 +3,7 @@
 import Filter from "@/components/client/Filter";
 import Image from "next/image";
 import { useAppDispatch } from "@/redux/hook";
-import { increment } from "@/redux/reducer/cartSlice";
+import { addToCard } from "@/redux/reducer/cartSlice";
 import ContactArrow from "@/components/icons/ContactArrow";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -12,7 +12,7 @@ import { products } from "@/types/Products";
 import { category } from "@/types/Category";
 import { AiOutlinePlus } from "react-icons/ai";
 import { useSearchParams } from "next/navigation";
-import { AddCartOrder } from "@/backend/Cart";
+import { AddCartOrder, getProCart } from "@/backend/Cart";
 
 function arraysHaveCommonElement(array1: any[], array2: any[]) {
   return array1.some((item) => array2.includes(item));
@@ -178,9 +178,14 @@ const Products = () => {
                                   product,
                                   userData.extra_data.id,
                                   1
-                                ).then((data) => {
-                                  dispatch(increment());
+                                ).then(() => {
+                                  getProCart(userData.extra_data.id).then(
+                                    (data) => {
+                                      dispatch(addToCard(data.data));
+                                    }
+                                  );
                                 });
+                                // });
                               }}
                             >
                               <AiOutlinePlus />
@@ -217,13 +222,16 @@ const Products = () => {
                               type="button"
                               onClick={() => {
                                 // console.log("hi", "", product, userData);
-
                                 AddCartOrder(
                                   product,
                                   userData.extra_data.id,
                                   1
-                                ).then((data) => {
-                                  dispatch(increment());
+                                ).then(() => {
+                                  getProCart(userData.extra_data.id).then(
+                                    (data) => {
+                                      dispatch(addToCard(data.data));
+                                    }
+                                  );
                                 });
                               }}
                             >
@@ -269,7 +277,11 @@ const Products = () => {
                                 userData.extra_data.id,
                                 1
                               ).then((data) => {
-                                dispatch(increment());
+                                getProCart(userData.extra_data.id).then(
+                                  (data) => {
+                                    dispatch(addToCard(data.data));
+                                  }
+                                );
                               });
                             }}
                           >
@@ -313,8 +325,12 @@ const Products = () => {
                                 product,
                                 userData.extra_data.id,
                                 1
-                              ).then((data) => {
-                                dispatch(increment());
+                              ).then(() => {
+                                getProCart(userData.extra_data.id).then(
+                                  (data) => {
+                                    dispatch(addToCard(data.data));
+                                  }
+                                );
                               });
                             }}
                           >
@@ -359,8 +375,12 @@ const Products = () => {
                               product,
                               userData.extra_data.id,
                               1
-                            ).then((data) => {
-                              dispatch(increment());
+                            ).then(() => {
+                              getProCart(userData.extra_data.id).then(
+                                (data) => {
+                                  dispatch(addToCard(data.data));
+                                }
+                              );
                             });
                           }}
                         >
@@ -398,13 +418,16 @@ const Products = () => {
                           type="button"
                           onClick={() => {
                             console.log("hi");
-
                             AddCartOrder(
                               product,
                               userData.extra_data.id,
                               1
-                            ).then((data) => {
-                              dispatch(increment());
+                            ).then(() => {
+                              getProCart(userData.extra_data.id).then(
+                                (data) => {
+                                  dispatch(addToCard(data.data));
+                                }
+                              );
                             });
                           }}
                         >

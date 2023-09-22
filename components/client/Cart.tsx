@@ -1,6 +1,6 @@
 import Image from "next/image";
-import { useAppDispatch } from "@/redux/hook";
-import { decrement } from "@/redux/reducer/cartSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/hook";
+import { addToCard, removeToCard } from "@/redux/reducer/cartSlice";
 interface props {
   onCartCloseClick: any;
 }
@@ -17,6 +17,7 @@ import { products } from "@/types/Products";
 import { useRouter } from "next/navigation";
 
 const Cart = ({ onCartCloseClick }: props) => {
+  const count = useAppSelector((state) => state.CardReducer.value);
   const router = useRouter();
   const dispatch = useAppDispatch();
   const [product, setProduct] = useState<null | any[]>(null);
@@ -37,8 +38,8 @@ const Cart = ({ onCartCloseClick }: props) => {
       <div className="cart-close-container" onClick={onCartCloseClick} />
       <div className="cart-container">
         <div className="cart-products">
-          {product &&
-            product.map(
+          {count &&
+            count.map(
               (v: { product: products; how_many: number; id: string }, i) => (
                 <div className="cart-items" key={i}>
                   <div className="cart-product-info">
@@ -64,11 +65,10 @@ const Cart = ({ onCartCloseClick }: props) => {
                   <button
                     type="button"
                     onClick={() => {
-                      RemoveCartOrder(v.id).then(() => {
-                        getProCart(userData.extra_data.id).then((data) =>
-                          setProduct(data.data)
-                        );
-                        dispatch(decrement());
+                      RemoveCartOrder(v.id).then((data) => {
+                        getProCart(userData.extra_data.id).then((data) => {
+                          dispatch(removeToCard(data.data));
+                        });
                       });
                     }}
                   >
@@ -78,7 +78,7 @@ const Cart = ({ onCartCloseClick }: props) => {
                 </div>
               )
             )}
-          {product?.length == 0 && <h3>No Product in cart</h3>}
+          {count?.length == 0 && <h3>No Product in cart</h3>}
           {/* <div className="cart-items">
             <div className="cart-product-info">
               <div className="image-container">

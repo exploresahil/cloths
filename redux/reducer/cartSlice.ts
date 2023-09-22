@@ -1,11 +1,23 @@
+import { AddCartOrder, getProCart, RemoveCartOrder } from "@/backend/Cart";
+import { products } from "@/types/Products";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
+interface card {
+  product: products;
+  id: string;
+  how_many: number;
+  created_at: string;
+  user: string;
+}
 type CartState = {
-  value: number;
+  value: Array<card | any>;
 };
 
 const initialState = {
-  value: parseInt(localStorage?.getItem("card") || "") || 0,
+  value:
+    window != undefined
+      ? JSON.parse(localStorage?.getItem("card") || "[]") || []
+      : [],
 } as CartState;
 
 export const CartCounter = createSlice({
@@ -13,15 +25,15 @@ export const CartCounter = createSlice({
   initialState,
   reducers: {
     reset: () => initialState,
-    increment: (state) => {
-      state.value += 1;
-      localStorage.setItem("card", state.value.toString());
+    addToCard: (state, action) => {
+      state.value = action.payload;
+      localStorage.setItem("card", JSON.stringify(state.value));
     },
-    decrement: (state) => {
-      state.value -= 1;
-      localStorage.setItem("card", state.value.toString());
+    removeToCard: (state, action) => {
+      state.value = action.payload;
+      localStorage.setItem("card", JSON.stringify(state.value));
     },
   },
 });
-export const { increment, decrement, reset } = CartCounter.actions;
+export const { addToCard, removeToCard, reset } = CartCounter.actions;
 export default CartCounter.reducer;
