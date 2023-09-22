@@ -67,7 +67,7 @@ export default function Authorize() {
             <div className="delivery-address-main">
               <h1>Dilivery Address</h1>
               <div className="name">
-                <h1>{userData.data.user_metadata.full_name}</h1>
+                <h1>{userData.extra_data.name}</h1>
               </div>
               <div className="address">
                 <h2 className="address-line">{userData.extra_data.address},</h2>
@@ -75,7 +75,7 @@ export default function Authorize() {
                 <h2 className="pincode"> - {userData.extra_data.pincode}</h2>
                 <h2 className="state">{userData.extra_data.state}</h2>
                 <h2 className="country">India</h2>
-                <h2 className="phone">+{userData.data.phone}</h2>
+                <h2 className="phone">{userData.extra_data.phone}</h2>
               </div>
             </div>
             <a className="delivery-address-edit" href="/checkout/shippingInfo">
@@ -138,16 +138,24 @@ export default function Authorize() {
               <span>
                 <p>
                   Order Amount: Rs.{" "}
-                  {product
+                  {count
                     ?.map((v) => parseInt(v.product.price))
                     .reduce(
                       (accumulator, currentValue) => accumulator + currentValue,
                       0
                     )}
                 </p>
-                <p>Dilivery Charges:{}</p>
+                <p>Dilivery Charges:80₹</p>
               </span>
-              <h3>Total: Rs. {}</h3>
+              <h3>
+                Total: Rs.{" "}
+                {count
+                  ?.map((v) => parseInt(v.product.price))
+                  .reduce(
+                    (accumulator, currentValue) => accumulator + currentValue,
+                    0
+                  ) + 80}
+              </h3>
             </div>
           </div>
           <div className="line" />

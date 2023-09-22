@@ -136,7 +136,13 @@ const Cart = ({ onCartCloseClick }: props) => {
         <button
           type="button"
           onClick={() => {
-            router.push("/checkout/shippingInfo/");
+            console.log(userData.extra_data.address);
+
+            router.push(
+              userData.extra_data.address
+                ? "/checkout/shippingInfo/authorize"
+                : "/checkout/shippingInfo/"
+            );
             onCartCloseClick();
           }}
         >

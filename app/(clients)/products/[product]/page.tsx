@@ -182,11 +182,15 @@ export default function Product({ params }: Props) {
                 type="button"
                 className="button"
                 onClick={() => {
-                  router.push("/checkout/shippingInfo/");
                   AddCartOrder(product, userData.extra_data.id, 1).then(
                     (data) => {
                       getProCart(userData.extra_data.id).then((data) => {
                         dispatch(addToCard(data.data));
+                        router.push(
+                          userData.extra_data.address
+                            ? "/checkout/shippingInfo/authorize"
+                            : "/checkout/shippingInfo/"
+                        );
                       });
                     }
                   );

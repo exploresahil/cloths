@@ -78,7 +78,7 @@ export default function ShippingInfo() {
   }, []);
   useEffect(() => {
     setInput({
-      name: userData?.data.user_metadata.full_name,
+      name: userData?.extra_data.name,
       address: userData?.extra_data.address,
       locality: userData?.extra_data.locality,
       state: userData?.extra_data.state,
@@ -86,7 +86,7 @@ export default function ShippingInfo() {
       more_info: userData?.extra_data.more_info,
       city: userData?.extra_data.city,
       region: "India",
-      phone: userData?.data.phone,
+      phone: userData?.extra_data.phone,
     });
   }, [userData]);
 
@@ -248,12 +248,6 @@ export default function ShippingInfo() {
           <div className="checkout-button-container">
             <button
               onClick={() => {
-                db.auth.updateUser({
-                  data: {
-                    full_name: input.name,
-                  },
-                  phone: "+91" + input.phone?.slice(0, 9),
-                });
                 db.from("USER")
                   .update({
                     address: input.address,
@@ -263,6 +257,8 @@ export default function ShippingInfo() {
                     more_info: input.more_info,
                     city: input.city,
                     region: input.region,
+                    name: input.name,
+                    phone: "+91" + input.phone?.slice(0, 9),
                   })
                   .eq("id", userData.extra_data.id)
                   .then(async (data) => {
