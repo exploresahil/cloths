@@ -511,7 +511,7 @@ const Hero = () => {
       </div>
       <div className="link-container">
         <Link href="#" ref={coOrdsArrowRef} className="coOrdsArrowRef">
-          <p>co-ords</p>
+          <p>Tube Top</p>
           <CategoryArrowRight />
         </Link>
       </div>
@@ -579,7 +579,8 @@ const Hero = () => {
           ref={accessoriesArrowRef}
           className="accessoriesArrowRef"
         >
-          <p>accessories</p>
+          <p>Crop Top</p>
+          {/* <p>accessories</p> */}
           <CategoryArrowRight />
         </Link>
       </div>

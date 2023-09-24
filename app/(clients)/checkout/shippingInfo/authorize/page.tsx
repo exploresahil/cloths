@@ -28,6 +28,18 @@ export default function Authorize() {
   const current = new Date();
   const next6 = current.setDate(new Date().getDate() + 6);
 
+  const orderAmount =
+    product?.reduce(
+      (accumulator, currentValue) =>
+        accumulator +
+        parseInt(currentValue.product.price) * currentValue.how_many,
+      0
+    ) ?? 0;
+
+  const deliveryCharges = orderAmount > 2550 ? "N/A" : 80;
+
+  const total = orderAmount + (orderAmount > 2550 ? 0 : deliveryCharges);
+
   return (
     <div className="authorize-container">
       <div className="authorize-main">
@@ -136,6 +148,7 @@ export default function Authorize() {
           <div className="price-container">
             <div className="text">
               <span>
+<<<<<<< Updated upstream
                 <p>
                   Order Amount: Rs.{" "}
                   {count
@@ -156,6 +169,12 @@ export default function Authorize() {
                     0
                   ) + 80}
               </h3>
+=======
+                <p>Order Amount: Rs. {orderAmount}</p>
+                <p>Delivery Charges: Rs. {deliveryCharges}</p>
+              </span>
+              <h3>Total: Rs. {total}</h3>
+>>>>>>> Stashed changes
             </div>
           </div>
           <div className="line" />
@@ -170,3 +189,8 @@ export default function Authorize() {
     </div>
   );
 }
+
+/* 
+Delivery Time: 5 to 7 working days
+Delivery Amount: 80
+*/
