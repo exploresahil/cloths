@@ -4,14 +4,15 @@ import React, { useEffect, useState } from "react";
 import Select from "react-select";
 import db from "@/backend/Backend.client";
 import { CheckoutArrowNormal, OTPTick } from "@/components/icons/Icons";
-import AccordionDown from "@/components/icons/AccordionDown";
 import { User } from "@supabase/supabase-js";
 import { useRouter } from "next/navigation";
 import { getUser } from "@/backend/User";
 import { getProCart } from "@/backend/Cart";
 import Link from "next/link";
+import { useAppSelector } from "@/redux/hook";
 
 export default function ShippingInfo() {
+  const count = useAppSelector((state) => state.CardReducer.value);
   const router = useRouter();
   const stateOptions: any = [
     {
@@ -62,6 +63,7 @@ export default function ShippingInfo() {
     if (userData)
       getProCart(userData.extra_data.id).then((data) => setProduct(data.data));
   }, [userData]);
+
   const [input, setInput] = useState({
     name: userData?.data.user_metadata.full_name,
     address: userData?.extra_data.address,
@@ -92,10 +94,13 @@ export default function ShippingInfo() {
 
   //console.log(userData?.data.user_metadata.full_name);
 
-  const number_formatter_current = new Intl.NumberFormat("en", {
-    style: "currency",
-    currency: "inr",
-  });
+  const orderAmount =
+    count?.reduce(
+      (accumulator, currentValue) =>
+        accumulator +
+        parseInt(currentValue.product.price) * currentValue.how_many,
+      0
+    ) ?? 0;
 
   return (
     userData &&
@@ -241,7 +246,7 @@ export default function ShippingInfo() {
         <div className="proceed-to-checkout-container">
           <div className="price-container">
             <div className="text">
-              <h4>Rs. 222</h4>
+              <h4>Rs. {orderAmount}</h4>
             </div>
           </div>
           <div className="line" />

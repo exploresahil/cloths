@@ -26,10 +26,10 @@ export default function Authorize() {
       getProCart(userData.extra_data.id).then((data) => setProduct(data.data));
   }, [userData]);
   const current = new Date();
-  const next6 = current.setDate(new Date().getDate() + 6);
+  //const next6 = current.setDate(new Date().getDate() + 6);
 
   const orderAmount =
-    product?.reduce(
+    count?.reduce(
       (accumulator, currentValue) =>
         accumulator +
         parseInt(currentValue.product.price) * currentValue.how_many,
@@ -147,28 +147,6 @@ export default function Authorize() {
         <div className="authorize-payment-bottom-container">
           <div className="price-container">
             <div className="text">
-              <span>
-                <p>
-                  Order Amount: Rs.{" "}
-                  {count
-                    ?.map((v) => parseInt(v.product.price))
-                    .reduce(
-                      (accumulator, currentValue) => accumulator + currentValue,
-                      0
-                    )}
-                </p>
-                <p>Dilivery Charges:80₹</p>
-              </span>
-              <h3>
-                Total: Rs.{" "}
-                {count
-                  ?.map((v) => parseInt(v.product.price))
-                  .reduce(
-                    (accumulator, currentValue) => accumulator + currentValue,
-                    0
-                  ) + 80}
-              </h3>
-
               <span>
                 <p>Order Amount: Rs. {orderAmount}</p>
                 <p>Delivery Charges: Rs. {deliveryCharges}</p>
