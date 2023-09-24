@@ -11,10 +11,14 @@ import { products } from "@/types/Products";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { removeToCard } from "@/redux/reducer/cartSlice";
 import { useEffect, useState } from "react";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import { makeOrder } from "@/backend/Order";
 export default function Authorize() {
   const count = useAppSelector((state) => state.CardReducer.value);
   const dispatch = useAppDispatch();
   const [product, setProduct] = useState<null | any[]>(null);
+  const router = useRouter()
   const [userData, setUser] = useState<null | any>(null);
 
   useEffect(() => {
@@ -156,7 +160,24 @@ export default function Authorize() {
           </div>
           <div className="line" />
           <div className="payment-button-container">
-            <button type="button">
+            <button type="button" onClick={() => {
+
+              makeOrder(
+                count,
+                userData.extra_data.id
+              ).then((data) => {
+                console.log(data);
+                axios.post("/api/getPaymentGateway", {
+                  price: total,
+                  phoneNo: userData.extra_data.phone,
+                  order_id: data.data[0].id
+                }).then(({ data: Data }) => {
+                  router.push(Data.data.instrumentResponse.redirectInfo.url)
+                })
+
+
+              })
+            }}>
               <h3>AUTHORIZE PAYMENT</h3>
               <CheckoutArrowNormal />
             </button>

@@ -2,20 +2,20 @@ import { getProduct } from "@/sanity/sanity-utils";
 import { SHA256, enc } from "crypto-js";
 import axios from "axios";
 
-export async function GET(request: Request) {
+export async function POST(request: Request) {
   //const price = (await getProduct(request.url.split("/").at(-1) || "")).price;
   //console.log(price + 0.00);
-
+  const { price, phoneNo, order_id } = await request.json();
   const payload = {
     merchantId: "PGTESTPAYUAT140",
     merchantTransactionId: "MT7850590068188104",
     merchantUserId: "PGTESTPAYUAT140",
     //amount: parseFloat(`${price}.00`) * 100,
-    amount: parseFloat(`200.00`) * 100,
-    redirectUrl: "http://localhost:3000/user",
+    amount: parseFloat(`${price}`) * 100,
+    redirectUrl: `http://localhost:3000/api/paymentConfrom/${order_id}`,
     redirectMode: "GET",
-    callbackUrl: "http://localhost:3000/user",
-    mobileNumber: "9999999999",
+    callbackUrl: `http://localhost:3000/api/paymentConfrom/${order_id}`,
+    mobileNumber: phoneNo,
     paymentInstrument: {
       type: "PAY_PAGE",
     },
