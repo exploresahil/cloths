@@ -79,58 +79,6 @@ const Cart = ({ onCartCloseClick }: props) => {
               )
             )}
           {count?.length == 0 && <h3>No Product in cart</h3>}
-          {/* <div className="cart-items">
-            <div className="cart-product-info">
-              <div className="image-container">
-                <Image
-                  fill
-                  src={productImage}
-                  style={{ objectFit: "cover" }}
-                  alt="footer-logo"
-                />
-              </div>
-              <div className="cart-item-info">
-                <div className="info">
-                  <h3>striped shirt kurta</h3>
-                  <p>rs 850</p>
-                </div>
-                <div className="item-filter">
-                  <p>M</p>
-                  <p>1</p>
-                </div>
-              </div>
-            </div>
-            <button>
-              <GrClose />
-            </button>
-            <div className="line" />
-          </div>
-          <div className="cart-items">
-            <div className="cart-product-info">
-              <div className="image-container">
-                <Image
-                  fill
-                  src={productImage}
-                  style={{ objectFit: "cover" }}
-                  alt="footer-logo"
-                />
-              </div>
-              <div className="cart-item-info">
-                <div className="info">
-                  <h3>striped shirt kurta</h3>
-                  <p>rs 850</p>
-                </div>
-                <div className="item-filter">
-                  <p>M</p>
-                  <p>1</p>
-                </div>
-              </div>
-            </div>
-            <button>
-              <GrClose />
-            </button>
-            <div className="line" />
-          </div> */}
         </div>
 
         <button
@@ -145,6 +93,7 @@ const Cart = ({ onCartCloseClick }: props) => {
             );
             onCartCloseClick();
           }}
+          disabled={count.length === 0}
         >
           PROCEED TO CHECKOUT{" "}
           <div className="arrow">
