@@ -154,11 +154,6 @@ const User = () => {
                 </Link>
                 <p>Select your preferences for receiving updates via mail</p>
               </li>
-              <li>
-                <Link href="#">
-                  Cookie Settings <ContactArrow />
-                </Link>
-              </li>
             </ul>
           </div>
         )}
