@@ -1,10 +1,10 @@
-import SuperBase from "@/backend/Backend.client";
+import SuperBase, { client2 } from "@/backend/Backend.client";
 
 export const makeOrder = async (product: JSON[], user: any): Promise<any> => {
   return await SuperBase.from("Order")
     .insert({
       product: product,
-      user: user.id,
+      user: user,
       cancel: false,
     })
     .select();
@@ -17,7 +17,8 @@ export const CancelOrder = async (order_id: string) => {
     .eq("id", order_id);
 };
 export const ConfromPay = async (id: string) =>
-  await SuperBase.from("Order")
+  await client2
+    .from("Order")
     .update({ payment_confirm: true })
     .eq("id", id)
     .select("id");
