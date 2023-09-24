@@ -148,7 +148,6 @@ export default function Authorize() {
           <div className="price-container">
             <div className="text">
               <span>
-<<<<<<< Updated upstream
                 <p>
                   Order Amount: Rs.{" "}
                   {count
@@ -169,12 +168,12 @@ export default function Authorize() {
                     0
                   ) + 80}
               </h3>
-=======
+
+              <span>
                 <p>Order Amount: Rs. {orderAmount}</p>
                 <p>Delivery Charges: Rs. {deliveryCharges}</p>
               </span>
               <h3>Total: Rs. {total}</h3>
->>>>>>> Stashed changes
             </div>
           </div>
           <div className="line" />
