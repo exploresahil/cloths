@@ -13,6 +13,7 @@ import { useAppSelector } from "@/redux/hook";
 
 export default function ShippingInfo() {
   const count = useAppSelector((state) => state.CardReducer.value);
+
   const router = useRouter();
   const stateOptions: any = [
     {

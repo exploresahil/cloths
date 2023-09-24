@@ -47,62 +47,28 @@ const User = () => {
             <h2>{userData.data.user_metadata.full_name || ""}</h2>
             <div className="product-main-container">
               <div className="product-info">
-                <div className="image-container">
-                  <Image
-                    fill
-                    src={productImage}
-                    style={{ objectFit: "cover" }}
-                    alt="footer-logo"
-                  />
-                </div>
                 <div className="item-info">
-                  <div className="info">
-                    <h3>striped shirt kurta</h3>
-                    <p>rs 850</p>
+                  <div className="order-number">
+                    <p>Order No: {}</p>
                   </div>
-                  <div className="item-filter">
-                    <p>M</p>
-                    <p>1</p>
+                  <div className="items">
+                    <div className="info">
+                      <h3>
+                        striped shirt kurta <span>M</span>
+                      </h3>
+                      <h3>
+                        striped shirt kurta <span>M</span>
+                      </h3>
+                      <h3>
+                        striped shirt kurta <span>M</span>
+                      </h3>
+                    </div>
+                    <div className="total-amount">
+                      <p>Rs. 121</p>
+                    </div>
                   </div>
-                </div>
-              </div>
-              <div className="product-info">
-                <div className="image-container">
-                  <Image
-                    fill
-                    src={productImage}
-                    style={{ objectFit: "cover" }}
-                    alt="footer-logo"
-                  />
-                </div>
-                <div className="item-info">
-                  <div className="info">
-                    <h3>striped shirt kurta</h3>
-                    <p>rs 850</p>
-                  </div>
-                  <div className="item-filter">
-                    <p>M</p>
-                    <p>1</p>
-                  </div>
-                </div>
-              </div>
-              <div className="product-info">
-                <div className="image-container">
-                  <Image
-                    fill
-                    src={productImage}
-                    style={{ objectFit: "cover" }}
-                    alt="footer-logo"
-                  />
-                </div>
-                <div className="item-info">
-                  <div className="info">
-                    <h3>striped shirt kurta</h3>
-                    <p>rs 850</p>
-                  </div>
-                  <div className="item-filter">
-                    <p>M</p>
-                    <p>1</p>
+                  <div className="order-address">
+                    <p>Address: {}</p>
                   </div>
                 </div>
               </div>
@@ -113,12 +79,6 @@ const User = () => {
           <div className="account-container menu-section">
             <h2>{userData.data.user_metadata.full_name || ""}</h2>
             <ul>
-              <li>
-                <Link href="#">
-                  Addresses <ContactArrow />
-                </Link>
-                <p>{userData.extra_data.address}</p>
-              </li>
               <li>
                 <Link href="#">
                   Email <ContactArrow />

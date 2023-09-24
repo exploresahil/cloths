@@ -154,6 +154,15 @@
         background-color: v.$textTeal;
         color: v.$bg;
       }
+
+      &:disabled {
+        opacity: 0.5;
+
+        &:hover {
+          background-color: v.$bg;
+          color: v.$dark;
+        }
+      }
     }
 
     .socials {
