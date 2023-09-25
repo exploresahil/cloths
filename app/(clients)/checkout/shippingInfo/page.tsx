@@ -99,9 +99,12 @@ export default function ShippingInfo() {
         parseInt(currentValue.product.price) * currentValue.how_many,
       0
     ) ?? 0;
-
-  console.log(Object.values(input).map((value) => value).filter((element) => element !== undefined));
-
+  /* 
+  console.log(
+    Object.values(input)
+      .map((value) => value)
+      .filter((element) => element !== undefined)
+  ); */
 
   return (
     userData &&
@@ -114,6 +117,20 @@ export default function ShippingInfo() {
           <form
             onSubmit={(e) => {
               e.preventDefault();
+
+              db.from("USER")
+                .update({
+                  name: input.name,
+                })
+                .eq("id", userData.extra_data.id)
+                .then(async (data: any) => {
+                  await getUser();
+                  dispatch(
+                    addUserAddress({ ...input, id: UserAddress.length })
+                  );
+
+                  router.push("/checkout/shippingInfo/authorize");
+                });
             }}
             className="shipping-info-form"
           >
@@ -255,6 +272,7 @@ export default function ShippingInfo() {
                 />
               </div>
             </div>
+            <button type="submit" />
           </form>
         </div>
         <div className="proceed-to-checkout-container">
@@ -266,21 +284,13 @@ export default function ShippingInfo() {
           <div className="line" />
           <div className="checkout-button-container">
             <button
-              disabled={Object.values(input).map((value) => value).filter((element) => element !== undefined).map((value) => !value).indexOf(true) != -1}
               onClick={() => {
-                db.from("USER")
-                  .update({
-                    name: input.name,
-                  })
-                  .eq("id", userData.extra_data.id)
-                  .then(async (data: any) => {
-                    await getUser();
-                    dispatch(
-                      addUserAddress({ ...input, id: UserAddress.length })
-                    );
-
-                    router.push("/checkout/shippingInfo/authorize");
-                  });
+                const submitButton = document.querySelector(
+                  '.shipping-info-form button[type="submit"]'
+                ) as HTMLButtonElement | null;
+                if (submitButton) {
+                  submitButton.click();
+                }
               }}
             >
               <h3>PROCEED TO CHECKOUT</h3>

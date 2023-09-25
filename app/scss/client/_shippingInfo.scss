@@ -38,6 +38,10 @@
       flex-direction: column;
       gap: 1.5rem;
 
+      button[type="submit"] {
+        display: none;
+      }
+
       input {
         border-radius: 0 !important;
       }
