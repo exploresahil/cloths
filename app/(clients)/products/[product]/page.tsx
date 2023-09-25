@@ -115,13 +115,6 @@ export default function Product({ params }: Props) {
               <h2>{product.name}</h2>
               <div className="product-details">
                 <PortableText value={product.details} />
-                djfapsjfpoasjfpoasjfp afas fpas fpasjf saf Lorem ipsum dolor sit
-                amet consectetur adipisicing elit. Suscipit in labore, itaque
-                pariatur rem quod ea quaerat dolore explicabo natus fugiat
-                quidem dolorum ipsa molestiae libero modi voluptatibus incidunt
-                corporis, minima harum nesciunt quisquam cupiditate eum. A sunt
-                quia deleniti accusantium totam, ipsum sed? Eveniet
-                necessitatibus perferendis officia dolorem voluptatibus?
               </div>
               <div className="product-info-price-size">
                 <p>Rs {product.price}</p>
