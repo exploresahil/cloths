@@ -1,11 +1,16 @@
 import SuperBase, { client2 } from "@/backend/Backend.client";
 
-export const makeOrder = async (product: JSON[], user: any): Promise<any> => {
+export const makeOrder = async (
+  product: JSON[],
+  user: any,
+  data: any
+): Promise<any> => {
   return await SuperBase.from("Order")
     .insert({
       product: product,
       user: user,
       cancel: false,
+      ...data,
     })
     .select();
 };

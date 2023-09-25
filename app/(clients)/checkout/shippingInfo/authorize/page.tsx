@@ -165,7 +165,11 @@ export default function Authorize() {
 
               makeOrder(
                 count,
-                userData.extra_data.id
+                userData.extra_data.id,
+                {
+
+                  ...{ ...UserAddress.at(-1), name: undefined, id: undefined }
+                }
               ).then((data) => {
                 console.log(data);
                 axios.post("/api/getPaymentGateway", {
