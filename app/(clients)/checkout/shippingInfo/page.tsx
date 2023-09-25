@@ -99,12 +99,6 @@ export default function ShippingInfo() {
         parseInt(currentValue.product.price) * currentValue.how_many,
       0
     ) ?? 0;
-  /* 
-  console.log(
-    Object.values(input)
-      .map((value) => value)
-      .filter((element) => element !== undefined)
-  ); */
 
   return (
     userData &&
