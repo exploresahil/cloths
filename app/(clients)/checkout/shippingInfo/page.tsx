@@ -100,7 +100,7 @@ export default function ShippingInfo() {
       0
     ) ?? 0;
 
-  console.log();
+  console.log(Object.values(input).map((value) => value).filter((element) => element !== undefined));
 
 
   return (
@@ -266,7 +266,7 @@ export default function ShippingInfo() {
           <div className="line" />
           <div className="checkout-button-container">
             <button
-              disabled={Object.values(input).map((value) => !value).indexOf(true) != -1}
+              disabled={Object.values(input).map((value) => value).filter((element) => element !== undefined).map((value) => !value).indexOf(true) != -1}
               onClick={() => {
                 db.from("USER")
                   .update({
