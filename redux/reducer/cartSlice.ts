@@ -25,6 +25,10 @@ export const CartCounter = createSlice({
   initialState,
   reducers: {
     reset: () => initialState,
+    set: (state, action) => {
+      console.log(action.payload);
+      state.value = action.payload;
+    },
     addToCard: (state, action) => {
       state.value = action.payload;
       localStorage.setItem("card", JSON.stringify(state.value));
@@ -35,5 +39,5 @@ export const CartCounter = createSlice({
     },
   },
 });
-export const { addToCard, removeToCard, reset } = CartCounter.actions;
+export const { addToCard, removeToCard, reset, set } = CartCounter.actions;
 export default CartCounter.reducer;

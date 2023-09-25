@@ -15,6 +15,7 @@ import { getProCart, RemoveCartOrder } from "@/backend/Cart";
 import { products } from "@/types/Products";
 
 import { useRouter } from "next/navigation";
+import { updateCardRedx } from "@/backend/User";
 
 const Cart = ({ onCartCloseClick }: props) => {
   const count = useAppSelector((state) => state.CardReducer.value);
@@ -66,8 +67,11 @@ const Cart = ({ onCartCloseClick }: props) => {
                     type="button"
                     onClick={() => {
                       RemoveCartOrder(v.id).then((data) => {
-                        getProCart(userData.extra_data.id).then((data) => {
+                        getProCart(userData.extra_data.id).then(async (data) => {
                           dispatch(removeToCard(data.data));
+                          await updateCardRedx(userData.extra_data.id, count).then(() => { })
+                          // console.log(data);
+
                         });
                       });
                     }}

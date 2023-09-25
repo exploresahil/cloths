@@ -6,14 +6,16 @@ import db from "@/backend/Backend.client";
 import { CheckoutArrowNormal, OTPTick } from "@/components/icons/Icons";
 import { User } from "@supabase/supabase-js";
 import { useRouter } from "next/navigation";
-import { getUser } from "@/backend/User";
+import { getUser, updateRedx } from "@/backend/User";
 import { getProCart } from "@/backend/Cart";
 import Link from "next/link";
-import { useAppSelector } from "@/redux/hook";
-
+import { useAppSelector, useAppDispatch } from "@/redux/hook";
+import { addUserAddress } from "@/redux/reducer/userSlice";
+import Supabase from "@/backend/Backend.client"
 export default function ShippingInfo() {
   const count = useAppSelector((state) => state.CardReducer.value);
-
+  const UserAddress = useAppSelector((state) => state.userSlice.value);
+  const dispatch = useAppDispatch();
   const router = useRouter();
   const stateOptions: any = [
     {
@@ -62,34 +64,25 @@ export default function ShippingInfo() {
   const [userData, setUserData] = useState<{ data: User; extra_data: any }>();
   useEffect(() => {
     if (userData)
-      getProCart(userData.extra_data.id).then((data) => setProduct(data.data));
+      getProCart(userData.extra_data.id).then((data: any) => setProduct(data.data));
   }, [userData]);
 
-  const [input, setInput] = useState({
-    name: userData?.data.user_metadata.full_name,
-    address: userData?.extra_data.address,
-    locality: userData?.extra_data.locality,
-    state: userData?.extra_data.state,
-    pincode: userData?.extra_data.pincode,
-    more_info: userData?.extra_data.more_info,
-    city: userData?.extra_data.city,
-    region: "India",
-    phone: userData?.data.phone,
-  });
+  const [input, setInput] = useState<any>();
   React.useEffect(() => {
     setUserData(JSON.parse(localStorage.getItem("userData") || ""));
   }, []);
   useEffect(() => {
     setInput({
       name: userData?.extra_data.name,
-      address: userData?.extra_data.address,
-      locality: userData?.extra_data.locality,
-      state: userData?.extra_data.state,
-      pincode: userData?.extra_data.pincode,
-      more_info: userData?.extra_data.more_info,
-      city: userData?.extra_data.city,
-      region: "India",
-      phone: userData?.extra_data.phone,
+      address: UserAddress.at(-1)?.address,
+      locality: UserAddress.at(-1)?.locality,
+      state: UserAddress.at(-1)?.state,
+      pincode: UserAddress.at(-1)?.pincode,
+      more_info: UserAddress.at(-1)?.more_info,
+      city: UserAddress.at(-1)?.city,
+      region: UserAddress.at(-1)?.region,
+      phone: UserAddress.at(-1)?.phone,
+
     });
   }, [userData]);
 
@@ -97,7 +90,7 @@ export default function ShippingInfo() {
 
   const orderAmount =
     count?.reduce(
-      (accumulator, currentValue) =>
+      (accumulator: number, currentValue: { product: { price: string; }; how_many: number; }) =>
         accumulator +
         parseInt(currentValue.product.price) * currentValue.how_many,
       0
@@ -129,7 +122,7 @@ export default function ShippingInfo() {
                   <input
                     value={input.name}
                     onChange={(e) =>
-                      setInput((data) => ({ ...data, name: e.target.value }))
+                      setInput((data: any) => ({ ...data, name: e.target.value }))
                     }
                     type="text"
                     required
@@ -141,7 +134,7 @@ export default function ShippingInfo() {
                     type="text"
                     value={input.address}
                     onChange={(e) =>
-                      setInput((data) => ({ ...data, address: e.target.value }))
+                      setInput((data: any) => ({ ...data, address: e.target.value }))
                     }
                     required
                   />
@@ -152,7 +145,7 @@ export default function ShippingInfo() {
                     type="text"
                     value={input.locality}
                     onChange={(e) =>
-                      setInput((data) => ({
+                      setInput((data: any) => ({
                         ...data,
                         locality: e.target.value,
                       }))
@@ -171,7 +164,7 @@ export default function ShippingInfo() {
                       (option: any) => option.value === input.state
                     )}
                     onChange={(e) =>
-                      setInput((data) => ({ ...data, state: e.value }))
+                      setInput((data: any) => ({ ...data, state: e.value }))
                     }
                     isSearchable
                   />
@@ -188,7 +181,7 @@ export default function ShippingInfo() {
                     maxLength={6}
                     onChange={(e) => {
                       const numericValue = e.target.value.replace(/\D/g, ""); // Remove non-numeric characters
-                      setInput((data) => ({ ...data, pincode: numericValue }));
+                      setInput((data: any) => ({ ...data, pincode: numericValue }));
                     }}
                     required
                   />
@@ -200,7 +193,7 @@ export default function ShippingInfo() {
                     value={input.more_info}
                     placeholder="OPTIONAL"
                     onChange={(e) =>
-                      setInput((data) => ({
+                      setInput((data: any) => ({
                         ...data,
                         more_info: e.target.value,
                       }))
@@ -213,7 +206,7 @@ export default function ShippingInfo() {
                     type="text"
                     value={input.city}
                     onChange={(e) =>
-                      setInput((data) => ({ ...data, city: e.target.value }))
+                      setInput((data: any) => ({ ...data, city: e.target.value }))
                     }
                     required
                   />
@@ -236,7 +229,7 @@ export default function ShippingInfo() {
                   maxLength={10}
                   value={input.phone}
                   onChange={(e) =>
-                    setInput((data) => ({ ...data, phone: e.target.value }))
+                    setInput((data: any) => ({ ...data, phone: e.target.value }))
                   }
                   required
                 />
@@ -256,20 +249,15 @@ export default function ShippingInfo() {
               onClick={() => {
                 db.from("USER")
                   .update({
-                    address: input.address,
-                    locality: input.locality,
-                    state: input.state,
-                    pincode: input.pincode,
-                    more_info: input.more_info,
-                    city: input.city,
-                    region: input.region,
+
                     name: input.name,
-                    phone: "+91" + input.phone?.slice(0, 9),
+
                   })
                   .eq("id", userData.extra_data.id)
-                  .then(async (data) => {
+                  .then(async (data: any) => {
                     await getUser();
-                    // console.log(data);
+                    dispatch(addUserAddress({ ...input, id: UserAddress.length }))
+
 
                     router.push("/checkout/shippingInfo/authorize");
                   });

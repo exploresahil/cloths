@@ -17,6 +17,7 @@ import { makeOrder } from "@/backend/Order";
 export default function Authorize() {
   const count = useAppSelector((state) => state.CardReducer.value);
   const dispatch = useAppDispatch();
+  const UserAddress = useAppSelector((state) => state.userSlice.value);
   const [product, setProduct] = useState<null | any[]>(null);
   const router = useRouter()
   const [userData, setUser] = useState<null | any>(null);
@@ -86,12 +87,12 @@ export default function Authorize() {
                 <h1>{userData.extra_data.name}</h1>
               </div>
               <div className="address">
-                <h2 className="address-line">{userData.extra_data.address},</h2>
-                <h2 className="city">{userData.extra_data.city}</h2>
-                <h2 className="pincode"> - {userData.extra_data.pincode}</h2>
-                <h2 className="state">{userData.extra_data.state}</h2>
+                <h2 className="address-line">{UserAddress.at(-1)?.address},</h2>
+                <h2 className="city">{UserAddress.at(-1)?.city}</h2>
+                <h2 className="pincode"> - {UserAddress.at(-1)?.pincode}</h2>
+                <h2 className="state">{UserAddress.at(-1)?.state}</h2>
                 <h2 className="country">India</h2>
-                <h2 className="phone">{userData.extra_data.phone}</h2>
+                <h2 className="phone">{UserAddress.at(-1)?.phone}</h2>
               </div>
             </div>
             <a className="delivery-address-edit" href="/checkout/shippingInfo">
