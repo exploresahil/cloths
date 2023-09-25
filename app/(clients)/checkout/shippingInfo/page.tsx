@@ -100,6 +100,9 @@ export default function ShippingInfo() {
       0
     ) ?? 0;
 
+  console.log();
+
+
   return (
     userData &&
     input && (
@@ -263,6 +266,7 @@ export default function ShippingInfo() {
           <div className="line" />
           <div className="checkout-button-container">
             <button
+              disabled={Object.values(input).map((value) => !value).indexOf(true) != -1}
               onClick={() => {
                 db.from("USER")
                   .update({
