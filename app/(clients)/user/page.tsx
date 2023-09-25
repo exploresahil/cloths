@@ -7,6 +7,9 @@ import ContactArrow from "@/components/icons/ContactArrow";
 import Link from "next/link";
 import { User } from "@supabase/supabase-js";
 import { useRouter } from "next/navigation";
+import { reset } from "@/redux/reducer/cartSlice";
+import { reset as Rest } from "@/redux/reducer/userSlice";
+import { useDispatch } from "react-redux";
 const User = () => {
   const router = useRouter();
   const [activeTab, setActiveTab] = useState("order");
@@ -18,6 +21,7 @@ const User = () => {
     setUserData(JSON.parse(localStorage.getItem("userData") || ""));
   }, []);
   console.log(userData);
+  const dispatch = useDispatch()
 
   return (
     userData && (
@@ -49,7 +53,7 @@ const User = () => {
               <div className="product-info">
                 <div className="item-info">
                   <div className="order-number">
-                    <p>Order No: {}</p>
+                    <p>Order No: { }</p>
                   </div>
                   <div className="items">
                     <div className="info">
@@ -68,7 +72,7 @@ const User = () => {
                     </div>
                   </div>
                   <div className="order-address">
-                    <p>Address: {}</p>
+                    <p>Address: { }</p>
                   </div>
                 </div>
               </div>
@@ -96,7 +100,10 @@ const User = () => {
               type="button"
               onClick={async () => {
                 await DB.auth.signOut();
+
                 localStorage.clear();
+                dispatch(reset())
+                dispatch(Rest())
                 router.push("/login");
               }}
             >

@@ -1,13 +1,18 @@
 "use client";
 import db from "@/backend/Backend.client";
-import { EmailLogin, getUser, googleLogin } from "@/backend/User";
+import { EmailLogin, getRedx, getUser, googleLogin } from "@/backend/User";
 import GoogleIcon from "@/components/icons/GoogleIcon";
 import HiddenPassword from "@/components/icons/HiddenPassword";
 import ShownPassword from "@/components/icons/ShownPassword";
 import { useState } from "react";
 import { LuUser } from "react-icons/lu";
 import { useRouter } from "next/navigation";
+import { useAppDispatch } from "@/redux/hook";
+import { set } from "@/redux/reducer/userSlice"
+import { set as Set } from "@/redux/reducer/cartSlice"
 const Login = () => {
+
+  const dispatch = useAppDispatch();
   const router = useRouter();
   const [isPasswordShown, setIsPasswordShown] = useState(false);
   const [inputValue, setInputValue] = useState({
@@ -43,7 +48,7 @@ const Login = () => {
                 inputValue.phone
               )
                 .then(async (data) => {
-                  //TODO
+
 
                   if (data.error?.message == "User already registered")
                     db.auth.signInWithPassword({
@@ -52,7 +57,11 @@ const Login = () => {
                       phone: inputValue.phone,
                     });
                   else alert(data.error?.message);
-                  await getUser().then(() => {
+                  await getUser().then(async (data) => {
+                    // console.log(data);
+                    const data_ = await getRedx(data.extra_data.id);
+                    dispatch(set(data_.data?.at(0).Redux.userSlice))
+                    dispatch(Set(data_.data?.at(0).Redux.CardReducer))
                     router.push("/user");
                   });
                 })

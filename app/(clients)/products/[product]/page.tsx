@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useAppDispatch } from "@/redux/hook";
+import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { addToCard } from "@/redux/reducer/cartSlice";
 import { AiFillPlusCircle, AiOutlinePlus } from "react-icons/ai";
 import { BsArrowRight } from "react-icons/bs";
@@ -15,11 +15,13 @@ import { PortableText } from "@portabletext/react";
 import { ScrollArrow } from "@/components/icons/Icons";
 import { AddCartOrder, getProCart } from "@/backend/Cart";
 import { useRouter } from "next/navigation";
+import { updateCardRedx } from "@/backend/User";
 type Props = {
   params: { product: any };
 };
 
 export default function Product({ params }: Props) {
+  const count = useAppSelector((state) => state.CardReducer.value);
   const router = useRouter();
   const dispatch = useAppDispatch();
   const [product, setProduct] = useState<products>();
@@ -169,6 +171,7 @@ export default function Product({ params }: Props) {
                       {
                         getProCart(userData.extra_data.id).then((data) => {
                           dispatch(addToCard(data.data));
+                          updateCardRedx(userData.extra_data.id, count)
                         });
                       }
                     }
@@ -186,6 +189,7 @@ export default function Product({ params }: Props) {
                     (data) => {
                       getProCart(userData.extra_data.id).then((data) => {
                         dispatch(addToCard(data.data));
+                        updateCardRedx(userData.extra_data.id, count)
                         router.push(
                           userData.extra_data.address
                             ? "/checkout/shippingInfo/authorize"
@@ -238,6 +242,7 @@ export default function Product({ params }: Props) {
                         (data) => {
                           getProCart(userData.extra_data.id).then((data) => {
                             dispatch(addToCard(data.data));
+                            updateCardRedx(userData.extra_data.id, count)
                           });
                         }
                       );
