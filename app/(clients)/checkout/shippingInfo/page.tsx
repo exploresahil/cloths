@@ -11,7 +11,7 @@ import { getProCart } from "@/backend/Cart";
 import Link from "next/link";
 import { useAppSelector, useAppDispatch } from "@/redux/hook";
 import { addUserAddress } from "@/redux/reducer/userSlice";
-import Supabase from "@/backend/Backend.client"
+import Supabase from "@/backend/Backend.client";
 export default function ShippingInfo() {
   const count = useAppSelector((state) => state.CardReducer.value);
   const UserAddress = useAppSelector((state) => state.userSlice.value);
@@ -64,7 +64,9 @@ export default function ShippingInfo() {
   const [userData, setUserData] = useState<{ data: User; extra_data: any }>();
   useEffect(() => {
     if (userData)
-      getProCart(userData.extra_data.id).then((data: any) => setProduct(data.data));
+      getProCart(userData.extra_data.id).then((data: any) =>
+        setProduct(data.data)
+      );
   }, [userData]);
 
   const [input, setInput] = useState<any>();
@@ -82,7 +84,6 @@ export default function ShippingInfo() {
       city: UserAddress.at(-1)?.city,
       region: UserAddress.at(-1)?.region,
       phone: UserAddress.at(-1)?.phone,
-
     });
   }, [userData]);
 
@@ -90,7 +91,10 @@ export default function ShippingInfo() {
 
   const orderAmount =
     count?.reduce(
-      (accumulator: number, currentValue: { product: { price: string; }; how_many: number; }) =>
+      (
+        accumulator: number,
+        currentValue: { product: { price: string }; how_many: number }
+      ) =>
         accumulator +
         parseInt(currentValue.product.price) * currentValue.how_many,
       0
@@ -117,7 +121,10 @@ export default function ShippingInfo() {
                   <input
                     value={input.name}
                     onChange={(e) =>
-                      setInput((data: any) => ({ ...data, name: e.target.value }))
+                      setInput((data: any) => ({
+                        ...data,
+                        name: e.target.value,
+                      }))
                     }
                     type="text"
                     required
@@ -129,7 +136,10 @@ export default function ShippingInfo() {
                     type="text"
                     value={input.address}
                     onChange={(e) =>
-                      setInput((data: any) => ({ ...data, address: e.target.value }))
+                      setInput((data: any) => ({
+                        ...data,
+                        address: e.target.value,
+                      }))
                     }
                     required
                   />
@@ -176,7 +186,10 @@ export default function ShippingInfo() {
                     maxLength={6}
                     onChange={(e) => {
                       const numericValue = e.target.value.replace(/\D/g, ""); // Remove non-numeric characters
-                      setInput((data: any) => ({ ...data, pincode: numericValue }));
+                      setInput((data: any) => ({
+                        ...data,
+                        pincode: numericValue,
+                      }));
                     }}
                     required
                   />
@@ -201,7 +214,10 @@ export default function ShippingInfo() {
                     type="text"
                     value={input.city}
                     onChange={(e) =>
-                      setInput((data: any) => ({ ...data, city: e.target.value }))
+                      setInput((data: any) => ({
+                        ...data,
+                        city: e.target.value,
+                      }))
                     }
                     required
                   />
@@ -223,9 +239,15 @@ export default function ShippingInfo() {
                   type="tel"
                   maxLength={10}
                   value={input.phone}
-                  onChange={(e) =>
-                    setInput((data: any) => ({ ...data, phone: e.target.value }))
-                  }
+                  inputMode="numeric"
+                  pattern="[0-9]*"
+                  onChange={(e) => {
+                    const telValue = e.target.value.replace(/\D/g, ""); // Remove non-numeric characters
+                    setInput((data: any) => ({
+                      ...data,
+                      phone: telValue,
+                    }));
+                  }}
                   required
                 />
               </div>
@@ -244,15 +266,14 @@ export default function ShippingInfo() {
               onClick={() => {
                 db.from("USER")
                   .update({
-
                     name: input.name,
-
                   })
                   .eq("id", userData.extra_data.id)
                   .then(async (data: any) => {
                     await getUser();
-                    dispatch(addUserAddress({ ...input, id: UserAddress.length }))
-
+                    dispatch(
+                      addUserAddress({ ...input, id: UserAddress.length })
+                    );
 
                     router.push("/checkout/shippingInfo/authorize");
                   });
