@@ -10,6 +10,7 @@
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+    margin-top: 50px;
 
     .shipping-info {
       h1 {
@@ -38,7 +39,7 @@
       gap: 1.5rem;
 
       input {
-        border-radius: 0 0 0 0 !important;
+        border-radius: 0 !important;
       }
 
       .main {
@@ -287,6 +288,112 @@
           width: 3.4em;
           height: auto;
           fill: v.$bg;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .shipping-info-container {
+    .proceed-to-checkout-container {
+      width: 50vw;
+    }
+  }
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
+  .shipping-info-container {
+    height: auto !important;
+    .shipping-info-main {
+      margin-top: 60px;
+      margin-bottom: 100px;
+      .shipping-info-form {
+        .main {
+          flex-direction: column;
+          input {
+            width: 100% !important;
+          }
+          .left {
+            width: 100%;
+          }
+
+          .right {
+            width: 100%;
+          }
+        }
+      }
+    }
+
+    .proceed-to-checkout-container {
+      width: 100%;
+      height: 200px;
+      bottom: auto;
+      padding: 0 120px;
+
+      .price-container {
+        width: max-content;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .shipping-info-container {
+    height: auto !important;
+    padding: 200px 6vh;
+    padding-bottom: 100px;
+    .shipping-info-main {
+      margin-top: 60px;
+      margin-bottom: 100px;
+      .shipping-info-form {
+        .main {
+          flex-direction: column;
+          input {
+            width: 100% !important;
+          }
+          .left {
+            width: 100%;
+          }
+
+          .right {
+            width: 100%;
+          }
+        }
+
+        .phone {
+          .telephone {
+            input {
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
+
+    .proceed-to-checkout-container {
+      width: 100%;
+      height: 100px;
+      bottom: auto;
+      padding: 0 6vw;
+
+      .price-container {
+        width: max-content;
+        .text {
+          h4 {
+            font-size: 1rem;
+          }
+        }
+      }
+
+      .checkout-button-container {
+        width: auto;
+
+        button {
+          h3 {
+            width: max-content;
+            font-size: 0.6rem;
+          }
         }
       }
     }

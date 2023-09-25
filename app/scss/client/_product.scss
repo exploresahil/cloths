@@ -213,10 +213,10 @@
         &:hover {
           background-color: $textTeal;
           color: $bg;
-        }
 
-        svg {
-          fill: $bg;
+          svg {
+            fill: $bg;
+          }
         }
       }
     }
