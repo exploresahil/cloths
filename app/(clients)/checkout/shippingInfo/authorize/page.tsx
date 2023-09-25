@@ -19,7 +19,7 @@ export default function Authorize() {
   const dispatch = useAppDispatch();
   const UserAddress = useAppSelector((state) => state.userSlice.value);
   const [product, setProduct] = useState<null | any[]>(null);
-  const router = useRouter()
+  const router = useRouter();
   const [userData, setUser] = useState<null | any>(null);
 
   useEffect(() => {
@@ -41,7 +41,7 @@ export default function Authorize() {
       0
     ) ?? 0;
 
-  const deliveryCharges = orderAmount > 2550 ? "N/A" : 80;
+  const deliveryCharges = orderAmount > 2550 ? "It's Free!" : 80;
 
   const total = orderAmount + (orderAmount > 2550 ? 0 : deliveryCharges);
 
@@ -154,7 +154,7 @@ export default function Authorize() {
             <div className="text">
               <span>
                 <p>Order Amount: Rs. {orderAmount}</p>
-                <p>Delivery Charges: Rs. {deliveryCharges}</p>
+                <p>Delivery Charges: {deliveryCharges}</p>
               </span>
               <h3>Total: Rs. {total}</h3>
             </div>
@@ -183,6 +183,25 @@ export default function Authorize() {
 
               })
             }}>
+              {/* <button
+              type="button"
+              onClick={() => {
+                makeOrder(count, userData.extra_data.id).then((data) => {
+                  console.log(data);
+                  axios
+                    .post("/api/getPaymentGateway", {
+                      price: total,
+                      phoneNo: userData.extra_data.phone,
+                      order_id: data.data[0].id,
+                    })
+                    .then(({ data: Data }) => {
+                      router.push(
+                        Data.data.instrumentResponse.redirectInfo.url
+                      );
+                    });
+                });
+              }}
+            > */}
               <h3>AUTHORIZE PAYMENT</h3>
               <CheckoutArrowNormal />
             </button>

@@ -115,6 +115,13 @@ export default function Product({ params }: Props) {
               <h2>{product.name}</h2>
               <div className="product-details">
                 <PortableText value={product.details} />
+                djfapsjfpoasjfpoasjfp afas fpas fpasjf saf Lorem ipsum dolor sit
+                amet consectetur adipisicing elit. Suscipit in labore, itaque
+                pariatur rem quod ea quaerat dolore explicabo natus fugiat
+                quidem dolorum ipsa molestiae libero modi voluptatibus incidunt
+                corporis, minima harum nesciunt quisquam cupiditate eum. A sunt
+                quia deleniti accusantium totam, ipsum sed? Eveniet
+                necessitatibus perferendis officia dolorem voluptatibus?
               </div>
               <div className="product-info-price-size">
                 <p>Rs {product.price}</p>
@@ -171,7 +178,7 @@ export default function Product({ params }: Props) {
                       {
                         getProCart(userData.extra_data.id).then((data) => {
                           dispatch(addToCard(data.data));
-                          updateCardRedx(userData.extra_data.id, count)
+                          updateCardRedx(userData.extra_data.id, count);
                         });
                       }
                     }
@@ -189,7 +196,7 @@ export default function Product({ params }: Props) {
                     (data) => {
                       getProCart(userData.extra_data.id).then((data) => {
                         dispatch(addToCard(data.data));
-                        updateCardRedx(userData.extra_data.id, count)
+                        updateCardRedx(userData.extra_data.id, count);
                         router.push(
                           userData.extra_data.address
                             ? "/checkout/shippingInfo/authorize"
@@ -242,7 +249,7 @@ export default function Product({ params }: Props) {
                         (data) => {
                           getProCart(userData.extra_data.id).then((data) => {
                             dispatch(addToCard(data.data));
-                            updateCardRedx(userData.extra_data.id, count)
+                            updateCardRedx(userData.extra_data.id, count);
                           });
                         }
                       );

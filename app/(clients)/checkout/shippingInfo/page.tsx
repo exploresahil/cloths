@@ -103,11 +103,6 @@ export default function ShippingInfo() {
         <div className="shipping-info-main">
           <div className="shipping-info">
             <h1>ENTER YOUR SHIPPING INFORMATION BELOW</h1>
-            <h2>
-              THIS INFORMATION CAN BE ACCESSED AT <Link href="/user">USER</Link>{" "}
-              PANEL
-            </h2>
-            <p>Delivery charges will be aplicable as per your location</p>
           </div>
           <form
             onSubmit={(e) => {

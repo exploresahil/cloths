@@ -52,6 +52,35 @@ button {
   cursor: pointer;
 }
 
+.cart-empty {
+  max-width: 100vw;
+  height: calc(100vh - 100px);
+  padding: 0 6vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+
+  p {
+    text-align: center;
+    font-family: v.$fontRM;
+    font-size: 2rem;
+  }
+
+  button {
+    border: 1px solid v.$textTeal;
+    color: v.$textTeal;
+    padding: 5px 10px;
+    border-radius: 100px;
+
+    &:hover {
+      background-color: v.$textTeal;
+      color: v.$bg;
+    }
+  }
+}
+
 //*----------> mediaQuroes
 
 //*----------> smartWatch

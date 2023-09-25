@@ -364,6 +364,11 @@ header {
               width: 25px;
               height: 25px;
             }
+
+            &:hover {
+              background-color: v.$textTeal;
+              color: v.$bg;
+            }
           }
         }
 
