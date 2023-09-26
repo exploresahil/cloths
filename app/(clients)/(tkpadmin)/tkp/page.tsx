@@ -15,16 +15,20 @@ type ProductItem = {
   };
 };
 
+type user = {
+  name: string;
+};
+
 type DataItem = {
   id: string;
   product: ProductItem[];
-  user: string;
+  user: user;
   phone: string;
   address: string;
   created_at: string;
   more_info: string;
   locality: string;
-  // other properties...
+  payment_confirm: boolean;
 };
 
 const page = () => {
@@ -107,6 +111,17 @@ const page = () => {
     setActiveTab(tabName);
   };
 
+  // Filter data to include only items with payment_confirm true and sort by created_at in descending order
+  const filteredData = data
+    .filter((item) => item.payment_confirm === true)
+    .sort(
+      (a, b) =>
+        new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+    );
+
+  // Initialize serial number to 1
+  let serialNumber = 1;
+
   return (
     <div className="tkp-admin-main">
       <div className="tkp-admin-title">
@@ -171,35 +186,39 @@ const page = () => {
               </tr>
             </thead>
             <tbody>
-              {data.map((item, index) => (
-                <tr key={item.id} className={getRowColor(item.created_at)}>
-                  <td>{data.length - index}</td>
-                  <td>{item.id}</td>
-                  <td>
-                    {item.product.map((products) => (
-                      <div key={products.id}>
-                        • {products.product.sku}: (
-                        {formatSizes(products.product.size)}),
-                      </div>
-                    ))}
-                  </td>
-                  <td>
-                    {item.product.map((products) => (
-                      <div key={products.id}>
-                        • {products.product.name}: (
-                        {formatSizes(products.product.size)}),
-                      </div>
-                    ))}
-                  </td>
-                  <td>{item.user}</td>
-                  <td>{item.phone}</td>
-                  <td>
-                    {item.address},Locality: {item.locality}, More Info:{" "}
-                    {item.more_info}
-                  </td>
-                  <td>{formatDateTime(item.created_at)}</td>
-                </tr>
-              ))}
+              {filteredData.map(
+                (item) => (
+                  /* item.payment_confirm && ( */
+                  <tr key={item.id} className={getRowColor(item.created_at)}>
+                    <td>{serialNumber--}</td>
+                    <td>{item.id}</td>
+                    <td>
+                      {item.product.map((products) => (
+                        <div key={products.id}>
+                          • {products.product.sku}: (
+                          {formatSizes(products.product.size)}),
+                        </div>
+                      ))}
+                    </td>
+                    <td>
+                      {item.product.map((products) => (
+                        <div key={products.id}>
+                          • {products.product.name}: (
+                          {formatSizes(products.product.size)}),
+                        </div>
+                      ))}
+                    </td>
+                    <td>{item.user.name}</td>
+                    <td>{item.phone}</td>
+                    <td>
+                      {item.address},Locality: {item.locality}, More Info:{" "}
+                      {item.more_info}
+                    </td>
+                    <td>{formatDateTime(item.created_at)}</td>
+                  </tr>
+                )
+                /*    ) */
+              )}
             </tbody>
           </table>
         </div>
