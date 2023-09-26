@@ -116,6 +116,7 @@ const page = () => {
 
   return (
     <div className="tkp-admin-main">
+      <h2>Admin</h2>
       <div className="tkp-admin-title">
         <div className="tkp-admin-menu">
           <button
@@ -168,7 +169,7 @@ const page = () => {
             <thead>
               <tr className="title">
                 <th className="srno">Sr/No</th>
-                <th>Order ID.</th>
+                <th>Order No.</th>
                 <th>Product SKUs</th>
                 <th>Products</th>
                 <th>Ordered By</th>
@@ -178,44 +179,37 @@ const page = () => {
               </tr>
             </thead>
             <tbody>
-              {data.length === 0 ? (
-                <p>No Data Available</p>
-              ) : (
-                data.map(
-                  (item) =>
-                    item.payment_confirm && (
-                      <tr
-                        key={item.id}
-                        className={getRowColor(item.created_at)}
-                      >
-                        <td>{serialNumber++}</td>
-                        <td>{item.id}</td>
-                        <td>
-                          {item.product.map((products) => (
-                            <div key={products.id}>
-                              • {products.product.sku}: (
-                              {formatSizes(products.product.size)}),
-                            </div>
-                          ))}
-                        </td>
-                        <td>
-                          {item.product.map((products) => (
-                            <div key={products.id}>
-                              • {products.product.name}: (
-                              {formatSizes(products.product.size)}),
-                            </div>
-                          ))}
-                        </td>
-                        <td>{item.user.name}</td>
-                        <td>{item.phone}</td>
-                        <td>
-                          {item.address},Locality: {item.locality}, More Info:{" "}
-                          {item.more_info}
-                        </td>
-                        <td>{formatDateTime(item.created_at)}</td>
-                      </tr>
-                    )
-                )
+              {data.map(
+                (item) =>
+                  item.payment_confirm && (
+                    <tr key={item.id} className={getRowColor(item.created_at)}>
+                      <td>{serialNumber++}</td>
+                      <td>TKP-{item.id}</td>
+                      <td>
+                        {item.product.map((products) => (
+                          <div key={products.id}>
+                            • {products.product.sku}: (
+                            {formatSizes(products.product.size)}),
+                          </div>
+                        ))}
+                      </td>
+                      <td>
+                        {item.product.map((products) => (
+                          <div key={products.id}>
+                            • {products.product.name}: (
+                            {formatSizes(products.product.size)}),
+                          </div>
+                        ))}
+                      </td>
+                      <td>{item.user.name}</td>
+                      <td>{item.phone}</td>
+                      <td>
+                        {item.address},Locality: {item.locality}, More Info:{" "}
+                        {item.more_info}
+                      </td>
+                      <td>{formatDateTime(item.created_at)}</td>
+                    </tr>
+                  )
               )}
             </tbody>
           </table>
