@@ -67,12 +67,16 @@ const Cart = ({ onCartCloseClick }: props) => {
                     type="button"
                     onClick={() => {
                       RemoveCartOrder(v.id).then((data) => {
-                        getProCart(userData.extra_data.id).then(async (data) => {
-                          dispatch(removeToCard(data.data));
-                          await updateCardRedx(userData.extra_data.id, count).then(() => { })
-                          // console.log(data);
-
-                        });
+                        getProCart(userData.extra_data.id).then(
+                          async (data) => {
+                            dispatch(removeToCard(data.data));
+                            await updateCardRedx(
+                              userData.extra_data.id,
+                              count
+                            ).then(() => {});
+                            // console.log(data);
+                          }
+                        );
                       });
                     }}
                   >
@@ -88,7 +92,7 @@ const Cart = ({ onCartCloseClick }: props) => {
         <button
           type="button"
           onClick={() => {
-            console.log(userData.extra_data.address);
+            /*  console.log(userData.extra_data.address); */
 
             router.push(
               userData.extra_data.address

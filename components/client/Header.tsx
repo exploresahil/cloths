@@ -9,9 +9,9 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FiSearch } from "react-icons/fi";
 import { useAppSelector } from "@/redux/hook";
-import { useAppDispatch } from "@/redux/hook"
-import { set } from "@/redux/reducer/cartSlice"
-import { set as Set } from "@/redux/reducer/userSlice"
+import { useAppDispatch } from "@/redux/hook";
+import { set } from "@/redux/reducer/cartSlice";
+import { set as Set } from "@/redux/reducer/userSlice";
 import {
   Bag,
   User,
@@ -27,7 +27,7 @@ import Cart from "./Cart";
 import { User as user } from "@supabase/supabase-js";
 import { getRedx, getUser } from "@/backend/User";
 import { getProCart } from "@/backend/Cart";
-import Supabase from "@/backend/Backend.client"
+import Supabase from "@/backend/Backend.client";
 const Header = () => {
   const count = useAppSelector((state) => state.CardReducer.value);
   const dispatch = useAppDispatch();
@@ -57,8 +57,8 @@ const Header = () => {
       await getRedx(dam.extra_data.id).then((data_) => {
         console.log("red->", data_);
 
-        dispatch(Set(data_.data?.at(0).Redux.userSlice.value))
-        dispatch(set(data_.data?.at(0).Redux.CardReducer.value))
+        dispatch(Set(data_.data?.at(0).Redux.userSlice.value));
+        dispatch(set(data_.data?.at(0).Redux.CardReducer.value));
       });
 
       if (dam.data !== null) {

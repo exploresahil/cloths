@@ -19,6 +19,15 @@ import { getContact } from "@/sanity/sanity-utils";
 
 const Contact = () => {
   const [contacts, setContacts] = useState<contactSchema[]>([]);
+  const [message, setMessage] = useState("");
+  const handleMessageChange = (e: any) => {
+    const inputMessage = e.target.value;
+    if (inputMessage.length <= 150) {
+      setMessage(inputMessage); // Update message state
+    }
+  };
+
+  const remainingCharacters = 150 - message.length; // Calculate remaining characters
 
   useEffect(() => {
     async function fetchContacts() {
@@ -81,9 +90,9 @@ const Contact = () => {
               </div>
               <div className="contact-newsletter">
                 <form className="contact-newsletter-form">
-                  <h2>SIGN UP FOR OUR NEWSLETTER</h2>
+                  <h2>Contact Us</h2>
                   <div className="name">
-                    <input type="text" placeholder="FIRST NAME" />
+                    <input type="text" placeholder="FIRST NAME" required />
                     <input type="text" placeholder="LAST NAME" />
                   </div>
                   <input
@@ -91,9 +100,21 @@ const Contact = () => {
                     name="email"
                     id="email"
                     placeholder="EMAIL"
+                    required
                   />
+                  <div className="character-count">
+                    {remainingCharacters}/150
+                  </div>
+                  <textarea
+                    name=""
+                    id=""
+                    required
+                    placeholder="Message"
+                    maxLength={150}
+                    onChange={handleMessageChange}
+                  ></textarea>
                   <button type="submit">
-                    <h3>JOIN THE MOVEMENT</h3>
+                    <h3>Send</h3>
                     <NewsletterArrowNormal />
                     <NewsletterTick />
                   </button>

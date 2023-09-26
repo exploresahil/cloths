@@ -44,7 +44,7 @@
       justify-content: center;
       align-items: flex-start;
       gap: 2.5em;
-      padding: 7em 1em 0em 1em;
+      padding: 15em 1em 0em 1em;
       height: 37vh;
       overflow-y: scroll;
 
@@ -162,6 +162,7 @@
       align-items: center;
       gap: 1em;
       font-family: v.$fontRM;
+      position: relative;
 
       .name {
         display: flex;
@@ -187,6 +188,27 @@
         border-style: solid;
         border-color: v.$bordercolor;
         background-color: v.$bg;
+      }
+
+      .character-count {
+        position: absolute;
+        bottom: 145px;
+        right: 0;
+        padding: 2px 10px;
+        font-size: 0.6rem;
+      }
+
+      textarea {
+        width: 26.35em;
+        height: 100px;
+        font-size: 1em;
+        color: #1a1a1a;
+        padding: 1em 1em;
+        border-width: 2px;
+        border-style: solid;
+        border-color: v.$bordercolor;
+        background-color: v.$bg;
+        resize: none;
       }
 
       button {
@@ -318,6 +340,7 @@
         width: 100vw;
         height: auto;
         overflow-y: visible;
+        padding-bottom: 100px;
 
         svg {
           width: 1em;
@@ -470,6 +493,24 @@
           background-color: v.$bg;
         }
 
+        .character-count {
+          bottom: 220px;
+          right: 10px;
+          font-size: 1rem;
+        }
+
+        textarea {
+          width: 87.5vw;
+          height: 150px;
+          font-size: 2em;
+          color: #1a1a1a;
+          padding: 1em 1em;
+          border-width: 2px;
+          border-style: solid;
+          border-color: v.$bordercolor;
+          background-color: v.$bg;
+        }
+
         button {
           align-items: center;
           display: flex;
@@ -555,7 +596,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    margin-top: -80px;
+    margin-top: 100px;
     width: 100vw;
     gap: 1em;
     z-index: 2;
@@ -620,7 +661,7 @@
             font-weight: 100;
 
             h2 {
-              font-size: .8rem
+              font-size: 0.8rem;
             }
 
             .contact-phone,
@@ -753,6 +794,24 @@
           background-color: v.$bg;
         }
 
+        .character-count {
+          bottom: 140px;
+          right: 10px;
+          font-size: 0.6rem;
+        }
+
+        textarea {
+          width: 86vw;
+          height: 100px;
+          font-size: 0.8rem;
+          color: #1a1a1a;
+          padding: 1em 1em;
+          border-width: 2px;
+          border-style: solid;
+          border-color: v.$bordercolor;
+          background-color: v.$bg;
+        }
+
         button {
           align-items: center;
           display: flex;
@@ -838,7 +897,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    margin-top: -80px;
+    margin-top: 100px;
     width: 100vw;
     gap: 1em;
     z-index: 2;
@@ -911,7 +970,7 @@
               font-size: 0.5rem;
 
               h2 {
-                font-size: .7rem
+                font-size: 0.7rem;
               }
             }
 

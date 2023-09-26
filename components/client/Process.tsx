@@ -4,6 +4,8 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { getProcesses } from "@/sanity/sanity-utils";
 
+import gif from "@/public/assets/images/V01.gif";
+
 import {
   CircularText,
   StitchingImpact,
@@ -75,7 +77,11 @@ export default function Process() {
             </Link>
           </div>
           <div className="mission-container">
-            <StitchingImpact />
+            {/* 
+            <StitchingImpact /> */}
+            <div className="img-container">
+              <Image src={gif} fill sizes="100" alt="gif" />
+            </div>
           </div>
         </div>
 

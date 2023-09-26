@@ -10,6 +10,21 @@
     justify-content: space-between;
     gap: 10px;
 
+    .tkp-admin-menu {
+      display: flex;
+      gap: 10px;
+
+      .active {
+        background-color: v.$textTeal;
+        color: v.$bg;
+      }
+    }
+
+    .tkp-admin-option {
+      display: flex;
+      gap: 10px;
+    }
+
     button {
       border: 1px solid v.$textTeal;
       padding: 5px 10px;
@@ -23,17 +38,46 @@
     }
   }
 
-  table {
-    tr {
-      td {
-        padding: 0 10px;
-        border: 1px solid v.$dark;
+  .table-responsive {
+    overflow-x: scroll;
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+
+      thead {
+        tr {
+          th {
+            text-align: left;
+            border: 2px solid v.$dark;
+            padding: 5px 10px;
+            font-size: 1rem;
+            line-height: 1;
+          }
+        }
+      }
+
+      tbody {
+        border: 2px solid v.$dark;
+
+        tr {
+          td {
+            border: 1px solid v.$dark;
+            padding: 5px 10px;
+            font-size: 1rem;
+            line-height: 1.2;
+          }
+        }
+      }
+
+      .recent-order {
+        color: green;
+        font-family: v.$fontRM;
+      }
+
+      .future-order {
+        color: v.$dark;
       }
     }
-  }
-
-  .tkp-admin-option {
-    display: flex;
-    gap: 10px;
   }
 }
