@@ -22,6 +22,7 @@ type Props = {
 
 export default function Product({ params }: Props) {
   const count = useAppSelector((state) => state.CardReducer.value);
+  const userAddress = useAppSelector((state) => state.userSlice.value);
   const router = useRouter();
   const dispatch = useAppDispatch();
   const [product, setProduct] = useState<products>();
@@ -171,7 +172,7 @@ export default function Product({ params }: Props) {
                       {
                         getProCart(userData.extra_data.id).then((data) => {
                           dispatch(addToCard(data.data));
-                          updateCardRedx(userData.extra_data.id, count);
+
                         });
                       }
                     }
@@ -189,9 +190,9 @@ export default function Product({ params }: Props) {
                     (data) => {
                       getProCart(userData.extra_data.id).then((data) => {
                         dispatch(addToCard(data.data));
-                        updateCardRedx(userData.extra_data.id, count);
+
                         router.push(
-                          userData.extra_data.address
+                          userAddress.length != 0
                             ? "/checkout/shippingInfo/authorize"
                             : "/checkout/shippingInfo/"
                         );
@@ -242,7 +243,7 @@ export default function Product({ params }: Props) {
                         (data) => {
                           getProCart(userData.extra_data.id).then((data) => {
                             dispatch(addToCard(data.data));
-                            updateCardRedx(userData.extra_data.id, count);
+
                           });
                         }
                       );

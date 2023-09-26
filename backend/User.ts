@@ -49,8 +49,14 @@ export const updateRedx = async (id: string, data: any) => {
     await DB.from("Redux").insert({ Redux: data, user: id });
   } else await DB.from("Redux").update({ Redux: data }).eq("user", id);
 };
-export const updateCardRedx = async (id: string, Cards: any) => {
-  return;
+export const updateCardRedx = async (id: string) => {
+  let d = await DB.from("Redux").select("*").eq("user", id);
+  if (d.data)
+    await DB.from("Redux")
+      .update({
+        Redux: { ...d.data[0].Redux, CardReducer: { value: [] } },
+      })
+      .eq("user", id);
 };
 export const updateUserRedx = async (id: string, UserAddress: any) => {
   return;

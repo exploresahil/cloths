@@ -9,11 +9,12 @@ import { AiOutlinePlus } from "react-icons/ai";
 import { getProCart, RemoveCartOrder } from "@/backend/Cart";
 import { products } from "@/types/Products";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
-import { removeToCard } from "@/redux/reducer/cartSlice";
+import { removeToCard, reset } from "@/redux/reducer/cartSlice";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { makeOrder } from "@/backend/Order";
+import { updateCardRedx } from "@/backend/User";
 export default function Authorize() {
   const count = useAppSelector((state) => state.CardReducer.value);
   const dispatch = useAppDispatch();
@@ -171,12 +172,14 @@ export default function Authorize() {
                   ...{ ...UserAddress.at(-1), name: undefined, id: undefined }
                 }
               ).then((data) => {
-                console.log(data);
+
                 axios.post("/api/getPaymentGateway", {
                   price: total,
                   phoneNo: userData.extra_data.phone,
                   order_id: data.data[0].id
                 }).then(({ data: Data }) => {
+                  updateCardRedx(userData.extra_data.id)
+                  dispatch(reset());
                   router.push(Data.data.instrumentResponse.redirectInfo.url)
                 })
 

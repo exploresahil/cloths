@@ -19,6 +19,7 @@ import { updateCardRedx } from "@/backend/User";
 
 const Cart = ({ onCartCloseClick }: props) => {
   const count = useAppSelector((state) => state.CardReducer.value);
+  const userAddress = useAppSelector((state) => state.userSlice.value);
   const router = useRouter();
   const dispatch = useAppDispatch();
   const [product, setProduct] = useState<null | any[]>(null);
@@ -70,10 +71,7 @@ const Cart = ({ onCartCloseClick }: props) => {
                         getProCart(userData.extra_data.id).then(
                           async (data) => {
                             dispatch(removeToCard(data.data));
-                            await updateCardRedx(
-                              userData.extra_data.id,
-                              count
-                            ).then(() => {});
+
                             // console.log(data);
                           }
                         );
@@ -95,7 +93,7 @@ const Cart = ({ onCartCloseClick }: props) => {
             /*  console.log(userData.extra_data.address); */
 
             router.push(
-              userData.extra_data.address
+              userAddress.length != 0
                 ? "/checkout/shippingInfo/authorize"
                 : "/checkout/shippingInfo/"
             );

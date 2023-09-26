@@ -12,8 +12,6 @@ export const store = configureStore({
   devTools: process.env.NODE_ENV !== "production",
   middleware: (da) => {
     return da().concat(({ getState }) => (next) => async (action) => {
-      console.log("ss=>", action);
-
       const result = next(action);
       if (action.type != "CartCounter/reset" || action.type != "Users/reset") {
         const data = JSON.parse(localStorage.getItem("userData") || "{}");

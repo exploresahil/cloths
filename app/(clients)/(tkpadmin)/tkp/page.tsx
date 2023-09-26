@@ -190,7 +190,7 @@ const page = () => {
                 (item) => (
                   /* item.payment_confirm && ( */
                   <tr key={item.id} className={getRowColor(item.created_at)}>
-                    <td>{serialNumber--}</td>
+                    <td>{serialNumber++}</td>
                     <td>{item.id}</td>
                     <td>
                       {item.product.map((products) => (
