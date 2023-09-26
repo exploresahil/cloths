@@ -21,7 +21,7 @@ const User = () => {
     setUserData(JSON.parse(localStorage.getItem("userData") || ""));
   }, []);
   console.log(userData);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   return (
     userData && (
@@ -53,7 +53,7 @@ const User = () => {
               <div className="product-info">
                 <div className="item-info">
                   <div className="order-number">
-                    <p>Order No: { }</p>
+                    <p>Order ID: {}</p>
                   </div>
                   <div className="items">
                     <div className="info">
@@ -72,7 +72,7 @@ const User = () => {
                     </div>
                   </div>
                   <div className="order-address">
-                    <p>Address: { }</p>
+                    <p>Address: {}</p>
                   </div>
                 </div>
               </div>
@@ -102,8 +102,8 @@ const User = () => {
                 await DB.auth.signOut();
 
                 localStorage.clear();
-                dispatch(reset())
-                dispatch(Rest())
+                dispatch(reset());
+                dispatch(Rest());
                 router.push("/login");
               }}
             >

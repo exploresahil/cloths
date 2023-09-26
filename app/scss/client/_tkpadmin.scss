@@ -108,6 +108,12 @@
       }
 
       tbody {
+        p {
+          position: absolute;
+          color: red;
+          margin: 40px;
+        }
+
         tr {
           td {
             border: 1px solid v.$dark;
