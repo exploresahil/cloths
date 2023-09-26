@@ -24,6 +24,7 @@ type DataItem = {
   created_at: string;
   more_info: string;
   locality: string;
+  payment_confirm: boolean;
   // other properties...
 };
 
@@ -171,35 +172,38 @@ const page = () => {
               </tr>
             </thead>
             <tbody>
-              {data.map((item, index) => (
-                <tr key={item.id} className={getRowColor(item.created_at)}>
-                  <td>{data.length - index}</td>
-                  <td>{item.id}</td>
-                  <td>
-                    {item.product.map((products) => (
-                      <div key={products.id}>
-                        • {products.product.sku}: (
-                        {formatSizes(products.product.size)}),
-                      </div>
-                    ))}
-                  </td>
-                  <td>
-                    {item.product.map((products) => (
-                      <div key={products.id}>
-                        • {products.product.name}: (
-                        {formatSizes(products.product.size)}),
-                      </div>
-                    ))}
-                  </td>
-                  <td>{item.user}</td>
-                  <td>{item.phone}</td>
-                  <td>
-                    {item.address},Locality: {item.locality}, More Info:{" "}
-                    {item.more_info}
-                  </td>
-                  <td>{formatDateTime(item.created_at)}</td>
-                </tr>
-              ))}
+              {data.map(
+                (item, index) =>
+                  item.payment_confirm && (
+                    <tr key={item.id} className={getRowColor(item.created_at)}>
+                      <td>{data.length - index}</td>
+                      <td>{item.id}</td>
+                      <td>
+                        {item.product.map((products) => (
+                          <div key={products.id}>
+                            • {products.product.sku}: (
+                            {formatSizes(products.product.size)}),
+                          </div>
+                        ))}
+                      </td>
+                      <td>
+                        {item.product.map((products) => (
+                          <div key={products.id}>
+                            • {products.product.name}: (
+                            {formatSizes(products.product.size)}),
+                          </div>
+                        ))}
+                      </td>
+                      <td>{item.user}</td>
+                      <td>{item.phone}</td>
+                      <td>
+                        {item.address},Locality: {item.locality}, More Info:{" "}
+                        {item.more_info}
+                      </td>
+                      <td>{formatDateTime(item.created_at)}</td>
+                    </tr>
+                  )
+              )}
             </tbody>
           </table>
         </div>
