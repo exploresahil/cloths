@@ -89,8 +89,12 @@ const page = () => {
     const orderDate = new Date(created_at);
     const oneWeekAgo = new Date();
     oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+    const oneDayAgo = new Date();
+    oneDayAgo.setDate(oneDayAgo.getDate() - 1);
 
-    if (orderDate >= oneWeekAgo && orderDate <= currentDate) {
+    if (orderDate >= oneDayAgo && orderDate <= currentDate) {
+      return "brown-order"; // brown color for orders less than 1 day old
+    } else if (orderDate >= oneWeekAgo && orderDate <= currentDate) {
       return "recent-order"; // green color for recent orders
     } else if (orderDate > currentDate) {
       return "future-order"; // Black color for future orders
@@ -139,11 +143,24 @@ const page = () => {
         </div>
       </div>
       {activeTab === "orders" && (
+        <div className="table-admin-info">
+          <p>
+            with in 24hr: <span className="blue" />
+          </p>
+          <p>
+            with in 7 days: <span className="green" />
+          </p>
+          <p>
+            before 7 days: <span className="black" />
+          </p>
+        </div>
+      )}
+      {activeTab === "orders" && (
         <div className="table-responsive">
           <table ref={tableRef}>
             <thead>
               <tr className="title">
-                <th>Sr/No</th>
+                <th className="srno">Sr/No</th>
                 <th>Order No.</th>
                 <th>Product SKUs</th>
                 <th>Products</th>
@@ -153,7 +170,6 @@ const page = () => {
                 <th>Ordered On</th>
               </tr>
             </thead>
-
             <tbody>
               {data.map((item, index) => (
                 <tr key={item.id} className={getRowColor(item.created_at)}>
