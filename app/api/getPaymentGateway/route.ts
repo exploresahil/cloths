@@ -12,8 +12,8 @@ export async function POST(request: Request) {
     merchantUserId: "PGTESTPAYUAT140",
     //amount: parseFloat(`${price}.00`) * 100,
     amount: parseFloat(`${price}`) * 100,
-    redirectUrl: `http://localhost:3000/thankyou`,
-    redirectMode: "GET",
+    redirectUrl: `http://localhost:3000/api/paymentConfrom/${order_id}`,
+    redirectMode: "POST",
     callbackUrl: `http://localhost:3000/api/paymentConfrom/${order_id}`,
     mobileNumber: phoneNo,
     paymentInstrument: {
