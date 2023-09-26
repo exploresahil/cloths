@@ -23,6 +23,7 @@ type DataItem = {
   address: string;
   created_at: string;
   more_info: string;
+  locality: string;
   // other properties...
 };
 
@@ -31,13 +32,12 @@ const page = () => {
   const [activeTab, setActiveTab] = useState("orders");
 
   const tableRef = useRef(null);
-
   const generateFilename = () => {
     const date = new Date();
     const dd = String(date.getDate()).padStart(2, "0");
     const mm = String(date.getMonth() + 1).padStart(2, "0");
     const yyyy = date.getFullYear();
-    const hh = String(date.getHours()).padStart(2, "0");
+    const hh = String(date.getHours() % 12 || 12).padStart(2, "0"); // Convert to 12-hour format
     const min = String(date.getMinutes()).padStart(2, "0");
     const ampm = date.getHours() >= 12 ? "pm" : "am";
 
@@ -178,7 +178,8 @@ const page = () => {
                   <td>{item.user}</td>
                   <td>{item.phone}</td>
                   <td>
-                    {item.address}, More Info: {item.more_info}
+                    {item.address},Locality: {item.locality}, More Info:{" "}
+                    {item.more_info}
                   </td>
                   <td>{formatDateTime(item.created_at)}</td>
                 </tr>

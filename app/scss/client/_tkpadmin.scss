@@ -44,6 +44,7 @@
     table {
       width: 100%;
       border-collapse: collapse;
+      border-spacing: 0;
 
       thead {
         tr {
@@ -61,11 +62,13 @@
         border: 2px solid v.$dark;
 
         tr {
+          border: 2px solid v.$dark;
           td {
             border: 1px solid v.$dark;
             padding: 5px 10px;
             font-size: 1rem;
             line-height: 1.2;
+            border-radius: 20px;
           }
         }
       }
