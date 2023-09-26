@@ -111,19 +111,12 @@ const page = () => {
     setActiveTab(tabName);
   };
 
-  // Filter data to include only items with payment_confirm true and sort by created_at in descending order
-  const filteredData = data
-    .filter((item) => item.payment_confirm === true)
-    .sort(
-      (a, b) =>
-        new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-    );
-
   // Initialize serial number to 1
   let serialNumber = 1;
 
   return (
     <div className="tkp-admin-main">
+      <h2>Admin</h2>
       <div className="tkp-admin-title">
         <div className="tkp-admin-menu">
           <button
@@ -186,6 +179,7 @@ const page = () => {
               </tr>
             </thead>
             <tbody>
+<<<<<<< HEAD
               {filteredData.map(
                 (item) => (
                   /* item.payment_confirm && ( */
@@ -218,6 +212,39 @@ const page = () => {
                   </tr>
                 )
                 /*    ) */
+=======
+              {data.map(
+                (item) =>
+                  item.payment_confirm && (
+                    <tr key={item.id} className={getRowColor(item.created_at)}>
+                      <td>{serialNumber++}</td>
+                      <td>TKP-{item.id}</td>
+                      <td>
+                        {item.product.map((products) => (
+                          <div key={products.id}>
+                            • {products.product.sku}: (
+                            {formatSizes(products.product.size)}),
+                          </div>
+                        ))}
+                      </td>
+                      <td>
+                        {item.product.map((products) => (
+                          <div key={products.id}>
+                            • {products.product.name}: (
+                            {formatSizes(products.product.size)}),
+                          </div>
+                        ))}
+                      </td>
+                      <td>{item.user.name}</td>
+                      <td>{item.phone}</td>
+                      <td>
+                        {item.address},Locality: {item.locality}, More Info:{" "}
+                        {item.more_info}
+                      </td>
+                      <td>{formatDateTime(item.created_at)}</td>
+                    </tr>
+                  )
+>>>>>>> 9ae99da2879d19c2b5845fc98cf75b4e8fac7eea
               )}
             </tbody>
           </table>
