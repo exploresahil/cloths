@@ -169,7 +169,7 @@ export default function Authorize() {
                 userData.extra_data.id,
                 {
 
-                  ...{ ...UserAddress.at(-1), name: undefined, id: undefined }
+                  ...{ ...UserAddress.at(-1), id: undefined }
                 }
               ).then((data) => {
 
@@ -178,9 +178,12 @@ export default function Authorize() {
                   phoneNo: userData.extra_data.phone,
                   order_id: data.data[0].id
                 }).then(({ data: Data }) => {
-                  updateCardRedx(userData.extra_data.id)
+                  console.log(Data.data);
+
+                  updateCardRedx(userData.extra_data.id);
+
                   dispatch(reset());
-                  router.push(Data.data.instrumentResponse.redirectInfo.url)
+                  router.push(Data.data.redirectURL)
                 })
 
 
