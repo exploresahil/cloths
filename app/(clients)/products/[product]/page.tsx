@@ -15,7 +15,6 @@ import { PortableText } from "@portabletext/react";
 import { ScrollArrow } from "@/components/icons/Icons";
 import { AddCartOrder, getProCart } from "@/backend/Cart";
 import { useRouter } from "next/navigation";
-import { updateCardRedx } from "@/backend/User";
 type Props = {
   params: { product: any };
 };

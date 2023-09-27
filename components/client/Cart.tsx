@@ -15,7 +15,6 @@ import { getProCart, RemoveCartOrder } from "@/backend/Cart";
 import { products } from "@/types/Products";
 
 import { useRouter } from "next/navigation";
-import { updateCardRedx } from "@/backend/User";
 
 const Cart = ({ onCartCloseClick }: props) => {
   const count = useAppSelector((state) => state.CardReducer.value);
