@@ -111,7 +111,6 @@ const page = () => {
     setActiveTab(tabName);
   };
 
-  // Initialize serial number to 1
   let serialNumber = 1;
 
   return (
