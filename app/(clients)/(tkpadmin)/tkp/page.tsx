@@ -87,22 +87,9 @@ const page = () => {
         setData(sortedData);
         setLoading(false);
       })
-      .then(() => {
-        toast.success("Refreshed Orders", {
-          theme: "colored",
-          autoClose: 400,
-          icon: "🚀",
-          hideProgressBar: true,
-        });
-      })
       .catch((error) => {
+        console.error("Error fetching orders:", error);
         setLoading(false);
-        toast.error("Error refreshing data", {
-          theme: "colored",
-          autoClose: 4000,
-          icon: "❌",
-          hideProgressBar: true,
-        });
       });
 
     fetch("/api/admin/newsletter")
@@ -115,22 +102,9 @@ const page = () => {
         setNLData(sortedNLData);
         setLoading(false);
       })
-      .then(() => {
-        toast.success("Refreshed NewsLetters", {
-          theme: "colored",
-          autoClose: 400,
-          icon: "🚀",
-          hideProgressBar: true,
-        });
-      })
       .catch((error) => {
+        console.error("Error fetching orders:", error);
         setLoading(false);
-        toast.error("Error refreshing data", {
-          theme: "colored",
-          autoClose: 4000,
-          icon: "❌",
-          hideProgressBar: true,
-        });
       });
 
     fetch("/api/admin/contact")
@@ -143,22 +117,9 @@ const page = () => {
         setContactData(sortedContactData);
         setLoading(false);
       })
-      .then(() => {
-        toast.success("Refreshed Contacts", {
-          theme: "colored",
-          autoClose: 400,
-          icon: "🚀",
-          hideProgressBar: true,
-        });
-      })
       .catch((error) => {
+        console.error("Error fetching orders:", error);
         setLoading(false);
-        toast.error("Error refreshing data", {
-          theme: "colored",
-          autoClose: 4000,
-          icon: "❌",
-          hideProgressBar: true,
-        });
       });
   };
 
