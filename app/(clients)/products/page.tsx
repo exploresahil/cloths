@@ -13,6 +13,7 @@ import { category } from "@/types/Category";
 import { AiOutlinePlus } from "react-icons/ai";
 import { useSearchParams } from "next/navigation";
 import { AddCartOrder, getProCart } from "@/backend/Cart";
+import { toast } from "react-toastify";
 
 function arraysHaveCommonElement(array1: any[], array2: any[]) {
   return array1.some((item) => array2.includes(item));
@@ -85,6 +86,19 @@ const Products = () => {
   useEffect(() => {
     setUser(JSON.parse(localStorage.getItem("userData") || ""));
   }, []);
+
+  const handleAddToCart = (product: any) => {
+    AddCartOrder(product, userData.extra_data.id, 1).then(() => {
+      getProCart(userData.extra_data.id).then((data) => {
+        dispatch(addToCard(data.data));
+        toast.success("Product Added", {
+          theme: "colored",
+          autoClose: 800,
+          hideProgressBar: true,
+        });
+      });
+    });
+  };
 
   return (
     <div className="products-main">
@@ -172,17 +186,7 @@ const Products = () => {
                             <button
                               type="button"
                               onClick={() => {
-                                AddCartOrder(
-                                  product,
-                                  userData.extra_data.id,
-                                  1
-                                ).then(() => {
-                                  getProCart(userData.extra_data.id).then(
-                                    (data) => {
-                                      dispatch(addToCard(data.data));
-                                    }
-                                  );
-                                });
+                                handleAddToCart(product);
                               }}
                             >
                               <AiOutlinePlus />
@@ -218,18 +222,7 @@ const Products = () => {
                             <button
                               type="button"
                               onClick={() => {
-                                // console.log("hi", "", product, userData);
-                                AddCartOrder(
-                                  product,
-                                  userData.extra_data.id,
-                                  1
-                                ).then(() => {
-                                  getProCart(userData.extra_data.id).then(
-                                    (data) => {
-                                      dispatch(addToCard(data.data));
-                                    }
-                                  );
-                                });
+                                handleAddToCart(product);
                               }}
                             >
                               <AiOutlinePlus />
@@ -269,17 +262,7 @@ const Products = () => {
                           <button
                             type="button"
                             onClick={() => {
-                              AddCartOrder(
-                                product,
-                                userData.extra_data.id,
-                                1
-                              ).then((data) => {
-                                getProCart(userData.extra_data.id).then(
-                                  (data) => {
-                                    dispatch(addToCard(data.data));
-                                  }
-                                );
-                              });
+                              handleAddToCart(product);
                             }}
                           >
                             <AiOutlinePlus />
@@ -316,19 +299,7 @@ const Products = () => {
                           <button
                             type="button"
                             onClick={() => {
-                              console.log("hi");
-
-                              AddCartOrder(
-                                product,
-                                userData.extra_data.id,
-                                1
-                              ).then(() => {
-                                getProCart(userData.extra_data.id).then(
-                                  (data) => {
-                                    dispatch(addToCard(data.data));
-                                  }
-                                );
-                              });
+                              handleAddToCart(product);
                             }}
                           >
                             <AiOutlinePlus />
@@ -366,19 +337,7 @@ const Products = () => {
                         <button
                           type="button"
                           onClick={() => {
-                            console.log("hi");
-
-                            AddCartOrder(
-                              product,
-                              userData.extra_data.id,
-                              1
-                            ).then(() => {
-                              getProCart(userData.extra_data.id).then(
-                                (data) => {
-                                  dispatch(addToCard(data.data));
-                                }
-                              );
-                            });
+                            handleAddToCart(product);
                           }}
                         >
                           <AiOutlinePlus />
@@ -414,18 +373,7 @@ const Products = () => {
                         <button
                           type="button"
                           onClick={() => {
-                            console.log("hi");
-                            AddCartOrder(
-                              product,
-                              userData.extra_data.id,
-                              1
-                            ).then(() => {
-                              getProCart(userData.extra_data.id).then(
-                                (data) => {
-                                  dispatch(addToCard(data.data));
-                                }
-                              );
-                            });
+                            handleAddToCart(product);
                           }}
                         >
                           <AiOutlinePlus />

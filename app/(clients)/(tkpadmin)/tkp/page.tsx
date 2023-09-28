@@ -1,7 +1,6 @@
 "use client";
 import { useRef } from "react";
 import { useDownloadExcel } from "react-export-table-to-excel";
-import { toast } from "react-toastify";
 
 //Order Id: TKP000001
 
@@ -32,6 +31,9 @@ type DataItem = {
   more_info: string;
   locality: string;
   payment_confirm: boolean;
+  pincode: number;
+  city: string;
+  state: string;
 };
 
 type DataNLItem = {
@@ -307,8 +309,9 @@ const page = () => {
                       <td>{item.user.name}</td>
                       <td>{item.phone}</td>
                       <td>
-                        {item.address},Locality: {item.locality}, More Info:{" "}
-                        {item.more_info}
+                        {item.address}, Locality: {item.locality}, City:{" "}
+                        {item.city}, Pincode: {item.pincode}, State:{" "}
+                        {item.state}, More Info: {item.more_info}
                       </td>
                       <td>{formatDateTime(item.created_at)}</td>
                     </tr>

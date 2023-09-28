@@ -15,6 +15,8 @@ import { PortableText } from "@portabletext/react";
 import { ScrollArrow } from "@/components/icons/Icons";
 import { AddCartOrder, getProCart } from "@/backend/Cart";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
+
 type Props = {
   params: { product: any };
 };
@@ -106,6 +108,19 @@ export default function Product({ params }: Props) {
     }
   };
 
+  const handleAddToCart = (product: any) => {
+    AddCartOrder(product, userData.extra_data.id, 1).then(() => {
+      getProCart(userData.extra_data.id).then((data) => {
+        dispatch(addToCard(data.data));
+        toast.success("Product Added", {
+          theme: "colored",
+          autoClose: 800,
+          hideProgressBar: true,
+        });
+      });
+    });
+  };
+
   return (
     <>
       {product && (
@@ -166,16 +181,7 @@ export default function Product({ params }: Props) {
               <button
                 type="button"
                 onClick={() => {
-                  AddCartOrder(product, userData.extra_data.id, 1).then(
-                    (data) => {
-                      {
-                        getProCart(userData.extra_data.id).then((data) => {
-                          dispatch(addToCard(data.data));
-
-                        });
-                      }
-                    }
-                  );
+                  handleAddToCart(product);
                 }}
               >
                 <AiFillPlusCircle />
@@ -242,7 +248,6 @@ export default function Product({ params }: Props) {
                         (data) => {
                           getProCart(userData.extra_data.id).then((data) => {
                             dispatch(addToCard(data.data));
-
                           });
                         }
                       );
