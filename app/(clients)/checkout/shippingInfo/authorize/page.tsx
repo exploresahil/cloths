@@ -176,6 +176,9 @@ export default function Authorize() {
                     })
                     .then(({ data: Data }) => {
                       console.log(Data.data);
+                      const data = JSON.parse(localStorage.getItem("applicationState") || "{}");
+                      data.CardReducer.value = [];
+                      localStorage.setItem("applicationState", JSON.stringify(data));
 
                       updateCardRedx(userData.extra_data.id);
 
