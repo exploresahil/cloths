@@ -17,18 +17,19 @@ export default function Newsletter() {
 
   const submitNewsLetter = (e: any) => {
     e.preventDefault();
-    NL(inputValue.firstName, inputValue.lastName, inputValue.email).then(
-      () => {
+    NL(inputValue.firstName, inputValue.lastName, inputValue.email)
+      .then(() => {
         toast.success("Submitted Successfully!", {
           theme: "colored",
+          autoClose: 800,
         });
-      },
-      (error) => {
+      })
+      .catch((error) => {
         toast.error("Erron on submit!", {
           theme: "colored",
+          autoClose: 800,
         });
-      }
-    );
+      });
   };
 
   return (

@@ -1,6 +1,7 @@
 "use client";
 import { useRef } from "react";
 import { useDownloadExcel } from "react-export-table-to-excel";
+import { toast } from "react-toastify";
 
 //Order Id: TKP000001
 
@@ -55,6 +56,7 @@ const page = () => {
   const [NLdata, setNLData] = useState<DataNLItem[]>([]);
   const [Contactdata, setContactData] = useState<DataContactItem[]>([]);
   const [activeTab, setActiveTab] = useState("orders");
+  const [loading, setLoading] = useState(false);
 
   const tableRef = useRef(null);
   const newsletterTableRef = useRef(null);
@@ -70,6 +72,63 @@ const page = () => {
     const ampm = date.getHours() >= 12 ? "pm" : "am";
 
     return `TKP-${prefix}-${dd}-${mm}-${yyyy}-${hh}-${min}-${ampm}`;
+  };
+
+  const fetchData = () => {
+    setLoading(true);
+
+    fetch("/api/admin/allorders")
+      .then((response) => response.json())
+      .then((json) => {
+        const sortedData = json.data.sort(
+          (a: any, b: any) =>
+            new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+        );
+        setData(sortedData);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching orders:", error);
+        setLoading(false);
+      });
+
+    fetch("/api/admin/newsletter")
+      .then((response) => response.json())
+      .then((json) => {
+        const sortedNLData = json.data.sort(
+          (a: any, b: any) =>
+            new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+        );
+        setNLData(sortedNLData);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching orders:", error);
+        setLoading(false);
+      });
+
+    fetch("/api/admin/contact")
+      .then((response) => response.json())
+      .then((json) => {
+        const sortedContactData = json.data.sort(
+          (a: any, b: any) =>
+            new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+        );
+        setContactData(sortedContactData);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching orders:", error);
+        setLoading(false);
+      });
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const handleRefreshClick = () => {
+    fetchData();
   };
 
   const { onDownload: onOrdersDownload } = useDownloadExcel({
@@ -89,46 +148,6 @@ const page = () => {
     filename: generateFilename("ContactUs"),
     sheet: "ContactUs",
   });
-
-  const fetchData = () => {
-    fetch("/api/admin/allorders")
-      .then((response) => response.json())
-      .then((json) => {
-        const sortedData = json.data.sort(
-          (a: any, b: any) =>
-            new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-        );
-        setData(sortedData);
-      });
-
-    fetch("/api/admin/newsletter")
-      .then((response) => response.json())
-      .then((json) => {
-        const sortedNLData = json.data.sort(
-          (a: any, b: any) =>
-            new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-        );
-        setNLData(sortedNLData);
-      });
-
-    fetch("/api/admin/contact")
-      .then((response) => response.json())
-      .then((json) => {
-        const sortedContactData = json.data.sort(
-          (a: any, b: any) =>
-            new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-        );
-        setContactData(sortedContactData);
-      });
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  const handleRefreshClick = () => {
-    fetchData();
-  };
 
   function formatSizes(sizes: string[]) {
     return sizes.join(", ");
@@ -202,13 +221,20 @@ const page = () => {
           </button>
         </div>
         <div className="tkp-admin-option">
-          <button
-            type="button"
-            className="refresh"
-            onClick={handleRefreshClick}
-          >
-            <BiRefresh />
-          </button>
+          {loading ? (
+            <div className="loading">
+              <BiRefresh />
+            </div>
+          ) : (
+            <button
+              type="button"
+              className="refresh"
+              onClick={handleRefreshClick}
+              title="refresh"
+            >
+              <BiRefresh />
+            </button>
+          )}
           <button type="button">Sign Out</button>
           {activeTab === "orders" && (
             <button type="button" onClick={onOrdersDownload}>
@@ -300,7 +326,7 @@ const page = () => {
                 <th className="srno">Sr/No</th>
                 <th>Name</th>
                 <th>Email</th>
-                <th>Created At</th>
+                <th>Submitted On</th>
               </tr>
             </thead>
             <tbody>
@@ -327,7 +353,7 @@ const page = () => {
                 <th>Name</th>
                 <th>Email</th>
                 <th>Message</th>
-                <th>Created At</th>
+                <th>Submitted On</th>
               </tr>
             </thead>
             <tbody>

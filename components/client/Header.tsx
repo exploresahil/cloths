@@ -51,11 +51,13 @@ const Header = () => {
       () => {
         toast.success("Submitted Successfully!", {
           theme: "colored",
+          autoClose: 800,
         });
       },
       (error) => {
         toast.error("Erron on submit!", {
           theme: "colored",
+          autoClose: 800,
         });
       }
     );
@@ -78,17 +80,22 @@ const Header = () => {
     (async () => {
       const dam = await getUser();
       console.log(dam);
-      await getRedx(dam.extra_data.id).then((data_) => {
-        console.log("red->", data_);
 
-        dispatch(Set(data_.data?.at(0).Redux.userSlice.value));
-        dispatch(set(data_.data?.at(0).Redux.CardReducer.value));
-      });
+      if (dam.extra_data) {
+        await getRedx(dam.extra_data.id).then((data_) => {
+          console.log("red->", data_);
+          dispatch(Set(data_.data?.at(0).Redux.userSlice.value));
+          dispatch(set(data_.data?.at(0).Redux.CardReducer.value));
+        });
+      } else {
+        console.error("dam.extra_data is undefined"); // Handle this case as needed
+      }
 
       if (dam.data !== null) {
         setUserData(dam);
       } else setUserData(undefined);
     })();
+
     let prevScrollPos = window.scrollY || document.documentElement.scrollTop;
     const handleScroll = () => {
       const currentScrollPos =
