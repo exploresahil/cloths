@@ -42,21 +42,40 @@ const Login = () => {
               e.preventDefault();
               EmailLogin(inputValue.email, inputValue.password)
                 .then(async (data) => {
+                  console.log(data);
+
                   if (data.error?.message == "User already registered")
                     db.auth.signInWithPassword({
                       email: inputValue.email,
                       password: inputValue.password,
+                    }).then(async () => {
+                      await getUser().then(async (data) => {
+                        console.log(data);
+                        const data_ = await getRedx(data.extra_data.id);
+                        console.log(data_);
+
+                        dispatch(set(data_.data?.at(0).Redux?.userSlice || []));
+                        dispatch(Set(data_.data?.at(0).Redux?.CardReducer || []));
+
+                        window.location.href = "/user"
+                      });
                     });
-                  else alert(data.error?.message);
-                  await getUser().then(async (data) => {
-                    // console.log(data);
-                    const data_ = await getRedx(data.extra_data.id);
-                    dispatch(set(data_.data?.at(0).Redux.userSlice));
-                    dispatch(Set(data_.data?.at(0).Redux.CardReducer));
-                    router.push("/user");
-                  });
+                  else if (!data.error?.message) {
+                    await getUser().then(async (data) => {
+                      // console.log(data);
+                      const data_ = await getRedx(data.extra_data.id);
+                      console.log(data_);
+
+                      dispatch(set([]));
+                      dispatch(Set([]));
+                      window.location.href = "/user"
+                    });
+                  };
+
                 })
                 .catch((e) => {
+                  console.log(e);
+
                   alert("An error occurred: " + e.message);
                 });
             }}

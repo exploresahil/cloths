@@ -4,6 +4,17 @@ export const getUser = async () => {
   let data = await DB.auth.getUser();
   const da = await DB.from("USER").select("*").eq("user", data.data.user?.id);
   if (da.data?.length == 0) {
+    await DB.from("Redux").insert({
+      Redux: {
+        CardReducer: {
+          value: [],
+        },
+        userSlice: {
+          value: [],
+        },
+      },
+      user: da.data.at(0).id,
+    });
     await DB.from("USER").insert({
       user: data.data.user?.id,
     });
