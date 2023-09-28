@@ -157,7 +157,7 @@ const page = () => {
     oneDayAgo.setDate(oneDayAgo.getDate() - 1);
 
     if (orderDate >= oneDayAgo && orderDate <= currentDate) {
-      return "blue-order"; // brown color for orders less than 1 day old
+      return "blue-order"; // blue color for orders less than 1 day old
     } else if (orderDate >= oneWeekAgo && orderDate <= currentDate) {
       return "green-order"; // green color for recent orders
     } else if (orderDate > currentDate) {
