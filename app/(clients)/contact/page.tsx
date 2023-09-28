@@ -36,18 +36,17 @@ const Contact = () => {
       inputValue.lastName,
       inputValue.email,
       inputValue.message
-    ).then(
-      () => {
+    )
+      .then(() => {
         toast.success("Submitted Successfully!", {
           theme: "colored",
         });
-      },
-      (error) => {
+      })
+      .catch((error) => {
         toast.error("Erron on submit!", {
           theme: "colored",
         });
-      }
-    );
+      });
   };
 
   const handleMessageChange = (e: any) => {

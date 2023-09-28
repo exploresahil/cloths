@@ -55,6 +55,7 @@ const page = () => {
   const [NLdata, setNLData] = useState<DataNLItem[]>([]);
   const [Contactdata, setContactData] = useState<DataContactItem[]>([]);
   const [activeTab, setActiveTab] = useState("orders");
+  const [loading, setLoading] = useState(false);
 
   const tableRef = useRef(null);
   const newsletterTableRef = useRef(null);
@@ -91,6 +92,8 @@ const page = () => {
   });
 
   const fetchData = () => {
+    setLoading(true);
+
     fetch("/api/admin/allorders")
       .then((response) => response.json())
       .then((json) => {
@@ -99,6 +102,11 @@ const page = () => {
             new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
         );
         setData(sortedData);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching orders:", error);
+        setLoading(false);
       });
 
     fetch("/api/admin/newsletter")
@@ -109,6 +117,11 @@ const page = () => {
             new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
         );
         setNLData(sortedNLData);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching orders:", error);
+        setLoading(false);
       });
 
     fetch("/api/admin/contact")
@@ -119,6 +132,11 @@ const page = () => {
             new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
         );
         setContactData(sortedContactData);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching orders:", error);
+        setLoading(false);
       });
   };
 
@@ -202,13 +220,19 @@ const page = () => {
           </button>
         </div>
         <div className="tkp-admin-option">
-          <button
-            type="button"
-            className="refresh"
-            onClick={handleRefreshClick}
-          >
-            <BiRefresh />
-          </button>
+          {loading ? (
+            <div className="loading">
+              <BiRefresh />
+            </div>
+          ) : (
+            <button
+              type="button"
+              className="refresh"
+              onClick={handleRefreshClick}
+            >
+              <BiRefresh />
+            </button>
+          )}
           <button type="button">Sign Out</button>
           {activeTab === "orders" && (
             <button type="button" onClick={onOrdersDownload}>

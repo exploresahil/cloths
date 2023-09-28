@@ -17,6 +17,7 @@
 
     .tkp-admin-menu {
       display: flex;
+      align-items: center;
       gap: 10px;
       flex-wrap: wrap;
 
@@ -28,10 +29,29 @@
 
     .tkp-admin-option {
       display: flex;
+      align-items: center;
       gap: 10px;
 
-      .refresh {
+      .loading {
         padding: 5px;
+        color: blue;
+
+        svg {
+          animation: rotate 1s ease-in-out infinite;
+
+          @keyframes rotate {
+            from {
+              transform: rotate(0deg);
+            }
+            to {
+              transform: rotate(-360deg);
+            }
+          }
+        }
+      }
+
+      .refresh {
+        padding: 4px;
         display: flex;
         justify-content: center;
         align-items: center;
