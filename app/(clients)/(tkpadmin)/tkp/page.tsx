@@ -64,7 +64,7 @@ const page = () => {
     const dd = String(date.getDate()).padStart(2, "0");
     const mm = String(date.getMonth() + 1).padStart(2, "0");
     const yyyy = date.getFullYear();
-    const hh = String(date.getHours() % 12 || 12).padStart(2, "0"); // Convert to 12-hour format
+    const hh = String(date.getHours() % 12 || 12).padStart(2, "0");
     const min = String(date.getMinutes()).padStart(2, "0");
     const ampm = date.getHours() >= 12 ? "pm" : "am";
 
@@ -73,19 +73,19 @@ const page = () => {
 
   const { onDownload: onOrdersDownload } = useDownloadExcel({
     currentTableRef: tableRef.current,
-    filename: generateFilename("Orders"), // Function modified to accept a prefix
+    filename: generateFilename("Orders"),
     sheet: "Orders",
   });
 
   const { onDownload: onNewsletterDownload } = useDownloadExcel({
-    currentTableRef: newsletterTableRef.current, // You'll need to create a ref for the Newsletter table
-    filename: generateFilename("Newsletter"), // Modify the function to accept a prefix
+    currentTableRef: newsletterTableRef.current,
+    filename: generateFilename("Newsletter"),
     sheet: "Newsletter",
   });
 
   const { onDownload: onContactDownload } = useDownloadExcel({
-    currentTableRef: contactTableRef.current, // You'll need to create a ref for the Contact Us table
-    filename: generateFilename("ContactUs"), // Modify the function to accept a prefix
+    currentTableRef: contactTableRef.current,
+    filename: generateFilename("ContactUs"),
     sheet: "ContactUs",
   });
 
@@ -148,7 +148,6 @@ const page = () => {
     return formattedDate;
   }
 
-  // Function to determine the row color based on the date
   function getRowColor(created_at: string) {
     const currentDate = new Date();
     const orderDate = new Date(created_at);
@@ -158,11 +157,11 @@ const page = () => {
     oneDayAgo.setDate(oneDayAgo.getDate() - 1);
 
     if (orderDate >= oneDayAgo && orderDate <= currentDate) {
-      return "brown-order"; // brown color for orders less than 1 day old
+      return "blue-order"; // brown color for orders less than 1 day old
     } else if (orderDate >= oneWeekAgo && orderDate <= currentDate) {
-      return "recent-order"; // green color for recent orders
+      return "green-order"; // green color for recent orders
     } else if (orderDate > currentDate) {
-      return "future-order"; // Black color for future orders
+      return "black-order"; // Black color for future orders
     } else {
       return ""; // Default color for other orders
     }
