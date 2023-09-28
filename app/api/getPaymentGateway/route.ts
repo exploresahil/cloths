@@ -1,3 +1,4 @@
+import { getProduct } from "@/sanity/sanity-utils";
 import { SHA256, enc } from "crypto-js";
 import axios from "axios";
 
@@ -7,24 +8,25 @@ export async function POST(request: Request) {
   const { price, phoneNo, order_id } = await request.json();
   const payload = {
     merchantId: "PGTESTPAYUAT140",
-    transactionId: `TKP-${order_id}`.slice(0, 37),
+    merchantTransactionId: "MT7850590068188104",
     merchantUserId: "PGTESTPAYUAT140",
     //amount: parseFloat(`${price}.00`) * 100,
-    // method: "POST",
     amount: parseFloat(`${price}`) * 100,
-
+    redirectUrl: `http://localhost:3000/api/paymentConfrom/${order_id}`,
+    redirectMode: "POST",
+    callbackUrl: `http://localhost:3000/api/paymentConfrom/${order_id}`,
     mobileNumber: phoneNo,
-    // paymentInstrument: {
-    //   type: "PAY_PAGE",
-    // },
+    paymentInstrument: {
+      type: "PAY_PAGE",
+    },
   };
   let data = Buffer.from(JSON.stringify(payload), "utf-8");
   // console.log(data.toString("base64"));
-  let api_endpoint = "/v4/debit";
+  let api_endpoint = "/pg/v1/pay";
   let salt_key = process.env.NEXT_PRIVATE_PHONEPE_SALT_KEY;
   let salt_index = process.env.NEXT_PRIVATE_SALT_INDEX;
   let res = await axios.post(
-    "https://mercury-uat.phonepe.com/v4/debit",
+    "https://api-preprod.phonepe.com/apis/pg-sandbox/pg/v1/pay",
     {
       request: data.toString("base64"),
     },
@@ -36,10 +38,6 @@ export async function POST(request: Request) {
           ).toString() +
           "###" +
           salt_index,
-        "X-REDIRECT-URL": `http://localhost:3000/thankyou`,
-        "X-REDIRECT-MODE": "GET",
-        "X-CALLBACK-URL": `http://localhost:3000/api/paymentConfrom/${order_id}`,
-        "X-CALL-MODE": "POST",
       },
     }
   );

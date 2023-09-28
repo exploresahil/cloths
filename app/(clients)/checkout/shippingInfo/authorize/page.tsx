@@ -162,33 +162,31 @@ export default function Authorize() {
           </div>
           <div className="line" />
           <div className="payment-button-container">
-            <button type="button" onClick={() => {
+            <button
+              type="button"
+              onClick={() => {
+                makeOrder(count, userData.extra_data.id, {
+                  ...{ ...UserAddress.at(-1), id: undefined },
+                }).then((data) => {
+                  axios
+                    .post("/api/getPaymentGateway", {
+                      price: total,
+                      phoneNo: userData.extra_data.phone,
+                      order_id: data.data[0].id,
+                    })
+                    .then(({ data: Data }) => {
+                      console.log(Data.data);
 
-              makeOrder(
-                count,
-                userData.extra_data.id,
-                {
+                      updateCardRedx(userData.extra_data.id);
 
-                  ...{ ...UserAddress.at(-1), id: undefined }
-                }
-              ).then((data) => {
-
-                axios.post("/api/getPaymentGateway", {
-                  price: total,
-                  phoneNo: userData.extra_data.phone,
-                  order_id: data.data[0].id
-                }).then(({ data: Data }) => {
-                  console.log(Data.data);
-
-                  updateCardRedx(userData.extra_data.id);
-
-                  dispatch(reset());
-                  router.push(Data.data.redirectURL)
-                })
-
-
-              })
-            }}>
+                      dispatch(reset());
+                      router.push(
+                        Data.data.instrumentResponse.redirectInfo.url
+                      );
+                    });
+                });
+              }}
+            >
               {/* <button
               type="button"
               onClick={() => {

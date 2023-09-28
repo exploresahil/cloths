@@ -8,8 +8,8 @@ export const Newsletter = async (
   return await db
     .from("Newsletter")
     .insert({
-      "First name": fname,
-      "Last name": lname,
+      first_name: fname,
+      last_name: lname,
       email: email,
     })
     .select("*");
@@ -21,7 +21,7 @@ export const contact = async (
   message: string
 ) => {
   return await db
-    .from("Newsletter")
+    .from("contact")
     .insert({
       first_name: fname,
       last_name: lname,

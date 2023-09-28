@@ -25,14 +25,9 @@ export const googleLogin = async () => {
   });
   await getUser();
 };
-export const EmailLogin = async (
-  emailId: string,
-  password: string,
-  phoneNo: string
-) => {
+export const EmailLogin = async (emailId: string, password: string) => {
   return await DB.auth.signUp({
     email: emailId,
-    phone: phoneNo,
     password: password,
   });
 };

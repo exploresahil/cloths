@@ -12,6 +12,8 @@ import { useAppSelector } from "@/redux/hook";
 import { useAppDispatch } from "@/redux/hook";
 import { set } from "@/redux/reducer/cartSlice";
 import { set as Set } from "@/redux/reducer/userSlice";
+import { Newsletter as NL } from "@/backend/forms";
+import { toast } from "react-toastify";
 import {
   Bag,
   User,
@@ -28,6 +30,7 @@ import { User as user } from "@supabase/supabase-js";
 import { getRedx, getUser } from "@/backend/User";
 import { getProCart } from "@/backend/Cart";
 import Supabase from "@/backend/Backend.client";
+
 const Header = () => {
   const count = useAppSelector((state) => state.CardReducer.value);
   const dispatch = useAppDispatch();
@@ -36,6 +39,27 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [inputValue, setInputValue] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+  });
+
+  const submitNewsLetter = (e: any) => {
+    e.preventDefault();
+    NL(inputValue.firstName, inputValue.lastName, inputValue.email).then(
+      () => {
+        toast.success("Submitted Successfully!", {
+          theme: "colored",
+        });
+      },
+      (error) => {
+        toast.error("Erron on submit!", {
+          theme: "colored",
+        });
+      }
+    );
+  };
 
   const [userData, setUserData] = useState<
     { data: user | null; extra_data: any } | undefined
@@ -53,7 +77,7 @@ const Header = () => {
   useEffect(() => {
     (async () => {
       const dam = await getUser();
-      // console.log(dam);
+      console.log(dam);
       await getRedx(dam.extra_data.id).then((data_) => {
         console.log("red->", data_);
 
@@ -302,17 +326,43 @@ const Header = () => {
                   </p>
                 </div>
               </div>
-              <form action="#">
+              <form onSubmit={submitNewsLetter}>
                 <h2>sign up for our newsletter</h2>
                 <div className="name">
-                  <input type="text" placeholder="First Name" />
-                  <input type="text" placeholder="Last Name" />
+                  <input
+                    type="text"
+                    placeholder="First Name"
+                    required
+                    value={inputValue.firstName}
+                    onChange={(e) => {
+                      setInputValue((v) => ({
+                        ...v,
+                        firstName: e.target.value,
+                      }));
+                    }}
+                  />
+                  <input
+                    type="text"
+                    placeholder="Last Name"
+                    value={inputValue.lastName}
+                    onChange={(e) => {
+                      setInputValue((v) => ({
+                        ...v,
+                        lastName: e.target.value,
+                      }));
+                    }}
+                  />
                 </div>
                 <input
                   type="email"
                   name="email"
                   id="email"
                   placeholder="Email"
+                  required
+                  value={inputValue.email}
+                  onChange={(e) => {
+                    setInputValue((v) => ({ ...v, email: e.target.value }));
+                  }}
                 />
                 <button type="submit">
                   <h3>JOIN THE MOVEMENT</h3>

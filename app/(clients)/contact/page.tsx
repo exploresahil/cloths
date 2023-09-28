@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { contact as contactUs } from "@/backend/forms";
 
 import {
   ContactInstaColor,
@@ -16,15 +17,45 @@ import {
 import { useEffect, useState } from "react";
 import { contactSchema } from "@/types/Contact";
 import { getContact } from "@/sanity/sanity-utils";
+import { toast } from "react-toastify";
 
 const Contact = () => {
   const [contacts, setContacts] = useState<contactSchema[]>([]);
   const [message, setMessage] = useState("");
+  const [inputValue, setInputValue] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    message: "",
+  });
+
+  const submitContctForm = (e: any) => {
+    e.preventDefault();
+    contactUs(
+      inputValue.firstName,
+      inputValue.lastName,
+      inputValue.email,
+      inputValue.message
+    ).then(
+      () => {
+        toast.success("Submitted Successfully!", {
+          theme: "colored",
+        });
+      },
+      (error) => {
+        toast.error("Erron on submit!", {
+          theme: "colored",
+        });
+      }
+    );
+  };
+
   const handleMessageChange = (e: any) => {
     const inputMessage = e.target.value;
     if (inputMessage.length <= 150) {
       setMessage(inputMessage); // Update message state
     }
+    setInputValue((v) => ({ ...v, message: e.target.value }));
   };
 
   const remainingCharacters = 150 - message.length; // Calculate remaining characters
@@ -89,11 +120,35 @@ const Contact = () => {
                 </Link>
               </div>
               <div className="contact-newsletter">
-                <form className="contact-newsletter-form">
+                <form
+                  className="contact-newsletter-form"
+                  onSubmit={submitContctForm}
+                >
                   <h2>Contact Us</h2>
                   <div className="name">
-                    <input type="text" placeholder="FIRST NAME" required />
-                    <input type="text" placeholder="LAST NAME" />
+                    <input
+                      type="text"
+                      placeholder="FIRST NAME"
+                      required
+                      value={inputValue.firstName}
+                      onChange={(e) => {
+                        setInputValue((v) => ({
+                          ...v,
+                          firstName: e.target.value,
+                        }));
+                      }}
+                    />
+                    <input
+                      type="text"
+                      placeholder="LAST NAME"
+                      value={inputValue.lastName}
+                      onChange={(e) => {
+                        setInputValue((v) => ({
+                          ...v,
+                          lastName: e.target.value,
+                        }));
+                      }}
+                    />
                   </div>
                   <input
                     type="email"
@@ -101,6 +156,10 @@ const Contact = () => {
                     id="email"
                     placeholder="EMAIL"
                     required
+                    value={inputValue.email}
+                    onChange={(e) => {
+                      setInputValue((v) => ({ ...v, email: e.target.value }));
+                    }}
                   />
                   <div className="character-count">
                     {remainingCharacters}/150
@@ -112,6 +171,7 @@ const Contact = () => {
                     placeholder="Message"
                     maxLength={150}
                     onChange={handleMessageChange}
+                    value={inputValue.message}
                   ></textarea>
                   <button type="submit">
                     <h3>Send</h3>

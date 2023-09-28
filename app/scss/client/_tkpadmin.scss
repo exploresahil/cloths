@@ -9,6 +9,7 @@
     font-weight: 100;
     font-size: 4rem;
   }
+
   .tkp-admin-title {
     display: flex;
     justify-content: space-between;
@@ -17,6 +18,7 @@
     .tkp-admin-menu {
       display: flex;
       gap: 10px;
+      flex-wrap: wrap;
 
       .active {
         background-color: v.$textTeal;
@@ -27,6 +29,13 @@
     .tkp-admin-option {
       display: flex;
       gap: 10px;
+
+      .refresh {
+        padding: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
     }
 
     button {
@@ -44,7 +53,7 @@
   }
 
   .table-admin-info {
-    margin: 20px 0;
+    margin-top: 20px;
     font-size: 0.6rem;
     display: flex;
 
@@ -82,6 +91,7 @@
   }
 
   .table-responsive {
+    margin: 20px 0;
     overflow: scroll;
     height: 80vh;
     border: 2px solid v.$dark;
@@ -110,7 +120,8 @@
           }
 
           .srno {
-            min-width: auto;
+            min-width: fit-content;
+            width: 70px;
           }
         }
       }
