@@ -51,11 +51,13 @@ const Header = () => {
       () => {
         toast.success("Submitted Successfully!", {
           theme: "colored",
+          autoClose: 800,
         });
       },
       (error) => {
         toast.error("Erron on submit!", {
           theme: "colored",
+          autoClose: 800,
         });
       }
     );

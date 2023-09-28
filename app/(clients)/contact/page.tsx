@@ -40,11 +40,13 @@ const Contact = () => {
       .then(() => {
         toast.success("Submitted Successfully!", {
           theme: "colored",
+          autoClose: 800,
         });
       })
       .catch((error) => {
         toast.error("Erron on submit!", {
           theme: "colored",
+          autoClose: 800,
         });
       });
   };

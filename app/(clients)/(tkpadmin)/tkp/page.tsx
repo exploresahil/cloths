@@ -1,6 +1,7 @@
 "use client";
 import { useRef } from "react";
 import { useDownloadExcel } from "react-export-table-to-excel";
+import { toast } from "react-toastify";
 
 //Order Id: TKP000001
 
@@ -73,6 +74,102 @@ const page = () => {
     return `TKP-${prefix}-${dd}-${mm}-${yyyy}-${hh}-${min}-${ampm}`;
   };
 
+  const fetchData = () => {
+    setLoading(true);
+
+    fetch("/api/admin/allorders")
+      .then((response) => response.json())
+      .then((json) => {
+        const sortedData = json.data.sort(
+          (a: any, b: any) =>
+            new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+        );
+        setData(sortedData);
+        setLoading(false);
+      })
+      .then(() => {
+        toast.success("Refreshed Orders", {
+          theme: "colored",
+          autoClose: 400,
+          icon: "🚀",
+          hideProgressBar: true,
+        });
+      })
+      .catch((error) => {
+        setLoading(false);
+        toast.error("Error refreshing data", {
+          theme: "colored",
+          autoClose: 4000,
+          icon: "❌",
+          hideProgressBar: true,
+        });
+      });
+
+    fetch("/api/admin/newsletter")
+      .then((response) => response.json())
+      .then((json) => {
+        const sortedNLData = json.data.sort(
+          (a: any, b: any) =>
+            new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+        );
+        setNLData(sortedNLData);
+        setLoading(false);
+      })
+      .then(() => {
+        toast.success("Refreshed NewsLetters", {
+          theme: "colored",
+          autoClose: 400,
+          icon: "🚀",
+          hideProgressBar: true,
+        });
+      })
+      .catch((error) => {
+        setLoading(false);
+        toast.error("Error refreshing data", {
+          theme: "colored",
+          autoClose: 4000,
+          icon: "❌",
+          hideProgressBar: true,
+        });
+      });
+
+    fetch("/api/admin/contact")
+      .then((response) => response.json())
+      .then((json) => {
+        const sortedContactData = json.data.sort(
+          (a: any, b: any) =>
+            new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+        );
+        setContactData(sortedContactData);
+        setLoading(false);
+      })
+      .then(() => {
+        toast.success("Refreshed Contacts", {
+          theme: "colored",
+          autoClose: 400,
+          icon: "🚀",
+          hideProgressBar: true,
+        });
+      })
+      .catch((error) => {
+        setLoading(false);
+        toast.error("Error refreshing data", {
+          theme: "colored",
+          autoClose: 4000,
+          icon: "❌",
+          hideProgressBar: true,
+        });
+      });
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const handleRefreshClick = () => {
+    fetchData();
+  };
+
   const { onDownload: onOrdersDownload } = useDownloadExcel({
     currentTableRef: tableRef.current,
     filename: generateFilename("Orders"),
@@ -90,63 +187,6 @@ const page = () => {
     filename: generateFilename("ContactUs"),
     sheet: "ContactUs",
   });
-
-  const fetchData = () => {
-    setLoading(true);
-
-    fetch("/api/admin/allorders")
-      .then((response) => response.json())
-      .then((json) => {
-        const sortedData = json.data.sort(
-          (a: any, b: any) =>
-            new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-        );
-        setData(sortedData);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error("Error fetching orders:", error);
-        setLoading(false);
-      });
-
-    fetch("/api/admin/newsletter")
-      .then((response) => response.json())
-      .then((json) => {
-        const sortedNLData = json.data.sort(
-          (a: any, b: any) =>
-            new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-        );
-        setNLData(sortedNLData);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error("Error fetching orders:", error);
-        setLoading(false);
-      });
-
-    fetch("/api/admin/contact")
-      .then((response) => response.json())
-      .then((json) => {
-        const sortedContactData = json.data.sort(
-          (a: any, b: any) =>
-            new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-        );
-        setContactData(sortedContactData);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error("Error fetching orders:", error);
-        setLoading(false);
-      });
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  const handleRefreshClick = () => {
-    fetchData();
-  };
 
   function formatSizes(sizes: string[]) {
     return sizes.join(", ");
@@ -229,6 +269,7 @@ const page = () => {
               type="button"
               className="refresh"
               onClick={handleRefreshClick}
+              title="refresh"
             >
               <BiRefresh />
             </button>
@@ -324,7 +365,7 @@ const page = () => {
                 <th className="srno">Sr/No</th>
                 <th>Name</th>
                 <th>Email</th>
-                <th>Created At</th>
+                <th>Submitted On</th>
               </tr>
             </thead>
             <tbody>
@@ -351,7 +392,7 @@ const page = () => {
                 <th>Name</th>
                 <th>Email</th>
                 <th>Message</th>
-                <th>Created At</th>
+                <th>Submitted On</th>
               </tr>
             </thead>
             <tbody>
