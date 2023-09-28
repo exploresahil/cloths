@@ -22,6 +22,7 @@ type user = {
 
 type DataItem = {
   id: string;
+  order_id: string;
   product: ProductItem[];
   user: user;
   phone: string;
@@ -260,7 +261,7 @@ const page = () => {
                   item.payment_confirm && (
                     <tr key={item.id} className={getRowColor(item.created_at)}>
                       <td>{serialNumber++}</td>
-                      <td>TKP-{item.id}</td>
+                      <td>{item.order_id}</td>
                       <td>
                         {item.product.map((products) => (
                           <div key={products.id}>
