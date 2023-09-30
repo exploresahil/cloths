@@ -208,7 +208,7 @@ const Header = () => {
     setSearchQuery("");
   };
 
-  return userData && (
+  return (
     <header className={`${isScrolled ? "scrollDown" : ""}`}>
       <ScrollLink
         to="bodyTop"
