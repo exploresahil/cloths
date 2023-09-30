@@ -30,10 +30,8 @@ export default function Product({ params }: Props) {
   const [relatedProducts, setRelatedProducts] = useState<products[]>([]);
   const [randomProducts, setRandomProducts] = useState<products[]>([]);
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
-  const userData = useAppSelector(state => state.userDataSlice.value)
+  const userData = useAppSelector((state) => state.userDataSlice.value);
   const slug = params.product;
-
-
 
   useEffect(() => {
     getProduct(slug).then((data) => {

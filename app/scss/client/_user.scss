@@ -42,20 +42,33 @@
 
   .order-container {
     .product-main-container {
+      height: 400px;
+      overflow-y: scroll;
       display: flex;
       flex-direction: column;
       padding: 20px 0;
       gap: 50px;
 
       .product-info {
-        padding-bottom: 10px;
-        border-bottom: 1px solid v.$dark;
-
         .item-info {
+          width: 100%;
+          padding-bottom: 10px;
+          padding: 0 20px 10px 0;
+          margin: 10px 0;
+          border-bottom: 1px solid v.$dark;
+
           .order-number {
+            width: 100% !important;
+            display: flex;
+            justify-content: space-between;
             width: fit-content;
-            border-bottom: 1px solid v.$dark;
+
             margin-bottom: 10px;
+
+            p {
+              font-size: 0.8rem;
+              border-bottom: 1px solid v.$dark;
+            }
           }
 
           .items {
@@ -87,6 +100,7 @@
           .order-address {
             margin-top: 10px;
             width: fit-content;
+            font-size: 1rem;
           }
 
           .item-filter {

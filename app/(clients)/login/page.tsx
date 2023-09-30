@@ -7,11 +7,14 @@ import ShownPassword from "@/components/icons/ShownPassword";
 import { useState } from "react";
 import { LuUser } from "react-icons/lu";
 import { useRouter } from "next/navigation";
-import { useAppDispatch } from "@/redux/hook";
+import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { set } from "@/redux/reducer/userSlice";
 import { set as Set } from "@/redux/reducer/cartSlice";
 import { addUserData } from "@/redux/reducer/userData";
+import dynamic from "next/dynamic";
+
 const Login = () => {
+  const userData = useAppSelector((state) => state.userDataSlice.value);
   const dispatch = useAppDispatch();
   const router = useRouter();
   const [isPasswordShown, setIsPasswordShown] = useState(false);
@@ -46,22 +49,32 @@ const Login = () => {
                   console.log(data);
 
                   if (data.error?.message == "User already registered")
-                    db.auth.signInWithPassword({
-                      email: inputValue.email,
-                      password: inputValue.password,
-                    }).then(async () => {
-                      await getUser().then(async (data) => {
-                        console.log(data?.data);
-                        const data_ = await getRedx(data?.extra_data.id);
-                        console.log(data_);
+                    db.auth
+                      .signInWithPassword({
+                        email: inputValue.email,
+                        password: inputValue.password,
+                      })
+                      .then(async () => {
+                        await getUser().then(async (data) => {
+                          console.log(data?.data);
+                          const data_ = await getRedx(data?.extra_data.id);
+                          console.log(data_);
 
-                        dispatch(set(data_.data?.at(0).Redux?.userSlice || []));
-                        dispatch(Set(data_.data?.at(0).Redux?.CardReducer || []));
-                        dispatch(addUserData(data))
+                          dispatch(
+                            set(data_.data?.at(0).Redux?.userSlice || [])
+                          );
+                          dispatch(
+                            Set(data_.data?.at(0).Redux?.CardReducer || [])
+                          );
+                          dispatch(addUserData(data));
 
-                        window.location.href = "/user"
+                          if (data?.extra_data.super_admin === true) {
+                            window.location.href = "/tkp";
+                          } else {
+                            window.location.href = "/user";
+                          }
+                        });
                       });
-                    });
                   else if (!data.error?.message) {
                     await getUser().then(async (data) => {
                       // console.log(data);
@@ -70,10 +83,13 @@ const Login = () => {
 
                       dispatch(set([]));
                       dispatch(Set([]));
-                      window.location.href = "/user"
+                      if (data?.extra_data.super_admin === true) {
+                        window.location.href = "/tkp";
+                      } else {
+                        window.location.href = "/user";
+                      }
                     });
-                  };
-
+                  }
                 })
                 .catch((e) => {
                   console.log(e);
@@ -123,8 +139,8 @@ const Login = () => {
           </button>
         </div>
       </div>
-    </div >
+    </div>
   );
 };
 
-export default Login;
+export default dynamic(() => Promise.resolve(Login), { ssr: false });

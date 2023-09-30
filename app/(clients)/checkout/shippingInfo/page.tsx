@@ -12,7 +12,9 @@ import Link from "next/link";
 import { useAppSelector, useAppDispatch } from "@/redux/hook";
 import { addUserAddress } from "@/redux/reducer/userSlice";
 import Supabase from "@/backend/Backend.client";
-export default function ShippingInfo() {
+import dynamic from "next/dynamic";
+
+const ShippingInfo = () => {
   const count = useAppSelector((state) => state.CardReducer.value);
   const UserAddress = useAppSelector((state) => state.userSlice.value);
   const dispatch = useAppDispatch();
@@ -60,7 +62,7 @@ export default function ShippingInfo() {
     { value: "West Bengal", label: "West Bengal" },
   ];
   const [product, setProduct] = useState<null | any[]>(null);
-  const userData = useAppSelector((state) => state.userDataSlice.value)
+  const userData = useAppSelector((state) => state.userDataSlice.value);
   useEffect(() => {
     if (userData)
       getProCart(userData.extra_data.id).then((data: any) =>
@@ -292,4 +294,6 @@ export default function ShippingInfo() {
       </div>
     )
   );
-}
+};
+
+export default dynamic(() => Promise.resolve(ShippingInfo), { ssr: false });
