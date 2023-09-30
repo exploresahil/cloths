@@ -13,6 +13,7 @@ import { category } from "@/types/Category";
 import { AiOutlinePlus } from "react-icons/ai";
 import { useSearchParams } from "next/navigation";
 import { AddCartOrder, getProCart } from "@/backend/Cart";
+import { toast } from "react-toastify";
 
 function arraysHaveCommonElement(array1: any[], array2: any[]) {
   return array1.some((item) => array2.includes(item));
@@ -47,13 +48,6 @@ const Products = () => {
 
   useEffect(() => {
     set_Products((_products) => {
-      // console.log(
-      //   "ssss=>",
-      //   categories,
-      //   selectedCategory,
-      //   searchQuery,
-      //   searchQuery && selectedCategory === "_view all"
-      // );
 
       if (searchQuery && selectedCategory === "_view all") {
         const filteredProducts = products.filter((product) =>
@@ -84,6 +78,19 @@ const Products = () => {
 
 
 
+
+  const handleAddToCart = (product: any) => {
+    AddCartOrder(product, userData.extra_data.id, 1).then(() => {
+      getProCart(userData.extra_data.id).then((data) => {
+        dispatch(addToCard(data.data));
+        toast.success("Product Added", {
+          theme: "colored",
+          autoClose: 800,
+          hideProgressBar: true,
+        });
+      });
+    });
+  };
 
   return (
     <div className="products-main">

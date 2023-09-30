@@ -47,6 +47,7 @@ const Header = () => {
     lastName: "",
     email: "",
   });
+  const [isOpen, setIsOpen] = useState(false);
 
   const submitNewsLetter = (e: any) => {
     e.preventDefault();
@@ -124,14 +125,24 @@ const Header = () => {
       const currentScrollPos =
         window.scrollY || document.documentElement.scrollTop;
       setIsScrolled(currentScrollPos > 0 && currentScrollPos > prevScrollPos);
+
+      if (currentScrollPos > prevScrollPos && isOpen) {
+        setIsOpen(false);
+      }
+
+      if (currentScrollPos > prevScrollPos && isCartOpen) {
+        setIsCartOpen(false);
+      }
+
       prevScrollPos = currentScrollPos;
     };
 
     window.addEventListener("scroll", handleScroll);
+
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [isOpen, isCartOpen]);
 
   useEffect(() => {
     if (pathname === "/" && typeof window !== "undefined") {
@@ -171,8 +182,6 @@ const Header = () => {
       );
     }
   }, [pathname]);
-
-  const [isOpen, setIsOpen] = useState(false);
 
   const handleMenuClick = () => {
     setIsOpen(!isOpen);

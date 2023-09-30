@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { addToCard, removeToCard } from "@/redux/reducer/cartSlice";
+import { toast } from "react-toastify";
 interface props {
   onCartCloseClick: any;
 }
@@ -30,7 +31,22 @@ const Cart = ({ onCartCloseClick }: props) => {
     if (userData)
       getProCart(userData.extra_data.id).then((data) => setProduct(data.data));
   }, [userData]);
-  //console.log(product);
+
+  const removeFromCart = (productId: string) => {
+    RemoveCartOrder(productId)
+      .then((data) => {
+        getProCart(userData.extra_data.id).then(async (data) => {
+          dispatch(removeToCard(data.data));
+        });
+      })
+      .then(() => {
+        toast.success("Product Removed", {
+          theme: "colored",
+          autoClose: 800,
+          hideProgressBar: true,
+        });
+      });
+  };
 
   return (
     <div className="cart-main-container">
@@ -64,15 +80,7 @@ const Cart = ({ onCartCloseClick }: props) => {
                   <button
                     type="button"
                     onClick={() => {
-                      RemoveCartOrder(v.id).then((data) => {
-                        getProCart(userData.extra_data.id).then(
-                          async (data) => {
-                            dispatch(removeToCard(data.data));
-
-                            // console.log(data);
-                          }
-                        );
-                      });
+                      removeFromCart(v.id);
                     }}
                   >
                     <GrClose />
