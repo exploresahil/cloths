@@ -89,7 +89,7 @@ const Cart = ({ onCartCloseClick }: props) => {
                 </div>
               )
             )}
-          {count.length == 0 && <h3>No Product in cart</h3>}
+          {count && count.length == 0 && <h3>No Product in cart</h3>}
         </div>
 
         <button
