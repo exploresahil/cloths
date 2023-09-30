@@ -32,7 +32,7 @@ import { getProCart } from "@/backend/Cart";
 import Supabase from "@/backend/Backend.client";
 import CDB from "@/storeage";
 import { addUserData } from "@/redux/reducer/userData";
-
+import { set as _set } from "@/redux/reducer/userData"
 const Header = () => {
   const count = useAppSelector((state) => state.CardReducer.value);
   const userData = useAppSelector((state) => state.userDataSlice.value);
@@ -89,13 +89,18 @@ const Header = () => {
   useEffect(() => {
     //push
     (async () => {
-      if (userData.extra_data.id) {
+      console.log(userData);
+
+      if (userData.data !== null) {
         await getRedx(userData.extra_data.id).then((data_) => {
           console.log("red->", data_);
           dispatch(Set(data_.data?.at(0).Redux.userSlice.value));
           dispatch(set(data_.data?.at(0).Redux.CardReducer.value));
         });
       } else {
+        dispatch(Set([]));
+        dispatch(set([]));
+        dispatch(_set({ data: null }));
         console.error("dam.extra_data is undefined"); // Handle this case as needed
       }
     })()
@@ -237,14 +242,14 @@ const Header = () => {
         <div className="user-menu-ecommercs">
           <button className="cart" onClick={handleCartClickOpen}>
             <Bag />
-            {count.length !== 0 && <p>{count.length}</p>}
+            {count && count.length !== 0 && <p>{count.length}</p>}
           </button>
           <div className="line" />
           <button
             onClick={() => {
               console.log(userData);
 
-              router.push(userData.data?.user?.id ? "/user" : "/login");
+              router.push(userData.data.user !== null ? "/user" : "/login");
             }}
           >
             <User />
