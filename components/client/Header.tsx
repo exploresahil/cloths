@@ -87,7 +87,7 @@ const Header = () => {
 
   }, [])
   useEffect(() => {
-
+    //push
     (async () => {
       if (userData.extra_data.id) {
         await getRedx(userData.extra_data.id).then((data_) => {
