@@ -1,30 +1,45 @@
+import { Users } from "@/types";
 import DB from "./Backend.client";
-
+import CDB from "@/storeage";
 export const getUser = async () => {
   let data = await DB.auth.getUser();
   const da = await DB.from("USER").select("*").eq("user", data.data.user?.id);
   if (da.data?.length == 0) {
-    await DB.from("Redux").insert({
-      Redux: {
-        CardReducer: {
-          value: [],
-        },
-        userSlice: {
-          value: [],
-        },
-      },
-      user: da.data.at(0).id,
-    });
     await DB.from("USER").insert({
       user: data.data.user?.id,
     });
-  }
+    const _da = await DB.from("USER")
+      .select("*")
+      .eq("user", data.data.user?.id);
+    console.log(_da.data?.at(0));
 
-  localStorage.setItem(
-    "userData",
-    JSON.stringify({ data: data.data.user, extra_data: da.data?.at(0) })
-  );
-  return { data: data.data.user, extra_data: da.data?.at(0) };
+    await DB.from("Redux")
+      .insert({
+        Redux: {
+          CardReducer: {
+            value: [],
+          },
+          userSlice: {
+            value: [],
+          },
+        },
+        user: _da.data?.at(0).id,
+      })
+      .then(() => null);
+  }
+  const __da = await DB.from("USER").select("*").eq("user", data.data.user?.id);
+
+  if (data.data.user && __da.data?.length != 0) {
+    await CDB.setItem<Users>("user-data", {
+      data: { user: data.data.user },
+      extra_data: __da.data?.at(0),
+    });
+
+    return {
+      data: { user: data.data.user },
+      extra_data: __da.data?.at(0),
+    };
+  }
 };
 
 export const googleLogin = async () => {
@@ -60,7 +75,7 @@ export const updateCardRedx = async (id: string) => {
   if (d.data)
     await DB.from("Redux")
       .update({
-        Redux: { ...d.data[0].Redux, CardReducer: { value: [] } },
+        Redux: { CardReducer: { value: [] }, ...d.data[0].Redux },
       })
       .eq("user", id);
 };

@@ -28,12 +28,10 @@ export default function Product({ params }: Props) {
   const [relatedProducts, setRelatedProducts] = useState<products[]>([]);
   const [randomProducts, setRandomProducts] = useState<products[]>([]);
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
-  const [userData, setUser] = useState<null | any>(null);
+  const userData = useAppSelector(state => state.userDataSlice.value)
   const slug = params.product;
 
-  useEffect(() => {
-    setUser(JSON.parse(localStorage.getItem("userData") || ""));
-  }, []);
+
 
   useEffect(() => {
     getProduct(slug).then((data) => {

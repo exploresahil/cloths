@@ -10,8 +10,19 @@ export async function POST(request: Request, { params }: any) {
     const data = await ConfromPay(order_id);
     console.log(data);
 
-    return NextResponse.redirect("http://localhost:3000/thankyou");
+    const res = new Response(`
+    <html>
+    <body>
+    <script>
+    window.location.href = "/thankyou"
+    </script>
+    </body>
+    </html>
+    
+    `);
+    res.headers.set("Content-Type", "text/html; charset=utf-8");
+    return res;
   }
   // work On sanity
-  return NextResponse.redirect("http://localhost:3000/thankyou");
+  return new Response("ok");
 }

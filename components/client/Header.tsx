@@ -30,9 +30,12 @@ import { User as user } from "@supabase/supabase-js";
 import { getRedx, getUser } from "@/backend/User";
 import { getProCart } from "@/backend/Cart";
 import Supabase from "@/backend/Backend.client";
+import CDB from "@/storeage";
+import { addUserData } from "@/redux/reducer/userData";
 
 const Header = () => {
   const count = useAppSelector((state) => state.CardReducer.value);
+  const userData = useAppSelector((state) => state.userDataSlice.value);
   const dispatch = useAppDispatch();
   const router = useRouter();
   const pathname = usePathname();
@@ -63,9 +66,7 @@ const Header = () => {
     );
   };
 
-  const [userData, setUserData] = useState<
-    { data: user | null; extra_data: any } | undefined
-  >();
+
 
   const handleCartClickOpen = () => {
     setIsCartOpen(true);
@@ -75,14 +76,20 @@ const Header = () => {
     setIsCartOpen(false);
   };
   // console.log(userData);
-
   useEffect(() => {
     (async () => {
-      const dam = await getUser();
-      console.log(dam);
+      const data = await CDB.getItem("user-data");
 
-      if (dam.extra_data) {
-        await getRedx(dam.extra_data.id).then((data_) => {
+      if (data != undefined) dispatch(addUserData(data))
+      console.log(data);
+    })();
+
+  }, [])
+  useEffect(() => {
+
+    (async () => {
+      if (userData.extra_data.id) {
+        await getRedx(userData.extra_data.id).then((data_) => {
           console.log("red->", data_);
           dispatch(Set(data_.data?.at(0).Redux.userSlice.value));
           dispatch(set(data_.data?.at(0).Redux.CardReducer.value));
@@ -90,11 +97,27 @@ const Header = () => {
       } else {
         console.error("dam.extra_data is undefined"); // Handle this case as needed
       }
+    })()
+  }, [userData])
+  useEffect(() => {
+    // (async () => {
+    //   const dam = await getUser();
+    //   console.log(dam);
 
-      if (dam.data !== null) {
-        setUserData(dam);
-      } else setUserData(undefined);
-    })();
+    //   if (dam.extra_data) {
+    //     await getRedx(dam.extra_data.id).then((data_) => {
+    //       console.log("red->", data_);
+    //       dispatch(Set(data_.data?.at(0).Redux.userSlice.value));
+    //       dispatch(set(data_.data?.at(0).Redux.CardReducer.value));
+    //     });
+    //   } else {
+    //     console.error("dam.extra_data is undefined"); // Handle this case as needed
+    //   }
+
+    //   if (dam.data !== null) {
+    //     setUserData(dam);
+    //   } else setUserData(undefined);
+    // })();
 
     let prevScrollPos = window.scrollY || document.documentElement.scrollTop;
     const handleScroll = () => {
@@ -176,7 +199,7 @@ const Header = () => {
     setSearchQuery("");
   };
 
-  return (
+  return userData && (
     <header className={`${isScrolled ? "scrollDown" : ""}`}>
       <ScrollLink
         to="bodyTop"
@@ -210,7 +233,9 @@ const Header = () => {
           <div className="line" />
           <button
             onClick={() => {
-              router.push(userData == undefined ? "/login" : "/user");
+              console.log(userData);
+
+              router.push(userData.data?.user?.id ? "/user" : "/login");
             }}
           >
             <User />

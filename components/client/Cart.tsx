@@ -22,11 +22,9 @@ const Cart = ({ onCartCloseClick }: props) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const [product, setProduct] = useState<null | any[]>(null);
-  const [userData, setUser] = useState<null | any>(null);
+  const userData = useAppSelector(state => state.userDataSlice.value)
 
-  useEffect(() => {
-    setUser(JSON.parse(localStorage.getItem("userData") || ""));
-  }, []);
+
 
   useEffect(() => {
     if (userData)

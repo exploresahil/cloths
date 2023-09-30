@@ -13,6 +13,9 @@ export const AddCartOrder = (
     })
     .select("id");
 };
+export const deleteAllCartProduct = (id: string) => {
+  return SuperBase.from("Cart").delete().eq("user", id);
+};
 export const RemoveCartOrder = (id: string) => {
   return SuperBase.from("Cart").delete().eq("id", id);
 };

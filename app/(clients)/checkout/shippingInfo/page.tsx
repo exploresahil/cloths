@@ -60,8 +60,7 @@ export default function ShippingInfo() {
     { value: "West Bengal", label: "West Bengal" },
   ];
   const [product, setProduct] = useState<null | any[]>(null);
-
-  const [userData, setUserData] = useState<{ data: User; extra_data: any }>();
+  const userData = useAppSelector((state) => state.userDataSlice.value)
   useEffect(() => {
     if (userData)
       getProCart(userData.extra_data.id).then((data: any) =>
@@ -70,9 +69,7 @@ export default function ShippingInfo() {
   }, [userData]);
 
   const [input, setInput] = useState<any>();
-  React.useEffect(() => {
-    setUserData(JSON.parse(localStorage.getItem("userData") || ""));
-  }, []);
+
   useEffect(() => {
     setInput({
       name: userData?.extra_data.name,

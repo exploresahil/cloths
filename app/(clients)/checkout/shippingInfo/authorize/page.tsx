@@ -6,10 +6,10 @@ import { GrClose } from "react-icons/gr";
 import AccordionDown from "@/components/icons/AccordionDown";
 import { CheckoutArrowNormal } from "@/components/icons/Icons";
 import { AiOutlinePlus } from "react-icons/ai";
-import { getProCart, RemoveCartOrder } from "@/backend/Cart";
+import { deleteAllCartProduct, getProCart, RemoveCartOrder, UpdateCartOrder } from "@/backend/Cart";
 import { products } from "@/types/Products";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
-import { removeToCard, reset } from "@/redux/reducer/cartSlice";
+import { removeToCard, _reset } from "@/redux/reducer/cartSlice";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
@@ -21,11 +21,9 @@ export default function Authorize() {
   const UserAddress = useAppSelector((state) => state.userSlice.value);
   const [product, setProduct] = useState<null | any[]>(null);
   const router = useRouter();
-  const [userData, setUser] = useState<null | any>(null);
+  const userData = useAppSelector((state) => state.userDataSlice.value)
 
-  useEffect(() => {
-    setUser(JSON.parse(localStorage.getItem("userData") || ""));
-  }, []);
+
 
   useEffect(() => {
     if (userData)
@@ -171,21 +169,23 @@ export default function Authorize() {
                   axios
                     .post("/api/getPaymentGateway", {
                       price: total,
-                      phoneNo: userData.extra_data.phone,
+                      phoneNo: UserAddress.at(-1)?.phone,
                       order_id: data.data[0].id,
                     })
                     .then(({ data: Data }) => {
                       console.log(Data.data);
-                      const data = JSON.parse(localStorage.getItem("applicationState") || "{}");
-                      data.CardReducer.value = [];
-                      localStorage.setItem("applicationState", JSON.stringify(data));
+                      deleteAllCartProduct(userData.extra_data.id).then(() => {
 
-                      updateCardRedx(userData.extra_data.id);
+                        dispatch(_reset());
+                        router.push(
+                          Data.data.instrumentResponse.redirectInfo.url
+                        );
+                      })
 
-                      dispatch(reset());
-                      router.push(
-                        Data.data.instrumentResponse.redirectInfo.url
-                      );
+                      // updateCardRedx(userData.extra_data.id);
+
+
+
                     });
                 });
               }}

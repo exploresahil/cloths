@@ -1,27 +1,38 @@
 "use client";
 import DB from "@/backend/Backend.client";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import productImage from "@/public/assets/images/products/product-img.png";
 import ContactArrow from "@/components/icons/ContactArrow";
 import Link from "next/link";
-import { User } from "@supabase/supabase-js";
+import CDB from "@/storeage"
+import { User as user } from "@supabase/supabase-js";
 import { useRouter } from "next/navigation";
 import { reset } from "@/redux/reducer/cartSlice";
 import { reset as Rest } from "@/redux/reducer/userSlice";
 import { useDispatch } from "react-redux";
+import { useAppSelector } from "@/redux/hook";
+import { addUserData } from "@/redux/reducer/userData";
 const User = () => {
+  const dispatch = useDispatch();
   const router = useRouter();
   const [activeTab, setActiveTab] = useState("order");
-  const [userData, setUserData] = useState<{ data: User; extra_data: any }>();
+  const userData = useAppSelector(state => state.userDataSlice.value)
   const handleTabClick = (tabName: string) => {
     setActiveTab(tabName);
   };
-  React.useEffect(() => {
-    setUserData(JSON.parse(localStorage.getItem("userData") || ""));
-  }, []);
-  console.log(userData);
-  const dispatch = useDispatch();
+  useEffect(() => {
+    (async () => {
+      const data = await CDB.getItem("user-data");
+
+      if (data != undefined) dispatch(addUserData(data))
+      console.log(data);
+    })();
+
+  }, [])
+  console.log("userdata", userData);
+
+
 
   return (
     userData && (
@@ -48,12 +59,12 @@ const User = () => {
         </div>
         {activeTab === "order" && (
           <div className="order-container menu-section">
-            <h2>{userData.data.user_metadata.full_name || ""}</h2>
+            <h2>{userData.data.user?.user_metadata?.full_name || ""}</h2>
             <div className="product-main-container">
               <div className="product-info">
                 <div className="item-info">
                   <div className="order-number">
-                    <p>Order ID: {}</p>
+                    <p>Order ID: { }</p>
                   </div>
                   <div className="items">
                     <div className="info">
@@ -72,7 +83,7 @@ const User = () => {
                     </div>
                   </div>
                   <div className="order-address">
-                    <p>Address: {}</p>
+                    <p>Address: { }</p>
                   </div>
                 </div>
               </div>
@@ -81,19 +92,19 @@ const User = () => {
         )}
         {activeTab === "account" && (
           <div className="account-container menu-section">
-            <h2>{userData.data.user_metadata.full_name || ""}</h2>
+            <h2>{userData.data.user?.user_metadata?.full_name || ""}</h2>
             <ul>
               <li>
                 <Link href="#">
                   Email <ContactArrow />
                 </Link>
-                <p>{userData.data.email}</p>
+                <p>{userData.data?.user?.email}</p>
               </li>
               <li>
                 <Link href="#">
                   Phone No <ContactArrow />
                 </Link>
-                <p>{userData.data.phone}</p>
+                <p>{userData.data.user?.phone}</p>
               </li>
             </ul>
             <button
@@ -101,7 +112,6 @@ const User = () => {
               onClick={async () => {
                 await DB.auth.signOut();
 
-                localStorage.clear();
                 dispatch(reset());
                 dispatch(Rest());
                 router.push("/login");
@@ -113,7 +123,7 @@ const User = () => {
         )}
         {activeTab === "settings" && (
           <div className="settings-container menu-section">
-            <h2>{userData.data.user_metadata.full_name || ""}</h2>
+            <h2>{userData.data.user?.user_metadata?.full_name || ""}</h2>
             <ul>
               <li>
                 <Link href="#">

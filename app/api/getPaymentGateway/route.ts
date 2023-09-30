@@ -14,7 +14,7 @@ export async function POST(request: Request) {
     amount: parseFloat(`${price}`) * 100,
     redirectUrl: `http://localhost:3000/api/paymentConfrom/${order_id}`,
     redirectMode: "POST",
-    callbackUrl: `http://localhost:3000/api/paymentConfrom/${order_id}`,
+    callbackUrl: `http://localhost:3000/thankyou`,
     mobileNumber: phoneNo,
     paymentInstrument: {
       type: "PAY_PAGE",
