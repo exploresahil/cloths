@@ -47,13 +47,6 @@ const Products = () => {
 
   useEffect(() => {
     set_Products((_products) => {
-      // console.log(
-      //   "ssss=>",
-      //   categories,
-      //   selectedCategory,
-      //   searchQuery,
-      //   searchQuery && selectedCategory === "_view all"
-      // );
 
       if (searchQuery && selectedCategory === "_view all") {
         const filteredProducts = products.filter((product) =>
