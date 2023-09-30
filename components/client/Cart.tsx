@@ -53,7 +53,7 @@ const Cart = ({ onCartCloseClick }: props) => {
       <div className="cart-close-container" onClick={onCartCloseClick} />
       <div className="cart-container">
         <div className="cart-products">
-          {count.length != 0 &&
+          {count && count.length != 0 &&
             count.map(
               (v: { product: products; how_many: number; id: string }, i) => (
                 <div className="cart-items" key={i}>
