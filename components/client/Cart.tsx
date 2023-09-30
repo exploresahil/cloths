@@ -98,7 +98,7 @@ const Cart = ({ onCartCloseClick }: props) => {
             /*  console.log(userData.extra_data.address); */
 
             router.push(
-              userAddress.length != 0
+              userAddress && userAddress.length != 0
                 ? "/checkout/shippingInfo/authorize"
                 : "/checkout/shippingInfo/"
             );
