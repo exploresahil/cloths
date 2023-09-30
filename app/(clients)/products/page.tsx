@@ -80,15 +80,22 @@ const Products = () => {
 
 
   const handleAddToCart = (product: any) => {
-    AddCartOrder(product, userData.extra_data.id, 1).then(() => {
-      getProCart(userData.extra_data.id).then((data) => {
-        dispatch(addToCard(data.data));
-        toast.success("Product Added", {
-          theme: "colored",
-          autoClose: 800,
-          hideProgressBar: true,
+    if (userData.data.user)
+      AddCartOrder(product, userData.extra_data.id, 1).then(() => {
+        getProCart(userData.extra_data.id).then((data) => {
+          dispatch(addToCard(data.data));
+          toast.success("Product Added", {
+            theme: "colored",
+            autoClose: 800,
+            hideProgressBar: true,
+          });
         });
+
       });
+    else toast.error("First login", {
+      theme: "colored",
+      autoClose: 800,
+      hideProgressBar: true,
     });
   };
 
@@ -175,21 +182,7 @@ const Products = () => {
                           </Link>
                           <button
                             type="button"
-                            onClick={() => {
-
-                              AddCartOrder(
-                                product,
-                                userData.extra_data.id,
-                                1
-                              ).then(() => {
-                                getProCart(userData.extra_data.id).then(
-                                  (data) => {
-                                    console.log(data);
-                                    dispatch(addToCard(data.data));
-                                  }
-                                );
-                              });
-                            }}
+                            onClick={() => handleAddToCart(product)}
                           >
                             <AiOutlinePlus />
                           </button>
@@ -223,23 +216,7 @@ const Products = () => {
                           </Link>
                           <button
                             type="button"
-                            onClick={() => {
-
-                              // console.log("hi", "", product, userData);
-                              AddCartOrder(
-                                product,
-                                userData.extra_data.id,
-                                1
-                              ).then(() => {
-                                getProCart(userData.extra_data.id).then(
-                                  (data) => {
-                                    console.log(data);
-
-                                    dispatch(addToCard(data.data));
-                                  }
-                                );
-                              });
-                            }}
+                            onClick={() => handleAddToCart(product)}
                           >
                             <AiOutlinePlus />
                           </button>
@@ -277,22 +254,7 @@ const Products = () => {
                         </Link>
                         <button
                           type="button"
-                          onClick={() => {
-                            console.log(userData);
-
-                            AddCartOrder(
-                              product,
-                              userData.extra_data.id,
-                              1
-                            ).then((data) => {
-                              getProCart(userData.extra_data.id).then(
-                                (data) => {
-                                  console.log(data);
-                                  dispatch(addToCard(data.data));
-                                }
-                              );
-                            });
-                          }}
+                          onClick={() => handleAddToCart(product)}
                         >
                           <AiOutlinePlus />
                         </button>
@@ -327,22 +289,7 @@ const Products = () => {
 
                         <button
                           type="button"
-                          onClick={() => {
-                            console.log("hi");
-
-                            AddCartOrder(
-                              product,
-                              userData.extra_data.id,
-                              1
-                            ).then(() => {
-                              getProCart(userData.extra_data.id).then(
-                                (data) => {
-                                  console.log(data);
-                                  dispatch(addToCard(data.data));
-                                }
-                              );
-                            });
-                          }}
+                          onClick={() => handleAddToCart(product)}
                         >
                           <AiOutlinePlus />
                         </button>
@@ -378,23 +325,8 @@ const Products = () => {
                       </Link>
                       <button
                         type="button"
-                        onClick={() => {
-
-                          console.log("hi");
-
-                          AddCartOrder(
-                            product,
-                            userData.extra_data.id,
-                            1
-                          ).then(() => {
-                            getProCart(userData.extra_data.id).then(
-                              (data) => {
-                                console.log(data);
-                                dispatch(addToCard(data.data));
-                              }
-                            );
-                          });
-                        }}
+                        onClick={handleAddToCart
+                        }
                       >
                         <AiOutlinePlus />
                       </button>
@@ -428,22 +360,7 @@ const Products = () => {
                       </Link>
                       <button
                         type="button"
-                        onClick={() => {
-
-                          console.log("hi");
-                          AddCartOrder(
-                            product,
-                            userData.extra_data.id,
-                            1
-                          ).then(() => {
-                            getProCart(userData.extra_data.id).then(
-                              (data) => {
-                                console.log(data);
-                                dispatch(addToCard(data.data));
-                              }
-                            );
-                          });
-                        }}
+                        onClick={() => handleAddToCart(product)}
                       >
                         <AiOutlinePlus />
                       </button>

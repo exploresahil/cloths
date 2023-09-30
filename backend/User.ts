@@ -49,7 +49,9 @@ export const googleLogin = async () => {
       redirectTo: "/user",
     },
   });
-  await getUser();
+  await getUser().then((data) => {
+    console.log(data);
+  });
 };
 export const EmailLogin = async (emailId: string, password: string) => {
   return await DB.auth.signUp({

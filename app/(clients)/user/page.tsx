@@ -10,9 +10,11 @@ import { User as user } from "@supabase/supabase-js";
 import { useRouter } from "next/navigation";
 import { reset } from "@/redux/reducer/cartSlice";
 import { reset as Rest } from "@/redux/reducer/userSlice";
+import { reset as _Rest } from "@/redux/reducer/userData";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "@/redux/hook";
 import { addUserData } from "@/redux/reducer/userData";
+
 const User = () => {
   const dispatch = useDispatch();
   const router = useRouter();
@@ -111,9 +113,10 @@ const User = () => {
               type="button"
               onClick={async () => {
                 await DB.auth.signOut();
-
+                CDB.clear();
                 dispatch(reset());
                 dispatch(Rest());
+                dispatch(_Rest())
                 router.push("/login");
               }}
             >
