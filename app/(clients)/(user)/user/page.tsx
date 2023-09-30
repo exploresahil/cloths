@@ -93,6 +93,7 @@ const User = () => {
         {activeTab === "order" && (
           <div className="order-container menu-section">
             <h2>{userData.data.user?.user_metadata?.full_name || ""}</h2>
+            <h3>Orders:</h3>
             <div className="product-main-container">
               <div className="product-info">
                 {data &&
@@ -137,7 +138,10 @@ const User = () => {
                         </div>
                       </div>
                     );
-                  })}
+                  })}{" "}
+                {(!data || data.length === 0) && (
+                  <p>No order found or Loading...</p>
+                )}
               </div>
             </div>
           </div>
