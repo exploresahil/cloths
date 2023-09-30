@@ -104,7 +104,7 @@ const Cart = ({ onCartCloseClick }: props) => {
             );
             onCartCloseClick();
           }}
-          disabled={count.length === 0}
+          disabled={count.length == 0}
         >
           PROCEED TO CHECKOUT{" "}
           <div className="arrow">

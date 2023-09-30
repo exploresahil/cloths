@@ -91,7 +91,7 @@ const Header = () => {
     (async () => {
       console.log(userData);
 
-      if (userData.data !== null) {
+      if (userData.data.user !== null) {
         await getRedx(userData.extra_data.id).then((data_) => {
           console.log("red->", data_);
           dispatch(Set(data_.data?.at(0).Redux.userSlice.value));
@@ -99,8 +99,8 @@ const Header = () => {
         });
       } else {
         // dispatch(Set([]));
-        dispatch(set([]));
-        dispatch(_set({ data: null }));
+        // dispatch(set([]));
+        // dispatch(_set({ data: null }));
         console.error("dam.extra_data is undefined"); // Handle this case as needed
       }
     })()

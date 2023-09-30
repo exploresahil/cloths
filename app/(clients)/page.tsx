@@ -11,7 +11,7 @@ export default function Home() {
   const dispatch = useAppDispatch()
   useEffect(() => {
     getUser().then((data) => {
-      if (data?.data) dispatch(addUserData(data))
+      if (data?.data.user) dispatch(addUserData(data))
     })
   }, [])
   return (
