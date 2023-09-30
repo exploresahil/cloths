@@ -98,7 +98,7 @@ const Header = () => {
           dispatch(set(data_.data?.at(0).Redux.CardReducer.value));
         });
       } else {
-        dispatch(Set([]));
+        // dispatch(Set([]));
         dispatch(set([]));
         dispatch(_set({ data: null }));
         console.error("dam.extra_data is undefined"); // Handle this case as needed
