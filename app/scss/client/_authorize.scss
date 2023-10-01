@@ -157,6 +157,18 @@
             display: flex;
             gap: 2em;
 
+            .out-of-stock {
+              background-color: v.$textTeal;
+              padding: 5px 10px;
+              position: absolute;
+              font-family: v.$fontRB;
+              font-size: 0.6rem;
+              color: v.$bg;
+              z-index: 4;
+              right: 0;
+              border-radius: 100px;
+            }
+
             .cart-item-info {
               text-transform: uppercase;
               display: flex;

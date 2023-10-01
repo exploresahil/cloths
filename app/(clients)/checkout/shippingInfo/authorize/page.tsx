@@ -6,7 +6,12 @@ import { GrClose } from "react-icons/gr";
 import AccordionDown from "@/components/icons/AccordionDown";
 import { CheckoutArrowNormal } from "@/components/icons/Icons";
 import { AiOutlinePlus } from "react-icons/ai";
-import { deleteAllCartProduct, getProCart, RemoveCartOrder, UpdateCartOrder } from "@/backend/Cart";
+import {
+  deleteAllCartProduct,
+  getProCart,
+  RemoveCartOrder,
+  UpdateCartOrder,
+} from "@/backend/Cart";
 import { products } from "@/types/Products";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { removeToCard, _reset } from "@/redux/reducer/cartSlice";
@@ -16,14 +21,17 @@ import { useRouter } from "next/navigation";
 import { makeOrder } from "@/backend/Order";
 import { updateCardRedx } from "@/backend/User";
 import { getProduct_by_id } from "@/sanity/sanity-utils";
+import { toast } from "react-toastify";
+
 export default function Authorize() {
   const count = useAppSelector((state) => state.CardReducer.value);
   const dispatch = useAppDispatch();
   const UserAddress = useAppSelector((state) => state.userSlice.value);
   const [product, setProduct] = useState<any[]>([]);
   const router = useRouter();
-  const userData = useAppSelector((state) => state.userDataSlice.value)
-  const [isAva, setAva] = useState<any[]>([])
+  const userData = useAppSelector((state) => state.userDataSlice.value);
+  const [isDis, setDis] = useState<boolean>(false);
+
   // const [Product,setProduct] = ise
 
   useEffect(() => {
@@ -32,13 +40,17 @@ export default function Authorize() {
       count.map((v, i) => {
         getProduct_by_id(v.product._id).then((data: any) => {
           console.log(data[0].isAvailable);
-          let pro = { product: { ...v.product, isAvailable: data[0].isAvailable }, ...v }
+          if (!data[0].isAvailable) {
+            setDis(true);
+          }
+          let pro = {
+            product: { ...v.product, isAvailable: data[0].isAvailable },
+            ...v,
+          };
           // v.product.isAvailable = data[0].isAvailable;
-          setProduct(prv => [...prv, pro])
-        })
-      })
-
-
+          setProduct((prv) => [...prv, pro]);
+        });
+      });
     }
   }, [count]);
   const current = new Date();
@@ -115,19 +127,19 @@ export default function Authorize() {
       <div className="authorize-payment-container">
         <div className="authorize-payment-cart">
           <div className="cart-products">
-            {(product && product.length !== 0) &&
+            {product &&
+              product.length !== 0 &&
               product.map(
                 (
                   v: { product: products; how_many: number; id: string },
                   i: any
                 ) => {
-
-
-
                   return (
                     <div className="cart-items">
                       <div className="cart-product-info">
-                        {v.product.isAvailable && <p>out of stock</p>}
+                        {!v.product.isAvailable && (
+                          <p className="out-of-stock">out of stock</p>
+                        )}
                         <div className="image-container">
                           <Image
                             fill
@@ -142,7 +154,7 @@ export default function Authorize() {
                             <p>rs {v.product.price}</p>
                           </div>
                           <div className="item-filter">
-                            <p>M</p>
+                            <p>{v.product.size[0]}</p>
                             <p>{v.how_many}</p>
                           </div>
                         </div>
@@ -161,7 +173,7 @@ export default function Authorize() {
                       </button>
                       <div className="line" />
                     </div>
-                  )
+                  );
                 }
               )}
           </div>
@@ -181,33 +193,40 @@ export default function Authorize() {
           <div className="payment-button-container">
             <button
               type="button"
-
               onClick={() => {
-                makeOrder(count, userData.extra_data.id, {
-                  ...{ ...UserAddress.at(-1), id: undefined },
-                }).then((data) => {
-                  axios
-                    .post("/api/getPaymentGateway", {
-                      price: total,
-                      phoneNo: UserAddress.at(-1)?.phone,
-                      order_id: data.data[0].id,
-                    })
-                    .then(({ data: Data }) => {
-                      console.log(Data.data);
-                      deleteAllCartProduct(userData.extra_data.id).then(() => {
-
-                        dispatch(_reset());
-                        router.push(
-                          Data.data.instrumentResponse.redirectInfo.url
-                        );
+                if (isDis) {
+                  toast.error(
+                    "One or more products are gone out of stock, please remove the out of stack product",
+                    {
+                      theme: "colored",
+                      autoClose: 5000,
+                    }
+                  );
+                } else {
+                  makeOrder(count, userData.extra_data.id, {
+                    ...{ ...UserAddress.at(-1), id: undefined },
+                  }).then((data) => {
+                    axios
+                      .post("/api/getPaymentGateway", {
+                        price: total,
+                        phoneNo: UserAddress.at(-1)?.phone,
+                        order_id: data.data[0].id,
                       })
+                      .then(({ data: Data }) => {
+                        console.log(Data.data);
+                        deleteAllCartProduct(userData.extra_data.id).then(
+                          () => {
+                            dispatch(_reset());
+                            router.push(
+                              Data.data.instrumentResponse.redirectInfo.url
+                            );
+                          }
+                        );
 
-                      // updateCardRedx(userData.extra_data.id);
-
-
-
-                    });
-                });
+                        // updateCardRedx(userData.extra_data.id);
+                      });
+                  });
+                }
               }}
             >
               {/* <button

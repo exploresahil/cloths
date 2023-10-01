@@ -203,7 +203,7 @@ export default function Product({ params }: Props) {
                 type="button"
                 className="button"
                 onClick={() => {
-                  if (userData.data.user && product.isAvailable)
+                  if (userData.data.user)
                     AddCartOrder(product, userData.extra_data.id, 1).then(
                       (data) => {
                         getProCart(userData.extra_data.id).then((data) => {
