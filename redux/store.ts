@@ -22,9 +22,9 @@ export const store = configureStore({
         const data = await CDB.getItem<Users>("user-data");
         if (data) {
           updateRedx(data.extra_data.id, getState());
-          await CDB.setItem("Redux-stores", getState());
         }
       }
+      await CDB.setItem("Redux-stores", getState());
 
       return result;
     });

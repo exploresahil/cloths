@@ -15,6 +15,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { makeOrder } from "@/backend/Order";
 import { updateCardRedx } from "@/backend/User";
+import { getProduct_by_id } from "@/sanity/sanity-utils";
 export default function Authorize() {
   const count = useAppSelector((state) => state.CardReducer.value);
   const dispatch = useAppDispatch();
@@ -43,7 +44,7 @@ export default function Authorize() {
   const deliveryCharges = orderAmount > 2550 ? "It's Free!" : 80;
 
   const total = orderAmount + (orderAmount > 2550 ? 0 : deliveryCharges);
-
+  const [disabled, setDisable] = useState(false)
   return (
     <div className="authorize-container">
       <div className="authorize-main">
@@ -108,43 +109,51 @@ export default function Authorize() {
                 (
                   v: { product: products; how_many: number; id: string },
                   i: any
-                ) => (
-                  <div className="cart-items">
-                    <div className="cart-product-info">
-                      <div className="image-container">
-                        <Image
-                          fill
-                          src={v.product.images[0].url}
-                          style={{ objectFit: "cover" }}
-                          alt="product-image"
-                        />
-                      </div>
-                      <div className="cart-item-info">
-                        <div className="info">
-                          <h3>{v.product.name}</h3>
-                          <p>rs {v.product.price}</p>
+                ) => {
+
+                  getProduct_by_id(v.product._id).then((data) => {
+
+                    setDisable(!data.isAvailable)
+                  });
+
+                  return (
+                    <div className="cart-items">
+                      <div className="cart-product-info">
+                        <div className="image-container">
+                          <Image
+                            fill
+                            src={v.product.images[0].url}
+                            style={{ objectFit: "cover" }}
+                            alt="product-image"
+                          />
                         </div>
-                        <div className="item-filter">
-                          <p>M</p>
-                          <p>{v.how_many}</p>
+                        <div className="cart-item-info">
+                          <div className="info">
+                            <h3>{v.product.name}</h3>
+                            <p>rs {v.product.price}</p>
+                          </div>
+                          <div className="item-filter">
+                            <p>M</p>
+                            <p>{v.how_many}</p>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        RemoveCartOrder(v.id).then(() => {
-                          getProCart(userData.extra_data.id).then((data) => {
-                            dispatch(removeToCard(data.data));
+                      <button
+                        type="button"
+                        onClick={() => {
+                          RemoveCartOrder(v.id).then(() => {
+                            getProCart(userData.extra_data.id).then((data) => {
+                              dispatch(removeToCard(data.data));
+                            });
                           });
-                        });
-                      }}
-                    >
-                      <GrClose />
-                    </button>
-                    <div className="line" />
-                  </div>
-                )
+                        }}
+                      >
+                        <GrClose />
+                      </button>
+                      <div className="line" />
+                    </div>
+                  )
+                }
               )}
           </div>
         </div>
@@ -162,6 +171,7 @@ export default function Authorize() {
           <div className="payment-button-container">
             <button
               type="button"
+              disabled={disabled}
               onClick={() => {
                 makeOrder(count, userData.extra_data.id, {
                   ...{ ...UserAddress.at(-1), id: undefined },

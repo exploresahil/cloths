@@ -1,7 +1,7 @@
 import { Users } from "@/types";
 import DB from "./Backend.client";
 import CDB from "@/storeage";
-export const getUser = async () => {
+export const getUser = async (): Promise<Users> => {
   let data = await DB.auth.getSession();
   const da = await DB.from("USER")
     .select("*")
@@ -41,6 +41,11 @@ export const getUser = async () => {
 
     return {
       data: { user: data.data.session.user },
+      extra_data: __da.data?.at(0),
+    };
+  } else {
+    return {
+      data: { user: null },
       extra_data: __da.data?.at(0),
     };
   }
