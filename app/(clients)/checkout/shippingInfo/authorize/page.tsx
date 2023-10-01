@@ -161,6 +161,7 @@ export default function Authorize() {
           <div className="price-container">
             <div className="text">
               <span>
+                {/* ok */}
                 <p>Order Amount: Rs. {orderAmount}</p>
                 <p>Delivery Charges: {deliveryCharges}</p>
               </span>
