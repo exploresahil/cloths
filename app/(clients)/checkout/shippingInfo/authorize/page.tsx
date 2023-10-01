@@ -104,7 +104,7 @@ export default function Authorize() {
       <div className="authorize-payment-container">
         <div className="authorize-payment-cart">
           <div className="cart-products">
-            {count &&
+            {(count && count !== 0) &&
               count.map(
                 (
                   v: { product: products; how_many: number; id: string },
