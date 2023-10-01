@@ -83,31 +83,14 @@ const products = {
     {
       name: "category",
       title: "Category",
-      type: "string",
-      options: {
-        list: [
-          { title: "Shirt Kurta", value: "Shirt Kurta" },
-          { title: "Crop Tops", value: "Crop Tops" },
-          { title: "Co-Ords", value: "Co-Ords" },
-          { title: "Samosa Tote Bag", value: "Samosa Tote Bag" },
-          { title: "Laptop Sleeves", value: "Laptop Sleeves" },
-        ],
-      },
-      validation: (Rule: any) =>
-        Rule.required().custom((value: any) => {
-          if (
-            ![
-              "Shirt Kurta",
-              "Crop Tops",
-              "Co-Ords",
-              "Samosa Tote Bag",
-              "Laptop Sleeves",
-            ].includes(value)
-          ) {
-            return "Please select a valid category option.";
-          }
-          return true;
-        }),
+      type: "category",
+    },
+    {
+      name: "isAvailable",
+      title: "Is Available",
+      type: "boolean",
+      description: "Select true if this product is Available, false otherwise",
+      initialValue: false,
     },
     {
       name: "searchTags",

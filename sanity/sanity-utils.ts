@@ -218,6 +218,7 @@ export async function getProducts(): Promise<products[]> {
       category,
       searchTags,
       sku,
+      isAvailable,
     }`
   );
 }
@@ -238,12 +239,8 @@ export async function getProduct(slug: string): Promise<products> {
       description,
       size,
       sku,
-      "category": {
-        "_id": category->_id,
-        "_createdAt": category->_createdAt,
-        "name": category->name,
-        "slug": category->slug,
-      },
+      isAvailable,
+      category,
     }`,
     { slug }
   );

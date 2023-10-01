@@ -45,6 +45,7 @@ const Products = () => {
     fetchProducts();
     fetchCategories();
   }, [selectedCategory]);
+  console.log("Products -->", products);
 
   useEffect(() => {
     set_Products((_products) => {
@@ -61,6 +62,7 @@ const Products = () => {
       }
     });
   }, [searchQuery, products]);
+
   useEffect(() => {
     if (categoryQuery) setSelectedCategory(categoryQuery);
   }, [categoryQuery]);

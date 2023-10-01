@@ -1,4 +1,5 @@
 import { PortableTextBlock } from "sanity";
+import { category } from "./Category";
 
 export type products = {
   _id: string;
@@ -15,8 +16,9 @@ export type products = {
   details: PortableTextBlock[];
   description: PortableTextBlock[];
   size: string[];
-  category: string;
+  category: category;
   type: string;
   searchTags: { current: string };
   sku: string;
+  isAvailable: boolean;
 };
