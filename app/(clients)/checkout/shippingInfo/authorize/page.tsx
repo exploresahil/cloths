@@ -23,7 +23,7 @@ import { updateCardRedx } from "@/backend/User";
 import { getProduct_by_id } from "@/sanity/sanity-utils";
 import { toast } from "react-toastify";
 function getUniqueListBy(arr: any[], key: string) {
-  return [...new Map(arr.map(item => [item[key], item])).values()]
+  return [...new Map(arr.map((item) => [item[key], item])).values()];
 }
 export default function Authorize() {
   const count = useAppSelector((state) => state.CardReducer.value);
@@ -139,7 +139,9 @@ export default function Authorize() {
                   return (
                     <div className="cart-items">
                       <div className="cart-product-info">
-                        {!product[i].product.isAvailable && (
+                        {!product.filter(
+                          (b, s) => b.product._id == v.product._id
+                        )[0].product.isAvailable && (
                           <p className="out-of-stock">out of stock</p>
                         )}
                         <div className="image-container">

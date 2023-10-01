@@ -33,6 +33,9 @@ import Supabase from "@/backend/Backend.client";
 import CDB from "@/storeage";
 import { addUserData } from "@/redux/reducer/userData";
 import { set as _set } from "@/redux/reducer/userData";
+import { getCategories } from "@/sanity/sanity-utils";
+import { category } from "@/types/Category";
+
 const Header = () => {
   const count = useAppSelector((state) => state.CardReducer.value);
   const userData = useAppSelector((state) => state.userDataSlice.value);
@@ -48,6 +51,18 @@ const Header = () => {
     email: "",
   });
   const [isOpen, setIsOpen] = useState(false);
+  const [Catogeries, setCatogeries] = useState<category[]>([]);
+
+  useEffect(() => {
+    async function fetchCatogeries() {
+      const Catogeries = await getCategories();
+      setCatogeries(Catogeries);
+    }
+
+    fetchCatogeries();
+  }, []);
+
+  console.log("Catogeries-->", Catogeries[1]);
 
   const submitNewsLetter = (e: any) => {
     e.preventDefault();
@@ -239,7 +254,7 @@ const Header = () => {
         <div className="user-menu-ecommercs">
           <button className="cart" onClick={handleCartClickOpen}>
             <Bag />
-            {(count && count.length !== 0) && <p>{count.length}</p>}
+            {count && count.length !== 0 && <p>{count.length}</p>}
           </button>
           <div className="line" />
           <button
@@ -264,51 +279,17 @@ const Header = () => {
             <div className="left section">
               <ul>
                 <li className="title">SHOP</li>
-                <li>
-                  <a
-                    href="#"
-                    className="nav-item"
-                    onClick={() => handleProductsClick("Shirt Kurta")}
-                  >
-                    shirt kurta
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="nav-item"
-                    onClick={() => handleProductsClick("Crop Tops")}
-                  >
-                    crop tops
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="nav-item"
-                    onClick={() => handleProductsClick("Co-Ords")}
-                  >
-                    co-ords
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="nav-item"
-                    onClick={() => handleProductsClick("Samosa Tote Bag")}
-                  >
-                    samosa tote bag
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="nav-item"
-                    onClick={() => handleProductsClick("Laptop Sleeves")}
-                  >
-                    laptop sleeves
-                  </a>
-                </li>
+                {Catogeries.slice(0, 5).map((cat) => (
+                  <li key={cat._id}>
+                    <a
+                      href="#"
+                      className="nav-item"
+                      onClick={() => handleProductsClick(cat.name)}
+                    >
+                      {cat.name}
+                    </a>
+                  </li>
+                ))}
                 <NavLinks
                   pageLink="#"
                   title="View All"
@@ -431,51 +412,18 @@ const Header = () => {
             <div className="left section">
               <ul>
                 <li className="title">SHOP</li>
-                <li>
-                  <a
-                    href="#"
-                    className="nav-item"
-                    onClick={() => handleProductsClick("Shirt Kurta")}
-                  >
-                    shirt kurta
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="nav-item"
-                    onClick={() => handleProductsClick("Crop Tops")}
-                  >
-                    crop tops
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="nav-item"
-                    onClick={() => handleProductsClick("Co-Ords")}
-                  >
-                    co-ords
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="nav-item"
-                    onClick={() => handleProductsClick("Samosa Tote Bag")}
-                  >
-                    samosa tote bag
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="nav-item"
-                    onClick={() => handleProductsClick("Laptop Sleeves")}
-                  >
-                    laptop sleeves
-                  </a>
-                </li>
+                {Catogeries.slice(0, 5).map((cat) => (
+                  <li key={cat._id}>
+                    <a
+                      href="#"
+                      className="nav-item"
+                      onClick={() => handleProductsClick(cat.name)}
+                    >
+                      {cat.name}
+                    </a>
+                  </li>
+                ))}
+
                 <NavLinks
                   pageLink="#"
                   title="View All"

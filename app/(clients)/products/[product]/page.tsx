@@ -140,6 +140,9 @@ export default function Product({ params }: Props) {
           <div className="product-container">
             <div className="product-info">
               <h2>{product.name}</h2>
+              {!product.isAvailable && (
+                <p className="out-of-stock-pro">Out of stock</p>
+              )}
               <div className="product-details">
                 <PortableText value={product.details} />
               </div>
@@ -203,26 +206,34 @@ export default function Product({ params }: Props) {
                 type="button"
                 className="button"
                 onClick={() => {
-                  if (userData.data.user)
-                    AddCartOrder(product, userData.extra_data.id, 1).then(
-                      (data) => {
-                        getProCart(userData.extra_data.id).then((data) => {
-                          dispatch(addToCard(data.data));
+                  if (product.isAvailable) {
+                    if (userData.data.user)
+                      AddCartOrder(product, userData.extra_data.id, 1).then(
+                        (data) => {
+                          getProCart(userData.extra_data.id).then((data) => {
+                            dispatch(addToCard(data.data));
 
-                          router.push(
-                            userAddress.length != 0
-                              ? "/checkout/shippingInfo/authorize"
-                              : "/checkout/shippingInfo/"
-                          );
-                        });
-                      }
-                    );
-                  else
+                            router.push(
+                              userAddress.length != 0
+                                ? "/checkout/shippingInfo/authorize"
+                                : "/checkout/shippingInfo/"
+                            );
+                          });
+                        }
+                      );
+                  } else if (!product.isAvailable) {
+                    toast.error("Product is Out of stack", {
+                      theme: "colored",
+                      autoClose: 1500,
+                      hideProgressBar: true,
+                    });
+                  } else if (product.isAvailable) {
                     toast.error("You Must Login First", {
                       theme: "colored",
                       autoClose: 1500,
                       hideProgressBar: true,
                     });
+                  }
                 }}
               >
                 Buy Now <BsArrowRight />
@@ -241,9 +252,16 @@ export default function Product({ params }: Props) {
                 <div className="product-sec" key={randomProduct._id}>
                   <Link
                     href={`/products/${randomProduct.slug}`}
-                    className="product"
+                    className={`product ${
+                      randomProduct.isAvailable ? "" : "product-link-out"
+                    }`}
                   >
                     <div className="img-container">
+                      {!randomProduct.isAvailable && (
+                        <div className="out-of-stock">
+                          <p>Out of stock</p>
+                        </div>
+                      )}
                       {randomProduct.images && (
                         <Image
                           fill
@@ -253,33 +271,44 @@ export default function Product({ params }: Props) {
                         />
                       )}
                     </div>
-                    <div className="product-info">
-                      <h3>{randomProduct.name}</h3>
-                      <p>RS.{randomProduct.price}</p>
-                    </div>
+                    {(!randomProduct.isAvailable && (
+                      <div className="product-info info-out">
+                        <h3>{randomProduct.name}</h3>
+                        <p>RS.{randomProduct.price}</p>
+                      </div>
+                    )) || (
+                      <div className="product-info">
+                        <h3>{randomProduct.name}</h3>
+                        <p>RS.{randomProduct.price}</p>
+                      </div>
+                    )}
                   </Link>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      // console.log("hi", "", product, userData);
-                      if (userData.data.user)
-                        AddCartOrder(product, userData.extra_data.id, 1).then(
-                          (data) => {
-                            getProCart(userData.extra_data.id).then((data) => {
-                              dispatch(addToCard(data.data));
-                            });
-                          }
-                        );
-                      else
-                        toast.error("You Must Login First", {
-                          theme: "colored",
-                          autoClose: 1500,
-                          hideProgressBar: true,
-                        });
-                    }}
-                  >
-                    <AiOutlinePlus />
-                  </button>
+                  {randomProduct.isAvailable && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        // console.log("hi", "", product, userData);
+                        if (userData.data.user)
+                          AddCartOrder(product, userData.extra_data.id, 1).then(
+                            (data) => {
+                              getProCart(userData.extra_data.id).then(
+                                (data) => {
+                                  dispatch(addToCard(data.data));
+                                }
+                              );
+                            }
+                          );
+                        else
+                          toast.error("You Must Login First", {
+                            theme: "colored",
+                            autoClose: 1500,
+                            hideProgressBar: true,
+                          });
+                      }}
+                    >
+                      <AiOutlinePlus />
+                    </button>
+                  )}
                 </div>
               ))}
             </div>

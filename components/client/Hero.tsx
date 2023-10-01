@@ -2,7 +2,7 @@
 
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 
 import {
@@ -13,14 +13,12 @@ import {
   CategoryArrowRight,
 } from "@/components/icons/Icons";
 
-const dance =
-  "https://assets.mixkit.co/videos/preview/mixkit-young-man-modeling-old-fashion-style-41480-large.mp4";
-
-const life =
-  "https://assets.mixkit.co/videos/preview/mixkit-t-shirts-on-hangers-at-fashion-store-34707-large.mp4";
+import { useRouter } from "next/navigation";
 
 import Link from "next/link";
 import { GrSpa } from "react-icons/gr";
+import { getHeros } from "@/sanity/sanity-utils";
+import { heros } from "@/types/Heros";
 
 const Hero = () => {
   const heroRef = useRef<HTMLElement>(null);
@@ -29,6 +27,31 @@ const Hero = () => {
   const coOrdsArrowRef = useRef<HTMLAnchorElement>(null);
   const archesRef = useRef<HTMLDivElement>(null);
   const scrollPromoRef = useRef<HTMLDivElement>(null);
+  const [heros, setHeros] = useState<heros[]>([]);
+
+  const router = useRouter();
+
+  useEffect(() => {
+    async function fetchHeros() {
+      const heros = await getHeros();
+      setHeros(heros);
+    }
+
+    fetchHeros();
+  }, []);
+
+  const videoUrlOne = heros[0]?.video_url;
+  const catogeryOne = heros[0]?.catogery_video.name;
+  const videoUrlTwo = heros[2]?.video_url;
+  const catogeryTwo = heros[2]?.catogery_video.name;
+  const videoUrlThree = heros[1]?.video_url;
+  const catogeryThree = heros[1]?.catogery_video.name;
+
+  const handleCatogeryClick = (selectedCategory: any) => {
+    router.push(`/products?category=${selectedCategory}`);
+  };
+
+  //console.log("heros-->", heros[0]?.catogery_video.name);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -471,18 +494,21 @@ const Hero = () => {
             ref={coOrdsRef}
           />
         </div> */}
+
         <div className="category_co-ords_container" id="coOrds">
-          <video
-            ref={videoRefOneDesktop}
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="metadata"
-            style={{ objectFit: "cover" }}
-          >
-            <source src={dance} type="video/mp4" />
-          </video>
+          {videoUrlOne && (
+            <video
+              ref={videoRefOneDesktop}
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload="metadata"
+              style={{ objectFit: "cover" }}
+            >
+              <source src={videoUrlOne} type="video/mp4" />
+            </video>
+          )}
         </div>
       </div>
       <div className="category_co-ords_main_mobile" id="coOrdsMainMobile">
@@ -496,25 +522,35 @@ const Hero = () => {
           />
         </div> */}
         <div className="category_co-ords_container_mobile" id="coOrdsMobile">
-          <video
-            ref={videoRefOne}
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="metadata"
-            style={{ objectFit: "cover" }}
-          >
-            <source src={dance} />
-          </video>
+          {videoUrlOne && (
+            <video
+              ref={videoRefOne}
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload="metadata"
+              style={{ objectFit: "cover" }}
+            >
+              <source src={videoUrlOne} />
+            </video>
+          )}
         </div>
       </div>
       <div className="link-container">
-        <Link href="#" ref={coOrdsArrowRef} className="coOrdsArrowRef">
-          <p>Shirt Kurta</p>
-          <CategoryArrowRight />
-        </Link>
+        {catogeryOne && (
+          <a
+            href="#"
+            ref={coOrdsArrowRef}
+            className="coOrdsArrowRef"
+            onClick={() => handleCatogeryClick(catogeryOne)}
+          >
+            <p>{catogeryOne}</p>
+            <CategoryArrowRight />
+          </a>
+        )}
       </div>
+
       <div className="category_accessories_main" id="accessoriesMain">
         {/* <div
           className="category_accessories_container"
@@ -529,15 +565,17 @@ const Hero = () => {
           />
         </div> */}
         <div className="category_accessories_container" id="accessories">
-          <video
-            ref={videoRefTwoDesktop}
-            autoPlay
-            loop
-            muted
-            style={{ objectFit: "cover" }}
-          >
-            <source src={life} />
-          </video>
+          {videoUrlTwo && (
+            <video
+              ref={videoRefTwoDesktop}
+              autoPlay
+              loop
+              muted
+              style={{ objectFit: "cover" }}
+            >
+              <source src={videoUrlTwo} />
+            </video>
+          )}
         </div>
       </div>
       <div
@@ -560,29 +598,33 @@ const Hero = () => {
           className="category_accessories_container_mobile"
           id="accessoriesMobile"
         >
-          <video
-            ref={videoRefTwo}
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="metadata"
-            style={{ objectFit: "cover" }}
-          >
-            <source src={life} />
-          </video>
+          {videoUrlTwo && (
+            <video
+              ref={videoRefTwo}
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload="metadata"
+              style={{ objectFit: "cover" }}
+            >
+              <source src={videoUrlTwo} />
+            </video>
+          )}
         </div>
       </div>
       <div className="link-container">
-        <Link
-          href="#"
-          ref={accessoriesArrowRef}
-          className="accessoriesArrowRef"
-        >
-          <p>Crop Top</p>
-          {/* <p>Tube Top</p> */}
-          <CategoryArrowRight />
-        </Link>
+        {catogeryTwo && (
+          <a
+            href="#"
+            ref={accessoriesArrowRef}
+            onClick={() => handleCatogeryClick(catogeryTwo)}
+            className="accessoriesArrowRef"
+          >
+            <p>{catogeryTwo}</p>
+            <CategoryArrowRight />
+          </a>
+        )}
       </div>
       <h3 className="stitchingImpact">
         <span className="one">stitching</span>{" "}

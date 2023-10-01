@@ -34,8 +34,17 @@
           font-family: $fontAM;
           font-style: italic;
         }
+      }
 
-        margin-bottom: 30px;
+      .out-of-stock-pro {
+        background-color: $textTeal;
+        width: fit-content;
+        padding: 5px 10px;
+        margin: 10px 0;
+
+        font-family: $fontRB;
+        font-size: 0.8rem;
+        color: $bg;
       }
 
       .product-details {
@@ -297,6 +306,11 @@
         }
       }
 
+      .product-link-out {
+        pointer-events: none;
+        cursor: default;
+      }
+
       .product {
         overflow: hidden;
 
@@ -308,10 +322,31 @@
           justify-content: center;
           align-items: flex-end;
 
+          .out-of-stock {
+            background-color: rgba(0, 0, 0, 0.5);
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            p {
+              color: $bg;
+              font-family: $fontRM;
+            }
+          }
+
           img {
             z-index: 2;
           }
         }
+        .info-out {
+          text-decoration-line: line-through;
+        }
+
         .product-info {
           font-size: 0.8rem;
           font-weight: 600;

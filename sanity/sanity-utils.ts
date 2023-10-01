@@ -11,6 +11,7 @@ import { policiesSchema } from "@/types/Policies";
 import { contactSchema } from "@/types/Contact";
 import { products } from "@/types/Products";
 import { category } from "@/types/Category";
+import { heros } from "@/types/Heros";
 
 export async function getProcesses(): Promise<process[]> {
   return createClient(clientConfig).fetch(
@@ -266,3 +267,15 @@ export const getProduct_by_id = async (id: string): Promise<products> =>
       id,
     }
   );
+
+export async function getHeros(): Promise<heros[]> {
+  return createClient(clientConfig).fetch(
+    groq`*[_type == "heros"] | order(_created_at asc) {
+     _id,
+  _created,
+ name,
+ catogery_video->{name,slug},
+ video_url
+    }`
+  );
+}

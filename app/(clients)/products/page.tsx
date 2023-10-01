@@ -164,7 +164,9 @@ const Products = () => {
                             <Link
                               key={product._id}
                               href={`/products/${product.slug}`}
-                              className="product"
+                              className={`product ${
+                                product.isAvailable ? "" : "product-link-out"
+                              }`}
                             >
                               <div className="img-container">
                                 {product.images && (
@@ -181,18 +183,28 @@ const Products = () => {
                                   </div>
                                 )}
                               </div>
-                              <div className="product-info">
-                                <h3>{product.name}</h3>
-                                <p>RS.{product.price}</p>
-                              </div>
+
+                              {(!product.isAvailable && (
+                                <div className="product-info info-out">
+                                  <h3>{product.name}</h3>
+                                  <p>RS.{product.price}</p>
+                                </div>
+                              )) || (
+                                <div className="product-info">
+                                  <h3>{product.name}</h3>
+                                  <p>RS.{product.price}</p>
+                                </div>
+                              )}
                             </Link>
-                            <button
-                              type="button"
-                              onClick={() => handleAddToCart(product)}
-                              disabled={!product.isAvailable}
-                            >
-                              <AiOutlinePlus />
-                            </button>
+                            {product.isAvailable && (
+                              <button
+                                type="button"
+                                onClick={() => handleAddToCart(product)}
+                                disabled={!product.isAvailable}
+                              >
+                                <AiOutlinePlus />
+                              </button>
+                            )}
                           </div>
                         );
                       } else if (
@@ -204,7 +216,9 @@ const Products = () => {
                             <Link
                               key={product._id}
                               href={`/products/${product.slug}`}
-                              className="product"
+                              className={`product ${
+                                product.isAvailable ? "" : "product-link-out"
+                              }`}
                             >
                               <div className="img-container">
                                 {product.images && (
@@ -221,18 +235,28 @@ const Products = () => {
                                   </div>
                                 )}
                               </div>
-                              <div className="product-info">
-                                <h3>{product.name}</h3>
-                                <p>RS.{product.price}</p>
-                              </div>
+
+                              {(!product.isAvailable && (
+                                <div className="product-info info-out">
+                                  <h3>{product.name}</h3>
+                                  <p>RS.{product.price}</p>
+                                </div>
+                              )) || (
+                                <div className="product-info">
+                                  <h3>{product.name}</h3>
+                                  <p>RS.{product.price}</p>
+                                </div>
+                              )}
                             </Link>
-                            <button
-                              type="button"
-                              onClick={() => handleAddToCart(product)}
-                              disabled={!product.isAvailable}
-                            >
-                              <AiOutlinePlus />
-                            </button>
+                            {product.isAvailable && (
+                              <button
+                                type="button"
+                                onClick={() => handleAddToCart(product)}
+                                disabled={!product.isAvailable}
+                              >
+                                <AiOutlinePlus />
+                              </button>
+                            )}
                           </div>
                         );
                       }
@@ -299,7 +323,9 @@ const Products = () => {
                           <Link
                             key={product._id}
                             href={`/products/${product.slug}`}
-                            className="product"
+                            className={`product ${
+                              product.isAvailable ? "" : "product-link-out"
+                            }`}
                           >
                             <div className="img-container">
                               {product.images && (
@@ -316,19 +342,28 @@ const Products = () => {
                                 </div>
                               )}
                             </div>
-                            <div className="product-info">
-                              <h3>{product.name}</h3>
-                              <p>RS.{product.price}</p>
-                            </div>
+                            {(!product.isAvailable && (
+                              <div className="product-info info-out">
+                                <h3>{product.name}</h3>
+                                <p>RS.{product.price}</p>
+                              </div>
+                            )) || (
+                              <div className="product-info">
+                                <h3>{product.name}</h3>
+                                <p>RS.{product.price}</p>
+                              </div>
+                            )}
                           </Link>
 
-                          <button
-                            type="button"
-                            onClick={() => handleAddToCart(product)}
-                            disabled={!product.isAvailable}
-                          >
-                            <AiOutlinePlus />
-                          </button>
+                          {product.isAvailable && (
+                            <button
+                              type="button"
+                              onClick={() => handleAddToCart(product)}
+                              disabled={!product.isAvailable}
+                            >
+                              <AiOutlinePlus />
+                            </button>
+                          )}
                         </div>
                       );
                     }
@@ -342,7 +377,9 @@ const Products = () => {
                         <Link
                           key={product._id}
                           href={`/products/${product.slug}`}
-                          className="product"
+                          className={`product ${
+                            product.isAvailable ? "" : "product-link-out"
+                          }`}
                         >
                           <div className="img-container">
                             {product.images && (
@@ -359,18 +396,27 @@ const Products = () => {
                               </div>
                             )}
                           </div>
-                          <div className="product-info">
-                            <h3>{product.name}</h3>
-                            <p>RS.{product.price}</p>
-                          </div>
+                          {(!product.isAvailable && (
+                            <div className="product-info info-out">
+                              <h3>{product.name}</h3>
+                              <p>RS.{product.price}</p>
+                            </div>
+                          )) || (
+                            <div className="product-info">
+                              <h3>{product.name}</h3>
+                              <p>RS.{product.price}</p>
+                            </div>
+                          )}
                         </Link>
-                        <button
-                          type="button"
-                          onClick={handleAddToCart}
-                          disabled={!product.isAvailable}
-                        >
-                          <AiOutlinePlus />
-                        </button>
+                        {product.isAvailable && (
+                          <button
+                            type="button"
+                            onClick={() => handleAddToCart(product)}
+                            disabled={!product.isAvailable}
+                          >
+                            <AiOutlinePlus />
+                          </button>
+                        )}
                       </div>
                     );
                   } else if (
@@ -382,7 +428,9 @@ const Products = () => {
                         <Link
                           key={product._id}
                           href={`/products/${product.slug}`}
-                          className="product"
+                          className={`product ${
+                            product.isAvailable ? "" : "product-link-out"
+                          }`}
                         >
                           <div className="img-container">
                             {product.images && (
@@ -399,18 +447,27 @@ const Products = () => {
                               </div>
                             )}
                           </div>
-                          <div className="product-info">
-                            <h3>{product.name}</h3>
-                            <p>RS.{product.price}</p>
-                          </div>
+                          {(!product.isAvailable && (
+                            <div className="product-info info-out">
+                              <h3>{product.name}</h3>
+                              <p>RS.{product.price}</p>
+                            </div>
+                          )) || (
+                            <div className="product-info">
+                              <h3>{product.name}</h3>
+                              <p>RS.{product.price}</p>
+                            </div>
+                          )}
                         </Link>
-                        <button
-                          type="button"
-                          onClick={() => handleAddToCart(product)}
-                          disabled={!product.isAvailable}
-                        >
-                          <AiOutlinePlus />
-                        </button>
+                        {product.isAvailable && (
+                          <button
+                            type="button"
+                            onClick={() => handleAddToCart(product)}
+                            disabled={!product.isAvailable}
+                          >
+                            <AiOutlinePlus />
+                          </button>
+                        )}
                       </div>
                     );
                   }
