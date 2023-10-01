@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { contact as contactUs } from "@/backend/forms";
+import dynamic from "next/dynamic";
 
 import {
   ContactInstaColor,
@@ -189,4 +190,4 @@ const Contact = () => {
   );
 };
 
-export default Contact;
+export default dynamic(() => Promise.resolve(Contact), { ssr: false });

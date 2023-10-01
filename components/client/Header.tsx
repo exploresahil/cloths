@@ -32,7 +32,7 @@ import { getProCart } from "@/backend/Cart";
 import Supabase from "@/backend/Backend.client";
 import CDB from "@/storeage";
 import { addUserData } from "@/redux/reducer/userData";
-import { set as _set } from "@/redux/reducer/userData"
+import { set as _set } from "@/redux/reducer/userData";
 const Header = () => {
   const count = useAppSelector((state) => state.CardReducer.value);
   const userData = useAppSelector((state) => state.userDataSlice.value);
@@ -67,8 +67,6 @@ const Header = () => {
     );
   };
 
-
-
   const handleCartClickOpen = () => {
     setIsCartOpen(true);
   };
@@ -81,11 +79,10 @@ const Header = () => {
     (async () => {
       const data = await CDB.getItem("user-data");
 
-      if (data != undefined) dispatch(addUserData(data))
+      if (data != undefined) dispatch(addUserData(data));
       console.log(data);
     })();
-
-  }, [])
+  }, []);
   useEffect(() => {
     //push
     (async () => {
@@ -103,8 +100,8 @@ const Header = () => {
         // dispatch(_set({ data: null }));
         console.error("dam.extra_data is undefined"); // Handle this case as needed
       }
-    })()
-  }, [userData])
+    })();
+  }, [userData]);
   useEffect(() => {
     // (async () => {
     //   const dam = await getUser();
@@ -242,7 +239,7 @@ const Header = () => {
         <div className="user-menu-ecommercs">
           <button className="cart" onClick={handleCartClickOpen}>
             <Bag />
-            {count && count.length !== 0 && <p>{count.length}</p>}
+            {count && count.length === 0 ? <p>{count.length}</p> : null}
           </button>
           <div className="line" />
           <button

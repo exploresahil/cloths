@@ -30,10 +30,8 @@ export default function Product({ params }: Props) {
   const [relatedProducts, setRelatedProducts] = useState<products[]>([]);
   const [randomProducts, setRandomProducts] = useState<products[]>([]);
   const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
-  const userData = useAppSelector(state => state.userDataSlice.value)
+  const userData = useAppSelector((state) => state.userDataSlice.value);
   const slug = params.product;
-
-
 
   useEffect(() => {
     getProduct(slug).then((data) => {
@@ -107,16 +105,23 @@ export default function Product({ params }: Props) {
   };
 
   const handleAddToCart = (product: any) => {
-    AddCartOrder(product, userData.extra_data.id, 1).then(() => {
-      getProCart(userData.extra_data.id).then((data) => {
-        dispatch(addToCard(data.data));
-        toast.success("Product Added", {
-          theme: "colored",
-          autoClose: 800,
-          hideProgressBar: true,
+    if (userData.data.user)
+      AddCartOrder(product, userData.extra_data.id, 1).then(() => {
+        getProCart(userData.extra_data.id).then((data) => {
+          dispatch(addToCard(data.data));
+          toast.success("Product Added", {
+            theme: "colored",
+            autoClose: 800,
+            hideProgressBar: true,
+          });
         });
       });
-    });
+    else
+      toast.error("You Must Login First", {
+        theme: "colored",
+        autoClose: 1500,
+        hideProgressBar: true,
+      });
   };
 
   return (
@@ -189,19 +194,26 @@ export default function Product({ params }: Props) {
                 type="button"
                 className="button"
                 onClick={() => {
-                  AddCartOrder(product, userData.extra_data.id, 1).then(
-                    (data) => {
-                      getProCart(userData.extra_data.id).then((data) => {
-                        dispatch(addToCard(data.data));
+                  if (userData.data.user)
+                    AddCartOrder(product, userData.extra_data.id, 1).then(
+                      (data) => {
+                        getProCart(userData.extra_data.id).then((data) => {
+                          dispatch(addToCard(data.data));
 
-                        router.push(
-                          userAddress.length != 0
-                            ? "/checkout/shippingInfo/authorize"
-                            : "/checkout/shippingInfo/"
-                        );
-                      });
-                    }
-                  );
+                          router.push(
+                            userAddress.length != 0
+                              ? "/checkout/shippingInfo/authorize"
+                              : "/checkout/shippingInfo/"
+                          );
+                        });
+                      }
+                    );
+                  else
+                    toast.error("You Must Login First", {
+                      theme: "colored",
+                      autoClose: 1500,
+                      hideProgressBar: true,
+                    });
                 }}
               >
                 Buy Now <BsArrowRight />
@@ -241,14 +253,20 @@ export default function Product({ params }: Props) {
                     type="button"
                     onClick={() => {
                       // console.log("hi", "", product, userData);
-
-                      AddCartOrder(product, userData.extra_data.id, 1).then(
-                        (data) => {
-                          getProCart(userData.extra_data.id).then((data) => {
-                            dispatch(addToCard(data.data));
-                          });
-                        }
-                      );
+                      if (userData.data.user)
+                        AddCartOrder(product, userData.extra_data.id, 1).then(
+                          (data) => {
+                            getProCart(userData.extra_data.id).then((data) => {
+                              dispatch(addToCard(data.data));
+                            });
+                          }
+                        );
+                      else
+                        toast.error("You Must Login First", {
+                          theme: "colored",
+                          autoClose: 1500,
+                          hideProgressBar: true,
+                        });
                     }}
                   >
                     <AiOutlinePlus />

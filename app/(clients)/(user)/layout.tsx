@@ -1,9 +1,11 @@
 "use client";
 
-import supabase from "@/backend/Backend.client";
 import { useAppSelector } from "@/redux/hook";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { getUser } from "@/backend/User";
+import { useAppDispatch } from "@/redux/hook";
+import { addUserData } from "@/redux/reducer/userData";
 
 export default function RootLayout({
   children,
@@ -15,16 +17,16 @@ export default function RootLayout({
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
 
   //console.log(userData);
-
+  const dispatch = useAppDispatch();
   useEffect(() => {
-    if (userData.data.user!) {
-      if (userData.extra_data.super_admin === true) {
+    getUser().then((data) => {
+      if (data?.data.user) {
         setIsAuthenticated(true);
       } else {
         router.push("/");
       }
-    }
-  }, [userData]);
+    });
+  }, []);
 
   return isAuthenticated ? <>{children}</> : <p>loading..</p>;
 }
