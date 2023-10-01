@@ -1,4 +1,4 @@
-import { ConfromPay } from "@/backend/Order";
+import { ConformPay } from "@/backend/Order";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request, { params }: any) {
@@ -7,8 +7,8 @@ export async function POST(request: Request, { params }: any) {
   console.log(FormData.get("code"));
 
   if (FormData.get("code") == "PAYMENT_SUCCESS") {
-    const data = await ConfromPay(order_id);
-    console.log(data);
+    const data = await ConformPay(order_id);
+    console.log(data.data);
 
     const res = new Response(`
     <html>
