@@ -20,16 +20,27 @@ export default function Authorize() {
   const count = useAppSelector((state) => state.CardReducer.value);
   const dispatch = useAppDispatch();
   const UserAddress = useAppSelector((state) => state.userSlice.value);
-  const [product, setProduct] = useState<null | any[]>(null);
+  const [product, setProduct] = useState<any[]>([]);
   const router = useRouter();
   const userData = useAppSelector((state) => state.userDataSlice.value)
-
-
+  const [isAva, setAva] = useState<any[]>([])
+  // const [Product,setProduct] = ise
 
   useEffect(() => {
-    if (userData)
-      getProCart(userData.extra_data.id).then((data) => setProduct(data.data));
-  }, [userData]);
+    if (count.length !== 0) {
+      // getProCart(userData.extra_data.id).then((data) => setProduct(data.data));
+      count.map((v, i) => {
+        getProduct_by_id(v.product._id).then((data: any) => {
+          console.log(data[0].isAvailable);
+          let pro = { product: { ...v.product, isAvailable: data[0].isAvailable }, ...v }
+          // v.product.isAvailable = data[0].isAvailable;
+          setProduct(prv => [...prv, pro])
+        })
+      })
+
+
+    }
+  }, [count]);
   const current = new Date();
   //const next6 = current.setDate(new Date().getDate() + 6);
 
@@ -44,7 +55,7 @@ export default function Authorize() {
   const deliveryCharges = orderAmount > 2550 ? "It's Free!" : 80;
 
   const total = orderAmount + (orderAmount > 2550 ? 0 : deliveryCharges);
-  const [disabled, setDisable] = useState(false)
+
   return (
     <div className="authorize-container">
       <div className="authorize-main">
@@ -104,21 +115,19 @@ export default function Authorize() {
       <div className="authorize-payment-container">
         <div className="authorize-payment-cart">
           <div className="cart-products">
-            {(count && count.length !== 0) &&
-              count.map(
+            {(product && product.length !== 0) &&
+              product.map(
                 (
                   v: { product: products; how_many: number; id: string },
                   i: any
                 ) => {
 
-                  getProduct_by_id(v.product._id).then((data) => {
 
-                    setDisable(!data.isAvailable)
-                  });
 
                   return (
                     <div className="cart-items">
                       <div className="cart-product-info">
+                        {v.product.isAvailable && <p>out of stock</p>}
                         <div className="image-container">
                           <Image
                             fill
@@ -172,7 +181,7 @@ export default function Authorize() {
           <div className="payment-button-container">
             <button
               type="button"
-              disabled={disabled}
+
               onClick={() => {
                 makeOrder(count, userData.extra_data.id, {
                   ...{ ...UserAddress.at(-1), id: undefined },
