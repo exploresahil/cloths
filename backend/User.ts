@@ -2,15 +2,17 @@ import { Users } from "@/types";
 import DB from "./Backend.client";
 import CDB from "@/storeage";
 export const getUser = async () => {
-  let data = await DB.auth.getUser();
-  const da = await DB.from("USER").select("*").eq("user", data.data.user?.id);
+  let data = await DB.auth.getSession();
+  const da = await DB.from("USER")
+    .select("*")
+    .eq("user", data.data.session?.user?.id);
   if (da.data?.length == 0) {
     await DB.from("USER").insert({
-      user: data.data.user?.id,
+      user: data.data.session?.user.id,
     });
     const _da = await DB.from("USER")
       .select("*")
-      .eq("user", data.data.user?.id);
+      .eq("user", data.data.session?.user?.id);
     console.log(_da.data?.at(0));
 
     await DB.from("Redux")
@@ -27,16 +29,18 @@ export const getUser = async () => {
       })
       .then(() => null);
   }
-  const __da = await DB.from("USER").select("*").eq("user", data.data.user?.id);
+  const __da = await DB.from("USER")
+    .select("*")
+    .eq("user", data.data.session?.user?.id);
 
-  if (data.data.user && __da.data?.length != 0) {
+  if (data.data.session?.user && __da.data?.length != 0) {
     await CDB.setItem<Users>("user-data", {
-      data: { user: data.data.user },
+      data: { user: data.data.session.user },
       extra_data: __da.data?.at(0),
     });
 
     return {
-      data: { user: data.data.user },
+      data: { user: data.data.session.user },
       extra_data: __da.data?.at(0),
     };
   }
