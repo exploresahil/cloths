@@ -22,7 +22,9 @@ import { makeOrder } from "@/backend/Order";
 import { updateCardRedx } from "@/backend/User";
 import { getProduct_by_id } from "@/sanity/sanity-utils";
 import { toast } from "react-toastify";
-
+function getUniqueListBy(arr: any[], key: string) {
+  return [...new Map(arr.map(item => [item[key], item])).values()]
+}
 export default function Authorize() {
   const count = useAppSelector((state) => state.CardReducer.value);
   const dispatch = useAppDispatch();
@@ -48,7 +50,7 @@ export default function Authorize() {
             ...v,
           };
           // v.product.isAvailable = data[0].isAvailable;
-          setProduct((prv) => [...prv, pro]);
+          setProduct((prv) => getUniqueListBy([...prv, pro], "id"));
         });
       });
     }
@@ -129,7 +131,7 @@ export default function Authorize() {
           <div className="cart-products">
             {product &&
               product.length !== 0 &&
-              product.map(
+              count.map(
                 (
                   v: { product: products; how_many: number; id: string },
                   i: any
@@ -137,7 +139,7 @@ export default function Authorize() {
                   return (
                     <div className="cart-items">
                       <div className="cart-product-info">
-                        {!v.product.isAvailable && (
+                        {!product[i].product.isAvailable && (
                           <p className="out-of-stock">out of stock</p>
                         )}
                         <div className="image-container">
@@ -162,6 +164,8 @@ export default function Authorize() {
                       <button
                         type="button"
                         onClick={() => {
+                          console.log(v.id);
+
                           RemoveCartOrder(v.id).then(() => {
                             getProCart(userData.extra_data.id).then((data) => {
                               dispatch(removeToCard(data.data));
