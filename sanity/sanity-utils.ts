@@ -215,7 +215,7 @@ export async function getProducts(): Promise<products[]> {
       description,
       size,
       type,
-      category,
+      category->{name,slug},
       searchTags,
       sku,
       isAvailable,

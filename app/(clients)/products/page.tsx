@@ -113,9 +113,8 @@ const Products = () => {
           <ul className="category-container">
             {categories.map((category) => (
               <li
-                className={`${
-                  selectedCategory === `${category.name}` ? "active" : ""
-                }`}
+                className={`${selectedCategory === `${category.name}` ? "active" : ""
+                  }`}
                 key={category._id}
                 onClick={() => {
                   setSelectedCategory(category.name);
@@ -127,12 +126,11 @@ const Products = () => {
               </li>
             ))}
             <li
-              className={`${
-                selectedCategory === "_view all" ||
-                selectedCategory === "view all"
+              className={`${selectedCategory === "_view all" ||
+                  selectedCategory === "view all"
                   ? "active"
                   : ""
-              }`}
+                }`}
               onClick={() => {
                 handleCategoryClick("view all");
               }}
@@ -146,90 +144,18 @@ const Products = () => {
           <div className="products-grid">
             {_products.length !== 0
               ? _products.map((product) => {
+                if (
+                  selectedFilters.length !== 0 ||
+                  selectedSizes.length !== 0
+                ) {
                   if (
-                    selectedFilters.length !== 0 ||
-                    selectedSizes.length !== 0
+                    selectedFilters.indexOf(product.type) !== -1 ||
+                    arraysHaveCommonElement(selectedSizes, product.size)
                   ) {
-                    if (
-                      selectedFilters.indexOf(product.type) !== -1 ||
-                      arraysHaveCommonElement(selectedSizes, product.size)
-                    ) {
-                      if (
-                        selectedCategory == "view all" ||
-                        selectedCategory == "_view all"
-                      ) {
-                        return (
-                          <div className="product-sec">
-                            <Link
-                              key={product._id}
-                              href={`/products/${product.slug}`}
-                              className="product"
-                            >
-                              <div className="img-container">
-                                {product.images && (
-                                  <Image
-                                    fill
-                                    src={product.images[0].url}
-                                    style={{ objectFit: "cover" }}
-                                    alt={product.slug}
-                                  />
-                                )}
-                              </div>
-                              <div className="product-info">
-                                <h3>{product.name}</h3>
-                                <p>RS.{product.price}</p>
-                              </div>
-                            </Link>
-                            <button
-                              type="button"
-                              onClick={() => handleAddToCart(product)}
-                            >
-                              <AiOutlinePlus />
-                            </button>
-                          </div>
-                        );
-                      } else if (
-                        selectedCategory == product.category &&
-                        product.category == product.category
-                      ) {
-                        return (
-                          <div className="product-sec">
-                            <Link
-                              key={product._id}
-                              href={`/products/${product.slug}`}
-                              className="product"
-                            >
-                              <div className="img-container">
-                                {product.images && (
-                                  <Image
-                                    fill
-                                    src={product.images[0].url}
-                                    style={{ objectFit: "cover" }}
-                                    alt={product.slug}
-                                  />
-                                )}
-                              </div>
-                              <div className="product-info">
-                                <h3>{product.name}</h3>
-                                <p>RS.{product.price}</p>
-                              </div>
-                            </Link>
-                            <button
-                              type="button"
-                              onClick={() => handleAddToCart(product)}
-                            >
-                              <AiOutlinePlus />
-                            </button>
-                          </div>
-                        );
-                      }
-                    }
-                  } else {
                     if (
                       selectedCategory == "view all" ||
                       selectedCategory == "_view all"
                     ) {
-                      // console.log(product.size);
                       return (
                         <div className="product-sec">
                           <Link
@@ -286,7 +212,6 @@ const Products = () => {
                               <p>RS.{product.price}</p>
                             </div>
                           </Link>
-
                           <button
                             type="button"
                             onClick={() => handleAddToCart(product)}
@@ -297,41 +222,12 @@ const Products = () => {
                       );
                     }
                   }
-                })
-              : products.map((product) => {
-                  if (selectedCategory == "view all") {
-                    // console.log(product.size);
-                    return (
-                      <div className="product-sec">
-                        <Link
-                          key={product._id}
-                          href={`/products/${product.slug}`}
-                          className="product"
-                        >
-                          <div className="img-container">
-                            {product.images && (
-                              <Image
-                                fill
-                                src={product.images[0].url}
-                                style={{ objectFit: "cover" }}
-                                alt={product.slug}
-                              />
-                            )}
-                          </div>
-                          <div className="product-info">
-                            <h3>{product.name}</h3>
-                            <p>RS.{product.price}</p>
-                          </div>
-                        </Link>
-                        <button type="button" onClick={handleAddToCart}>
-                          <AiOutlinePlus />
-                        </button>
-                      </div>
-                    );
-                  } else if (
-                    selectedCategory == product.category &&
-                    product.category == product.category
+                } else {
+                  if (
+                    selectedCategory == "view all" ||
+                    selectedCategory == "_view all"
                   ) {
+                    // console.log(product.size);
                     return (
                       <div className="product-sec">
                         <Link
@@ -362,8 +258,110 @@ const Products = () => {
                         </button>
                       </div>
                     );
+                  } else if (
+                    selectedCategory == product.category &&
+                    product.category == product.category
+                  ) {
+                    return (
+                      <div className="product-sec">
+                        <Link
+                          key={product._id}
+                          href={`/products/${product.slug}`}
+                          className="product"
+                        >
+                          <div className="img-container">
+                            {product.images && (
+                              <Image
+                                fill
+                                src={product.images[0].url}
+                                style={{ objectFit: "cover" }}
+                                alt={product.slug}
+                              />
+                            )}
+                          </div>
+                          <div className="product-info">
+                            <h3>{product.name}</h3>
+                            <p>RS.{product.price}</p>
+                          </div>
+                        </Link>
+
+                        <button
+                          type="button"
+                          onClick={() => handleAddToCart(product)}
+                        >
+                          <AiOutlinePlus />
+                        </button>
+                      </div>
+                    );
                   }
-                })}
+                }
+              })
+              : products.map((product) => {
+                if (selectedCategory == "view all") {
+                  // console.log(product.size);
+                  return (
+                    <div className="product-sec">
+                      <Link
+                        key={product._id}
+                        href={`/products/${product.slug}`}
+                        className="product"
+                      >
+                        <div className="img-container">
+                          {product.images && (
+                            <Image
+                              fill
+                              src={product.images[0].url}
+                              style={{ objectFit: "cover" }}
+                              alt={product.slug}
+                            />
+                          )}
+                        </div>
+                        <div className="product-info">
+                          <h3>{product.name}</h3>
+                          <p>RS.{product.price}</p>
+                        </div>
+                      </Link>
+                      <button type="button" onClick={handleAddToCart}>
+                        <AiOutlinePlus />
+                      </button>
+                    </div>
+                  );
+                } else if (
+                  selectedCategory == product.category &&
+                  product.category == product.category
+                ) {
+                  return (
+                    <div className="product-sec">
+                      <Link
+                        key={product._id}
+                        href={`/products/${product.slug}`}
+                        className="product"
+                      >
+                        <div className="img-container">
+                          {product.images && (
+                            <Image
+                              fill
+                              src={product.images[0].url}
+                              style={{ objectFit: "cover" }}
+                              alt={product.slug}
+                            />
+                          )}
+                        </div>
+                        <div className="product-info">
+                          <h3>{product.name}</h3>
+                          <p>RS.{product.price}</p>
+                        </div>
+                      </Link>
+                      <button
+                        type="button"
+                        onClick={() => handleAddToCart(product)}
+                      >
+                        <AiOutlinePlus />
+                      </button>
+                    </div>
+                  );
+                }
+              })}
           </div>
         </div>
         <div className="blank" />

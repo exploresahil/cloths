@@ -82,8 +82,9 @@ const products = {
     },
     {
       name: "category",
-      title: "Category",
-      type: "category",
+      title: "category",
+      type: "reference",
+      to: [{ type: "category" }],
     },
     {
       name: "isAvailable",
