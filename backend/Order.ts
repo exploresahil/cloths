@@ -21,12 +21,13 @@ export const CancelOrder = async (order_id: string) => {
     })
     .eq("id", order_id);
 };
-export const ConfromPay = async (id: string) =>
+export const ConformPay = async (id: string) =>
   await client2
     .from("Order")
     .update({ payment_confirm: true })
     .eq("id", id)
-    .select("id");
+    .select("*")
+    .single();
 
 export const UpdateOrder = async (order_id: string, updateObject: any) => {
   return await SuperBase.from("Order").update(updateObject).eq("id", order_id);
