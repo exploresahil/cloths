@@ -23,9 +23,7 @@ const Cart = ({ onCartCloseClick }: props) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const [product, setProduct] = useState<null | any[]>(null);
-  const userData = useAppSelector(state => state.userDataSlice.value)
-
-
+  const userData = useAppSelector((state) => state.userDataSlice.value);
 
   useEffect(() => {
     if (userData)
@@ -53,10 +51,12 @@ const Cart = ({ onCartCloseClick }: props) => {
       <div className="cart-close-container" onClick={onCartCloseClick} />
       <div className="cart-container">
         <div className="cart-products">
-          {count && count.length != 0 &&
+          {count &&
+            count.length != 0 &&
             count.map(
               (v: { product: products; how_many: number; id: string }, i) => (
                 <div className="cart-items" key={i}>
+                  {!v.product.isAvailable && <p>not available</p>}
                   <div className="cart-product-info">
                     <div className="image-container">
                       <Image

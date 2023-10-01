@@ -239,12 +239,12 @@ const Header = () => {
         <div className="user-menu-ecommercs">
           <button className="cart" onClick={handleCartClickOpen}>
             <Bag />
-            {count && count.length === 0 ? <p>{count.length}</p> : null}
+            {count && count.length === 0 && <p>{count.length}</p>}
           </button>
           <div className="line" />
           <button
             onClick={() => {
-              console.log(userData);
+              console.log("on login :", userData);
 
               router.push(userData.data.user !== null ? "/user" : "/login");
             }}

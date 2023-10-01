@@ -23,7 +23,7 @@ export default function RootLayout({
       if (data?.data.user) {
         setIsAuthenticated(true);
       } else {
-        router.push("/");
+        //router.push("/");
       }
     });
   }, []);

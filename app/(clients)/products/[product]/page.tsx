@@ -105,23 +105,32 @@ export default function Product({ params }: Props) {
   };
 
   const handleAddToCart = (product: any) => {
-    if (userData.data.user)
-      AddCartOrder(product, userData.extra_data.id, 1).then(() => {
-        getProCart(userData.extra_data.id).then((data) => {
-          dispatch(addToCard(data.data));
-          toast.success("Product Added", {
-            theme: "colored",
-            autoClose: 800,
-            hideProgressBar: true,
+    if (product.isAvailable) {
+      if (userData.data.user) {
+        AddCartOrder(product, userData.extra_data.id, 1).then(() => {
+          getProCart(userData.extra_data.id).then((data) => {
+            dispatch(addToCard(data.data));
+            toast.success("Product Added", {
+              theme: "colored",
+              autoClose: 800,
+              hideProgressBar: true,
+            });
           });
         });
+      }
+    } else if (!product.isAvailable) {
+      toast.error("Product is Out of stack", {
+        theme: "colored",
+        autoClose: 1500,
+        hideProgressBar: true,
       });
-    else
+    } else if (product.isAvailable) {
       toast.error("You Must Login First", {
         theme: "colored",
         autoClose: 1500,
         hideProgressBar: true,
       });
+    }
   };
 
   return (
@@ -194,7 +203,7 @@ export default function Product({ params }: Props) {
                 type="button"
                 className="button"
                 onClick={() => {
-                  if (userData.data.user)
+                  if (userData.data.user && product.isAvailable)
                     AddCartOrder(product, userData.extra_data.id, 1).then(
                       (data) => {
                         getProCart(userData.extra_data.id).then((data) => {

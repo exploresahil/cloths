@@ -283,6 +283,11 @@
           }
         }
 
+        .product-link-out {
+          pointer-events: none;
+          cursor: default;
+        }
+
         .product {
           overflow: hidden;
 
@@ -294,6 +299,23 @@
             justify-content: center;
             align-items: flex-end;
 
+            .out-of-stack {
+              background-color: rgba(0, 0, 0, 0.5);
+              position: absolute;
+              inset: 0;
+              width: 100%;
+              height: 100%;
+              z-index: 4;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+
+              p {
+                color: v.$bg;
+                font-family: v.$fontRM;
+              }
+            }
+
             img {
               z-index: 2;
             }
@@ -303,6 +325,10 @@
             font-weight: 600;
             margin: 10px 0;
             text-align: center;
+          }
+
+          .info-out {
+            text-decoration-line: line-through;
           }
         }
       }

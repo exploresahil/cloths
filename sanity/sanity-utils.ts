@@ -256,3 +256,6 @@ export async function getCategories(): Promise<category[]> {
     }`
   );
 }
+
+export const getProduct_by_id = async (id: string): Promise<products> =>
+  createClient(clientConfig).fetch(groq``);
