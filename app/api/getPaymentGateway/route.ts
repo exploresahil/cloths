@@ -7,6 +7,7 @@ export async function GET(request: Request) {
   //const price = (await getProduct(request.url.split("/").at(-1) || "")).price;
   //console.log(price + 0.00);
   const { price, phoneNo, order_id } = await request.json();
+
   const payload = {
     merchantId: "PGTESTPAYUAT140",
     merchantTransactionId: "MT7850590068188104",
@@ -21,6 +22,8 @@ export async function GET(request: Request) {
       type: "PAY_PAGE",
     },
   };
+  console.log(payload);
+
   let data = Buffer.from(JSON.stringify(payload), "utf-8");
   // console.log(data.toString("base64"));
   let api_endpoint = "/pg/v1/pay";
@@ -42,6 +45,8 @@ export async function GET(request: Request) {
       },
     }
   );
+  console.log(res);
+
   return new Response(JSON.stringify(res.data));
   // } catch (e) {
   //   console.log(e);
