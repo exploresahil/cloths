@@ -144,10 +144,10 @@ export default function Authorize() {
                           (b, s) => b.product._id == v.product._id
                         ).length != 0
                           ? !product.filter(
-                              (b, s) => b.product._id == v.product._id
-                            )[0].product.isAvailable && (
-                              <p className="out-of-stock">out of stock</p>
-                            )
+                            (b, s) => b.product._id == v.product._id
+                          )[0].product.isAvailable && (
+                            <p className="out-of-stock">out of stock</p>
+                          )
                           : null}
                         <div className="image-container">
                           <Image
@@ -225,10 +225,12 @@ export default function Authorize() {
                     ...{ ...UserAddress.at(-1), id: undefined },
                   }).then((data) => {
                     axios
-                      .post("/api/getPaymentGateway", {
-                        price: total,
-                        phoneNo: UserAddress.at(-1)?.phone,
-                        order_id: data.data[0].id,
+                      .get("/api/getPaymentGateway", {
+                        data: {
+                          price: total,
+                          phoneNo: UserAddress.at(-1)?.phone,
+                          order_id: data.data[0].id,
+                        }
                       })
                       .then(({ data: Data }) => {
                         console.log(Data.data);

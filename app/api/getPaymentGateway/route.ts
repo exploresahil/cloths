@@ -2,7 +2,7 @@ import { getProduct } from "@/sanity/sanity-utils";
 import { SHA256, enc } from "crypto-js";
 import axios from "axios";
 
-export async function POST(request: Request) {
+export async function GET(request: Request) {
   try {
     //const price = (await getProduct(request.url.split("/").at(-1) || "")).price;
     //console.log(price + 0.00);
