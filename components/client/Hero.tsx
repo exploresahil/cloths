@@ -112,7 +112,7 @@ const Hero = () => {
     );
 
     tlHero.fromTo(
-      "#coOrds",
+      "#vidOne",
       {
         y: 500,
         opacity: 0,
@@ -125,7 +125,7 @@ const Hero = () => {
     );
 
     tlHero.fromTo(
-      "#coOrdsMobile",
+      "#vidOneMobile",
       {
         y: 500,
         opacity: 0,
@@ -196,7 +196,7 @@ const Hero = () => {
 
     mm.add("(min-width: 1024px)", () => {
       gsap.fromTo(
-        "#coOrds",
+        "#vidOne",
         {
           width: "33.4vw",
           borderRadius: "1000px 1000px 0 0",
@@ -215,7 +215,7 @@ const Hero = () => {
       );
 
       gsap.fromTo(
-        "#coOrds",
+        "#vidOne",
         {},
         {
           scrollTrigger: {
@@ -230,7 +230,7 @@ const Hero = () => {
       );
 
       gsap.fromTo(
-        "#accessories",
+        "#vidTwo",
         {
           width: "33.4vw",
           borderRadius: "1000px 1000px 0 0",
@@ -249,7 +249,7 @@ const Hero = () => {
       );
 
       gsap.fromTo(
-        "#accessories",
+        "#vidTwo",
         {},
         {
           scrollTrigger: {
@@ -264,7 +264,7 @@ const Hero = () => {
       );
 
       gsap.fromTo(
-        "#accessories",
+        "#vidTwo",
         {},
         {
           borderRadius: "0 0 1000px 1000px",
@@ -300,7 +300,7 @@ const Hero = () => {
 
     mm.add("(max-width: 1024px)", () => {
       gsap.fromTo(
-        "#coOrdsMobile",
+        "#vidOneMobile",
         {
           width: "100vw",
           borderRadius: "1000px 1000px 0 0",
@@ -319,7 +319,7 @@ const Hero = () => {
       );
 
       gsap.fromTo(
-        "#coOrdsMobile",
+        "#vidOneMobile",
         {},
         {
           scrollTrigger: {
@@ -485,17 +485,7 @@ const Hero = () => {
         <ScrollArrow />
       </div>
       <div className="category_co-ords_main" id="coOrdsMain">
-        {/*  <div className="category_co-ords_container" ref={categoryCoOrdsRef}>
-          <Image
-            fill
-            src={coOrds}
-            style={{ objectFit: "cover" }}
-            alt="footer-logo"
-            ref={coOrdsRef}
-          />
-        </div> */}
-
-        <div className="category_co-ords_container" id="coOrds">
+        <div className="category_co-ords_container" id="vidOne">
           {videoUrlOne && (
             <video
               ref={videoRefOneDesktop}
@@ -512,16 +502,7 @@ const Hero = () => {
         </div>
       </div>
       <div className="category_co-ords_main_mobile" id="coOrdsMainMobile">
-        {/*  <div className="category_co-ords_container" ref={categoryCoOrdsRef}>
-          <Image
-            fill
-            src={coOrds}
-            style={{ objectFit: "cover" }}
-            alt="footer-logo"
-            ref={coOrdsRef}
-          />
-        </div> */}
-        <div className="category_co-ords_container_mobile" id="coOrdsMobile">
+        <div className="category_co-ords_container_mobile" id="vidOneMobile">
           {videoUrlOne && (
             <video
               ref={videoRefOne}
@@ -552,19 +533,7 @@ const Hero = () => {
       </div>
 
       <div className="category_accessories_main" id="accessoriesMain">
-        {/* <div
-          className="category_accessories_container"
-          ref={categoryAccessoriesRef}
-        >
-          <Image
-            fill
-            src={accessories}
-            style={{ objectFit: "cover" }}
-            alt="footer-logo"
-            ref={accessoriesRef}
-          />
-        </div> */}
-        <div className="category_accessories_container" id="accessories">
+        <div className="category_accessories_container" id="vidTwo">
           {videoUrlTwo && (
             <video
               ref={videoRefTwoDesktop}
@@ -582,18 +551,6 @@ const Hero = () => {
         className="category_accessories_main_mobile"
         id="accessoriesMainMobile"
       >
-        {/* <div
-          className="category_accessories_container"
-          ref={categoryAccessoriesRef}
-        >
-          <Image
-            fill
-            src={accessories}
-            style={{ objectFit: "cover" }}
-            alt="footer-logo"
-            ref={accessoriesRef}
-          />
-        </div> */}
         <div
           className="category_accessories_container_mobile"
           id="accessoriesMobile"
