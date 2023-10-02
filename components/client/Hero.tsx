@@ -51,7 +51,7 @@ const Hero = () => {
     router.push(`/products?category=${selectedCategory}`);
   };
 
-  //console.log("heros-->", heros[0]?.catogery_video.name);
+  console.log("heros-->", heros[0]?.catogery_video.name);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);

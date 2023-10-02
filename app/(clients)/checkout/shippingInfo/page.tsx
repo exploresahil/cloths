@@ -242,27 +242,45 @@ const ShippingInfo = () => {
               </div>
             </div>
             <div className="phone">
-              <div className="code">
-                <p>CODE</p>
-                <input type="text" value="+91" readOnly />
-              </div>
-              <div className="telephone">
-                <p>TELEPHONE</p>
-                <input
-                  type="tel"
-                  maxLength={10}
-                  value={input.phone}
-                  inputMode="numeric"
-                  pattern="[0-9]*"
-                  onChange={(e) => {
-                    const telValue = e.target.value.replace(/\D/g, ""); // Remove non-numeric characters
-                    setInput((data: any) => ({
-                      ...data,
-                      phone: telValue,
-                    }));
-                  }}
-                  required
-                />
+              <div className="contact">
+                <div className="email">
+                  <p>Email</p>
+                  <input
+                    type="email"
+                    value={input.email}
+                    onChange={(e) => {
+                      setInput((data: any) => ({
+                        ...data,
+                        email: e.target.value,
+                      }));
+                    }}
+                    required
+                  />
+                </div>
+                <div className="telephone">
+                  <div className="code">
+                    <p>CODE</p>
+                    <input type="text" value="+91" readOnly />
+                  </div>
+                  <div className="tel">
+                    <p>TELEPHONE</p>
+                    <input
+                      type="tel"
+                      maxLength={10}
+                      value={input.phone}
+                      inputMode="numeric"
+                      pattern="[0-9]*"
+                      onChange={(e) => {
+                        const telValue = e.target.value.replace(/\D/g, ""); // Remove non-numeric characters
+                        setInput((data: any) => ({
+                          ...data,
+                          phone: telValue,
+                        }));
+                      }}
+                      required
+                    />
+                  </div>
+                </div>
               </div>
             </div>
             <button type="submit" />

@@ -142,26 +142,23 @@
         display: flex;
         gap: 2rem;
 
-        .code {
+        .contact {
           display: flex;
-          flex-direction: column;
+          gap: 20px;
 
-          input {
-            width: 5vw;
-            border: none;
-            background-color: v.$bg;
-            font-family: v.$fontRR;
-            font-size: 1rem;
-            outline: none;
+          .telephone {
+            display: flex;
+            gap: 10px;
+
+            .code {
+              width: min-content;
+              input {
+                width: 50px;
+              }
+            }
           }
-        }
-
-        .telephone {
-          display: flex;
-          flex-direction: column;
-
           input {
-            width: 35vw;
+            width: 20vw;
             font-size: 1rem;
             font-family: v.$fontRSB;
             border-top: none;
@@ -326,6 +323,13 @@
             width: 100%;
           }
         }
+        .phone {
+          .contact {
+            input {
+              width: 30vw;
+            }
+          }
+        }
       }
     }
 
@@ -366,7 +370,20 @@
         }
 
         .phone {
-          .telephone {
+          flex-direction: column;
+          .contact {
+            width: 100%;
+            flex-direction: column;
+
+            .telephone {
+              display: flex;
+              gap: 10px;
+
+              .code {
+                width: min-content;
+              }
+            }
+
             input {
               width: 100%;
             }
