@@ -226,11 +226,11 @@ export default function Authorize() {
                   }).then((data) => {
                     axios
                       .post("/api/getPaymentGateway", {
-                        data: {
-                          price: total,
-                          phoneNo: UserAddress.at(-1)?.phone,
-                          order_id: data.data[0].id,
-                        }
+                        // data: {
+                        price: total,
+                        phoneNo: UserAddress.at(-1)?.phone,
+                        order_id: data.data[0].id,
+                        // }
                       })
                       .then(({ data: Data }) => {
                         console.log(Data.data);
