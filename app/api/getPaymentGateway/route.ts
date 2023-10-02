@@ -44,6 +44,8 @@ export async function GET(request: Request) {
     );
     return new Response(JSON.stringify(res.data));
   } catch (e) {
+    console.log(e);
+
     return new Response(JSON.stringify(e));
   }
 }
