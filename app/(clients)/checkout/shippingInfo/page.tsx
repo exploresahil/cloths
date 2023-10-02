@@ -73,18 +73,20 @@ const ShippingInfo = () => {
   const [input, setInput] = useState<any>();
 
   useEffect(() => {
-    setInput({
-      name: userData?.extra_data.name,
-      address: UserAddress.at(-1)?.address,
-      locality: UserAddress.at(-1)?.locality,
-      state: UserAddress.at(-1)?.state,
-      pincode: UserAddress.at(-1)?.pincode,
-      more_info: UserAddress.at(-1)?.more_info,
-      city: UserAddress.at(-1)?.city,
-      region: UserAddress.at(-1)?.region,
-      phone: UserAddress.at(-1)?.phone,
-      email: UserAddress.at(-1)?.email,
-    });
+    if (UserAddress.length != 0) {
+      setInput({
+        name: userData?.extra_data.name,
+        address: UserAddress.at(-1)?.address,
+        locality: UserAddress.at(-1)?.locality,
+        state: UserAddress.at(-1)?.state,
+        pincode: UserAddress.at(-1)?.pincode,
+        more_info: UserAddress.at(-1)?.more_info,
+        city: UserAddress.at(-1)?.city,
+        region: UserAddress.at(-1)?.region,
+        phone: UserAddress.at(-1)?.phone,
+        email: UserAddress.at(-1)?.email,
+      });
+    }
   }, [userData]);
 
   //console.log(userData?.data.user_metadata.full_name);
