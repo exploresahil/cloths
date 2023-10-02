@@ -105,7 +105,7 @@ const User = () => {
                           (accumulator: any, currentValue: any) =>
                             accumulator +
                             parseInt(currentValue.product.price) *
-                              currentValue.how_many,
+                            currentValue.how_many,
                           0
                         ) ?? 0;
 
@@ -146,9 +146,9 @@ const User = () => {
                         </div>
                       );
                     })}{" "}
-                {!data ||
-                  data.length === 0 ||
-                  (data.filter((item: any) => item.payment_confirm) && (
+                {((!data ||
+                  data.length === 0) ||
+                  data.filter((item: any) => item.payment_confirm).length != 0 && (
                     <p>No order found or Loading...</p>
                   ))}
               </div>
