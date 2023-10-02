@@ -3,9 +3,19 @@ import { useRef } from "react";
 import { useDownloadExcel } from "react-export-table-to-excel";
 
 //Order Id: TKP000001
+import DB from "@/backend/Backend.client";
+import CDB from "@/storeage";
+import { useDispatch } from "react-redux";
+import supabase from "@/backend/Backend.client";
+import { addUserData } from "@/redux/reducer/userData";
+import { getUser } from "@/backend/User";
+import { reset } from "@/redux/reducer/cartSlice";
+import { reset as Rest } from "@/redux/reducer/userSlice";
+import { reset as _Rest } from "@/redux/reducer/userData";
 
 import { useEffect, useState } from "react";
 import { BiRefresh } from "react-icons/bi";
+import { useRouter } from "next/navigation";
 
 type ProductItem = {
   id: string;
@@ -56,10 +66,13 @@ type DataContactItem = {
 
 const page = () => {
   const [data, setData] = useState<DataItem[]>([]);
+  const [dataUser, setDataUser] = useState<any>([]);
   const [NLdata, setNLData] = useState<DataNLItem[]>([]);
   const [Contactdata, setContactData] = useState<DataContactItem[]>([]);
   const [activeTab, setActiveTab] = useState("orders");
   const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+  const router = useRouter();
 
   const tableRef = useRef(null);
   const newsletterTableRef = useRef(null);
@@ -198,6 +211,34 @@ const page = () => {
 
   let serialNumber = 1;
 
+  useEffect(() => {
+    (async () => {
+      const data: any = await CDB.getItem("user-data");
+
+      if (data != undefined && data) {
+        dispatch(addUserData(data));
+        const orders = await supabase
+          .from("Order")
+          .select("*")
+          .eq("user", data.extra_data?.id);
+        setDataUser(orders.data);
+        //console.log("orders:", orders);
+      } else {
+        getUser().then(async (data) => {
+          if (data?.data.user) {
+            dispatch(addUserData(data));
+            const orders = await supabase
+              .from("Order")
+              .select("*")
+              .eq("user", data.extra_data?.id);
+            setDataUser(orders.data);
+          }
+        });
+      }
+      //console.log(data);
+    })();
+  }, []);
+
   return (
     <div className="tkp-admin-main">
       <h2>Admin</h2>
@@ -240,7 +281,19 @@ const page = () => {
               <BiRefresh />
             </button>
           )}
-          <button type="button">Sign Out</button>
+          <button
+            type="button"
+            onClick={async () => {
+              await DB.auth.signOut();
+              CDB.clear();
+              dispatch(reset());
+              dispatch(Rest());
+              dispatch(_Rest());
+              router.push("/login");
+            }}
+          >
+            Sign Out
+          </button>
           {activeTab === "orders" && (
             <button type="button" onClick={onOrdersDownload}>
               Download
