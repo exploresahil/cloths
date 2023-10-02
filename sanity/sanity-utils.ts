@@ -29,20 +29,6 @@ export async function getProcesses(): Promise<process[]> {
   );
 }
 
-export async function getHeaders(): Promise<headerSchema[]> {
-  return createClient(clientConfig).fetch(
-    groq`*[_type == "header"]{
-      _id,
-      _createdAt,
-      headerName,
-      "image": {
-        "url": image.asset->url,
-      },
-      imageAlt,
-    }`
-  );
-}
-
 export async function getBlogs(): Promise<blogsSchema[]> {
   return createClient(clientConfig).fetch(
     groq`*[_type == "blogs"] | order(_createdAt desc){
