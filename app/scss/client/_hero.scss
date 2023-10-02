@@ -91,7 +91,45 @@
     }
   }
 
-  .category_co-ords_main {
+  .link-container {
+    position: relative;
+    z-index: 3;
+    width: 100vw;
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    //background-color: rgba(255, 192, 203, 0.5);
+
+    .vidOneArrowRef,
+    .vidTwoArrowRef,
+    .vidThreeArrowRef {
+      width: fit-content;
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
+
+      color: v.$light;
+      fill: v.$light;
+
+      font-size: 8rem;
+
+      p {
+        width: 100%;
+        font-family: v.$fontAM;
+        text-decoration: underline;
+      }
+
+      svg {
+        width: 80px;
+      }
+    }
+  }
+
+  //*------------------------> Vid One
+
+  .category_vid_one_main {
     position: relative;
     width: 100vw;
     height: 100vh;
@@ -100,11 +138,11 @@
     z-index: 2;
   }
 
-  .category_co-ords_main_mobile {
+  .category_vid_one_main_mobile {
     display: none;
   }
 
-  .category_co-ords_container {
+  .category_vid_one_container {
     position: relative;
     top: 0;
 
@@ -131,42 +169,9 @@
     }
   }
 
-  .link-container {
-    position: relative;
-    z-index: 3;
-    width: 100vw;
-    height: 80vh;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    //background-color: rgba(255, 192, 203, 0.5);
+  //*------------------------> Vid Two
 
-    .coOrdsArrowRef,
-    .accessoriesArrowRef {
-      width: fit-content;
-      position: relative;
-      display: flex;
-      align-items: center;
-      gap: 0.5em;
-
-      color: v.$light;
-      fill: v.$light;
-
-      font-size: 8rem;
-
-      p {
-        width: 100%;
-        font-family: v.$fontAM;
-        text-decoration: underline;
-      }
-
-      svg {
-        width: 80px;
-      }
-    }
-  }
-
-  .category_accessories_main {
+  .category_vid_two_main {
     position: relative;
     width: 100vw;
     height: 100vh;
@@ -175,11 +180,11 @@
     z-index: 3;
   }
 
-  .category_accessories_main_mobile {
+  .category_vid_two_main_mobile {
     display: none;
   }
 
-  .category_accessories_container {
+  .category_vid_two_container {
     position: relative;
 
     width: 33.4vw;
@@ -203,6 +208,48 @@
       object-position: center 20%;
     }
   }
+
+  //*------------------------> Vid Three
+
+  .category_vid_three_main {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    z-index: 3;
+  }
+
+  .category_vid_three_main_mobile {
+    display: none;
+  }
+
+  .category_vid_three_container {
+    position: relative;
+
+    width: 33.4vw;
+    height: 100vh;
+
+    z-index: 3;
+
+    border-radius: 1000px 1000px 0 0;
+
+    overflow: hidden;
+
+    img {
+      object-position: center 65%;
+    }
+
+    video {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      inset: 0;
+      object-position: center 20%;
+    }
+  }
+
+  //*-----------------------------------------------------------------------
 
   h3 {
     position: absolute;
@@ -282,15 +329,21 @@
     }
   }
 
-  .category_co-ords_main {
+  .category_vid_one_main {
     display: none !important;
   }
 
-  .category_accessories_main {
+  .category_vid_two_main {
     display: none !important;
   }
 
-  .category_co-ords_main_mobile {
+  .category_vid_three_main {
+    display: none !important;
+  }
+
+  //*------------------------> Vid One Mobile
+
+  .category_vid_one_main_mobile {
     margin-top: 300px;
     position: relative;
     width: 100vw;
@@ -299,7 +352,7 @@
     justify-content: center;
     z-index: 2;
 
-    .category_co-ords_container_mobile {
+    .category_vid_one__container_mobile {
       position: relative;
       top: 0;
 
@@ -325,7 +378,10 @@
       }
     }
   }
-  .category_accessories_main_mobile {
+
+  //*------------------------> Vid Two Mobile
+
+  .category_vid_two_main_mobile {
     position: relative;
     width: 100vw;
     height: 100vh;
@@ -333,7 +389,43 @@
     justify-content: center;
     z-index: 3;
 
-    .category_accessories_container_mobile {
+    .category_vid_two_container_mobile {
+      position: relative;
+
+      width: 100vw;
+      height: 100vh;
+
+      z-index: 3;
+
+      border-radius: 1000px 1000px 0 0;
+
+      overflow: hidden;
+
+      img {
+        object-position: center 65%;
+      }
+
+      video {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        inset: 0;
+        object-position: center 20%;
+      }
+    }
+  }
+
+  //*------------------------> Vid Three Mobile
+
+  .category_vid_three_main_mobile {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex !important;
+    justify-content: center;
+    z-index: 3;
+
+    .category_vid_three_container_mobile {
       position: relative;
 
       width: 100vw;
@@ -404,8 +496,9 @@
     }
 
     .link-container {
-      .coOrdsArrowRef,
-      .accessoriesArrowRef {
+      .vidOneArrowRef,
+      .vidTwoArrowRef,
+      .vidThreeArrowRef {
         font-size: 3rem;
         gap: 0px;
 
@@ -416,15 +509,21 @@
     }
   }
 
-  .category_co-ords_main {
+  .category_vid_one_main {
     display: none !important;
   }
 
-  .category_accessories_main {
+  .category_vid_two_main {
     display: none !important;
   }
 
-  .category_co-ords_main_mobile {
+  .category_vid_three_main {
+    display: none !important;
+  }
+
+  //*------------------------> Vid One Mobile
+
+  .category_vid_one_main_mobile {
     margin-top: 150px;
     position: relative;
     width: 100vw;
@@ -433,7 +532,7 @@
     justify-content: center;
     z-index: 2;
 
-    .category_co-ords_container_mobile {
+    .category_vid_one__container_mobile {
       position: relative;
       top: 0;
 
@@ -459,7 +558,10 @@
       }
     }
   }
-  .category_accessories_main_mobile {
+
+  //*------------------------> Vid Two Mobile
+
+  .category_vid_two_main_mobile {
     position: relative;
     width: 100vw;
     height: 100vh;
@@ -467,7 +569,43 @@
     justify-content: center;
     z-index: 3;
 
-    .category_accessories_container_mobile {
+    .category_vid_two_container_mobile {
+      position: relative;
+
+      width: 100vw;
+      height: 100vh;
+
+      z-index: 3;
+
+      border-radius: 1000px 1000px 0 0;
+
+      overflow: hidden;
+
+      img {
+        object-position: center 65%;
+      }
+
+      video {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        inset: 0;
+        object-position: center 20%;
+      }
+    }
+  }
+
+  //*------------------------> Vid Three Mobile
+
+  .category_vid_three_main_mobile {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex !important;
+    justify-content: center;
+    z-index: 3;
+
+    .category_vid_three_container_mobile {
       position: relative;
 
       width: 100vw;

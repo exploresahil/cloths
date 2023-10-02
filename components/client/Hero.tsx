@@ -23,8 +23,9 @@ import { heros } from "@/types/Heros";
 const Hero = () => {
   const heroRef = useRef<HTMLElement>(null);
   const watermarkRef = useRef<HTMLDivElement>(null);
-  const accessoriesArrowRef = useRef<HTMLAnchorElement>(null);
-  const coOrdsArrowRef = useRef<HTMLAnchorElement>(null);
+  const vidTwoArrowRef = useRef<HTMLAnchorElement>(null);
+  const vidOneArrowRef = useRef<HTMLAnchorElement>(null);
+  const vidThreeArrowRef = useRef<HTMLAnchorElement>(null);
   const archesRef = useRef<HTMLDivElement>(null);
   const scrollPromoRef = useRef<HTMLDivElement>(null);
   const [heros, setHeros] = useState<heros[]>([]);
@@ -51,7 +52,7 @@ const Hero = () => {
     router.push(`/products?category=${selectedCategory}`);
   };
 
-  console.log("heros-->", heros[0]?.catogery_video.name);
+  //  console.log("heros-->", heros[0]?.catogery_video.name);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -205,7 +206,7 @@ const Hero = () => {
           width: "100vw",
           borderRadius: "0 0 0 0",
           scrollTrigger: {
-            trigger: "#coOrdsMain",
+            trigger: "#vidOneMain",
             scrub: 0.1,
             //markers: true,
             start: "top 180px",
@@ -219,7 +220,7 @@ const Hero = () => {
         {},
         {
           scrollTrigger: {
-            trigger: "#coOrdsMain",
+            trigger: "#vidOneMain",
             scrub: 0.1,
             //markers: true,
             start: "180px 180px",
@@ -239,7 +240,7 @@ const Hero = () => {
           width: "100vw",
           borderRadius: "0 0 0 0",
           scrollTrigger: {
-            trigger: "#accessoriesMain",
+            trigger: "#vidTwoMain",
             scrub: 0.1,
             //markers: true,
             start: "top 180px",
@@ -253,7 +254,43 @@ const Hero = () => {
         {},
         {
           scrollTrigger: {
-            trigger: "#accessoriesMain",
+            trigger: "#vidTwoMain",
+            scrub: 0.1,
+            //markers: true,
+            start: "180px 180px",
+            end: "1300px top",
+            pin: true,
+          },
+        }
+      );
+
+      /*----------------------------------------------------------------*/
+
+      gsap.fromTo(
+        "#vidThree",
+        {
+          width: "33.4vw",
+          borderRadius: "1000px 1000px 0 0",
+        },
+        {
+          width: "100vw",
+          borderRadius: "0 0 0 0",
+          scrollTrigger: {
+            trigger: "#vidThreeMain",
+            scrub: 0.1,
+            //markers: true,
+            start: "top 350px",
+            end: "180px 180px",
+          },
+        }
+      );
+
+      gsap.fromTo(
+        "#vidThree",
+        {},
+        {
+          scrollTrigger: {
+            trigger: "#vidThreeMain",
             scrub: 0.1,
             //markers: true,
             start: "180px 180px",
@@ -264,14 +301,14 @@ const Hero = () => {
       );
 
       gsap.fromTo(
-        "#vidTwo",
+        "#vidThree",
         {},
         {
           borderRadius: "0 0 1000px 1000px",
           scrollTrigger: {
-            trigger: "#accessoriesMain",
+            trigger: "#vidThreeMain",
             scrub: 0.1,
-            // markers: true,
+            //markers: true,
             start: "10px top",
             end: "bottom top",
           },
@@ -280,23 +317,6 @@ const Hero = () => {
     });
 
     //*----> Med Device Screen
-
-    /* mm.add("(max-height: 1024px)", () => {
-      gsap.fromTo(
-        "#accessories",
-        {},
-        {
-          borderRadius: "0 0 1000px 1000px",
-          scrollTrigger: {
-            trigger: "#accessoriesMain",
-            scrub: 0.1,
-            markers: true,
-            start: "1500px bottom",
-            end: "2000px bottom",
-          },
-        }
-      );
-    }); */
 
     mm.add("(max-width: 1024px)", () => {
       gsap.fromTo(
@@ -309,7 +329,7 @@ const Hero = () => {
           width: "100vw",
           borderRadius: "0 0 0 0",
           scrollTrigger: {
-            trigger: "#coOrdsMainMobile",
+            trigger: "#vidOneMainMobile",
             scrub: 0.1,
             //markers: true,
             start: "top 180px",
@@ -323,7 +343,7 @@ const Hero = () => {
         {},
         {
           scrollTrigger: {
-            trigger: "#coOrdsMainMobile",
+            trigger: "#vidOneMainMobile",
             scrub: 0.1,
             //markers: true,
             start: "180px 180px",
@@ -332,8 +352,11 @@ const Hero = () => {
           },
         }
       );
+
+      /*----------------------------------------------------------------*/
+
       gsap.fromTo(
-        "#accessoriesMobile",
+        "#vidTwoMobile",
         {
           width: "100vw",
           borderRadius: "1000px 1000px 0 0",
@@ -342,7 +365,7 @@ const Hero = () => {
           width: "100vw",
           borderRadius: "0 0 0 0",
           scrollTrigger: {
-            trigger: "#accessoriesMainMobile",
+            trigger: "#vidTwoMainMobile",
             scrub: 0.1,
             //markers: true,
             start: "top 180px",
@@ -352,11 +375,47 @@ const Hero = () => {
       );
 
       gsap.fromTo(
-        "#accessoriesMobile",
+        "#vidTwoMobile",
         {},
         {
           scrollTrigger: {
-            trigger: "#accessoriesMainMobile",
+            trigger: "#vidTwoMainMobile",
+            scrub: 0.1,
+            //markers: true,
+            start: "180px 180px",
+            end: "1400px top",
+            pin: true,
+          },
+        }
+      );
+
+      /*----------------------------------------------------------------*/
+
+      gsap.fromTo(
+        "#vidThreeMobile",
+        {
+          width: "100vw",
+          borderRadius: "1000px 1000px 0 0",
+        },
+        {
+          width: "100vw",
+          borderRadius: "0 0 0 0",
+          scrollTrigger: {
+            trigger: "#vidThreeMainMobile",
+            scrub: 0.1,
+            //markers: true,
+            start: "top 180px",
+            end: "180px 180px",
+          },
+        }
+      );
+
+      gsap.fromTo(
+        "#vidThreeMobile",
+        {},
+        {
+          scrollTrigger: {
+            trigger: "#vidThreeMainMobile",
             scrub: 0.1,
             //markers: true,
             start: "180px 180px",
@@ -367,12 +426,12 @@ const Hero = () => {
       );
 
       gsap.fromTo(
-        "#accessoriesMobile",
+        "#vidThreeMobile",
         {},
         {
           borderRadius: "0 0 1000px 1000px",
           scrollTrigger: {
-            trigger: "#accessoriesMainMobile",
+            trigger: "#vidThreeMainMobile",
             scrub: 0.1,
             //markers: true,
             start: "1400px bottom",
@@ -386,12 +445,12 @@ const Hero = () => {
 
     mm.add("(max-width: 767px)", () => {
       gsap.fromTo(
-        "#accessoriesMobile",
+        "#vidThreeMobile",
         {},
         {
           borderRadius: "0 0 1000px 1000px",
           scrollTrigger: {
-            trigger: "#accessoriesMainMobile",
+            trigger: "#vidThreeMainMobile",
             scrub: 0.1,
             //markers: true,
             start: "1000px bottom",
@@ -484,11 +543,13 @@ const Hero = () => {
         <p>scroll</p>
         <ScrollArrow />
       </div>
-      <div className="category_co-ords_main" id="coOrdsMain">
-        <div className="category_co-ords_container" id="vidOne">
+
+      {/* ---------------------> Vid One <---------------------- */}
+
+      <div className="category_vid_one_main" id="vidOneMain">
+        <div className="category_vid_one_container" id="vidOne">
           {videoUrlOne && (
             <video
-              ref={videoRefOneDesktop}
               autoPlay
               loop
               muted
@@ -501,11 +562,10 @@ const Hero = () => {
           )}
         </div>
       </div>
-      <div className="category_co-ords_main_mobile" id="coOrdsMainMobile">
-        <div className="category_co-ords_container_mobile" id="vidOneMobile">
+      <div className="category_vid_one_main_mobile" id="vidOneMainMobile">
+        <div className="category_vid_one__container_mobile" id="vidOneMobile">
           {videoUrlOne && (
             <video
-              ref={videoRefOne}
               autoPlay
               loop
               muted
@@ -522,8 +582,8 @@ const Hero = () => {
         {catogeryOne && (
           <a
             href="#"
-            ref={coOrdsArrowRef}
-            className="coOrdsArrowRef"
+            ref={vidOneArrowRef}
+            className="vidOneArrowRef"
             onClick={() => handleCatogeryClick(catogeryOne)}
           >
             <p>{catogeryOne}</p>
@@ -532,32 +592,21 @@ const Hero = () => {
         )}
       </div>
 
-      <div className="category_accessories_main" id="accessoriesMain">
-        <div className="category_accessories_container" id="vidTwo">
+      {/* ---------------------> Vid Two <---------------------- */}
+
+      <div className="category_vid_two_main" id="vidTwoMain">
+        <div className="category_vid_two_container" id="vidTwo">
           {videoUrlTwo && (
-            <video
-              ref={videoRefTwoDesktop}
-              autoPlay
-              loop
-              muted
-              style={{ objectFit: "cover" }}
-            >
+            <video autoPlay loop muted style={{ objectFit: "cover" }}>
               <source src={videoUrlTwo} />
             </video>
           )}
         </div>
       </div>
-      <div
-        className="category_accessories_main_mobile"
-        id="accessoriesMainMobile"
-      >
-        <div
-          className="category_accessories_container_mobile"
-          id="accessoriesMobile"
-        >
+      <div className="category_vid_two_main_mobile" id="vidTwoMainMobile">
+        <div className="category_vid_two_container_mobile" id="vidTwoMobile">
           {videoUrlTwo && (
             <video
-              ref={videoRefTwo}
               autoPlay
               loop
               muted
@@ -574,11 +623,55 @@ const Hero = () => {
         {catogeryTwo && (
           <a
             href="#"
-            ref={accessoriesArrowRef}
+            ref={vidTwoArrowRef}
             onClick={() => handleCatogeryClick(catogeryTwo)}
-            className="accessoriesArrowRef"
+            className="vidTwoArrowRef"
           >
             <p>{catogeryTwo}</p>
+            <CategoryArrowRight />
+          </a>
+        )}
+      </div>
+
+      {/* ---------------------> Vid Three <---------------------- */}
+
+      <div className="category_vid_three_main" id="vidThreeMain">
+        <div className="category_vid_three_container" id="vidThree">
+          {videoUrlThree && (
+            <video autoPlay loop muted style={{ objectFit: "cover" }}>
+              <source src={videoUrlThree} />
+            </video>
+          )}
+        </div>
+      </div>
+      <div className="category_vid_three_main_mobile" id="vidThreeMainMobile">
+        <div
+          className="category_vid_three_container_mobile"
+          id="vidThreeMobile"
+        >
+          {videoUrlThree && (
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload="metadata"
+              style={{ objectFit: "cover" }}
+            >
+              <source src={videoUrlThree} />
+            </video>
+          )}
+        </div>
+      </div>
+      <div className="link-container">
+        {catogeryThree && (
+          <a
+            href="#"
+            ref={vidThreeArrowRef}
+            onClick={() => handleCatogeryClick(catogeryThree)}
+            className="vidThreeArrowRef"
+          >
+            <p>{catogeryThree}</p>
             <CategoryArrowRight />
           </a>
         )}

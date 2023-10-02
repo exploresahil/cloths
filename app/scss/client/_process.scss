@@ -8,7 +8,36 @@
   color: v.$textTeal;
   position: relative;
 
+  .view-all-catogeries {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: -50px;
+    margin-bottom: 150px;
+
+    a {
+      display: flex;
+      align-items: center;
+      font-size: 4rem;
+      gap: 0.5em;
+
+      color: v.$dark;
+
+      p {
+        width: 100%;
+        font-family: v.$fontAM;
+        text-decoration: underline;
+      }
+
+      &:hover {
+        color: v.$textTeal;
+      }
+    }
+  }
+
   .main-process-heading {
+    border-top: 2px solid v.$dark;
+    padding-top: 50px;
     display: flex;
     flex-direction: column;
     font-family: v.$fontAR;
@@ -216,7 +245,7 @@
 
     .circular-text-container {
       position: absolute;
-      top: 300px;
+      top: 630px;
 
       svg {
         width: 150vw;
@@ -324,6 +353,14 @@
     margin-top: 500px;
     position: relative;
 
+    .view-all-catogeries {
+      margin-top: 16px;
+      margin-bottom: 100px;
+      a {
+        font-size: 2rem !important;
+      }
+    }
+
     .main-process-heading {
       line-height: 1;
 
@@ -338,7 +375,7 @@
 
     .circular-text-container {
       position: absolute;
-      top: 200px;
+      top: 380px;
 
       svg {
         width: 150vw;

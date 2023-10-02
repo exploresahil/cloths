@@ -25,6 +25,7 @@ type DataItem = {
   order_id: string;
   product: ProductItem[];
   user: user;
+  email: string;
   phone: string;
   address: string;
   created_at: string;
@@ -128,6 +129,8 @@ const page = () => {
   useEffect(() => {
     fetchData();
   }, []);
+
+  console.log("orders All -->", data);
 
   const handleRefreshClick = () => {
     fetchData();
@@ -278,6 +281,7 @@ const page = () => {
                 <th>Products</th>
                 <th>Ordered By</th>
                 <th>Mob. No.</th>
+                <th>Email</th>
                 <th>Order Address</th>
                 <th>Ordered On</th>
               </tr>
@@ -308,6 +312,7 @@ const page = () => {
                       </td>
                       <td>{item.user.name}</td>
                       <td>{item.phone}</td>
+                      <td>{item.email}</td>
                       <td>
                         {item.address}, Locality: {item.locality}, City:{" "}
                         {item.city}, Pincode: {item.pincode}, State:{" "}

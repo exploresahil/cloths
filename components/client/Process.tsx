@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { getProcesses } from "@/sanity/sanity-utils";
+import { useRouter } from "next/navigation";
 
 import gif from "@/public/assets/images/V01.gif";
 
@@ -10,6 +11,7 @@ import {
   CircularText,
   StitchingImpact,
   MissionArrow,
+  CategoryArrowRight,
 } from "@/components/icons/Icons";
 import Link from "next/link";
 
@@ -25,6 +27,7 @@ interface Process {
 }
 
 export default function Process() {
+  const router = useRouter();
   const [processes, setProcesses] = useState<Process[]>([]);
 
   useEffect(() => {
@@ -36,9 +39,22 @@ export default function Process() {
     fetchProcesses();
   }, []);
 
+  const handleCatogeryClick = (selectedCategory: any) => {
+    router.push(`/products?category=${selectedCategory}`);
+  };
+
   return (
     <>
       <section className="main-process-section">
+        <div className="view-all-catogeries">
+          <a
+            href="#"
+            title="View All"
+            onClick={() => handleCatogeryClick("view all")}
+          >
+            <p>View All products</p>
+          </a>
+        </div>
         <div className="main-process-heading">
           <h1>
             <span>LOVE</span> WHAT YOU SEE?
