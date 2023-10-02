@@ -64,6 +64,7 @@ const Cart = ({ onCartCloseClick }: props) => {
                         src={v.product.images[0].url}
                         style={{ objectFit: "cover" }}
                         alt="footer-logo"
+                        sizes="100%"
                       />
                     </div>
                     <div className="cart-item-info">

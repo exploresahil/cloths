@@ -142,19 +142,20 @@ export default function Authorize() {
                       <div className="cart-product-info">
                         {product.filter(
                           (b, s) => b.product._id == v.product._id
-                        ).length != 0 ?
-
-                          !product.filter(
-                            (b, s) => b.product._id == v.product._id
-                          )[0].product.isAvailable && (
-                            <p className="out-of-stock">out of stock</p>
-                          ) : null}
+                        ).length != 0
+                          ? !product.filter(
+                              (b, s) => b.product._id == v.product._id
+                            )[0].product.isAvailable && (
+                              <p className="out-of-stock">out of stock</p>
+                            )
+                          : null}
                         <div className="image-container">
                           <Image
                             fill
                             src={v.product.images[0].url}
                             style={{ objectFit: "cover" }}
                             alt="product-image"
+                            sizes="100%"
                           />
                         </div>
                         <div className="cart-item-info">
@@ -173,14 +174,17 @@ export default function Authorize() {
                         onClick={() => {
                           console.log(v.id);
                           // update
-                          RemoveCartOrder(v.id).then(() => {
-                            getProCart(userData.extra_data.id).then((data) => {
-                              dispatch(removeToCard(data.data));
-
+                          RemoveCartOrder(v.id)
+                            .then(() => {
+                              getProCart(userData.extra_data.id).then(
+                                (data) => {
+                                  dispatch(removeToCard(data.data));
+                                }
+                              );
+                            })
+                            .then(() => {
+                              router.refresh();
                             });
-                          }).then(() => {
-                            router.refresh()
-                          });
                         }}
                       >
                         <GrClose />
@@ -208,7 +212,6 @@ export default function Authorize() {
             <button
               type="button"
               onClick={() => {
-
                 if (isDis) {
                   toast.error(
                     "One or more products are gone out of stock, please remove the out of stack product",

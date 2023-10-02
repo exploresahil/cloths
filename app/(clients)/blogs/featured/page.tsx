@@ -31,6 +31,7 @@ export default async function Featured() {
                 src={featured.image.url}
                 alt={featured._id}
                 style={{ objectFit: "cover" }}
+                sizes="100%"
               />
             )}
           </div>

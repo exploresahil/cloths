@@ -125,6 +125,7 @@ export default function Blogs() {
                       src={blog.image.url}
                       style={{ objectFit: "cover" }}
                       alt={blog.slug}
+                      sizes="100%"
                     />
                   )}
                 </div>
@@ -163,6 +164,7 @@ export default function Blogs() {
                       src={blog.image.url}
                       style={{ objectFit: "cover" }}
                       alt={blog.slug}
+                      sizes="100%"
                     />
                   )}
                 </div>

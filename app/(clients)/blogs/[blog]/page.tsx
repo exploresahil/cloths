@@ -41,6 +41,7 @@ export default function Blog({ params }: Props) {
                 src={blog.image.url}
                 alt={blog.slug}
                 style={{ objectFit: "cover" }}
+                sizes="100%"
               />
             )}
           </div>

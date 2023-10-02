@@ -176,6 +176,7 @@ const Products = () => {
                                       src={product.images[0].url}
                                       style={{ objectFit: "cover" }}
                                       alt={product.slug}
+                                      sizes="100%"
                                     />
                                   )}
                                   {!product.isAvailable && (
@@ -228,6 +229,7 @@ const Products = () => {
                                       src={product.images[0].url}
                                       style={{ objectFit: "cover" }}
                                       alt={product.slug}
+                                      sizes="100%"
                                     />
                                   )}
                                   {!product.isAvailable && (
@@ -284,6 +286,7 @@ const Products = () => {
                                     src={product.images[0].url}
                                     style={{ objectFit: "cover" }}
                                     alt={product.slug}
+                                    sizes="100%"
                                   />
                                 )}
                                 {!product.isAvailable && (
@@ -335,6 +338,7 @@ const Products = () => {
                                     src={product.images[0].url}
                                     style={{ objectFit: "cover" }}
                                     alt={product.slug}
+                                    sizes="100%"
                                   />
                                 )}
                                 {!product.isAvailable && (
@@ -389,6 +393,7 @@ const Products = () => {
                                 src={product.images[0].url}
                                 style={{ objectFit: "cover" }}
                                 alt={product.slug}
+                                sizes="100%"
                               />
                             )}
                             {!product.isAvailable && (
@@ -440,6 +445,7 @@ const Products = () => {
                                 src={product.images[0].url}
                                 style={{ objectFit: "cover" }}
                                 alt={product.slug}
+                                sizes="100%"
                               />
                             )}
                             {!product.isAvailable && (

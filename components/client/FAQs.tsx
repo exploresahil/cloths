@@ -27,6 +27,7 @@ const AccordionItem: FC<AccordionItemProps> = ({ header, ...rest }) => (
           className="accordion-down"
           src={AccordionDown}
           alt="accordion-down"
+          sizes="100%"
         />
       </>
     }

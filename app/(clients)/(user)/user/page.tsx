@@ -1,6 +1,5 @@
 "use client";
 import DB from "@/backend/Backend.client";
-import Image from "next/image";
 import React, { useState, useEffect } from "react";
 import productImage from "@/public/assets/images/products/product-img.png";
 import ContactArrow from "@/components/icons/ContactArrow";

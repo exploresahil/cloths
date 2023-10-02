@@ -3,7 +3,6 @@
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
 
 import {
   Arches,

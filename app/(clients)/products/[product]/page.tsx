@@ -172,6 +172,7 @@ export default function Product({ params }: Props) {
                     src={firstImageSrc}
                     style={{ objectFit: "cover" }}
                     alt="logo"
+                    sizes="100%"
                     className="zoomed-image"
                   />
                 </div>
@@ -268,6 +269,7 @@ export default function Product({ params }: Props) {
                           src={randomProduct.images[0].url}
                           style={{ objectFit: "cover" }}
                           alt={randomProduct.slug}
+                          sizes="100%"
                         />
                       )}
                     </div>

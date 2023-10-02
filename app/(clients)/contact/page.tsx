@@ -81,6 +81,7 @@ const Contact = () => {
               src={contact.image.url}
               style={{ objectFit: "cover" }}
               alt="contact-bg"
+              sizes="100%"
             />
           </div>
           <div className="contact-details">

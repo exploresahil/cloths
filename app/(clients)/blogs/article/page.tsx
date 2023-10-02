@@ -21,7 +21,7 @@ const Article = () => {
       </div>
       <div className="article-section">
         <div className="article-img-container">
-          <Image src={ArticleImg} alt="article-img" />
+          <Image src={ArticleImg} alt="article-img" sizes="100%" />
         </div>
         <div className="article-content">
           <div className="article-heading">

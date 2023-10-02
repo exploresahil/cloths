@@ -22,6 +22,7 @@ export default function Footer() {
           src={FooterBackground}
           style={{ objectFit: "cover" }}
           alt="footer-background"
+          sizes="100%"
         />
       </div>
       <div className="footer-components">
