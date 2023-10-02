@@ -55,7 +55,7 @@ export const googleLogin = async () => {
   const data = await DB.auth.signInWithOAuth({
     provider: "google",
     options: {
-      redirectTo: "http://localhost:3000/user",
+      redirectTo: `${window.location.host}/user`,
     },
   });
   await getUser().then((data) => {
