@@ -134,7 +134,11 @@ const User = () => {
                         </div>
                         <div className="order-address">
                           <p>Name: {item.name}</p>
-                          <p>Address: {item.address}</p>
+                          <p>
+                            Address: {item.address}, Locality: {item.locality},
+                            City: {item.city}, Pincode: {item.pincode}, State:{" "}
+                            {item.state}, More Info: {item.more_info}
+                          </p>
                         </div>
                       </div>
                     );
