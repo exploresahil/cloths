@@ -103,8 +103,7 @@ const ShippingInfo = () => {
     ) ?? 0;
 
   return (
-    userData &&
-    input && (
+    userData && (
       <div className="shipping-info-container">
         <div className="shipping-info-main">
           <div className="shipping-info">
