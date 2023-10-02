@@ -172,7 +172,7 @@ export default function Authorize() {
                         type="button"
                         onClick={() => {
                           console.log(v.id);
-
+                          // update
                           RemoveCartOrder(v.id).then(() => {
                             getProCart(userData.extra_data.id).then((data) => {
                               dispatch(removeToCard(data.data));
