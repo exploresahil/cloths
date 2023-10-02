@@ -197,7 +197,7 @@
       height: 70vh;
       width: 100vw;
       border-radius: 60px 60px 0 0;
-      padding: 60px 10vw;
+      padding: 60px 10vw 100px 10vw;
 
       .cart-products {
         .cart-items {
@@ -210,6 +210,10 @@
           }
         }
       }
+    }
+
+    .socials {
+      bottom: 50px !important;
     }
   }
 }

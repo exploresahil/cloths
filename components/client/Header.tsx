@@ -164,7 +164,7 @@ const Header = () => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [isOpen, isCartOpen]);
+  }, []);
 
   useEffect(() => {
     if (pathname === "/" && typeof window !== "undefined") {
