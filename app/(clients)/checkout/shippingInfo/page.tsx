@@ -70,7 +70,18 @@ const ShippingInfo = () => {
       );
   }, [userData]);
 
-  const [input, setInput] = useState<any>();
+  const [input, setInput] = useState<any>({
+    name: "",
+    address: "",
+    locality: "",
+    state: "",
+    pincode: "",
+    more_info: "",
+    city: "",
+    region: "",
+    phone: "",
+    email: "",
+  });
 
   useEffect(() => {
     if (UserAddress.length != 0) {
