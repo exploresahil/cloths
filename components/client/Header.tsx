@@ -83,7 +83,12 @@ const Header = () => {
   };
 
   const handleCartClickOpen = () => {
-    setIsCartOpen(true);
+    if (userData.data.user == null) {
+      toast.error("You must login first!", {
+        theme: "colored",
+        autoClose: 1000,
+      });
+    } else setIsCartOpen(true);
   };
 
   const handleCartClickClose = () => {

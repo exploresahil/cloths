@@ -147,18 +147,127 @@ const Products = () => {
           <div className="products-grid">
             {_products.length !== 0
               ? _products.map((product) => {
-                  if (
-                    selectedFilters.length !== 0 ||
-                    selectedSizes.length !== 0
-                  ) {
+                  if (product.isAvailable)
                     if (
-                      selectedFilters.indexOf(product.type) !== -1 ||
-                      arraysHaveCommonElement(selectedSizes, product.size)
+                      selectedFilters.length !== 0 ||
+                      selectedSizes.length !== 0
                     ) {
+                      if (
+                        selectedFilters.indexOf(product.type) !== -1 ||
+                        arraysHaveCommonElement(selectedSizes, product.size)
+                      ) {
+                        if (
+                          selectedCategory == "view all" ||
+                          selectedCategory == "_view all"
+                        ) {
+                          return (
+                            <div className="product-sec">
+                              <Link
+                                key={product._id}
+                                href={`/products/${product.slug}`}
+                                className={`product ${
+                                  product.isAvailable ? "" : "product-link-out"
+                                }`}
+                              >
+                                <div className="img-container">
+                                  {product.images && (
+                                    <Image
+                                      fill
+                                      src={product.images[0].url}
+                                      style={{ objectFit: "cover" }}
+                                      alt={product.slug}
+                                    />
+                                  )}
+                                  {!product.isAvailable && (
+                                    <div className="out-of-stack">
+                                      <p>Out Of Stock</p>
+                                    </div>
+                                  )}
+                                </div>
+
+                                {(!product.isAvailable && (
+                                  <div className="product-info info-out">
+                                    <h3>{product.name}</h3>
+                                    <p>RS.{product.price}</p>
+                                  </div>
+                                )) || (
+                                  <div className="product-info">
+                                    <h3>{product.name}</h3>
+                                    <p>RS.{product.price}</p>
+                                  </div>
+                                )}
+                              </Link>
+                              {product.isAvailable && (
+                                <button
+                                  type="button"
+                                  onClick={() => handleAddToCart(product)}
+                                  disabled={!product.isAvailable}
+                                >
+                                  <AiOutlinePlus />
+                                </button>
+                              )}
+                            </div>
+                          );
+                        } else if (
+                          selectedCategory == product.category.name &&
+                          product.category == product.category
+                        ) {
+                          return (
+                            <div className="product-sec">
+                              <Link
+                                key={product._id}
+                                href={`/products/${product.slug}`}
+                                className={`product ${
+                                  product.isAvailable ? "" : "product-link-out"
+                                }`}
+                              >
+                                <div className="img-container">
+                                  {product.images && (
+                                    <Image
+                                      fill
+                                      src={product.images[0].url}
+                                      style={{ objectFit: "cover" }}
+                                      alt={product.slug}
+                                    />
+                                  )}
+                                  {!product.isAvailable && (
+                                    <div className="out-of-stack">
+                                      <p>Out Of Stock</p>
+                                    </div>
+                                  )}
+                                </div>
+
+                                {(!product.isAvailable && (
+                                  <div className="product-info info-out">
+                                    <h3>{product.name}</h3>
+                                    <p>RS.{product.price}</p>
+                                  </div>
+                                )) || (
+                                  <div className="product-info">
+                                    <h3>{product.name}</h3>
+                                    <p>RS.{product.price}</p>
+                                  </div>
+                                )}
+                              </Link>
+                              {product.isAvailable && (
+                                <button
+                                  type="button"
+                                  onClick={() => handleAddToCart(product)}
+                                  disabled={!product.isAvailable}
+                                >
+                                  <AiOutlinePlus />
+                                </button>
+                              )}
+                            </div>
+                          );
+                        }
+                      }
+                    } else {
                       if (
                         selectedCategory == "view all" ||
                         selectedCategory == "_view all"
                       ) {
+                        // console.log(product.size);
                         return (
                           <div className="product-sec">
                             <Link
@@ -179,11 +288,10 @@ const Products = () => {
                                 )}
                                 {!product.isAvailable && (
                                   <div className="out-of-stack">
-                                    <p>Out Of Stack</p>
+                                    <p>Out Of Stock</p>
                                   </div>
                                 )}
                               </div>
-
                               {(!product.isAvailable && (
                                 <div className="product-info info-out">
                                   <h3>{product.name}</h3>
@@ -231,11 +339,10 @@ const Products = () => {
                                 )}
                                 {!product.isAvailable && (
                                   <div className="out-of-stack">
-                                    <p>Out Of Stack</p>
+                                    <p>Out Of Stock</p>
                                   </div>
                                 )}
                               </div>
-
                               {(!product.isAvailable && (
                                 <div className="product-info info-out">
                                   <h3>{product.name}</h3>
@@ -248,6 +355,7 @@ const Products = () => {
                                 </div>
                               )}
                             </Link>
+
                             {product.isAvailable && (
                               <button
                                 type="button"
@@ -261,113 +369,6 @@ const Products = () => {
                         );
                       }
                     }
-                  } else {
-                    if (
-                      selectedCategory == "view all" ||
-                      selectedCategory == "_view all"
-                    ) {
-                      // console.log(product.size);
-                      return (
-                        <div className="product-sec">
-                          <Link
-                            key={product._id}
-                            href={`/products/${product.slug}`}
-                            className={`product ${
-                              product.isAvailable ? "" : "product-link-out"
-                            }`}
-                          >
-                            <div className="img-container">
-                              {product.images && (
-                                <Image
-                                  fill
-                                  src={product.images[0].url}
-                                  style={{ objectFit: "cover" }}
-                                  alt={product.slug}
-                                />
-                              )}
-                              {!product.isAvailable && (
-                                <div className="out-of-stack">
-                                  <p>Out Of Stack</p>
-                                </div>
-                              )}
-                            </div>
-                            {(!product.isAvailable && (
-                              <div className="product-info info-out">
-                                <h3>{product.name}</h3>
-                                <p>RS.{product.price}</p>
-                              </div>
-                            )) || (
-                              <div className="product-info">
-                                <h3>{product.name}</h3>
-                                <p>RS.{product.price}</p>
-                              </div>
-                            )}
-                          </Link>
-                          {product.isAvailable && (
-                            <button
-                              type="button"
-                              onClick={() => handleAddToCart(product)}
-                              disabled={!product.isAvailable}
-                            >
-                              <AiOutlinePlus />
-                            </button>
-                          )}
-                        </div>
-                      );
-                    } else if (
-                      selectedCategory == product.category.name &&
-                      product.category == product.category
-                    ) {
-                      return (
-                        <div className="product-sec">
-                          <Link
-                            key={product._id}
-                            href={`/products/${product.slug}`}
-                            className={`product ${
-                              product.isAvailable ? "" : "product-link-out"
-                            }`}
-                          >
-                            <div className="img-container">
-                              {product.images && (
-                                <Image
-                                  fill
-                                  src={product.images[0].url}
-                                  style={{ objectFit: "cover" }}
-                                  alt={product.slug}
-                                />
-                              )}
-                              {!product.isAvailable && (
-                                <div className="out-of-stack">
-                                  <p>Out Of Stack</p>
-                                </div>
-                              )}
-                            </div>
-                            {(!product.isAvailable && (
-                              <div className="product-info info-out">
-                                <h3>{product.name}</h3>
-                                <p>RS.{product.price}</p>
-                              </div>
-                            )) || (
-                              <div className="product-info">
-                                <h3>{product.name}</h3>
-                                <p>RS.{product.price}</p>
-                              </div>
-                            )}
-                          </Link>
-
-                          {product.isAvailable && (
-                            <button
-                              type="button"
-                              onClick={() => handleAddToCart(product)}
-                              disabled={!product.isAvailable}
-                            >
-                              <AiOutlinePlus />
-                            </button>
-                          )}
-                        </div>
-                      );
-                    }
-                  }
                 })
               : products.map((product) => {
                   if (selectedCategory == "view all") {
@@ -392,7 +393,7 @@ const Products = () => {
                             )}
                             {!product.isAvailable && (
                               <div className="out-of-stack">
-                                <p>Out Of Stack</p>
+                                <p>Out Of Stock</p>
                               </div>
                             )}
                           </div>
@@ -443,7 +444,7 @@ const Products = () => {
                             )}
                             {!product.isAvailable && (
                               <div className="out-of-stack">
-                                <p>Out Of Stack</p>
+                                <p>Out Of Stock</p>
                               </div>
                             )}
                           </div>
