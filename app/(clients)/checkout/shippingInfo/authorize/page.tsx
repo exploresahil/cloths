@@ -225,7 +225,7 @@ export default function Authorize() {
                     ...{ ...UserAddress.at(-1), id: undefined },
                   }).then((data) => {
                     axios
-                      .get("/api/getPaymentGateway", {
+                      .post("/api/getPaymentGateway", {
                         data: {
                           price: total,
                           phoneNo: UserAddress.at(-1)?.phone,
