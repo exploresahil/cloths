@@ -33,9 +33,9 @@ const User = () => {
         const orders = await supabase
           .from("Order")
           .select("*")
-          .eq("user", data.extra_data?.id);
+          .eq("user", data.extra_data?.id)
+          .order("created_at", { ascending: false }); // Sort by created_at in descending order
         setData(orders.data);
-        //console.log("orders:", orders);
       } else {
         getUser().then(async (data) => {
           if (data?.data.user) {
@@ -43,12 +43,12 @@ const User = () => {
             const orders = await supabase
               .from("Order")
               .select("*")
-              .eq("user", data.extra_data?.id);
+              .eq("user", data.extra_data?.id)
+              .order("created_at", { ascending: false }); // Sort by created_at in descending order
             setData(orders.data);
           }
         });
       }
-      //console.log(data);
     })();
   }, []);
 
@@ -66,6 +66,7 @@ const User = () => {
     const formattedDate = date.toLocaleDateString("en-GB", options);
     return formattedDate;
   }
+
   return (
     userData && (
       <div className="user-main-container">
@@ -96,55 +97,60 @@ const User = () => {
             <div className="product-main-container">
               <div className="product-info">
                 {data &&
-                  data.map((item: any, id: any) => {
-                    const orderAmount =
-                      item.product?.reduce(
-                        (accumulator: any, currentValue: any) =>
-                          accumulator +
-                          parseInt(currentValue.product.price) *
-                            currentValue.how_many,
-                        0
-                      ) ?? 0;
+                  data
+                    .filter((item: any) => item.payment_confirm === true)
+                    .map((item: any, id: any) => {
+                      const orderAmount =
+                        item.product?.reduce(
+                          (accumulator: any, currentValue: any) =>
+                            accumulator +
+                            parseInt(currentValue.product.price) *
+                              currentValue.how_many,
+                          0
+                        ) ?? 0;
 
-                    const deliveryCharges =
-                      orderAmount > 2550 ? "It's Free!" : 80;
+                      const deliveryCharges =
+                        orderAmount > 2550 ? "It's Free!" : 80;
 
-                    const total =
-                      orderAmount + (orderAmount > 2550 ? 0 : deliveryCharges);
-                    return (
-                      <div key={id} className="item-info">
-                        <div className="order-number">
-                          <p>Order ID: {item.order_id}</p>
-                          <p>Ordered On: {formatDateTime(item.created_at)}</p>
-                        </div>
-                        <div className="items">
-                          <div className="info">
-                            {item.product.map((pro: any, id: any) => (
-                              <h3>
-                                {pro.product.name}{" "}
-                                <span>{pro.product.size.at(0)}</span>
-                              </h3>
-                            ))}
+                      const total =
+                        orderAmount +
+                        (orderAmount > 2550 ? 0 : deliveryCharges);
+                      return (
+                        <div key={id} className="item-info">
+                          <div className="order-number">
+                            <p>Order ID: {item.order_id}</p>
+                            <p>Ordered On: {formatDateTime(item.created_at)}</p>
                           </div>
+                          <div className="items">
+                            <div className="info">
+                              {item.product.map((pro: any, id: any) => (
+                                <h3>
+                                  {pro.product.name}{" "}
+                                  <span>{pro.product.size.at(0)}</span>
+                                </h3>
+                              ))}
+                            </div>
 
-                          <div className="total-amount">
-                            <p>Rs. {total}</p>
+                            <div className="total-amount">
+                              <p>Rs. {total}</p>
+                            </div>
+                          </div>
+                          <div className="order-address">
+                            <p>Name: {item.name}</p>
+                            <p>
+                              Address: {item.address}, Locality: {item.locality}
+                              , City: {item.city}, Pincode: {item.pincode},
+                              State: {item.state}, More Info: {item.more_info}
+                            </p>
                           </div>
                         </div>
-                        <div className="order-address">
-                          <p>Name: {item.name}</p>
-                          <p>
-                            Address: {item.address}, Locality: {item.locality},
-                            City: {item.city}, Pincode: {item.pincode}, State:{" "}
-                            {item.state}, More Info: {item.more_info}
-                          </p>
-                        </div>
-                      </div>
-                    );
-                  })}{" "}
-                {(!data || data.length === 0) && (
-                  <p>No order found or Loading...</p>
-                )}
+                      );
+                    })}{" "}
+                {!data ||
+                  data.length === 0 ||
+                  (data.filter((item: any) => item.payment_confirm) && (
+                    <p>No order found or Loading...</p>
+                  ))}
               </div>
             </div>
           </div>
