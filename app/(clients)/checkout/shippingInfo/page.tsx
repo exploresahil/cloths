@@ -83,6 +83,7 @@ const ShippingInfo = () => {
       city: UserAddress.at(-1)?.city,
       region: UserAddress.at(-1)?.region,
       phone: UserAddress.at(-1)?.phone,
+      email: UserAddress.at(-1)?.email,
     });
   }, [userData]);
 

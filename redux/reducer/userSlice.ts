@@ -10,6 +10,7 @@ interface user_address {
   city: string;
   region: string;
   phone: string;
+  email: string;
 }
 
 type Users = {
