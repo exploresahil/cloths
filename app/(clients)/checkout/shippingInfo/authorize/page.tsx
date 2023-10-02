@@ -45,6 +45,7 @@ export default function Authorize() {
           if (!data[0].isAvailable) {
             setDis(true);
           }
+
           let pro = {
             product: { ...v.product, isAvailable: data[0].isAvailable },
             ...v,
@@ -139,11 +140,15 @@ export default function Authorize() {
                   return (
                     <div className="cart-items">
                       <div className="cart-product-info">
-                        {!product.filter(
+                        {product.filter(
                           (b, s) => b.product._id == v.product._id
-                        )[0].product.isAvailable && (
-                          <p className="out-of-stock">out of stock</p>
-                        )}
+                        ).length != 0 ?
+
+                          !product.filter(
+                            (b, s) => b.product._id == v.product._id
+                          )[0].product.isAvailable && (
+                            <p className="out-of-stock">out of stock</p>
+                          ) : null}
                         <div className="image-container">
                           <Image
                             fill
@@ -171,7 +176,10 @@ export default function Authorize() {
                           RemoveCartOrder(v.id).then(() => {
                             getProCart(userData.extra_data.id).then((data) => {
                               dispatch(removeToCard(data.data));
+
                             });
+                          }).then(() => {
+                            router.refresh()
                           });
                         }}
                       >
@@ -200,6 +208,7 @@ export default function Authorize() {
             <button
               type="button"
               onClick={() => {
+
                 if (isDis) {
                   toast.error(
                     "One or more products are gone out of stock, please remove the out of stack product",
