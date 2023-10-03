@@ -146,11 +146,12 @@ const User = () => {
                         </div>
                       );
                     })}{" "}
-                {(((!data ||
+                {((!data ||
                   data.length === 0) &&
-                  data.filter((item: any) => item.payment_confirm).length != 0) && (
+                  (
                     <p>No order found or Loading...</p>
                   ))}
+                {data.filter((item: any) => item.payment_confirm == false).length != 0 && <p>No order found or Loading...</p>}
               </div>
             </div>
           </div>
