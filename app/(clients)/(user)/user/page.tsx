@@ -146,9 +146,9 @@ const User = () => {
                         </div>
                       );
                     })}{" "}
-                {((!data ||
-                  data.length === 0) ||
-                  data.filter((item: any) => item.payment_confirm).length != 0 && (
+                {(((!data ||
+                  data.length === 0) &&
+                  data.filter((item: any) => item.payment_confirm).length != 0) && (
                     <p>No order found or Loading...</p>
                   ))}
               </div>
