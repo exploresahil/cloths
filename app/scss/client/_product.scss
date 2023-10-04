@@ -18,7 +18,7 @@
       flex-direction: column;
 
       margin-left: 80px;
-      max-width: 400px;
+      padding-right: 50px;
 
       h2 {
         font-family: $fontAR;
@@ -114,8 +114,8 @@
 
       .img-container {
         position: relative;
-        width: 20vw;
-        height: 500px;
+        width: 350px;
+        height: 437.5px;
         overflow: hidden;
 
         .image-zoom-container {
@@ -317,7 +317,7 @@
         .img-container {
           position: relative;
           width: 100%;
-          height: 400px;
+          height: 325px;
           display: flex;
           justify-content: center;
           align-items: flex-end;

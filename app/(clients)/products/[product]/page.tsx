@@ -249,70 +249,74 @@ export default function Product({ params }: Props) {
             <h2>Related Products</h2>
 
             <div className="products-grid">
-              {randomProducts.map((randomProduct) => (
-                <div className="product-sec" key={randomProduct._id}>
-                  <Link
-                    href={`/products/${randomProduct.slug}`}
-                    className={`product ${
-                      randomProduct.isAvailable ? "" : "product-link-out"
-                    }`}
-                  >
-                    <div className="img-container">
-                      {!randomProduct.isAvailable && (
-                        <div className="out-of-stock">
-                          <p>Out of stock</p>
+              {randomProducts
+                .filter((randomProduct) => randomProduct.isAvailable === true)
+                .map((randomProduct) => (
+                  <div className="product-sec" key={randomProduct._id}>
+                    <Link
+                      href={`/products/${randomProduct.slug}`}
+                      className={`product ${
+                        randomProduct.isAvailable ? "" : "product-link-out"
+                      }`}
+                    >
+                      <div className="img-container">
+                        {!randomProduct.isAvailable && (
+                          <div className="out-of-stock">
+                            <p>Out of stock</p>
+                          </div>
+                        )}
+                        {randomProduct.images && (
+                          <Image
+                            fill
+                            src={randomProduct.images[0].url}
+                            style={{ objectFit: "cover" }}
+                            alt={randomProduct.slug}
+                            sizes="100%"
+                          />
+                        )}
+                      </div>
+                      {(!randomProduct.isAvailable && (
+                        <div className="product-info info-out">
+                          <h3>{randomProduct.name}</h3>
+                          <p>RS.{randomProduct.price}</p>
+                        </div>
+                      )) || (
+                        <div className="product-info">
+                          <h3>{randomProduct.name}</h3>
+                          <p>RS.{randomProduct.price}</p>
                         </div>
                       )}
-                      {randomProduct.images && (
-                        <Image
-                          fill
-                          src={randomProduct.images[0].url}
-                          style={{ objectFit: "cover" }}
-                          alt={randomProduct.slug}
-                          sizes="100%"
-                        />
-                      )}
-                    </div>
-                    {(!randomProduct.isAvailable && (
-                      <div className="product-info info-out">
-                        <h3>{randomProduct.name}</h3>
-                        <p>RS.{randomProduct.price}</p>
-                      </div>
-                    )) || (
-                      <div className="product-info">
-                        <h3>{randomProduct.name}</h3>
-                        <p>RS.{randomProduct.price}</p>
-                      </div>
-                    )}
-                  </Link>
-                  {randomProduct.isAvailable && (
-                    <button
-                      type="button"
-                      onClick={() => {
-                        // console.log("hi", "", product, userData);
-                        if (userData.data.user)
-                          AddCartOrder(product, userData.extra_data.id, 1).then(
-                            (data) => {
+                    </Link>
+                    {randomProduct.isAvailable && (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          // console.log("hi", "", product, userData);
+                          if (userData.data.user)
+                            AddCartOrder(
+                              product,
+                              userData.extra_data.id,
+                              1
+                            ).then((data) => {
                               getProCart(userData.extra_data.id).then(
                                 (data) => {
                                   dispatch(addToCard(data.data));
                                 }
                               );
-                            }
-                          );
-                        else
-                          toast.error("You Must Login First", {
-                            theme: "colored",
-                            autoClose: 1500,
-                            hideProgressBar: true,
-                          });
-                      }}
-                    >
-                      <AiOutlinePlus />
-                    </button>
-                  )}
-                </div>
-              ))}
+                            });
+                          else
+                            toast.error("You Must Login First", {
+                              theme: "colored",
+                              autoClose: 1500,
+                              hideProgressBar: true,
+                            });
+                        }}
+                      >
+                        <AiOutlinePlus />
+                      </button>
+                    )}
+                  </div>
+                ))}
             </div>
           </div>
         </div>
