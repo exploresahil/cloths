@@ -97,6 +97,8 @@ const User = () => {
             <div className="product-main-container">
               <div className="product-info">
                 {data &&
+                data.length > 0 &&
+                data.some((item: any) => item.payment_confirm === true) ? (
                   data
                     .filter((item: any) => item.payment_confirm === true)
                     .map((item: any, id: any) => {
@@ -105,7 +107,7 @@ const User = () => {
                           (accumulator: any, currentValue: any) =>
                             accumulator +
                             parseInt(currentValue.product.price) *
-                            currentValue.how_many,
+                              currentValue.how_many,
                           0
                         ) ?? 0;
 
@@ -115,6 +117,7 @@ const User = () => {
                       const total =
                         orderAmount +
                         (orderAmount > 2550 ? 0 : deliveryCharges);
+
                       return (
                         <div key={id} className="item-info">
                           <div className="order-number">
@@ -124,13 +127,12 @@ const User = () => {
                           <div className="items">
                             <div className="info">
                               {item.product.map((pro: any, id: any) => (
-                                <h3>
+                                <h3 key={id}>
                                   {pro.product.name}{" "}
                                   <span>{pro.product.size.at(0)}</span>
                                 </h3>
                               ))}
                             </div>
-
                             <div className="total-amount">
                               <p>Rs. {total}</p>
                             </div>
@@ -145,13 +147,10 @@ const User = () => {
                           </div>
                         </div>
                       );
-                    })}{" "}
-                {((!data ||
-                  data.length === 0) &&
-                  (
-                    <p>No order found or Loading...</p>
-                  ))}
-                {data.filter((item: any) => item.payment_confirm == false).length != 0 && <p>No order found or Loading...</p>}
+                    })
+                ) : (
+                  <p>No order found or Loading...</p>
+                )}
               </div>
             </div>
           </div>
