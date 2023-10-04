@@ -209,19 +209,28 @@ export default function Product({ params }: Props) {
                 onClick={() => {
                   if (product.isAvailable) {
                     if (userData.data.user)
-                      AddCartOrder(product, userData.extra_data.id, 1).then(
-                        (data) => {
-                          getProCart(userData.extra_data.id).then((data) => {
-                            dispatch(addToCard(data.data));
+                      getProCart(userData.extra_data.id).then((_data) => {
+                        if (_data.data?.filter((v) => v.product._id == product._id).length == 0) {
+                          AddCartOrder(product, userData.extra_data.id, 1).then(
+                            (data) => {
+                              getProCart(userData.extra_data.id).then((data) => {
+                                dispatch(addToCard(data.data));
 
-                            router.push(
-                              userAddress.length != 0
-                                ? "/checkout/shippingInfo/authorize"
-                                : "/checkout/shippingInfo/"
-                            );
-                          });
+                                router.push(
+                                  userAddress.length != 0
+                                    ? "/checkout/shippingInfo/authorize"
+                                    : "/checkout/shippingInfo/"
+                                );
+                              });
+                            }
+                          );
                         }
-                      );
+                        else toast.error("Product Already in Cart", {
+                          theme: "colored",
+                          autoClose: 800,
+                          hideProgressBar: true,
+                        });
+                      })
                   } else if (!product.isAvailable) {
                     toast.error("Product is Out of stack", {
                       theme: "colored",
@@ -255,9 +264,8 @@ export default function Product({ params }: Props) {
                   <div className="product-sec" key={randomProduct._id}>
                     <Link
                       href={`/products/${randomProduct.slug}`}
-                      className={`product ${
-                        randomProduct.isAvailable ? "" : "product-link-out"
-                      }`}
+                      className={`product ${randomProduct.isAvailable ? "" : "product-link-out"
+                        }`}
                     >
                       <div className="img-container">
                         {!randomProduct.isAvailable && (
@@ -281,11 +289,11 @@ export default function Product({ params }: Props) {
                           <p>RS.{randomProduct.price}</p>
                         </div>
                       )) || (
-                        <div className="product-info">
-                          <h3>{randomProduct.name}</h3>
-                          <p>RS.{randomProduct.price}</p>
-                        </div>
-                      )}
+                          <div className="product-info">
+                            <h3>{randomProduct.name}</h3>
+                            <p>RS.{randomProduct.price}</p>
+                          </div>
+                        )}
                     </Link>
                     {randomProduct.isAvailable && (
                       <button
@@ -293,17 +301,28 @@ export default function Product({ params }: Props) {
                         onClick={() => {
                           // console.log("hi", "", product, userData);
                           if (userData.data.user)
-                            AddCartOrder(
-                              product,
-                              userData.extra_data.id,
-                              1
-                            ).then((data) => {
-                              getProCart(userData.extra_data.id).then(
-                                (data) => {
-                                  dispatch(addToCard(data.data));
-                                }
-                              );
-                            });
+                            getProCart(userData.extra_data.id).then((_data) => {
+                              if (_data.data?.filter((v) => v.product._id == randomProduct._id).length == 0) {
+                                AddCartOrder(
+                                  randomProduct,
+                                  userData.extra_data.id,
+                                  1
+                                ).then((data) => {
+                                  getProCart(userData.extra_data.id).then(
+                                    (data) => {
+                                      dispatch(addToCard(data.data));
+                                    }
+                                  );
+                                });
+                              } else {
+                                toast.error("Product Already in Cart", {
+                                  theme: "colored",
+                                  autoClose: 800,
+                                  hideProgressBar: true,
+                                });
+                              }
+
+                            })
                           else
                             toast.error("You Must Login First", {
                               theme: "colored",
