@@ -2,29 +2,57 @@ import { ConformPay } from "@/backend/Order";
 import { NextResponse } from "next/server";
 import { createClient } from "@sanity/client";
 import clientConfig from "@/sanity/config/client-config";
+import { products } from "@/types/Products";
+import { Order } from "@/types";
+import { client2 } from "@/backend/Backend.client";
 
 export async function POST(request: Request, { params }: any) {
   const order_id = params.order_id;
   const FormData = await request.formData();
-  console.log(FormData.get("code"));
+  await client2.from("ADMIN_LOGS").insert({
+    LEVEL: "INFO",
+    LOG: "PAYMENT-CONFORM-RUN ORDER_ID-" + order_id,
+  });
 
+  console.log();
+  await client2.from("ADMIN_LOGS").insert({
+    LEVEL: "INFO",
+    LOG: FormData.get("code")?.toString() + " ORDER_ID-" + order_id,
+  });
   if (FormData.get("code") == "PAYMENT_SUCCESS") {
+    client2.from("ADMIN_LOGS").insert({
+      LEVEL: "INFO",
+      LOG: "PAYMENT SUCCESS ORDER_ID-" + order_id,
+    });
     const data = await ConformPay(order_id);
-
+    await client2.from("ADMIN_LOGS").insert({
+      LEVEL: "INFO",
+      LOG: `${JSON.stringify(data.data)}` + "data return into ConformPay",
+    });
     //console.log("ordered --->", data.data.product[0].product.order_id);
 
     const client = createClient({
       ...clientConfig,
-      token:
-        "sktJkuYa5pdMqisAbC1sJqD3Fq4FbpDaIs4Q1gu38y1nef1AqVIhY60Ek6kRIYO8y27hXmwSCSjChC35KrQm7XaFYKHmr66HsIhINiiBXNJP7mIvME7qqap1IBMHddusz3DAx7BlIchbEhyLiiJjdpW3ycAD81nF1nl0RoKf2iSbYvHV77gM",
+      token: process.env.NEXT_SANITY_TOKEN,
     });
 
-    const orders = data.data.product.map(async (product: any) => {
-      //console.log(product.product);
-      return await client
-        .patch(product.product._id)
-        .set({ isAvailable: false })
-        .commit();
+    const orders = await data.data.product.map(
+      async (product: {
+        id: number;
+        product: products;
+        how_many: number;
+        created_at: string;
+      }) => {
+        console.log(product);
+        return await client
+          .patch(product.product._id)
+          .set({ isAvailable: false })
+          .commit();
+      }
+    );
+    await client2.from("ADMIN_LOGS").insert({
+      LEVEL: "INFO",
+      LOG: `${JSON.stringify(orders)}` + "order getting isAvailable : false",
     });
     console.log(orders);
 
