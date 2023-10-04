@@ -218,6 +218,7 @@ export default function Authorize() {
                         price: total,
                         phoneNo: UserAddress.at(-1)?.phone,
                         order_id: data.data[0].id,
+                        orderId: data.data[0].order_id
                         // }
                       })
                       .then(({ data: Data }) => {

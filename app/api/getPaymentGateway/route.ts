@@ -6,11 +6,11 @@ export async function POST(request: Request) {
   try {
     //const price = (await getProduct(request.url.split("/").at(-1) || "")).price;
     //console.log(price + 0.00);
-    const { price, phoneNo, order_id } = await request.json();
+    const { price, phoneNo, order_id,orderId } = await request.json();
 
     const payload = {
       merchantId: "PGTESTPAYUAT140",
-      merchantTransactionId: "MT7850590068188104",
+      merchantTransactionId: orderId,
       merchantUserId: "PGTESTPAYUAT140",
       //amount: parseFloat(`${price}.00`) * 100,
       amount: parseFloat(`${price}`) * 100,
