@@ -105,32 +105,32 @@ export default function Product({ params }: Props) {
   };
 
   const handleAddToCart = (product: any) => {
-    if (product.isAvailable) {
-      if (userData.data.user) {
-        AddCartOrder(product, userData.extra_data.id, 1).then(() => {
-          getProCart(userData.extra_data.id).then((data) => {
-            dispatch(addToCard(data.data));
-            toast.success("Product Added", {
-              theme: "colored",
-              autoClose: 800,
-              hideProgressBar: true,
+    if (userData.data.user)
+      getProCart(userData.extra_data.id).then((_data) => {
+        if (_data.data?.filter((v) => v.product._id == product._id).length == 0)
+          AddCartOrder(product, userData.extra_data.id, 1).then(() => {
+            getProCart(userData.extra_data.id).then((data) => {
+              dispatch(addToCard(data.data));
+              toast.success("Product Added", {
+                theme: "colored",
+                autoClose: 800,
+                hideProgressBar: true,
+              });
             });
           });
+        else toast.error("Product Already in Cart", {
+          theme: "colored",
+          autoClose: 800,
+          hideProgressBar: true,
         });
-      }
-    } else if (!product.isAvailable) {
-      toast.error("Product is Out of stack", {
-        theme: "colored",
-        autoClose: 1500,
-        hideProgressBar: true,
-      });
-    } else if (product.isAvailable) {
+      })
+
+    else
       toast.error("You Must Login First", {
         theme: "colored",
         autoClose: 1500,
         hideProgressBar: true,
       });
-    }
   };
 
   return (
