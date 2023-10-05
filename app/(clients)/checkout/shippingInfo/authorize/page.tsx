@@ -209,32 +209,60 @@ export default function Authorize() {
                     }
                   );
                 } else {
-                  makeOrder(count, userData.extra_data.id, {
-                    ...{ ...UserAddress.at(-1), id: undefined },
-                  }).then((data) => {
-                    axios
-                      .post("/api/getPaymentGateway", {
-                        // data: {
-                        price: total,
-                        phoneNo: UserAddress.at(-1)?.phone,
-                        order_id: data.data[0].id,
-                        orderId: data.data[0].order_id
-                        // }
-                      })
-                      .then(({ data: Data }) => {
-                        console.log(Data.data);
-                        deleteAllCartProduct(userData.extra_data.id).then(
-                          () => {
-                            dispatch(_reset());
-                            router.push(
-                              Data.data.instrumentResponse.redirectInfo.url
-                            );
-                          }
-                        );
+                  if (count.length !== 0) {
+                    // getProCart(userData.extra_data.id).then((data) => setProduct(data.data));
+                    count.map((v: any, i) => {
+                      getProduct_by_id(v.product._id).then((data: any) => {
+                        console.log(data[0].isAvailable);
+                        if (!data[0].isAvailable) {
+                          setDis(true);
+                        }
 
-                        // updateCardRedx(userData.extra_data.id);
+                        let pro = {
+                          product: { ...v.product, isAvailable: data[0].isAvailable },
+                          ...v,
+                        };
+                        // v.product.isAvailable = data[0].isAvailable;
+                        setProduct((prv) => getUniqueListBy([...prv, pro], "id"));
                       });
-                  });
+                    });
+                  }
+                  if (!isDis)
+                    makeOrder(count, userData.extra_data.id, {
+                      ...{ ...UserAddress.at(-1), id: undefined },
+                    }).then((data) => {
+                      axios
+                        .post("/api/getPaymentGateway", {
+                          // data: {
+                          price: total,
+                          phoneNo: UserAddress.at(-1)?.phone,
+                          order_id: data.data[0].id,
+                          orderId: data.data[0].order_id
+                          // }
+                        })
+                        .then(({ data: Data }) => {
+                          console.log(Data.data);
+                          deleteAllCartProduct(userData.extra_data.id).then(
+                            () => {
+                              dispatch(_reset());
+                              router.push(
+                                Data.data.instrumentResponse.redirectInfo.url
+                              );
+                            }
+                          );
+
+                          // updateCardRedx(userData.extra_data.id);
+                        });
+                    });
+                  else {
+                    toast.error(
+                      "Stock Out",
+                      {
+                        theme: "colored",
+                        autoClose: 5000,
+                      }
+                    );
+                  }
                 }
               }}
             >
