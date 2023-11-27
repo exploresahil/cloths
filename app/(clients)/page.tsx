@@ -17,11 +17,9 @@ export default function Home() {
 
       if (data) dispatch(addUserData(data));
       else {
-
-        dispatch(reset())
-        dispatch(Reset())
-        dispatch(_reset())
-
+        dispatch(reset());
+        dispatch(Reset());
+        dispatch(_reset());
       }
     });
   }, []);

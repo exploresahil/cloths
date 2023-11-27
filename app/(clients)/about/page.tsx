@@ -592,7 +592,7 @@ const About = () => {
                   />
                 )}
                 <div className="solution-impact-logo">
-                    <SolutionImpactLogo />
+                  <SolutionImpactLogo />
                 </div>
               </div>
             </div>

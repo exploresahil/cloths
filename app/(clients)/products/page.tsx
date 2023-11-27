@@ -92,13 +92,13 @@ const Products = () => {
               });
             });
           });
-        else toast.error("Product Already in Cart", {
-          theme: "colored",
-          autoClose: 800,
-          hideProgressBar: true,
-        });
-      })
-
+        else
+          toast.error("Product Already in Cart", {
+            theme: "colored",
+            autoClose: 800,
+            hideProgressBar: true,
+          });
+      });
     else
       toast.error("You Must Login First", {
         theme: "colored",
@@ -123,8 +123,9 @@ const Products = () => {
           <ul className="category-container">
             {categories.map((category) => (
               <li
-                className={`${selectedCategory === `${category.name}` ? "active" : ""
-                  }`}
+                className={`${
+                  selectedCategory === `${category.name}` ? "active" : ""
+                }`}
                 key={category._id}
                 onClick={() => {
                   setSelectedCategory(category.name);
@@ -136,11 +137,12 @@ const Products = () => {
               </li>
             ))}
             <li
-              className={`${selectedCategory === "_view all" ||
+              className={`${
+                selectedCategory === "_view all" ||
                 selectedCategory === "view all"
-                ? "active"
-                : ""
-                }`}
+                  ? "active"
+                  : ""
+              }`}
               onClick={() => {
                 handleCategoryClick("view all");
               }}
@@ -151,7 +153,7 @@ const Products = () => {
           </ul>
         </div>
         <div className="products">
-          <div className="products-grid">
+           <div className="products-grid">
             {_products.length !== 0
               ? _products.map((product) => {
                 if (product.isAvailable)
@@ -480,7 +482,7 @@ const Products = () => {
                   );
                 }
               })}
-          </div>
+          </div> 
         </div>
         <div className="blank" />
       </div>
