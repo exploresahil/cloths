@@ -6,12 +6,12 @@ export async function POST(request: Request) {
   try {
     //const price = (await getProduct(request.url.split("/").at(-1) || "")).price;
     //console.log(price + 0.00);
-    const { price, phoneNo, order_id,orderId } = await request.json();
+    const { price, phoneNo, order_id, orderId } = await request.json();
 
     const payload = {
-      merchantId: "PGTESTPAYUAT140",
+      merchantId: process.env.NEXT_PRIVATE_MERCHANTID,
       merchantTransactionId: orderId,
-      merchantUserId: "PGTESTPAYUAT140",
+      merchantUserId: process.env.NEXT_PRIVATE_MERCHANTUSERID,
       //amount: parseFloat(`${price}.00`) * 100,
       amount: parseFloat(`${price}`) * 100,
       redirectUrl: `${process.env.NEXT_PHONEPE_REDIRECT}/api/paymentConfrom/${order_id}`,
